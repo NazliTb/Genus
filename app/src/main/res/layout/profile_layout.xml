@@ -169,20 +169,23 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.654" />
+        app:layout_constraintVertical_bias="0.626" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/lay1"
         android:layout_width="381dp"
         android:layout_height="160dp"
+        android:background="#FFFFFF"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.471">
 
 
         <TextView
@@ -193,8 +196,12 @@
             android:text="My Games"
             android:textColor="@color/design_default_color_on_secondary"
             android:textSize="18sp"
-            tools:layout_editor_absoluteX="87dp"
-            tools:layout_editor_absoluteY="16dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.304"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.117" />
 
         <TextView
             android:id="@+id/WishList"
@@ -230,55 +237,91 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/lay2"
-        android:layout_width="383dp"
-        android:layout_height="163dp"
+        android:layout_width="379dp"
+        android:layout_height="215dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintHorizontal_bias="0.468"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.911">
+        app:layout_constraintVertical_bias="0.932">
 
         <TextView
-            android:id="@+id/account2"
-            android:layout_width="95dp"
-            android:layout_height="24dp"
+            android:id="@+id/nightmode"
+            android:layout_width="108dp"
+            android:layout_height="28dp"
             android:fontFamily="@font/roboto"
-            android:text="Account"
+            android:text="Night Mode"
             android:textColor="@color/design_default_color_on_secondary"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.304"
+            app:layout_constraintHorizontal_bias="0.321"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.882" />
+            app:layout_constraintVertical_bias="0.085" />
 
         <TextView
-            android:id="@+id/wishList3"
-            android:layout_width="95dp"
-            android:layout_height="24dp"
+            android:id="@+id/notification"
+            android:layout_width="107dp"
+            android:layout_height="27dp"
             android:fontFamily="@font/roboto"
-            android:text="WishList"
-            android:textAlignment="viewStart"
+            android:text="Notifications"
+
             android:textColor="@color/design_default_color_on_secondary"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.304"
+            app:layout_constraintHorizontal_bias="0.319"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.308" />
 
         <TextView
-            android:id="@+id/games2"
-            android:layout_width="95dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/help"
+            android:layout_width="107dp"
+            android:layout_height="26dp"
             android:fontFamily="@font/roboto"
-            android:text="My Games"
+            android:text="Help"
             android:textColor="@color/design_default_color_on_secondary"
             android:textSize="18sp"
-            tools:layout_editor_absoluteX="87dp"
-            tools:layout_editor_absoluteY="16dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.323"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.719" />
+
+        <TextView
+            android:id="@+id/signout"
+            android:layout_width="108dp"
+            android:layout_height="24dp"
+            android:fontFamily="@font/roboto"
+            android:text="Sign Out"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.317"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.905" />
+
+        <TextView
+            android:id="@+id/language"
+            android:layout_width="108dp"
+            android:layout_height="25dp"
+            android:fontFamily="@font/roboto"
+            android:text="Languages"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.321"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.505" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
