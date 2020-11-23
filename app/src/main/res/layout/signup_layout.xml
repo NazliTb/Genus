@@ -6,88 +6,144 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/logo"
         android:layout_width="284dp"
         android:layout_height="274dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.417"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.035"
+        app:layout_constraintVertical_bias="0.106"
         app:srcCompat="@drawable/genus1_1" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/sign_up"
         android:layout_width="406dp"
         android:layout_height="68dp"
         android:fontFamily="@font/orbitron"
         android:text="JOIN THE REALM"
         android:textAlignment="center"
         android:textColor="#04D9D9"
-        android:textSize="24sp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.334" />
+        app:layout_constraintVertical_bias="0.344" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/username"
-        android:layout_width="277dp"
-        android:layout_height="47dp"
+        android:layout_width="282dp"
+        android:layout_height="59dp"
         android:background="@drawable/my_border"
         android:fontFamily="@font/orbitron"
         android:hint="enter your username"
+        android:textAlignment="center"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.522"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.466" />
+        app:layout_constraintVertical_bias="0.474" />
+
+    <ImageView
+        android:id="@+id/userIcon"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintStart_toStartOf="@+id/username"
+        app:layout_constraintTop_toBottomOf="@+id/sign_up"
+        app:layout_constraintVertical_bias="0.110000014"
+        app:srcCompat="@drawable/user" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/email"
-        android:layout_width="277dp"
-        android:layout_height="49dp"
+        android:layout_width="282dp"
+        android:layout_height="59dp"
         android:background="@drawable/my_border"
         android:fontFamily="@font/orbitron"
         android:hint="enter your email address"
+        android:textAlignment="center"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.522"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.574" />
+        app:layout_constraintVertical_bias="0.572" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/cPassword"
-        android:layout_width="277dp"
-        android:layout_height="49dp"
-        android:background="@drawable/my_border"
-        android:fontFamily="@font/orbitron"
-        android:hint="confirm password"
+    <ImageView
+        android:id="@+id/mailIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintHorizontal_bias="0.207"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.794" />
+        app:layout_constraintTop_toBottomOf="@+id/userIcon"
+        app:layout_constraintVertical_bias="0.135"
+        app:srcCompat="@drawable/email" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/password"
-        android:layout_width="277dp"
-        android:layout_height="49dp"
+        android:layout_width="282dp"
+        android:layout_height="59dp"
         android:background="@drawable/my_border"
         android:fontFamily="@font/orbitron"
         android:hint="enter your password"
+        android:textAlignment="center"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.522"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.689" />
+        app:layout_constraintVertical_bias="0.672" />
+
+    <ImageView
+        android:id="@+id/lockIcon1"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.217"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mailIcon"
+        app:layout_constraintVertical_bias="0.163"
+        app:srcCompat="@drawable/lock" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/cPassword"
+        android:layout_width="282dp"
+        android:layout_height="59dp"
+        android:background="@drawable/my_border"
+        android:fontFamily="@font/orbitron"
+        android:hint="confirm password"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.767" />
+
+    <ImageView
+        android:id="@+id/lockIcon2"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.217"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lockIcon1"
+        app:layout_constraintVertical_bias="0.229"
+        app:srcCompat="@drawable/lock" />
 
     <Button
         android:id="@+id/signup_button"
@@ -102,10 +158,31 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
 
-        app:layout_constraintHorizontal_bias="0.536"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.948" /><![CDATA[
+        app:layout_constraintVertical_bias="0.913" />
+
+    <TextView
+        android:id="@+id/log_in"
+        android:layout_width="226dp"
+        android:layout_height="19dp"
+        android:fontFamily="@font/orbitron"
+        android:text="I already have an account"
+        android:textAlignment="center"
+        android:textColor="#111C59"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95" /><![CDATA[
+
+
+
+
+
+
 
 
 
@@ -116,6 +193,9 @@
 
 
     /* android:drawableLeft="@drawable/"/>*/
+
+
+
 
 
 
