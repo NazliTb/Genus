@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:weightSum="7"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +21,6 @@
             android:layout_width="300dp"
             android:layout_height="300dp"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -30,19 +29,17 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_weight="1" />
+            android:layout_height="20dp" />
 
 
         <EditText
             android:id="@+id/username"
-            android:layout_width="282dp"
-            android:layout_height="59dp"
+            android:layout_width="280dp"
+            android:layout_height="60dp"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
             android:background="@drawable/my_border"
-            android:drawableLeft="@drawable/ic_baseline_person_34"
             android:drawableStart="@drawable/ic_baseline_person_34"
+            android:drawableLeft="@drawable/ic_baseline_person_34"
             android:drawablePadding="15dp"
             android:fontFamily="@font/orbitron"
             android:gravity="center"
@@ -58,18 +55,17 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:layout_weight="1" />
+            android:layout_height="10dp" />
 
 
         <EditText
             android:id="@+id/password"
-            android:layout_width="282dp"
-            android:layout_height="59dp"
+            android:layout_width="280dp"
+            android:layout_height="60dp"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/my_border"
-            android:drawableLeft="@drawable/ic_baseline_lock_30"
             android:drawableStart="@drawable/ic_baseline_lock_30"
+            android:drawableLeft="@drawable/ic_baseline_lock_30"
             android:drawablePadding="15dp"
             android:fontFamily="@font/orbitron"
             android:hint="password"
@@ -85,8 +81,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_weight="1" />
+            android:layout_height="50dp" />
 
         <Button
             android:id="@+id/login_button"
@@ -106,13 +101,12 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_weight="1" />
+            android:layout_height="20dp" />
 
         <TextView
             android:id="@+id/sign_up"
-            android:layout_width="226dp"
-            android:layout_height="19dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:fontFamily="@font/orbitron"
             android:text="JOIN THE REALM"
@@ -125,8 +119,8 @@
 
         <TextView
             android:id="@+id/forgoten_password"
-            android:layout_width="226dp"
-            android:layout_height="19dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:fontFamily="@font/orbitron"
             android:text="I forgot my password"
@@ -140,8 +134,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_weight="1" />
+            android:layout_height="50dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -149,7 +142,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal"
-        android:weightSum="3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -159,7 +151,6 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="right"
-            android:layout_weight="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -175,7 +166,6 @@
             android:id="@+id/fbIcon"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_weight="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -190,7 +180,6 @@
             android:id="@+id/igIcon"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_weight="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
