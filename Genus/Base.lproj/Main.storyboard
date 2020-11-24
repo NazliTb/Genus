@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -37,7 +37,7 @@
         <!--Profile Screen-->
         <scene sceneID="4Ou-a4-4dI">
             <objects>
-                <viewController id="GUy-T2-ypE" userLabel="Profile Screen" sceneMemberID="viewController">
+                <viewController id="GUy-T2-ypE" userLabel="Profile Screen" customClass="ProfileController" customModule="Genus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wRP-Sy-duF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -106,6 +106,9 @@
                                 <state key="normal" title="Edit Profile" backgroundImage="Elements_Rectangle 379">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="editProfileAction:" destination="GUy-T2-ypE" eventType="touchUpInside" id="4bd-iU-ihc"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Gvh-qn-8A3">
                                 <rect key="frame" x="42" y="448" width="57" height="18"/>
@@ -121,6 +124,9 @@
                                 <state key="normal" title="Night Mode">
                                     <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="nightModeAction:" destination="GUy-T2-ypE" eventType="touchUpInside" id="lQi-AI-cdy"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="652-R8-lkz">
                                 <rect key="frame" x="44" y="512" width="332" height="35"/>
@@ -129,6 +135,9 @@
                                 <state key="normal" title="Notification">
                                     <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="notificationAction:" destination="GUy-T2-ypE" eventType="touchUpInside" id="ha4-SL-EUP"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="D00-a1-yg2">
                                 <rect key="frame" x="44" y="550" width="332" height="35"/>
@@ -137,6 +146,9 @@
                                 <state key="normal" title="Language">
                                     <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="languageAction:" destination="GUy-T2-ypE" eventType="touchUpInside" id="TBR-V2-lIj"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="lk8-1G-xl8">
                                 <rect key="frame" x="44" y="588" width="332" height="35"/>
@@ -145,6 +157,9 @@
                                 <state key="normal" title="Help">
                                     <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="helpAction:" destination="GUy-T2-ypE" eventType="touchUpInside" id="crY-EE-ZNZ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="ReZ-o6-BfB">
                                 <rect key="frame" x="44" y="626" width="332" height="35"/>
@@ -153,6 +168,9 @@
                                 <state key="normal" title="Sign Out">
                                     <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="signoutAction:" destination="GUy-T2-ypE" eventType="touchUpInside" id="oJg-2z-s0X"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="moon.circle.fill" catalog="system" id="DLQ-Cr-4op">
                                 <rect key="frame" x="51" y="479" width="25" height="25"/>
@@ -193,6 +211,9 @@
                                 <state key="normal" title="My Games">
                                     <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="goMyGamesAction:" destination="GUy-T2-ypE" eventType="touchUpInside" id="Wys-tu-zEk"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T6A-3T-t2f">
                                 <rect key="frame" x="44" y="331" width="332" height="35"/>
@@ -201,6 +222,9 @@
                                 <state key="normal" title="Wishlist">
                                     <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="goMyWishlistAction:" destination="GUy-T2-ypE" eventType="touchUpInside" id="EEs-58-iO1"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="FPd-eI-Ye3">
                                 <rect key="frame" x="44" y="369" width="332" height="35"/>
@@ -210,6 +234,9 @@
                                 <state key="normal" title="Account">
                                     <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="goMyAccountAction:" destination="GUy-T2-ypE" eventType="touchUpInside" id="Sgn-Lt-rbI"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="gamecontroller.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="wqd-rw-TgS">
                                 <rect key="frame" x="51" y="297" width="25" height="25"/>
@@ -230,6 +257,12 @@
                         <viewLayoutGuide key="safeArea" id="qwB-P7-d0s"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <outlet property="favNbr" destination="8tD-mw-OBw" id="vrT-mv-9u9"/>
+                        <outlet property="gameNbr" destination="jPE-yl-uyM" id="dZA-OK-UIg"/>
+                        <outlet property="profilePic" destination="6cG-Sw-Adj" id="kIK-rb-CTi"/>
+                        <outlet property="wishNbr" destination="KYE-50-MeT" id="j60-iw-e9b"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZCy-Le-cBR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -238,7 +271,7 @@
         <!--Game Screen-->
         <scene sceneID="xTh-91-eY7">
             <objects>
-                <viewController id="RDj-bg-2ia" userLabel="Game Screen" sceneMemberID="viewController">
+                <viewController id="RDj-bg-2ia" userLabel="Game Screen" customClass="GameController" customModule="Genus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="x9l-Ed-9Th">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -256,12 +289,18 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" backgroundImage="arrow.uturn.left.circle.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="returnAction:" destination="RDj-bg-2ia" eventType="touchUpInside" id="Hd2-eF-Cqy"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4xi-nC-OFs" userLabel="returnButton">
                                 <rect key="frame" x="354" y="44.5" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" backgroundImage="ellipsis.circle.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="settingAction:" destination="RDj-bg-2ia" eventType="touchUpInside" id="FRr-c7-yEY"/>
+                                </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Y5N-rE-FHH">
                                 <rect key="frame" x="38" y="562" width="337" height="260"/>
@@ -279,6 +318,9 @@
                                 <state key="normal" title="ADD" backgroundImage="Elements_Rectangle 379">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="addAction:" destination="RDj-bg-2ia" eventType="touchUpInside" id="w5v-Tc-FVT"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Game name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ug8-gC-Ea6">
                                 <rect key="frame" x="113" y="354" width="186" height="42"/>
@@ -326,6 +368,14 @@
                         <viewLayoutGuide key="safeArea" id="xZu-eB-Jvr"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <outlet property="commentNbr" destination="72d-fC-va0" id="3P1-wP-yKL"/>
+                        <outlet property="favNbr" destination="JlR-IM-EWX" id="Uxd-hy-jk8"/>
+                        <outlet property="gameDescription" destination="Y5N-rE-FHH" id="uNk-j1-wzI"/>
+                        <outlet property="gameName" destination="Ug8-gC-Ea6" id="YZy-ri-RBo"/>
+                        <outlet property="gamePic" destination="O5D-Qi-Mvw" id="lxx-XG-cap"/>
+                        <outlet property="gameStudio" destination="yWh-Pp-0Fq" id="D1C-Xh-vm7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yBI-yP-fMH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -334,7 +384,7 @@
         <!--Library Screen-->
         <scene sceneID="u2r-rL-YX1">
             <objects>
-                <viewController id="jqV-cx-Omj" userLabel="Library Screen" sceneMemberID="viewController">
+                <viewController id="jqV-cx-Omj" userLabel="Library Screen" customClass="LibraryController" customModule="Genus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bdb-G2-IiD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -398,6 +448,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="searchAction:" destination="jqV-cx-Omj" eventType="editingDidEnd" id="1eA-SR-dNW"/>
+                                </connections>
                             </textField>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="magnifyingglass" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Q6E-GJ-wwr">
                                 <rect key="frame" x="48" y="82" width="20" height="20"/>
@@ -408,6 +461,9 @@
                         <viewLayoutGuide key="safeArea" id="uFI-34-Htg"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <outlet property="search" destination="wf1-Wu-JoV" id="V1i-jK-Mnd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yxu-bn-cde" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -416,7 +472,7 @@
         <!--Login Screen-->
         <scene sceneID="0v9-LW-EYK">
             <objects>
-                <viewController id="9td-Sq-vtg" userLabel="Login Screen" sceneMemberID="viewController">
+                <viewController id="9td-Sq-vtg" userLabel="Login Screen" customClass="LoginController" customModule="Genus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="o8i-lL-Mt3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -440,6 +496,9 @@
                                 <state key="normal" title="LOGIN" backgroundImage="Elements_Rectangle 3">
                                     <color key="titleColor" red="0.04148148745" green="0.16957512499999999" blue="0.49475795030000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="LoginAction:" destination="9td-Sq-vtg" eventType="touchUpInside" id="G4w-jR-ozc"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="K0t-74-Oga">
                                 <rect key="frame" x="93" y="499" width="20" height="20"/>
@@ -457,6 +516,9 @@
                                 <state key="normal" title="JOIN THE REALM">
                                     <color key="titleColor" red="0.04148148745" green="0.16957512499999999" blue="0.49475795030000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="JoinAction:" destination="9td-Sq-vtg" eventType="touchUpInside" id="f74-bC-8ZI"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sjF-fh-tt7">
                                 <rect key="frame" x="144" y="754" width="127" height="28"/>
@@ -465,21 +527,33 @@
                                 <state key="normal" title="I forgot my password">
                                     <color key="titleColor" red="0.0" green="0.84365910290000001" blue="0.85154384370000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="forgotPasswordAction:" destination="9td-Sq-vtg" eventType="touchUpInside" id="7Oo-dF-Zgf"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PNP-pS-J0j" userLabel="fbButton">
                                 <rect key="frame" x="195" y="837" width="25" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="Elements_fb"/>
+                                <connections>
+                                    <action selector="goFacebookAction:" destination="9td-Sq-vtg" eventType="touchUpInside" id="y7B-C2-e0H"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kZB-jn-Zo9" userLabel="twButton">
                                 <rect key="frame" x="162" y="837" width="25" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Elements_twitter"/>
+                                <connections>
+                                    <action selector="goTwitterAction:" destination="9td-Sq-vtg" eventType="touchUpInside" id="ffc-CS-Cjy"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AHM-Zj-6BJ">
                                 <rect key="frame" x="228" y="837" width="25" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Elements_ig"/>
+                                <connections>
+                                    <action selector="goInstagramActioon:" destination="9td-Sq-vtg" eventType="touchUpInside" id="lCb-xh-AQm"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Elements_Genus1.3" translatesAutoresizingMaskIntoConstraints="NO" id="ap1-iz-6zw">
                                 <rect key="frame" x="47" y="105" width="320" height="380"/>
@@ -489,6 +563,10 @@
                         <viewLayoutGuide key="safeArea" id="f1o-26-Jok"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <outlet property="email" destination="yMN-Hj-ytg" id="0tY-Ex-fOn"/>
+                        <outlet property="password" destination="Vqz-up-Uze" id="aTM-HZ-ara"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QCC-qx-0eN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -497,7 +575,7 @@
         <!--Sign Up Screen-->
         <scene sceneID="BCl-KG-fxP">
             <objects>
-                <viewController id="2MG-60-0Kb" userLabel="Sign Up Screen" sceneMemberID="viewController">
+                <viewController id="2MG-60-0Kb" userLabel="Sign Up Screen" customClass="SignupController" customModule="Genus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aVp-wT-Zyl">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -544,6 +622,9 @@
                                 <state key="normal" title="JOIN" backgroundImage="Elements_Rectangle 3">
                                     <color key="titleColor" red="0.04148148745" green="0.16957512499999999" blue="0.49475795030000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="registerAction:" destination="2MG-60-0Kb" eventType="touchUpInside" id="oy2-pn-BYE"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="EeL-PL-zZr">
                                 <rect key="frame" x="96" y="412" width="20" height="20"/>
@@ -569,6 +650,12 @@
                         <viewLayoutGuide key="safeArea" id="wTb-py-Fac"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <outlet property="cPassword" destination="lGY-Mg-46c" id="ICa-z2-oEX"/>
+                        <outlet property="email" destination="fXI-LD-j9e" id="VXf-eO-pb0"/>
+                        <outlet property="password" destination="vqM-wX-Nla" id="dYS-RV-oyw"/>
+                        <outlet property="username" destination="yWg-4v-X6l" id="7kt-tr-4iy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qbM-No-GwY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -577,7 +664,7 @@
         <!--Password Recovery Screen-->
         <scene sceneID="wVF-EP-0CA">
             <objects>
-                <viewController id="wLr-Ix-XgV" userLabel="Password Recovery Screen" sceneMemberID="viewController">
+                <viewController id="wLr-Ix-XgV" userLabel="Password Recovery Screen" customClass="passwordrecoveryController" customModule="Genus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DbK-Pa-7Yp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -606,6 +693,9 @@
                                 <state key="normal" title="SEND" backgroundImage="Elements_Rectangle 3">
                                     <color key="titleColor" red="0.04148148745" green="0.16957512499999999" blue="0.49475795030000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="sendAction:" destination="wLr-Ix-XgV" eventType="touchUpInside" id="F6W-Mh-stb"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="envelope.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="NdF-Gi-Orl">
                                 <rect key="frame" x="89" y="503.5" width="20" height="20"/>
@@ -616,6 +706,9 @@
                         <viewLayoutGuide key="safeArea" id="2n2-xj-aXM"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <outlet property="email" destination="EK6-zF-eJ6" id="MmT-lg-Tm0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gIN-Me-jRI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
