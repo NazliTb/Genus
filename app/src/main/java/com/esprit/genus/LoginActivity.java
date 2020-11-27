@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText password;
     Button login_button;
     TextView sign_up;
+    TextView forgottenpassword;
 
 
     @Override
@@ -45,6 +46,8 @@ public class LoginActivity extends AppCompatActivity {
         password=(EditText)findViewById(R.id.password);
 
         sign_up=(TextView)findViewById(R.id.sign_up);
+
+        forgottenpassword=(TextView)findViewById(R.id.sign_up);
 
         //Event
         login_button.setOnClickListener(new View.OnClickListener() {
