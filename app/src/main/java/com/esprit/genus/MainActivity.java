@@ -9,7 +9,7 @@ import android.os.Handler;
 public class MainActivity extends AppCompatActivity {
 
     /** Duration of wait **/
-    private final int SPLASH_DISPLAY_LENGTH = 1000;
+    private final long SPLASH_DISPLAY_LENGTH = 10000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

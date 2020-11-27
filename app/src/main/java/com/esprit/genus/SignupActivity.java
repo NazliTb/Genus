@@ -2,9 +2,12 @@ package com.esprit.genus;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.esprit.genus.Retrofit.INodeJS;
@@ -21,11 +24,11 @@ public class SignupActivity extends AppCompatActivity {
 
     INodeJS myAPI;
     CompositeDisposable compositeDisposable=new CompositeDisposable();
-    TextInputEditText username;
-    TextInputEditText password;
-    TextInputEditText email;
-    TextInputEditText confirmPassword;
-
+    EditText username;
+    EditText password;
+    EditText email;
+    EditText confirmPassword;
+    TextView log_in;
     Button signup_button;
 
 
@@ -41,11 +44,11 @@ public class SignupActivity extends AppCompatActivity {
         //View
         signup_button=(Button)findViewById(R.id.signup_button);
 
-        username=(TextInputEditText)findViewById(R.id.username);
-        password=(TextInputEditText)findViewById(R.id.password);
-        email=(TextInputEditText)findViewById(R.id.email);
-        confirmPassword=(TextInputEditText)findViewById(R.id.cPassword);
-
+        username=(EditText)findViewById(R.id.username);
+        password=(EditText)findViewById(R.id.password);
+        email=(EditText)findViewById(R.id.email);
+        confirmPassword=(EditText) findViewById(R.id.cPassword);
+        log_in=(TextView)findViewById(R.id.log_in);
 
         //Event
         signup_button.setOnClickListener(new View.OnClickListener() {
@@ -56,6 +59,13 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
+        log_in.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                SignupActivity.this.startActivity(intent);
+            }
+        });
 
     }
 
@@ -69,7 +79,7 @@ public class SignupActivity extends AppCompatActivity {
                         if(s.contains("password"))
                         /*pass to the next activity for now we'll make
                         a toast appear to test */
-                            Toast.makeText(SignupActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignupActivity.this, "Register Successful", Toast.LENGTH_SHORT).show();
                         else
                             Toast.makeText(SignupActivity.this, ""+s, Toast.LENGTH_SHORT).show();
                     }
