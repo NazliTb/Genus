@@ -4,6 +4,7 @@ import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 
 public interface INodeJS {
     @POST("register")
@@ -17,5 +18,10 @@ public interface INodeJS {
     Observable<String> loginUser(@Field("email") String email,
                                     @Field("password") String password);
 
+
+
+    @PUT("getForgottenPassword")
+    @FormUrlEncoded
+    Observable<String> getForgottenPassword(@Field("email") String email);
 
 }
