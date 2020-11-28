@@ -9,11 +9,13 @@ import android.os.Handler;
 public class MainActivity extends AppCompatActivity {
 
     /** Duration of wait **/
-    private final long SPLASH_DISPLAY_LENGTH = 10000;
+    private final long SPLASH_DISPLAY_LENGTH = 1500;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splach_layout);
+        //getSupportActionBar().hide();
+
         /* New Handler to start the Login-Activity
          * and close this Splash-Screen after some seconds.*/
         new Handler().postDelayed(new Runnable(){

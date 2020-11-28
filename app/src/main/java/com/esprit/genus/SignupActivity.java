@@ -35,6 +35,7 @@ public class SignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup_layout);
+        //getSupportActionBar().hide();
 
         //Init API
         Retrofit retrofit= RetrofitClient.getInstance();
