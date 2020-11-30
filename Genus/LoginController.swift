@@ -25,7 +25,11 @@ class LoginController: UIViewController {
     }
 
     //Functions
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+            segue.destination as! SignupController
+        
+    }
 
     //IBActions
     
@@ -34,6 +38,7 @@ class LoginController: UIViewController {
     
     
     @IBAction func JoinAction(_ sender: Any) {
+    
     }
     
     
