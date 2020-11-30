@@ -41,28 +41,38 @@ class SignupController: UIViewController {
         if (password.text == cPassword.text ) {
         
             let params = ["username":username.text,"email":email.text, "password":password.text] as! Dictionary<String, String>
-            var request = URLRequest(url: URL(string: "http://localhost:3000/register")!)
+            var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/register")!)
         request.httpMethod = "POST"
         request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 
         let session = URLSession.shared
         let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
-            print(response!)
-            do {
-                let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
-                print(json)
-            } catch {
-                print("error")
-            }
-        })
-
-        task.resume()
             
+            
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
+                    print(json)
+                    
+                       
+                    
+                       
+                    
+                    }
+                    catch {
+                    print("error")
+                }
+            
+            
+            })
+            self.alert(message:"User added successfully",title: "Information")
+            task.resume()
+        
+        
         }
         else
         {
-            alert(message: "Both password fields should contain same password", title: "Warning")
+        alert(message: "Both password fields should contain same password", title: "Warning")
         }
         
     }

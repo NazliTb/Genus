@@ -29,7 +29,7 @@ class LoginController: UIViewController {
         
             segue.destination as! SignupController
         
-    }
+    } 
 
     //IBActions
     
