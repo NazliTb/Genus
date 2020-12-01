@@ -30,6 +30,7 @@ class ProfileController: UIViewController {
     //IBActions
     
     @IBAction func editProfileAction(_ sender: Any) {
+        
     }
     
     @IBAction func goMyGamesAction(_ sender: Any) {
