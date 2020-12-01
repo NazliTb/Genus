@@ -22,7 +22,7 @@ import retrofit2.Retrofit;
 public class LoginActivity extends AppCompatActivity {
 
     INodeJS myAPI;
-    CompositeDisposable compositeDisposable=new CompositeDisposable();
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
     EditText username;
     EditText password;
     Button login_button;
@@ -37,25 +37,27 @@ public class LoginActivity extends AppCompatActivity {
         //getSupportActionBar().hide();
 
         //Init API
-        Retrofit retrofit= RetrofitClient.getInstance();
-        myAPI=retrofit.create((INodeJS.class));
+        Retrofit retrofit = RetrofitClient.getInstance();
+        myAPI = retrofit.create((INodeJS.class));
 
         //View
-        login_button=(Button)findViewById(R.id.login_button);
+        login_button = (Button) findViewById(R.id.login_button);
 
-        username=(EditText)findViewById(R.id.username);
-        password=(EditText)findViewById(R.id.password);
+        username = (EditText) findViewById(R.id.username);
+        password = (EditText) findViewById(R.id.password);
 
-        sign_up=(TextView)findViewById(R.id.sign_up);
+        sign_up = (TextView) findViewById(R.id.sign_up);
 
-        forgottenpassword=(TextView)findViewById(R.id.forgotten_password);
+        forgottenpassword = (TextView) findViewById(R.id.forgotten_password);
 
         //Event
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginUser(username.getText().toString(),password.getText()
-                .toString());
+                loginUser(username.getText().toString(), password.getText()
+                        .toString());
+                Intent intent = new Intent(LoginActivity.this, HomepageActivity.class);
+                LoginActivity.this.startActivity(intent);
             }
         });
 
@@ -78,18 +80,18 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginUser(String username, String password) {
-        compositeDisposable.add(myAPI.loginUser(username,password)
+        compositeDisposable.add(myAPI.loginUser(username, password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String s) throws Exception {
-                    if(s.contains("username"))
+                        if (s.contains("username"))
                         /*pass to the next activity for now we'll make
                         a toast appear to test */
-                        Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                         else
-                        Toast.makeText(LoginActivity.this, ""+s, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "" + s, Toast.LENGTH_SHORT).show();
                     }
                 })
         );
