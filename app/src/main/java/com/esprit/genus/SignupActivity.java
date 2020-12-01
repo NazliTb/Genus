@@ -56,6 +56,8 @@ public class SignupActivity extends AppCompatActivity {
             public void onClick(View v) {
                 registerUser(email.getText().toString(),username.getText().toString(),password.getText()
                         .toString());
+                Intent intent = new Intent(SignupActivity.this, HomepageActivity.class);
+                SignupActivity.this.startActivity(intent);
             }
         });
 

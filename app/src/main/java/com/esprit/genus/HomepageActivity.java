@@ -7,18 +7,38 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.esprit.genus.Retrofit.INodeJS;
+import com.esprit.genus.Retrofit.RetrofitClient;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Retrofit;
 
 public class HomepageActivity extends AppCompatActivity {
     private ImageView profileIcon, libIcon, loopIcon, heartIcon, chatIcon;
     private TextView profileTitle, libTitle, loopTitle, heartTitle, chatTitle;
     public Fragment selectedFragment = null;
+    public int userID;
+    private RelativeLayout rl;
+    INodeJS myAPI;
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homepage_layout);
+
+        //Init API
+        Retrofit retrofit = RetrofitClient.getInstance();
+        myAPI = retrofit.create((INodeJS.class));
+
+        rl = (RelativeLayout) findViewById(R.id.relativeLayout);
 
         profileIcon = (ImageView) findViewById(R.id.userIcon);
         profileTitle = (TextView) findViewById(R.id.profile);
@@ -38,8 +58,8 @@ public class HomepageActivity extends AppCompatActivity {
         profileIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Intent intent = new Intent(HomepageActivity.this, ProfileActivity.class);
-                HomepageActivity.this.startActivity(intent);*/
+                Intent intent = new Intent(HomepageActivity.this, ProfileActivity.class);
+                HomepageActivity.this.startActivity(intent);
 
                 //Fragments navigation coloring
                 profileIcon.setImageResource(R.drawable.user3);
@@ -55,8 +75,7 @@ public class HomepageActivity extends AppCompatActivity {
                 chatTitle.setTextColor(getResources().getColor(R.color.hintColor));
 
                 //Fragment display
-                selectedFragment = new ProfileActivity();
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, selectedFragment).commit();
+
             }
         });
 
@@ -79,6 +98,7 @@ public class HomepageActivity extends AppCompatActivity {
                 //Fragment display
                 selectedFragment = new GamelistActivity();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, selectedFragment).commit();
+
 
             }
         });
@@ -137,6 +157,19 @@ public class HomepageActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void DisplayGames(int userID) {
+        compositeDisposable.add(myAPI.GetGameList(userID)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+
+                    }
+                })
+        );
     }
 
     @Override
