@@ -35,7 +35,7 @@ public interface INodeJS {
 
     @GET("GetGamesNbr/{idUser}")
 
-    String getGamesNbr(@Path("idUser") String idUser);
+    Observable<String> getGamesNbr(@Path("idUser") String idUser);
 
     @GET("GetFavouriteGamesNbr/{idUser}")
 
