@@ -1,167 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_view"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:padding="10dp">
 
-    <ImageView
-        android:id="@+id/gameBg"
-        android:layout_centerHorizontal="true"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="470dp"
-        android:background="#CAC8C8"/>
-
-    <ImageButton
-        android:id="@+id/backButton"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#00ED0707"
-        app:srcCompat="@drawable/back" />
+        android:orientation="horizontal"
+        android:padding="15dp">
 
-    <ImageButton
-        android:id="@+id/moreButton"
-        android:layout_alignParentRight="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#00FF0303"
-        app:srcCompat="@drawable/more" />
+        <ImageView
+            android:id="@+id/gamePic"
+            android:layout_width="150dp"
+            android:layout_height="220dp"
+            android:background="#A1A0A0" />
 
-    <ImageView
-        android:id="@+id/gameImg"
-        android:layout_marginTop="70dp"
-        android:layout_centerHorizontal="true"
-        android:layout_width="151dp"
-        android:layout_height="216dp"
-        android:background="#A1A0A0" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:layout_marginTop="50dp">
 
-    <TextView
-        android:id="@+id/gameName"
-        android:layout_below="@+id/gameImg"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/orbitron_medium"
-        android:text="Game Name"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp" />
+            <TextView
+                android:id="@+id/txt_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Game Name"
+                style="@style/TextAppearance.AppCompat.Headline"
+                android:fontFamily="@font/orbitron"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textAlignment="center"/>
 
-    <TextView
-        android:id="@+id/gameStudio"
-        android:layout_below="@+id/gameName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto"
-        android:text="game studio"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp" />
+            <TextView
+                android:id="@+id/txt_companyname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Studio Name"
+                style="@style/TextAppearance.AppCompat.Subhead"
+                android:fontFamily="@font/roboto"
+                android:textSize="18sp"
+                android:textAlignment="center"/>
 
-    <TextView
-        android:id="@+id/favorites"
-        android:layout_below="@+id/gameStudio"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="60dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto"
-        android:text="Favorites"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp" />
+            <TextView
+                android:id="@+id/txt_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="game type"
+                android:fontFamily="@font/roboto"
+                android:textSize="18sp"
+                android:textAlignment="center"/>
 
-    <TextView
-        android:id="@+id/favCount"
-        android:layout_below="@+id/favorites"
-        android:layout_marginLeft="85dp"
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto"
-        android:text="0"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+            <TextView
+                android:id="@+id/txt_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="release date"
+                android:fontFamily="@font/roboto"
+                android:textSize="18sp"
+                android:textAlignment="center"/>
 
-    <ImageView
-        android:id="@+id/divider1"
-        android:layout_below="@id/gameStudio"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="150dp"
-        android:layout_width="0.5dp"
-        android:layout_height="40dp"
-        android:background="#FFFFFF"
-        app:srcCompat="@android:drawable/status_bar_item_app_background" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/comments"
-        android:layout_below="@id/gameStudio"
-        android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto"
-        android:text="Comments"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/cmCount"
-        android:layout_below="@+id/comments"
-        android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto"
-        android:text="0"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:textStyle="bold"/>
-
-    <ImageView
-        android:id="@+id/divider2"
-        android:layout_below="@id/gameStudio"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="150dp"
-        android:layout_width="0.5dp"
-        android:layout_height="40dp"
-        android:background="#FFFFFF"
-        app:srcCompat="@android:drawable/status_bar_item_app_background" />
-
-    <TextView
-        android:id="@+id/gameDesc"
-        android:layout_below="@+id/gameBg"
-        android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true"
-        android:layout_width="350dp"
-        android:layout_height="240dp"
-        android:fontFamily="@font/roboto"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ornare justo non diam commodo, vel consectetur tortor consectetur. Phasellus ut ultrices risus. Nulla at elementum enim. Etiam rhoncus scelerisque condimentum. Integer ut urna cursus, volutpat tellus ullamcorper, rutrum erat. Sed sem ex, egestas finibus quam vitae, cursus ultrices leo. Fusce venenatis vel orci et porta. Morbi rhoncus sit amet est at pellentesque. Cras ut odio metus.  Nunc id mi porttitor, laoreet ante a, semper nunc. Integer condimentum lorem sed nibh pharetra, at tempus quam varius. Proin rutrum eu ex a convallis. Nulla facilisi. Suspendisse sed sodales neque. Integer quis ante in risus pellentesque dictum. Proin dictum diam at mollis dapibus. Praesent ut hendrerit eros, nec iaculis velit. Morbi quis maximus sem. Nulla justo lacus, facilisis at sem sed, varius accumsan ligula. Sed pellentesque consequat odio in cursus."
-        android:textAlignment="textStart"/>
-
-    <Button
-        android:id="@+id/addButton"
-        android:layout_below="@+id/gameDesc"
-        android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true"
-        android:layout_width="156dp"
-        android:layout_height="50dp"
-        android:background="@drawable/button_border"
-        android:fontFamily="@font/orbitron_medium"
-        android:text="ADD" />
-
-
-</RelativeLayout>
-
+</androidx.cardview.widget.CardView>
