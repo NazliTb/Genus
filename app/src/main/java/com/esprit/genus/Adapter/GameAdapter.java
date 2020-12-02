@@ -26,12 +26,15 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.MyViewHolder> 
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.game_layout, parent, false);
-        return null;
+        return new MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
+        holder.gameName.setText(gameList.get(position).getName());
+        holder.gameStudio.setText(gameList.get(position).getCompanyName());
+        holder.gameType.setText(gameList.get(position).getType());
+        holder.gameDate.setText(gameList.get(position).getReleaseDate().toString());
     }
 
     @Override
