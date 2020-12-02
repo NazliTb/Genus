@@ -2,6 +2,7 @@ package com.esprit.genus;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -11,7 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.esprit.genus.Model.Game;
 import com.esprit.genus.Retrofit.INodeJS;
@@ -20,6 +23,10 @@ import com.esprit.genus.Retrofit.RetrofitClient;
 import java.util.List;
 
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,8 +36,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ProfileActivity extends AppCompatActivity {
     private TextView gameList, wishList, signOut,gamesNbr,favNbr,wishesNbr,username;
     private String idUser="";
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
     private Button editProfile;
     INodeJS myAPI;
+    INodeJS myAPI1;
+    AlertDialog dialog;
+    AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +71,12 @@ public class ProfileActivity extends AppCompatActivity {
         }
         //Init API
         Retrofit retrofit = RetrofitClient.getInstance();
+
         //this one i used for the gamenumber , wishnumber , favnumber  because i'm using Gson okay ?
         Retrofit retrofit1 = new Retrofit.Builder().baseUrl("http://10.0.2.2:3000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
+        myAPI1 = retrofit.create((INodeJS.class));
         myAPI = retrofit1.create((INodeJS.class));
 
         Call<List<Game>> listWishGames = myAPI.GetWishList(Integer.parseInt(idUser));
@@ -164,12 +176,54 @@ public class ProfileActivity extends AppCompatActivity {
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Intent intent = new Intent(ProfileActivity.this, PopupActivity.class);
+              /* Intent intent = new Intent(ProfileActivity.this, PopupActivity.class);
                 intent.putExtra("idUser",idUser);
-                ProfileActivity.this.startActivity(intent);
+                ProfileActivity.this.startActivity(intent);*/
+                View vpop=getLayoutInflater().inflate(R.layout.popupwindow_layout,null);
+                final EditText username;
+                final EditText password;
+                final EditText cPassword;
+                Button updateProfile;
+                username = (EditText) vpop.findViewById(R.id.editusername);
+                password = (EditText) vpop.findViewById(R.id.editpassword);
+                cPassword = (EditText) vpop.findViewById(R.id.editcpassword);
 
+                updateProfile = vpop.findViewById(R.id.updateProfile_button);
+                updateProfile.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                       updateUser(idUser,username.getText().toString(), password.getText()
+                                .toString());
+
+
+
+                    }
+                });
+
+              builder=new AlertDialog.Builder(ProfileActivity.this);
+              builder.setView(vpop);
+              dialog=builder.create();
+              dialog.show();
             }
         });
+
+    }
+
+    private void updateUser(String idUser,String username, String password) {
+
+
+        compositeDisposable.add(myAPI1.editProfile(Integer.parseInt(idUser),username, password,"")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        Toast.makeText(ProfileActivity.this, "" + s, Toast.LENGTH_SHORT).show();
+                    }
+
+
+                }));
 
     }
 }

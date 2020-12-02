@@ -36,11 +36,11 @@ public class PopupActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.popupwindow_layout);
 
-        DisplayMetrics dm=new DisplayMetrics();
+        /*DisplayMetrics dm=new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width=dm.widthPixels;
         int height=dm.heightPixels;
-        getWindow().setLayout((int)(width*.8),(int)(height*.8));
+        getWindow().setLayout((int)(width*.8),(int)(height*.7));*/
         //Recuperer les données de homepage
         Intent intent = getIntent();
         if (intent != null) {
