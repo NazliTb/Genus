@@ -41,7 +41,14 @@ public class ForgottenpasswordActivity extends AppCompatActivity {
         retrievepassword_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getForgottenPassword(email.getText().toString());
+                if (email.getText().toString().equals("")) {
+                    Toast.makeText(ForgottenpasswordActivity.this, "Please give an email", Toast.LENGTH_SHORT).show();
+
+                } else if (!email.getText().toString().contains("@")) {
+                    Toast.makeText(ForgottenpasswordActivity.this, "Please give a correct email", Toast.LENGTH_SHORT).show();
+                } else {
+                    getForgottenPassword(email.getText().toString());
+                }
             }
         });
          }
