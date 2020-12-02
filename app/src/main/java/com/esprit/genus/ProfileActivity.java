@@ -13,8 +13,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class ProfileActivity extends AppCompatActivity {
-    private TextView gameList, wishList, signOut;
-
+    private TextView gameList, wishList, signOut,gamesNbr,favNbr,wishesNbr,username;
+    private String idUser="";
 
 
     @Override
@@ -25,6 +25,22 @@ public class ProfileActivity extends AppCompatActivity {
         gameList = (TextView) findViewById(R.id.games);
         wishList = (TextView) findViewById(R.id.wishList);
         signOut = (TextView) findViewById(R.id.signout);
+        gamesNbr = (TextView) findViewById(R.id.gamesNbr);
+        favNbr = (TextView) findViewById(R.id.favNbr);
+        wishesNbr = (TextView) findViewById(R.id.wishesNbr);
+        username= (TextView) findViewById(R.id.username);
+        //Recuperer les données de homepage
+        Intent intent = getIntent();
+        if (intent != null){
+
+            if (intent.hasExtra("idUser")){
+                idUser = intent.getStringExtra("idUser");
+            }
+            if (intent.hasExtra("username")){
+                username.setText(intent.getStringExtra("username"));
+            }
+
+        }
 
         gameList.setOnClickListener(new View.OnClickListener() {
             @Override

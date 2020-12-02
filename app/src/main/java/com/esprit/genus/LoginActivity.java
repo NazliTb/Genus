@@ -56,8 +56,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 loginUser(username.getText().toString(), password.getText()
                         .toString());
-                Intent intent = new Intent(LoginActivity.this, HomepageActivity.class);
-                LoginActivity.this.startActivity(intent);
+
             }
         });
 
@@ -80,21 +79,44 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginUser(String username, String password) {
+        final String[] idUser = {""};
+        final String[] userName = {""};
+
         compositeDisposable.add(myAPI.loginUser(username, password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String s) throws Exception {
-                        if (s.contains("username"))
+                        int positionDebidUser;
+                        int positionFinidUser;
+                        int positionDebUsername;
+                        int positionFinUsername;
+                        if (s.contains("username")) {
                         /*pass to the next activity for now we'll make
                         a toast appear to test */
+                            //Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                            positionDebidUser = s.indexOf("idUser") + 8;
+                            positionFinidUser = s.indexOf(",");
+                            positionDebUsername= s.indexOf("username") +11;
+                            positionFinUsername= s.indexOf(",",positionDebUsername)-1;
+
+                            idUser[0] = s.substring(positionDebidUser, positionFinidUser);
+                            userName[0] = s.substring(positionDebUsername, positionFinUsername);
+
                             Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(LoginActivity.this, HomepageActivity.class);
+                            intent.putExtra("idUser",idUser[0]);
+                            intent.putExtra("Username",userName[0]);
+                            LoginActivity.this.startActivity(intent);
+                        }
                         else
                             Toast.makeText(LoginActivity.this, "" + s, Toast.LENGTH_SHORT).show();
                     }
+
                 })
         );
+
     }
 
     @Override

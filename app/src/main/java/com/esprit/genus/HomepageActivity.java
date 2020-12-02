@@ -25,6 +25,8 @@ public class HomepageActivity extends AppCompatActivity {
     public Fragment selectedFragment = null;
     private RelativeLayout rl;
     INodeJS myAPI;
+    private String idUser = "";
+    private String username="";
     CompositeDisposable compositeDisposable = new CompositeDisposable();
 
 
@@ -32,6 +34,21 @@ public class HomepageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homepage_layout);
+        //Recuperer les données envoyé par login fil oncreate
+        Intent intent = getIntent();
+        if (intent != null){
+
+            if (intent.hasExtra("idUser")){
+                idUser = intent.getStringExtra("idUser");
+            }
+            if (intent.hasExtra("userName")){
+                username = intent.getStringExtra("userName");
+            }
+
+        }
+
+        intent.putExtra("idUser",idUser);
+        intent.putExtra("Username",username);
 
         //Init API
         Retrofit retrofit = RetrofitClient.getInstance();
