@@ -36,10 +36,17 @@ public interface INodeJS {
 
     Observable<List<Game>> GetGameList(@Path("idUser") int idUser);
 
+
+    @GET("GetGameList/{idUser}")
+
+    Call<List<Game>> GetGameListForNumber(@Path("idUser") int idUser);
+    //this one for gamesNumber okay ?
+
     @GET("GetWishList/{idUser}")
     Call<List<Game>> GetWishList(@Path("idUser") int idUser);
 
-
+    @GET("GetFavList/{idUser}")
+    Call<List<Game>> GetFavList(@Path("idUser") int idUser);
 
 
 }
