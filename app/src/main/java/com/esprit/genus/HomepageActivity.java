@@ -23,7 +23,6 @@ public class HomepageActivity extends AppCompatActivity {
     private ImageView profileIcon, libIcon, loopIcon, heartIcon, chatIcon;
     private TextView profileTitle, libTitle, loopTitle, heartTitle, chatTitle;
     public Fragment selectedFragment = null;
-    public int userID;
     private RelativeLayout rl;
     INodeJS myAPI;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -159,14 +158,15 @@ public class HomepageActivity extends AppCompatActivity {
 
     }
 
-    private void DisplayGames(int userID) {
-        compositeDisposable.add(myAPI.GetGameList(userID)
+    private void DisplayGames(int idUser) {
+        compositeDisposable.add(myAPI.GetGameList(idUser)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String s) throws Exception {
-
+                        for (int i = 0; i <s.length(); i++) {
+                        }
                     }
                 })
         );
@@ -174,11 +174,15 @@ public class HomepageActivity extends AppCompatActivity {
 
     @Override
     protected void onStop() {
+        compositeDisposable.clear();
         super.onStop();
+
     }
 
     @Override
     protected void onDestroy() {
+        compositeDisposable.clear();
         super.onDestroy();
     }
+
 }
