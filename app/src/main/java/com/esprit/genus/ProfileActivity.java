@@ -39,6 +39,15 @@ public class ProfileActivity extends AppCompatActivity {
             if (intent.hasExtra("username")){
                 username.setText(intent.getStringExtra("username"));
             }
+            if (intent.hasExtra("gameNbr")){
+                gamesNbr.setText(intent.getStringExtra("gameNbr"));
+            }
+            if (intent.hasExtra("favNbr")){
+                favNbr.setText(intent.getStringExtra("favNbr"));
+            }
+            if (intent.hasExtra("wishNbr")){
+                wishesNbr.setText(intent.getStringExtra("wishNbr"));
+            }
 
         }
 

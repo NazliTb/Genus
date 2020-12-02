@@ -37,11 +37,11 @@ public interface INodeJS {
 
     @GET("GetFavouriteGamesNbr")
     @FormUrlEncoded
-    Observable<String> GetFavouriteGamesNbr(@Field("idUser") String idUser);
+    Observable<String> getFavouriteGamesNbr(@Field("idUser") String idUser);
 
     @GET("GetWishGamesNbr")
     @FormUrlEncoded
-    Observable<String> GetWishGamesNbr(@Field("idUser") String idUser);
+    Observable<String> getWishGamesNbr(@Field("idUser") String idUser);
 
 
 }
