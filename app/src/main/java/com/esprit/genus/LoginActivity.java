@@ -54,9 +54,20 @@ public class LoginActivity extends AppCompatActivity {
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginUser(username.getText().toString(), password.getText()
-                        .toString());
+                if (username.getText().toString().equals("")||
+                        password.getText().toString().equals(""))
+                {
+                    Toast.makeText(LoginActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
 
+                }
+                else if(!username.getText().toString().contains("@"))
+                {
+                    Toast.makeText(LoginActivity.this, "Please give a correct email", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    loginUser(username.getText().toString(), password.getText()
+                            .toString());
+                }
             }
         });
 
