@@ -29,10 +29,11 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class GamelistActivity extends Fragment {
 
-    INodeJS myAPI;
+    INodeJS myAPI, myAPI1;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     RecyclerView recycler_games;
@@ -41,9 +42,15 @@ public class GamelistActivity extends Fragment {
     MaterialSearchBar materialSearchBar;
     List<String> suggestList = new ArrayList<>();
 
+    protected View mView;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.fragment_gamelist, container, false);
+        this.mView = view;
 
         //Get userID
         String getidUser = this.getArguments().getString("idUser");
@@ -58,14 +65,20 @@ public class GamelistActivity extends Fragment {
         Retrofit retrofit = RetrofitClient.getInstance();
         myAPI = retrofit.create((INodeJS.class));
 
+        Retrofit retrofit1 = new Retrofit.Builder()
+                .baseUrl("http://10.0.2.2:3000/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        myAPI1 = retrofit1.create((INodeJS.class));
+
         //View
-        recycler_games = (RecyclerView) getView().findViewById(R.id.recyclerViewGames);
+        recycler_games = (RecyclerView) mView.findViewById(R.id.recyclerViewGames);
         recycler_games.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
         recycler_games.setLayoutManager(layoutManager);
         recycler_games.addItemDecoration(new DividerItemDecoration(getContext(), layoutManager.getOrientation()));
 
-        materialSearchBar = (MaterialSearchBar) getView().findViewById(R.id.search_bar);
+        materialSearchBar = (MaterialSearchBar) mView.findViewById(R.id.search_bar);
         materialSearchBar.setCardViewElevation(10);
 
         //Add Suggest List
@@ -114,11 +127,12 @@ public class GamelistActivity extends Fragment {
 
         getAllGames(idUser);
 
-        return inflater.inflate(R.layout.fragment_gamelist, container, false);
+        //return inflater.inflate(R.layout.fragment_gamelist, container, false);
+        return view;
     }
 
     private void startSearch(String query) {
-        compositeDisposable.add(myAPI.searchGames(query)
+        compositeDisposable.add(myAPI1.searchGames(query)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<Game>>() {
@@ -137,7 +151,8 @@ public class GamelistActivity extends Fragment {
     }
 
     private void getAllGames(int idUser) {
-        compositeDisposable.add(myAPI.GetGameList(idUser)
+
+        compositeDisposable.add(myAPI1.GetGameList(idUser)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new Consumer<List<Game>>() {
