@@ -54,8 +54,25 @@ public class SignupActivity extends AppCompatActivity {
         signup_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registerUser(email.getText().toString(),username.getText().toString(),password.getText()
-                        .toString());
+                if (username.getText().toString().equals("")||
+                        password.getText().toString().equals("")||
+                                email.getText().toString().equals("")||
+                confirmPassword.getText().toString().equals(""))
+                {
+                    Toast.makeText(SignupActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                }
+                else if(!email.getText().toString().contains("@"))
+                {
+                    Toast.makeText(SignupActivity.this, "Please give a correct email", Toast.LENGTH_SHORT).show();
+                }
+                else if(!password.getText().toString().equals(confirmPassword.getText().toString()))
+                {
+                    Toast.makeText(SignupActivity.this, "the two password fields should be same", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    registerUser(email.getText().toString(), username.getText().toString(), password.getText()
+                            .toString());
+                }
 
             }
         });
@@ -71,6 +88,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void registerUser(String email,String username, String password) {
+
         compositeDisposable.add(myAPI.registerUser(email,username,password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
