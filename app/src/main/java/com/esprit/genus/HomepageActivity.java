@@ -4,51 +4,63 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.esprit.genus.Adapter.GameAdapter;
 import com.esprit.genus.Retrofit.INodeJS;
 import com.esprit.genus.Retrofit.RetrofitClient;
+import com.mancj.materialsearchbar.MaterialSearchBar;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import io.reactivex.disposables.CompositeDisposable;
 import retrofit2.Retrofit;
 
 
 public class HomepageActivity extends AppCompatActivity {
+
+    INodeJS myAPI;
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
+
     private ImageView profileIcon, libIcon, loopIcon, heartIcon, chatIcon;
     private TextView profileTitle, libTitle, loopTitle, heartTitle, chatTitle;
     public Fragment selectedFragment = null;
-    private RelativeLayout rl;
-    INodeJS myAPI;
     private String idUser = "";
-    private String username="";
-    CompositeDisposable compositeDisposable = new CompositeDisposable();
-
+    private String username = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homepage_layout);
-        //Recuperer les données envoyé par login fil oncreate
-        Intent intent = getIntent();
-        if (intent != null){
 
-            if (intent.hasExtra("idUser")){
+        //Recuperer les données envoyé par login on oncreate
+        Intent intent = getIntent();
+        if (intent != null) {
+
+            if (intent.hasExtra("idUser")) {
                 idUser = intent.getStringExtra("idUser");
             }
-            if (intent.hasExtra("username")){
+            if (intent.hasExtra("username")) {
                 username = intent.getStringExtra("username");
             }
 
         }
 
-
+        //this is to send data from activity to fragments
+        final Bundle bundle = new Bundle();
+        bundle.putString("idUser", idUser);
 
         //Init API
         Retrofit retrofit = RetrofitClient.getInstance();
         myAPI = retrofit.create((INodeJS.class));
-
-        rl = (RelativeLayout) findViewById(R.id.relativeLayout);
 
         profileIcon = (ImageView) findViewById(R.id.userIcon);
         profileTitle = (TextView) findViewById(R.id.profile);
@@ -68,10 +80,11 @@ public class HomepageActivity extends AppCompatActivity {
         profileIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomepageActivity.this, ProfileActivity.class);
-                intent.putExtra("idUser",idUser);
-                intent.putExtra("username",username);
 
+                //Fragment display
+                Intent intent = new Intent(HomepageActivity.this, ProfileActivity.class);
+                intent.putExtra("idUser", idUser);
+                intent.putExtra("username", username);
 
                 HomepageActivity.this.startActivity(intent);
 
@@ -88,7 +101,7 @@ public class HomepageActivity extends AppCompatActivity {
                 chatIcon.setImageResource(R.drawable.chat2);
                 chatTitle.setTextColor(getResources().getColor(R.color.hintColor));
 
-                //Fragment display
+
 
             }
         });
@@ -111,6 +124,7 @@ public class HomepageActivity extends AppCompatActivity {
 
                 //Fragment display
                 selectedFragment = new GamelistActivity();
+                selectedFragment.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, selectedFragment).commit();
 
 
@@ -176,6 +190,7 @@ public class HomepageActivity extends AppCompatActivity {
         });
 
     }
+
 
     @Override
     protected void onStop() {
