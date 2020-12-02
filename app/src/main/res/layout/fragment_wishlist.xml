@@ -15,41 +15,25 @@
         android:fontFamily="@font/roboto"/>
 
     <TextView
-        android:id="@+id/favlistTitle"
+        android:id="@+id/wishlistTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/searchBar"
         android:layout_marginTop="20sp"
         android:layout_weight="1"
         android:fontFamily="@font/roboto"
-        android:text="My Favorite Games"
+        android:text="My Wish List"
         android:textSize="20sp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewFav"
+        android:id="@+id/recyclerViewWish"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/favlistTitle"
+        android:layout_below="@+id/wishlistTitle"
         android:layout_marginTop="20sp"
         android:orientation="horizontal"/>
 
-    <TextView
-        android:id="@+id/gamelistTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/recyclerViewFav"
-        android:layout_marginTop="20sp"
-        android:layout_weight="1"
-        android:fontFamily="@font/roboto"
-        android:text="My Games"
-        android:textSize="20sp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewGames"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/gamelistTitle"
-        android:layout_marginTop="20sp"/>
 
 
 </RelativeLayout>

@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".GamelistActivity"></activity>
+        <activity android:name=".WishlistActivity"></activity>
+        <activity android:name=".GamelistActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".HomepageActivity" />
         <activity

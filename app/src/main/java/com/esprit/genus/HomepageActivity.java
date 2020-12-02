@@ -159,6 +159,10 @@ public class HomepageActivity extends AppCompatActivity {
                 loopTitle.setTextColor(getResources().getColor(R.color.hintColor));
                 chatIcon.setImageResource(R.drawable.chat2);
                 chatTitle.setTextColor(getResources().getColor(R.color.hintColor));
+
+                //Fragment display
+                selectedFragment = new WishlistActivity();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, selectedFragment).commit();
             }
         });
 
@@ -236,19 +240,12 @@ public class HomepageActivity extends AppCompatActivity {
         );
 
     }
-    private void DisplayGames(int idUser) {
+/*    private void DisplayGames(int idUser) {
         compositeDisposable.add(myAPI.GetGameList(idUser)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<String>() {
-                    @Override
-                    public void accept(String s) throws Exception {
-                        for (int i = 0; i <s.length(); i++) {
-                        }
-                    }
-                })
-        );
-    }
+                }*/
 
     @Override
     protected void onStop() {
