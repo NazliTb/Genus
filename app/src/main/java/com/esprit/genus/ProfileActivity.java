@@ -192,11 +192,21 @@ public class ProfileActivity extends AppCompatActivity {
                 updateProfile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if (username.getText().toString().equals("")||
+                                password.getText().toString().equals("")||
+                                cPassword.getText().toString().equals(("")))
+                        {
+                            Toast.makeText(ProfileActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                        }
+                        else if(!password.getText().toString().equals(cPassword.getText().toString()))
+                        {
+                            Toast.makeText(ProfileActivity.this, "the two password fields should be same", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            updateUser(idUser, username.getText().toString(), password.getText()
+                                    .toString());
 
-                       updateUser(idUser,username.getText().toString(), password.getText()
-                                .toString());
-
-
+                        }
 
                     }
                 });
