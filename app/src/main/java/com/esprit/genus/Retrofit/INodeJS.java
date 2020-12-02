@@ -34,7 +34,7 @@ public interface INodeJS {
 
     @PUT("/editProfile")
     @FormUrlEncoded
-    Observable<String> editProfile(@Field("username") String username,@Field("password") String password);
+    Observable<String> editProfile(@Field ("idUser") int idUser,@Field("username") String username,@Field("password") String password);
 
 
     @GET("GetGameList/{idUser}")

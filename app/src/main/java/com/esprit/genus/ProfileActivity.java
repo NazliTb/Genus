@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.esprit.genus.Model.Game;
@@ -18,6 +19,7 @@ import com.esprit.genus.Retrofit.RetrofitClient;
 
 import java.util.List;
 
+import Popupwindow.PopUpClass;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,6 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ProfileActivity extends AppCompatActivity {
     private TextView gameList, wishList, signOut,gamesNbr,favNbr,wishesNbr,username;
     private String idUser="";
+    private Button editProfile;
     INodeJS myAPI;
 
     @Override
@@ -41,6 +44,7 @@ public class ProfileActivity extends AppCompatActivity {
         favNbr = (TextView) findViewById(R.id.favNbr);
         wishesNbr = (TextView) findViewById(R.id.wishesNbr);
         username = (TextView) findViewById(R.id.username);
+        editProfile=(Button) findViewById(R.id.editProfile);
         //Recuperer les données de homepage
         Intent intent = getIntent();
         if (intent != null) {
@@ -154,6 +158,15 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
                 ProfileActivity.this.startActivity(intent);
+            }
+        });
+
+        editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopUpClass popUpClass = new PopUpClass();
+                popUpClass.idUser=idUser;
+                popUpClass.showPopupWindow(v);
             }
         });
 
