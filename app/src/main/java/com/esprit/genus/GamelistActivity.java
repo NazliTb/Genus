@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.esprit.genus.Adapter.GameAdapter;
 import com.esprit.genus.Model.Game;
 import com.esprit.genus.Retrofit.INodeJS;
+import com.esprit.genus.Retrofit.RetrofitClient;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Retrofit;
 
 public class GamelistActivity extends Fragment {
 
@@ -46,17 +48,23 @@ public class GamelistActivity extends Fragment {
         //Get userID
         final int idUser = Integer.parseInt(this.getArguments().getString("idUser"));
 
-        //Add Suggest List
-        addSuggestList();
+        //Init API
+        Retrofit retrofit = RetrofitClient.getInstance();
+        myAPI = retrofit.create((INodeJS.class));
 
         //View
         recycler_games = (RecyclerView) getView().findViewById(R.id.recyclerViewGames);
         recycler_games.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
+        recycler_games.setLayoutManager(layoutManager);
         recycler_games.addItemDecoration(new DividerItemDecoration(getContext(), layoutManager.getOrientation()));
 
         materialSearchBar = (MaterialSearchBar) getView().findViewById(R.id.search_bar);
         materialSearchBar.setCardViewElevation(10);
+
+        //Add Suggest List
+        addSuggestList();
+
         materialSearchBar.addTextChangeListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -103,8 +111,22 @@ public class GamelistActivity extends Fragment {
     }
 
     private void startSearch(String query) {
-        
+        compositeDisposable.add(myAPI.searchGames(query)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<Game>>() {
+                    @Override
+                    public void accept(List<Game> games) throws Exception {
+                        adapter = new GameAdapter(games);
+                        recycler_games.setAdapter(adapter);
 
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Toast.makeText(getContext(), "Not found", Toast.LENGTH_SHORT).show();
+                    }
+                }));
     }
 
     private void getAllGames(int idUser) {
@@ -133,5 +155,7 @@ public class GamelistActivity extends Fragment {
         suggestList.add("Dota 2");
         suggestList.add("Counter Strike");
         suggestList.add("GTA");
+
+        materialSearchBar.setLastSuggestions(suggestList);
     }
 }

@@ -4,22 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.esprit.genus.Adapter.GameAdapter;
 import com.esprit.genus.Retrofit.INodeJS;
 import com.esprit.genus.Retrofit.RetrofitClient;
-import com.mancj.materialsearchbar.MaterialSearchBar;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import io.reactivex.disposables.CompositeDisposable;
 import retrofit2.Retrofit;
