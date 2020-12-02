@@ -236,6 +236,7 @@
                         <outlet property="favNbr" destination="8tD-mw-OBw" id="vrT-mv-9u9"/>
                         <outlet property="gameNbr" destination="jPE-yl-uyM" id="dZA-OK-UIg"/>
                         <outlet property="profilePic" destination="6cG-Sw-Adj" id="kIK-rb-CTi"/>
+                        <outlet property="username" destination="GuO-1v-ZsA" id="ZMi-vG-0mk"/>
                         <outlet property="wishNbr" destination="KYE-50-MeT" id="j60-iw-e9b"/>
                     </connections>
                 </viewController>

@@ -10,8 +10,14 @@ import UIKit
 class ProfileController: UIViewController {
     
     //Widgets
-    
+    var id:String = ""
+    var Username:String = "Full Name"
+    var gamenbr: String = "0"
+    var favnbr: String  = "0"
+    var wishnbr: String = "0"
    
+    @IBOutlet weak var username: UILabel!
+    
     @IBOutlet weak var gameNbr: UILabel!
     
     @IBOutlet weak var favNbr: UILabel!
@@ -20,18 +26,28 @@ class ProfileController: UIViewController {
     
     @IBOutlet weak var profilePic: UIImageView!
     
+  
+    
     
     override func viewDidLoad() {
+       
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view.
+        username.text=Username
+        gameNbr.text=gamenbr
+        favNbr.text=favnbr
+        wishNbr.text=wishnbr
+        
     }
 
 
     //IBActions
     
     @IBAction func editProfileAction(_ sender: Any) {
-        
-    }
+    var popUpWindow: PopUpWindow!
+        popUpWindow = PopUpWindow(title: "Edit Profile", Usernamelabel:"Username : ",Passwordlabel: "Password : ", buttontext: "Update")
+    self.present(popUpWindow, animated: true, completion: nil)    }
     
     @IBAction func goMyGamesAction(_ sender: Any) {
     }

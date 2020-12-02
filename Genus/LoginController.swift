@@ -34,11 +34,27 @@ class LoginController: UIViewController {
          }
     
     
+    func updateValue(res:String)
+    {
+    let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileController") as! ProfileController
+    vc.gamenbr=res
+    print(vc.gamenbr)
+    self.navigationController?.pushViewController(vc, animated: true)
+    }
     
-    func alertLogin(message: String, title: String ) {
+    func alertLogin(id:String,username:String,message: String, title: String ) {
            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
            let OKAction = UIAlertAction(title: "OK", style: .default, handler: {(action) -> Void in
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileController") as! ProfileController
+            
+            
+            vc.Username=username as! String
+            vc.id=id
+            
+            self.getGamesNbr(idUser: id)
+            
+            self.getFavNbr(idUser: id)
+            self.getWishNbr(idUser: id)
             self.navigationController?.pushViewController(vc, animated: true)
             self.present(vc, animated: true, completion: nil)
             
@@ -47,6 +63,76 @@ class LoginController: UIViewController {
            self.present(alertController, animated: true, completion: nil)
          }
     
+    func getGamesNbr(idUser: String)
+    {
+    var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/GetGamesNbr/"+idUser)!)
+    request.httpMethod = "GET"
+    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+    let session = URLSession.shared
+    let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+        do {
+            let responseData = String(data: data!, encoding: String.Encoding.utf8)
+    DispatchQueue.main.async {
+            
+    let res = responseData!.replacingOccurrences(of: "\"", with: "")
+    //print(res)
+    
+   /* let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileController") as! ProfileController
+    vc.gamenbr=res
+    self.navigationController?.pushViewController(vc, animated: true)*/
+    self.updateValue(res:res)
+    }
+    }
+    catch {}
+   
+    })
+    task.resume()
+    
+        
+    }
+    
+    func getFavNbr(idUser: String)
+    {
+    var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/GetFavouriteGamesNbr/"+idUser)!)
+    request.httpMethod = "GET"
+    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+    let session = URLSession.shared
+    let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+    let responseData = String(data: data!, encoding: String.Encoding.utf8)
+    DispatchQueue.main.async {
+            
+    let res = responseData!.replacingOccurrences(of: "\"", with: "")
+    let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileController") as! ProfileController
+    vc.favnbr=res
+    self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    })
+        task.resume()
+    }
+    
+    func getWishNbr(idUser: String)
+    {
+    var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/GetWishGamesNbr/"+idUser)!)
+    request.httpMethod = "GET"
+    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+    let session = URLSession.shared
+    let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+    let responseData = String(data: data!, encoding: String.Encoding.utf8)
+    DispatchQueue.main.async {
+            
+    let res = responseData!.replacingOccurrences(of: "\"", with: "")
+    let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileController") as! ProfileController
+    vc.wishnbr=res
+    self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    })
+        task.resume()
+    }
     
     //IBActions
     
@@ -66,37 +152,35 @@ class LoginController: UIViewController {
     let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
             
             
-                do {
-                let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
-                    
-                    
-                       
-                    
-                    }
-                    catch {
-                        
-                }
+        do {
+            let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String,AnyObject>
+          
+                let name = json["username"]
+                let idUser=json["idUser"]
+                
+                DispatchQueue.main.async {
+               
+                let error1="Wrong password"
+                let error2="User doesnt exist !"
                 let responseData = String(data: data!, encoding: String.Encoding.utf8)
-                                   
-                                
-                                    
-              
-        
-        DispatchQueue.main.async {
-           
-            let error1="Wrong password"
-            let error2="User doesnt exist !"
-            
-            let res = responseData!.replacingOccurrences(of: "\"", with: "")
-            if(res.caseInsensitiveCompare(error1) == .orderedSame || res.caseInsensitiveCompare(error2) == .orderedSame) {
-            self.alertErrorLogin(message:res,title:"Error")
-            
-            
-           }
-            else {
-                self.alertLogin(message:"Welcome you are connected !",title:"Information")
-           }
+                let res = responseData!.replacingOccurrences(of: "\"", with: "")
+                if(res.caseInsensitiveCompare(error1) == .orderedSame || res.caseInsensitiveCompare(error2) == .orderedSame) {
+                self.alertErrorLogin(message:res,title:"Error")
+               
+                }
+                else {
+                    //print(name)
+                    //print(idUser)
+                    self.alertLogin(id:"2",username:"Senjiro",message:"Welcome you are connected !",title:"Information")
+         
+                }
+            }
         }
+        catch
+        {
+            
+        }
+
     })
     
     task.resume()
