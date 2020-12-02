@@ -8,6 +8,7 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 
 public interface INodeJS {
+
     @POST("register")
     @FormUrlEncoded
     Observable<String> registerUser(@Field("email") String email,
@@ -28,4 +29,19 @@ public interface INodeJS {
     @GET("GetGameList")
     @FormUrlEncoded
     Observable<String> GetGameList(@Field("idUser") int idUser);
+
+
+    @GET("GetGamesNbr")
+    @FormUrlEncoded
+    Observable<String> getGamesNbr(@Field("idUser") String idUser);
+
+    @GET("GetFavouriteGamesNbr")
+    @FormUrlEncoded
+    Observable<String> GetFavouriteGamesNbr(@Field("idUser") String idUser);
+
+    @GET("GetWishGamesNbr")
+    @FormUrlEncoded
+    Observable<String> GetWishGamesNbr(@Field("idUser") String idUser);
+
+
 }
