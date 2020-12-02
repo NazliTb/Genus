@@ -56,8 +56,7 @@ public class SignupActivity extends AppCompatActivity {
             public void onClick(View v) {
                 registerUser(email.getText().toString(),username.getText().toString(),password.getText()
                         .toString());
-                Intent intent = new Intent(SignupActivity.this, HomepageActivity.class);
-                SignupActivity.this.startActivity(intent);
+
             }
         });
 
@@ -78,10 +77,12 @@ public class SignupActivity extends AppCompatActivity {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String s) throws Exception {
-                        if(s.contains("password"))
+                        if(s.contains("password")) {
                         /*pass to the next activity for now we'll make
                         a toast appear to test */
                             Toast.makeText(SignupActivity.this, "Register Successful", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                            SignupActivity.this.startActivity(intent); }
                         else
                             Toast.makeText(SignupActivity.this, ""+s, Toast.LENGTH_SHORT).show();
                     }

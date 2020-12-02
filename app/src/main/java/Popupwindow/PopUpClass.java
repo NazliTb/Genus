@@ -1,21 +1,13 @@
 package Popupwindow;
 
-import android.content.Intent;
-import android.provider.ContactsContract;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.esprit.genus.HomepageActivity;
-import com.esprit.genus.LoginActivity;
-import com.esprit.genus.ProfileActivity;
 import com.esprit.genus.R;
 import com.esprit.genus.Retrofit.INodeJS;
 import com.esprit.genus.Retrofit.RetrofitClient;
@@ -45,7 +37,7 @@ public class PopUpClass {
 
         //Create a View object yourself through inflater
         LayoutInflater inflater = (LayoutInflater) view.getContext().getSystemService(view.getContext().LAYOUT_INFLATER_SERVICE);
-        View popupView = inflater.inflate(R.layout.popupwindow, null);
+        View popupView = inflater.inflate(R.layout.popupwindow_layout, null);
 
         //Specify the length and width through constants
         int width = 1000;//LinearLayout.LayoutParams.MATCH_PARENT;
