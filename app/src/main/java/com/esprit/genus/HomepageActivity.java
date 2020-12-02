@@ -1,25 +1,18 @@
 package com.esprit.genus;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import com.esprit.genus.Retrofit.INodeJS;
 import com.esprit.genus.Retrofit.RetrofitClient;
-
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
+
 
 public class HomepageActivity extends AppCompatActivity {
     private ImageView profileIcon, libIcon, loopIcon, heartIcon, chatIcon;
@@ -183,18 +176,6 @@ public class HomepageActivity extends AppCompatActivity {
         });
 
     }
-
-
-
-
-
-
-/*    private void DisplayGames(int idUser) {
-        compositeDisposable.add(myAPI.GetGameList(idUser)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<String>() {
-                }*/
 
     @Override
     protected void onStop() {
