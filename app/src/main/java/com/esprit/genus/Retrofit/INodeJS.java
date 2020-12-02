@@ -6,6 +6,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public interface INodeJS {
 
@@ -26,22 +27,23 @@ public interface INodeJS {
     @FormUrlEncoded
     Observable<String> getForgottenPassword(@Field("email") String email);
 
-    @GET("GetGameList")
-    @FormUrlEncoded
-    Observable<String> GetGameList(@Field("idUser") int idUser);
+    @GET("GetGameList/{idUser}")
+
+    Observable<String> GetGameList(@Path("idUser") int idUser);
 
 
-    @GET("GetGamesNbr")
-    @FormUrlEncoded
-    Observable<String> getGamesNbr(@Field("idUser") String idUser);
 
-    @GET("GetFavouriteGamesNbr")
-    @FormUrlEncoded
-    Observable<String> getFavouriteGamesNbr(@Field("idUser") String idUser);
+    @GET("GetGamesNbr/{idUser}")
 
-    @GET("GetWishGamesNbr")
-    @FormUrlEncoded
-    Observable<String> getWishGamesNbr(@Field("idUser") String idUser);
+    String getGamesNbr(@Path("idUser") String idUser);
+
+    @GET("GetFavouriteGamesNbr/{idUser}")
+
+    Observable<String> getFavouriteGamesNbr(@Path("idUser") String idUser);
+
+    @GET("GetWishGamesNbr/{idUser}")
+
+    Observable<String> getWishGamesNbr(@Path("idUser") String idUser);
 
 
 }

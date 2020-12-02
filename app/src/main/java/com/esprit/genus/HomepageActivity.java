@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.esprit.genus.Retrofit.INodeJS;
 import com.esprit.genus.Retrofit.RetrofitClient;
 
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
@@ -42,14 +43,13 @@ public class HomepageActivity extends AppCompatActivity {
             if (intent.hasExtra("idUser")){
                 idUser = intent.getStringExtra("idUser");
             }
-            if (intent.hasExtra("userName")){
-                username = intent.getStringExtra("userName");
+            if (intent.hasExtra("username")){
+                username = intent.getStringExtra("username");
             }
 
         }
 
-        intent.putExtra("idUser",idUser);
-        intent.putExtra("Username",username);
+
 
         //Init API
         Retrofit retrofit = RetrofitClient.getInstance();
@@ -76,7 +76,10 @@ public class HomepageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomepageActivity.this, ProfileActivity.class);
+                intent.putExtra("idUser",idUser);
+                intent.putExtra("username",username);
                 GetGamesNbr(idUser);
+                System.out.println(intent.getStringExtra("gameNbr"));
                 GetFavouriteGamesNbr(idUser);
                 GetWishGamesNbr(idUser);
                 HomepageActivity.this.startActivity(intent);
@@ -187,9 +190,10 @@ public class HomepageActivity extends AppCompatActivity {
                     @Override
                     public void accept(String s) throws Exception {
                      Intent intent = new Intent(HomepageActivity.this, ProfileActivity.class);
-                            intent.putExtra("gameNbr",s);
+                      //  System.out.println(s);
+                        intent.putExtra("gameNbr", s);
 
-                        }
+                    }
 
 
                 })
