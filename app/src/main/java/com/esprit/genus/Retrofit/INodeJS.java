@@ -5,6 +5,7 @@ import com.esprit.genus.Model.Game;
 import java.util.List;
 
 import io.reactivex.Observable;
+import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -35,19 +36,10 @@ public interface INodeJS {
 
     Observable<List<Game>> GetGameList(@Path("idUser") int idUser);
 
+    @GET("GetWishList/{idUser}")
+    Call<List<Game>> GetWishList(@Path("idUser") int idUser);
 
 
-    @GET("GetGamesNbr/{idUser}")
-
-    Observable<String> getGamesNbr(@Path("idUser") String idUser);
-
-    @GET("GetFavouriteGamesNbr/{idUser}")
-
-    Observable<String> getFavouriteGamesNbr(@Path("idUser") String idUser);
-
-    @GET("GetWishGamesNbr/{idUser}")
-
-    Observable<String> getWishGamesNbr(@Path("idUser") String idUser);
 
 
 }

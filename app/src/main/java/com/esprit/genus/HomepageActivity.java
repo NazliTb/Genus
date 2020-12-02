@@ -78,10 +78,8 @@ public class HomepageActivity extends AppCompatActivity {
                 Intent intent = new Intent(HomepageActivity.this, ProfileActivity.class);
                 intent.putExtra("idUser",idUser);
                 intent.putExtra("username",username);
-                GetGamesNbr(idUser);
-                System.out.println(intent.getStringExtra("gameNbr"));
-                GetFavouriteGamesNbr(idUser);
-                GetWishGamesNbr(idUser);
+
+
                 HomepageActivity.this.startActivity(intent);
 
                 //Fragments navigation coloring
@@ -186,60 +184,11 @@ public class HomepageActivity extends AppCompatActivity {
 
     }
 
-    private void GetGamesNbr(String idUser) {
-    compositeDisposable.add(myAPI.getGamesNbr(idUser)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<String>() {
-                    @Override
-                    public void accept(String s) throws Exception {
-                     Intent intent = new Intent(HomepageActivity.this, ProfileActivity.class);
-                      //  System.out.println(s);
-                        intent.putExtra("gameNbr", s);
-
-                    }
 
 
-                })
-        );
-
-    }
-
-    private void GetFavouriteGamesNbr(String idUser) {
-        compositeDisposable.add(myAPI.getFavouriteGamesNbr(idUser)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<String>() {
-                    @Override
-                    public void accept(String s) throws Exception {
-                        Intent intent = new Intent(HomepageActivity.this, ProfileActivity.class);
-                        intent.putExtra("favNbr",s);
-
-                    }
 
 
-                })
-        );
 
-    }
-
-    private void GetWishGamesNbr(String idUser) {
-        compositeDisposable.add(myAPI.getWishGamesNbr(idUser)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<String>() {
-                    @Override
-                    public void accept(String s) throws Exception {
-                        Intent intent = new Intent(HomepageActivity.this, ProfileActivity.class);
-                        intent.putExtra("wishNbr",s);
-
-                    }
-
-
-                })
-        );
-
-    }
 /*    private void DisplayGames(int idUser) {
         compositeDisposable.add(myAPI.GetGameList(idUser)
                 .subscribeOn(Schedulers.io())
