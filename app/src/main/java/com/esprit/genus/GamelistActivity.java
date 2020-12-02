@@ -46,7 +46,13 @@ public class GamelistActivity extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         //Get userID
-        final int idUser = Integer.parseInt(this.getArguments().getString("idUser"));
+        String getidUser = this.getArguments().getString("idUser");
+        int idUser = 0;
+        try {
+            idUser=Integer.parseInt(getidUser);
+        } catch (NumberFormatException e) {
+            Toast.makeText(getContext(), "No user logged in", Toast.LENGTH_SHORT).show();
+        }
 
         //Init API
         Retrofit retrofit = RetrofitClient.getInstance();
@@ -88,10 +94,11 @@ public class GamelistActivity extends Fragment {
 
             }
         });
+        final int finalIdUser = idUser;
         materialSearchBar.setOnSearchActionListener(new MaterialSearchBar.OnSearchActionListener() {
             @Override
             public void onSearchStateChanged(boolean enabled) {
-                if (!enabled) { getAllGames(idUser); }
+                if (!enabled) { getAllGames(finalIdUser); }
             }
 
             @Override
