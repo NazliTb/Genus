@@ -19,7 +19,7 @@ import com.esprit.genus.Retrofit.RetrofitClient;
 
 import java.util.List;
 
-import Popupwindow.PopUpClass;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -164,9 +164,10 @@ public class ProfileActivity extends AppCompatActivity {
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PopUpClass popUpClass = new PopUpClass();
-                popUpClass.idUser=idUser;
-                popUpClass.showPopupWindow(v);
+               Intent intent = new Intent(ProfileActivity.this, PopupActivity.class);
+                intent.putExtra("idUser",idUser);
+                ProfileActivity.this.startActivity(intent);
+
             }
         });
 
