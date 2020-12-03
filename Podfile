@@ -6,6 +6,7 @@ target 'Genus' do
   use_frameworks!
 
   # Pods for Genus
+  pod 'Alamofire'
 
   target 'GenusTests' do
     inherit! :search_paths
@@ -15,7 +16,5 @@ target 'Genus' do
   target 'GenusUITests' do
     # Pods for testing
   end
-
-  pod 'Alamofire'
 
 end

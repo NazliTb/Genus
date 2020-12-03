@@ -7,7 +7,7 @@
 
 
 import UIKit
-
+import Alamofire
 class LoginController: UIViewController {
     
     //Var
@@ -60,6 +60,7 @@ class LoginController: UIViewController {
     
     func getGamesNbr(idUser: String)
     {
+        
     var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/GetGamesNbr/"+idUser)!)
     request.httpMethod = "GET"
     request.addValue("application/json", forHTTPHeaderField: "Content-Type")
