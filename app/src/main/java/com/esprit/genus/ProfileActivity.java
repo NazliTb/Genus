@@ -184,11 +184,20 @@ public class ProfileActivity extends AppCompatActivity {
                 final EditText password;
                 final EditText cPassword;
                 Button updateProfile;
+                Button dismiss;
                 username = (EditText) vpop.findViewById(R.id.editusername);
                 password = (EditText) vpop.findViewById(R.id.editpassword);
                 cPassword = (EditText) vpop.findViewById(R.id.editcpassword);
 
                 updateProfile = vpop.findViewById(R.id.updateProfile_button);
+                dismiss = vpop.findViewById(R.id.dismiss);
+                dismiss.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
                 updateProfile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

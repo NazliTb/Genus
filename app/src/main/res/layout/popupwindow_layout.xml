@@ -17,7 +17,23 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:background="@drawable/my_border">
+            >
+
+            <Button
+                android:id="@+id/dismiss"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:layout_gravity="right"
+                android:background="#04D9D9"
+                android:fontFamily="@font/orbitron"
+                android:text="X"
+                android:textColor="#0A1240"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Space
                 android:layout_width="match_parent"
@@ -127,6 +143,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
         </LinearLayout>
 
 </RelativeLayout>
