@@ -39,7 +39,7 @@ public interface INodeJS {
 
 
     @GET("GetGameList/{idUser}")
-    Observable<List<Game>> GetGameList(@Path("idUser") int idUser);
+    Call<List<Game>> GetGameList(@Path("idUser") int idUser);
 
     @POST("search")
     @FormUrlEncoded

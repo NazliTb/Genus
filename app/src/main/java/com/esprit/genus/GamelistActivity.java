@@ -28,6 +28,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -70,6 +73,8 @@ public class GamelistActivity extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         myAPI1 = retrofit1.create((INodeJS.class));
+        Call<List<Game>> listGames = myAPI1.GetGameList(idUser);
+
 
         //View
         recycler_games = (RecyclerView) mView.findViewById(R.id.recyclerViewGames);
@@ -125,7 +130,23 @@ public class GamelistActivity extends Fragment {
             }
         });
 
-        getAllGames(idUser);
+        //getAllGames(idUser);
+
+        listGames.enqueue(new Callback<List<Game>>() {
+            @Override
+            public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
+                if (!response.isSuccessful()) {
+                    return;
+                }
+                List<Game> games = response.body();
+                adapter = new GameAdapter(games);
+                recycler_games.setAdapter(adapter);
+            }
+            @Override
+            public void onFailure(Call<List<Game>> call, Throwable t) {
+                Toast.makeText(getContext(), "Not found", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         //return inflater.inflate(R.layout.fragment_gamelist, container, false);
         return view;
@@ -152,7 +173,7 @@ public class GamelistActivity extends Fragment {
 
     private void getAllGames(int idUser) {
 
-        compositeDisposable.add(myAPI1.GetGameList(idUser)
+        /*compositeDisposable.add(myAPI1.GetGameList(idUser)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new Consumer<List<Game>>() {
@@ -167,7 +188,8 @@ public class GamelistActivity extends Fragment {
             public void accept(Throwable throwable) throws Exception {
                 Toast.makeText(getContext(), "Not found", Toast.LENGTH_SHORT).show();
             }
-        }));
+        }));*/
+
     }
 
     private void addSuggestList() {
