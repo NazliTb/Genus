@@ -12,7 +12,7 @@ class ProfileController: UIViewController {
     //Widgets
     var id:Int=0
     var Username:String = "Full Name"
-    var gamenbr: String = "0"
+    var gamesnbr: Any = 0
     var favnbr: String  = "0"
     var wishnbr: String = "0"
    
@@ -35,7 +35,7 @@ class ProfileController: UIViewController {
         
         // Do any additional setup after loading the view.
         username.text=Username
-        gameNbr.text=gamenbr
+        gameNbr.text="\(gamesnbr)"
         favNbr.text=favnbr
         wishNbr.text=wishnbr
         

@@ -14,7 +14,7 @@
             <objects>
                 <viewController storyboardIdentifier="ProfileController" id="GUy-T2-ypE" userLabel="Profile Screen" customClass="ProfileController" customModule="Genus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wRP-Sy-duF">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Elements_iPhone X-XS-11 Pro – 8" translatesAutoresizingMaskIntoConstraints="NO" id="DIB-We-F6q">
@@ -232,6 +232,7 @@
                         <viewLayoutGuide key="safeArea" id="qwB-P7-d0s"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="i6V-2o-ER4"/>
                     <connections>
                         <outlet property="favNbr" destination="8tD-mw-OBw" id="vrT-mv-9u9"/>
                         <outlet property="gameNbr" destination="jPE-yl-uyM" id="dZA-OK-UIg"/>
@@ -242,7 +243,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZCy-Le-cBR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="205.79710144927537" y="813.61607142857144"/>
+            <point key="canvasLocation" x="-238" y="749"/>
         </scene>
         <!--Game Screen-->
         <scene sceneID="xTh-91-eY7">
@@ -544,11 +545,12 @@
                     <connections>
                         <outlet property="email" destination="yMN-Hj-ytg" id="0tY-Ex-fOn"/>
                         <outlet property="password" destination="Vqz-up-Uze" id="aTM-HZ-ara"/>
+                        <segue destination="GUy-T2-ypE" kind="show" identifier="login_profile" id="u6I-9d-aq0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QCC-qx-0eN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="902.89855072463774" y="105.13392857142857"/>
+            <point key="canvasLocation" x="-239" y="-374"/>
         </scene>
         <!--Sign Up Screen-->
         <scene sceneID="BCl-KG-fxP">
@@ -638,7 +640,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qbM-No-GwY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1608.6956521739132" y="104.46428571428571"/>
+            <point key="canvasLocation" x="1116" y="-667"/>
         </scene>
         <!--Password Recovery Screen-->
         <scene sceneID="wVF-EP-0CA">
@@ -692,7 +694,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gIN-Me-jRI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2334.7826086956525" y="104.46428571428571"/>
+            <point key="canvasLocation" x="1071" y="115"/>
         </scene>
     </scenes>
     <resources>

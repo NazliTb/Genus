@@ -11,6 +11,7 @@ import Alamofire
 class LoginController: UIViewController {
     
     //Var
+    var nbrGames: Any = 0
     
     //Widgets
 
@@ -33,6 +34,11 @@ class LoginController: UIViewController {
            self.present(alertController, animated: true, completion: nil)
          }
     
+    func linkLoginProfile()
+    {
+        self.performSegue(withIdentifier: "login_profile", sender: nbrGames)
+        
+    }
     
  
     
@@ -48,8 +54,8 @@ class LoginController: UIViewController {
             
             self.getGamesNbr(idUser: id1)
             
-            self.getFavNbr(idUser: id1)
-            self.getWishNbr(idUser: id1)
+           /* self.getFavNbr(idUser: id1)
+            self.getWishNbr(idUser: id1) */
             self.navigationController?.pushViewController(vc, animated: true)
             self.present(vc, animated: true, completion: nil)
             
@@ -61,29 +67,25 @@ class LoginController: UIViewController {
     func getGamesNbr(idUser: String)
     {
         
-    var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/GetGamesNbr/"+idUser)!)
-    request.httpMethod = "GET"
-    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-
-    let session = URLSession.shared
-    let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
-        do {
-            let responseData = String(data: data!, encoding: String.Encoding.utf8)
-    DispatchQueue.main.async {
+    
+        AF.request("http://192.168.64.1:3000/GetGamesNbr/"+idUser).responseJSON{ (response) in
+            switch response.result {
+                    
+                    case .success(let value):
+                         self.nbrGames=value
+                         
+                    
+                        break
+                    case .failure(let error):
+                        print(error)
+                        break
+                    }
+           
             
-    let res = responseData!.replacingOccurrences(of: "\"", with: "")
+        }
+        
    
-    
-   let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileController") as! ProfileController
-    vc.gamenbr=res
-    self.navigationController?.pushViewController(vc, animated: true)
-    }
-    }
-    catch {}
-   
-    })
-    task.resume()
-    
+        
         
     }
     
@@ -181,8 +183,18 @@ class LoginController: UIViewController {
     
     task.resume()
     }
+        
+        linkLoginProfile()
     }
 
+   
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "login_profile") {
+        let viewController = segue.destination as? ProfileController
+        viewController!.gamesnbr=nbrGames
+        }
+    }
     
     @IBAction func JoinAction(_ sender: Any) {
     
