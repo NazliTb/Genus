@@ -34,27 +34,22 @@ class LoginController: UIViewController {
          }
     
     
-    func updateValue(res:String)
-    {
-    let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileController") as! ProfileController
-    vc.gamenbr=res
-    print(vc.gamenbr)
-    self.navigationController?.pushViewController(vc, animated: true)
-    }
+ 
     
-    func alertLogin(id:String,username:String,message: String, title: String ) {
+    func alertLogin(id:Int,username:String,message: String, title: String ) {
            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
            let OKAction = UIAlertAction(title: "OK", style: .default, handler: {(action) -> Void in
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileController") as! ProfileController
             
             
             vc.Username=username as! String
+            var id1="\(id)"
             vc.id=id
             
-            self.getGamesNbr(idUser: id)
+            self.getGamesNbr(idUser: id1)
             
-            self.getFavNbr(idUser: id)
-            self.getWishNbr(idUser: id)
+            self.getFavNbr(idUser: id1)
+            self.getWishNbr(idUser: id1)
             self.navigationController?.pushViewController(vc, animated: true)
             self.present(vc, animated: true, completion: nil)
             
@@ -76,12 +71,11 @@ class LoginController: UIViewController {
     DispatchQueue.main.async {
             
     let res = responseData!.replacingOccurrences(of: "\"", with: "")
-    //print(res)
+   
     
-   /* let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileController") as! ProfileController
+   let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileController") as! ProfileController
     vc.gamenbr=res
-    self.navigationController?.pushViewController(vc, animated: true)*/
-    self.updateValue(res:res)
+    self.navigationController?.pushViewController(vc, animated: true)
     }
     }
     catch {}
@@ -94,7 +88,8 @@ class LoginController: UIViewController {
     
     func getFavNbr(idUser: String)
     {
-    var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/GetFavouriteGamesNbr/"+idUser)!)
+       
+        var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/GetFavouriteGamesNbr/"+idUser)!)
     request.httpMethod = "GET"
     request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 
@@ -115,6 +110,7 @@ class LoginController: UIViewController {
     
     func getWishNbr(idUser: String)
     {
+        
     var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/GetWishGamesNbr/"+idUser)!)
     request.httpMethod = "GET"
     request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -155,8 +151,8 @@ class LoginController: UIViewController {
         do {
             let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String,AnyObject>
           
-                let name = json["username"]
-                let idUser=json["idUser"]
+                let name = json["username"] as! String
+                let idUser=json["idUser"] as! Int
                 
                 DispatchQueue.main.async {
                
@@ -169,9 +165,8 @@ class LoginController: UIViewController {
                
                 }
                 else {
-                    //print(name)
-                    //print(idUser)
-                    self.alertLogin(id:"2",username:"Senjiro",message:"Welcome you are connected !",title:"Information")
+                  
+                    self.alertLogin(id:idUser,username:name,message:"Welcome you are connected !",title:"Information")
          
                 }
             }

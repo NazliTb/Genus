@@ -10,7 +10,7 @@ import UIKit
 class ProfileController: UIViewController {
     
     //Widgets
-    var id:String = ""
+    var id:Int=0
     var Username:String = "Full Name"
     var gamenbr: String = "0"
     var favnbr: String  = "0"
