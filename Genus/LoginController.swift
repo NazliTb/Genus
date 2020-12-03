@@ -27,7 +27,7 @@ class LoginController: UIViewController {
 
     
     //Functions
-    func alertErrorLogin(message: String, title: String ) {
+    func alert(message: String, title: String ) {
            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
            let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
            alertController.addAction(OKAction)
@@ -42,27 +42,7 @@ class LoginController: UIViewController {
     
  
     
-    func alertLogin(id:Int,username:String,message: String, title: String ) {
-           let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-           let OKAction = UIAlertAction(title: "OK", style: .default, handler: {(action) -> Void in
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileController") as! ProfileController
-            
-            
-            vc.Username=username as! String
-            var id1="\(id)"
-            vc.id=id
-            
-            self.getGamesNbr(idUser: id1)
-            
-           /* self.getFavNbr(idUser: id1)
-            self.getWishNbr(idUser: id1) */
-            self.navigationController?.pushViewController(vc, animated: true)
-            self.present(vc, animated: true, completion: nil)
-            
-           })
-           alertController.addAction(OKAction)
-           self.present(alertController, animated: true, completion: nil)
-         }
+ 
     
     func getGamesNbr(idUser: String)
     {
@@ -73,7 +53,7 @@ class LoginController: UIViewController {
                     
                     case .success(let value):
                          self.nbrGames=value
-                         
+                         self.linkLoginProfile()
                     
                         break
                     case .failure(let error):
@@ -85,7 +65,7 @@ class LoginController: UIViewController {
         }
         
    
-        
+       print(nbrGames)
         
     }
     
@@ -138,7 +118,7 @@ class LoginController: UIViewController {
     @IBAction func LoginAction(_ sender: Any) {
         if(email.text=="" || password.text=="")
         {
-            alertErrorLogin(message: "Please give your email and password", title: "Warning")
+            alert(message: "Please give your email and password", title: "Warning")
         }
         else {
     let params = ["email":email.text, "password":password.text] as! Dictionary<String, String>
@@ -164,13 +144,26 @@ class LoginController: UIViewController {
                 let responseData = String(data: data!, encoding: String.Encoding.utf8)
                 let res = responseData!.replacingOccurrences(of: "\"", with: "")
                 if(res.caseInsensitiveCompare(error1) == .orderedSame || res.caseInsensitiveCompare(error2) == .orderedSame) {
-                self.alertErrorLogin(message:res,title:"Error")
+                self.alert(message:res,title:"Error")
                
                 }
                 else {
                   
-                    self.alertLogin(id:idUser,username:name,message:"Welcome you are connected !",title:"Information")
-         
+                    self.alert(message:"Welcome you are connected !",title:"Information")
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileController") as! ProfileController
+                    
+                    
+                    vc.Username=name as! String
+                    var id1="\(idUser)"
+                    vc.id=idUser
+                    self.getGamesNbr(idUser: id1)
+                  
+                   /* self.getFavNbr(idUser: id1)
+                    self.getWishNbr(idUser: id1) */
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    self.present(vc, animated: true, completion: nil)
+                   
+                
                 }
             }
         }
@@ -184,7 +177,7 @@ class LoginController: UIViewController {
     task.resume()
     }
         
-        linkLoginProfile()
+        
     }
 
    

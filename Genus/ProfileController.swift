@@ -38,7 +38,7 @@ class ProfileController: UIViewController {
         gameNbr.text="\(gamesnbr)"
         favNbr.text=favnbr
         wishNbr.text=wishnbr
-        
+        print(gamesnbr)
     }
 
 
