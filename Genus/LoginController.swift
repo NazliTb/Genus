@@ -12,7 +12,9 @@ class LoginController: UIViewController {
     
     //Var
  
-  
+    private let networkingClient=NetworkingClient()
+    
+    var nbrGame: Any = 0
     
     //Widgets
 
@@ -58,11 +60,35 @@ class LoginController: UIViewController {
    
  
     
-    func getGamesNbr(idUser: String,completion: @escaping (Any) -> Void)
-    {
+   /* func getGamesNbr(idUser:String,completion:@escaping(_ str:String?) -> ()) {
+       
+
+            let link = "http://192.168.64.1:3000/GetGamesNbr/"+idUser
+            let url = URL(string: link)
+
+            let task = URLSession.shared.dataTask(with: url!) { data, response, error in
+                guard error == nil else {
+                    print(error!)
+                    completion(nil)
+                    return
+                }
+                guard let data = data else {
+                    print("Data is empty")
+                    completion(nil)
+                    return
+                }
+                let json = try! JSONSerialization.jsonObject(with: data, options: [])
+                guard let jsonArray = json as? String else {
+                    completion(nil)
+                    return
+                }
+                let myData = jsonArray
+                completion(myData)
+            }
+            task.resume()
         
-    
-        AF.request("http://192.168.64.1:3000/GetGamesNbr/"+idUser).responseJSON{ (response) in
+   
+    /*   AF.request("http://192.168.64.1:3000/GetGamesNbr/"+idUser).responseJSON{ (response) in
             switch response.result {
                     
                     case .success(let value):
@@ -78,10 +104,12 @@ class LoginController: UIViewController {
                     }
            
             
-        }
+        }*/
+   
+            
         
         
-    }
+    }*/
     
     func getFavNbr(idUser: String,completion: @escaping (Any) -> Void)
     {
@@ -165,26 +193,26 @@ class LoginController: UIViewController {
                      let id1="\(idUser)"
                      vc.id=idUser
                     
+                  //  self.getGamesNbr(url:"http://192.168.64.1:3000/GetGamesNbr/"+id1){
+                 /*   self.getGamesNbr(idUser: id1) { (str) in
+                      if let st = str {
+                        print(st)
+                       }
+                    }*/
+                    
+                    
+                    //self.getGamesNbr(idUser:id1)
+                    print(self.nbrGame)
+                    vc.gamesnbr=self.nbrGame
                     self.navigationController?.pushViewController(vc, animated: true)
                     self.present(vc, animated: true, completion: nil)
-                    
-                   
-                    
-                    
-                    
-                 
-                    self.getGamesNbr(idUser: id1) { (response) in
-                        
-                        vc.gamesnbr=response
-                        
-                        
-                    }
-                    print(vc.gamesnbr) //and here should be 2 too , but it showed 0 you see the problem ? it should be both 2
+      
+                    //print(vc.gamesnbr) //and here should be 2 too , but it showed 0 you see the problem ? it should be both 2
                     
                   
                     
                     //i noticed when i get out from that function it goes 0 everytime
-                    self.getFavNbr(idUser: id1) { (response) in
+                    /* self.getFavNbr(idUser: id1) { (response) in
                         vc.favnbr=response
                        
 
@@ -193,12 +221,10 @@ class LoginController: UIViewController {
                         vc.favnbr=response
                         
 
-                    }
+                    }*/
                     //self.linkLoginProfile()
                  
-                   
-                   
-                
+       
                 }
             }
         }
