@@ -37,12 +37,12 @@ class ProfileController: UIViewController {
         // Do any additional setup after loading the view.
         username.text=Username
         print(username.text)
-        /*gameNbr.text="\(gamesnbr)"
+        gameNbr.text="\(gamesnbr)"
         print(gameNbr.text)
         favNbr.text="\(favnbr)"
         print(favNbr.text)
         wishNbr.text="\(wishnbr)"
-        print(wishNbr.text)*/
+        print(wishNbr.text)
        
     }
 

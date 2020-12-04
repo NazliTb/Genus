@@ -67,9 +67,9 @@ class LoginController: UIViewController {
                     
                     case .success(let value):
                         // self.nbrGames=value
+                        
                        
-                       
-                      
+                    
                         completion(value)
                         
                     case .failure(let error):
@@ -111,13 +111,17 @@ class LoginController: UIViewController {
                     case .success(let value):
                          //self.nbrFav=value
                         completion(value)
+                        print(value) //okay so this one is 2
                         break
                     case .failure(let error):
                         print(error)
                         break
                     }
+                    
            
     }
+       
+        
     }
     
     //IBActions
@@ -169,15 +173,17 @@ class LoginController: UIViewController {
                     
                     
                  
-                    /*self.getGamesNbr(idUser: id1) { (response) in
+                    self.getGamesNbr(idUser: id1) { (response) in
                         
                         vc.gamesnbr=response
                         
                         
                     }
-                    print(vc.gamesnbr)
-                    print(vc.Username)
+                    print(vc.gamesnbr) //and here should be 2 too , but it showed 0 you see the problem ? it should be both 2
+                    
                   
+                    
+                    //i noticed when i get out from that function it goes 0 everytime
                     self.getFavNbr(idUser: id1) { (response) in
                         vc.favnbr=response
                        
@@ -187,7 +193,7 @@ class LoginController: UIViewController {
                         vc.favnbr=response
                         
 
-                    }*/
+                    }
                     //self.linkLoginProfile()
                  
                    
