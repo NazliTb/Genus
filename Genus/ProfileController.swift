@@ -13,8 +13,9 @@ class ProfileController: UIViewController {
     var id:Int=0
     var Username:String = "Full Name"
     var gamesnbr: Any = 0
-    var favnbr: String  = "0"
+    var favnbr: Any  = 0
     var wishnbr: String = "0"
+  
    
     @IBOutlet weak var username: UILabel!
     
@@ -35,10 +36,14 @@ class ProfileController: UIViewController {
         
         // Do any additional setup after loading the view.
         username.text=Username
-        gameNbr.text="\(gamesnbr)"
-        favNbr.text=favnbr
-        wishNbr.text=wishnbr
-        print(gamesnbr)
+        print(username.text)
+        /*gameNbr.text="\(gamesnbr)"
+        print(gameNbr.text)
+        favNbr.text="\(favnbr)"
+        print(favNbr.text)
+        wishNbr.text="\(wishnbr)"
+        print(wishNbr.text)*/
+       
     }
 
 

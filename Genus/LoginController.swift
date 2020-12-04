@@ -11,11 +11,12 @@ import Alamofire
 class LoginController: UIViewController {
     
     //Var
-    var nbrGames: Any = 0
+ 
+  
     
     //Widgets
 
-    @IBOutlet weak var email: UITextField!
+    @IBOutlet weak var email: UITextField! 
     
     @IBOutlet weak var password: UITextField!
     
@@ -31,20 +32,33 @@ class LoginController: UIViewController {
            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
            let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
            alertController.addAction(OKAction)
-           self.present(alertController, animated: true, completion: nil)
+           
+           if(message=="Welcome you are connected !")
+           {
+            //self.present(alertController, animated: true, completion: nil)
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileController") as! ProfileController
+            self.navigationController?.pushViewController(vc, animated: true)
+            self.present(vc, animated: true, completion: nil) 
+           }
+           else {
+            self.present(alertController, animated: true, completion: nil)
+           }
+        
          }
     
-    func linkLoginProfile()
+    
+    
+ /*   func linkLoginProfile()
     {
-        self.performSegue(withIdentifier: "login_profile", sender: nbrGames)
+        self.performSegue(withIdentifier: "data", sender: data)
         
-    }
+    }*/
     
  
-    
+   
  
     
-    func getGamesNbr(idUser: String)
+    func getGamesNbr(idUser: String,completion: @escaping (Any) -> Void)
     {
         
     
@@ -52,10 +66,12 @@ class LoginController: UIViewController {
             switch response.result {
                     
                     case .success(let value):
-                         self.nbrGames=value
-                         self.linkLoginProfile()
-                    
-                        break
+                        // self.nbrGames=value
+                       
+                       
+                      
+                        completion(value)
+                        
                     case .failure(let error):
                         print(error)
                         break
@@ -64,53 +80,44 @@ class LoginController: UIViewController {
             
         }
         
-   
-       print(nbrGames)
         
     }
     
-    func getFavNbr(idUser: String)
+    func getFavNbr(idUser: String,completion: @escaping (Any) -> Void)
     {
        
-        var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/GetFavouriteGamesNbr/"+idUser)!)
-    request.httpMethod = "GET"
-    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-
-    let session = URLSession.shared
-    let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
-    let responseData = String(data: data!, encoding: String.Encoding.utf8)
-    DispatchQueue.main.async {
-            
-    let res = responseData!.replacingOccurrences(of: "\"", with: "")
-    let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileController") as! ProfileController
-    vc.favnbr=res
-    self.navigationController?.pushViewController(vc, animated: true)
+        AF.request("http://192.168.64.1:3000/GetGamesNbr/"+idUser).responseJSON{ (response) in
+            switch response.result {
+                    
+                    case .success(let value):
+                         //self.nbrFav=value
+                        completion(value)
+                        break
+                    case .failure(let error):
+                        print(error)
+                        break
+                    }
+           
+    }
     }
     
-    })
-        task.resume()
-    }
-    
-    func getWishNbr(idUser: String)
+    func getWishNbr(idUser: String,completion: @escaping (Any) -> Void)
     {
         
-    var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/GetWishGamesNbr/"+idUser)!)
-    request.httpMethod = "GET"
-    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-
-    let session = URLSession.shared
-    let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
-    let responseData = String(data: data!, encoding: String.Encoding.utf8)
-    DispatchQueue.main.async {
-            
-    let res = responseData!.replacingOccurrences(of: "\"", with: "")
-    let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileController") as! ProfileController
-    vc.wishnbr=res
-    self.navigationController?.pushViewController(vc, animated: true)
+  
+        AF.request("http://192.168.64.1:3000/GetWishGamesNbr/"+idUser).responseJSON{ (response) in
+            switch response.result {
+                    
+                    case .success(let value):
+                         //self.nbrFav=value
+                        completion(value)
+                        break
+                    case .failure(let error):
+                        print(error)
+                        break
+                    }
+           
     }
-    
-    })
-        task.resume()
     }
     
     //IBActions
@@ -148,20 +155,42 @@ class LoginController: UIViewController {
                
                 }
                 else {
-                  
-                    self.alert(message:"Welcome you are connected !",title:"Information")
+                   // self.alert(message:"Welcome you are connected !",title:"Information")
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileController") as! ProfileController
+                    vc.Username=name
+                     let id1="\(idUser)"
+                     vc.id=idUser
                     
-                    
-                    vc.Username=name as! String
-                    var id1="\(idUser)"
-                    vc.id=idUser
-                    self.getGamesNbr(idUser: id1)
-                  
-                   /* self.getFavNbr(idUser: id1)
-                    self.getWishNbr(idUser: id1) */
                     self.navigationController?.pushViewController(vc, animated: true)
                     self.present(vc, animated: true, completion: nil)
+                    
+                   
+                    
+                    
+                    
+                 
+                    /*self.getGamesNbr(idUser: id1) { (response) in
+                        
+                        vc.gamesnbr=response
+                        
+                        
+                    }
+                    print(vc.gamesnbr)
+                    print(vc.Username)
+                  
+                    self.getFavNbr(idUser: id1) { (response) in
+                        vc.favnbr=response
+                       
+
+                    }
+                    self.getWishNbr(idUser: id1) { (response) in
+                        vc.favnbr=response
+                        
+
+                    }*/
+                    //self.linkLoginProfile()
+                 
+                   
                    
                 
                 }
@@ -182,12 +211,15 @@ class LoginController: UIViewController {
 
    
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "login_profile") {
+    
+    /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let viewController = segue.destination as? ProfileController
-        viewController!.gamesnbr=nbrGames
-        }
-    }
+        if (segue.identifier == "data")
+        
+        {viewController!.data=data}
+        
+        
+    }*/
     
     @IBAction func JoinAction(_ sender: Any) {
     
