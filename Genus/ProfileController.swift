@@ -6,7 +6,7 @@
 //
 
 import UIKit
-//import PopupDialog
+import SCLAlertView
 
 class ProfileController: UIViewController {
     
@@ -57,6 +57,8 @@ class ProfileController: UIViewController {
     
        
     }
+    
+    //Functions
 
     func getGamesNbr(idUser:String,completionHandler: @escaping (String?,Error?)->
     Void) {
@@ -69,7 +71,7 @@ class ProfileController: UIViewController {
     }
     catch let parseErr {
     print(parseErr)
-    //completionHandler(nil,parseErr)
+    
     }
     })
     task.resume()
@@ -86,7 +88,7 @@ class ProfileController: UIViewController {
     }
     catch let parseErr {
     print(parseErr)
-    //completionHandler(nil,parseErr)
+    
     }
     })
     task.resume()
@@ -104,17 +106,87 @@ class ProfileController: UIViewController {
     }
     catch let parseErr {
     print(parseErr)
-    //completionHandler(nil,parseErr)
+    
     }
     })
     task.resume()
     }
+    
+    
     //IBActions
     
     @IBAction func editProfileAction(_ sender: Any) {
-    var popUpWindow: PopUpWindow!
-        popUpWindow = PopUpWindow(title: "Edit Profile", Usernamelabel:"Username : ",Passwordlabel: "Password : ", buttontext: "Update")
-    self.present(popUpWindow, animated: true, completion: nil)    }
+        
+     
+        /*let appearance = SCLAlertView.SCLAppearance(/*kTitleFont:UIFont(name: "Orbitron", size: 20)!, kTextFont: UIFont(name: "Orbitron", size: 20)!, kButtonFont: UIFont(name: "Orbitron", size: 20)!,*/kCircleHeight:70, kCircleIconHeight: 100, kWindowWidth: 300, kWindowHeight: 1000, showCloseButton: true,circleBackgroundColor: UIColor(red: 255, green: 255, blue: 255, alpha: 1), contentViewBorderColor:UIColor(red: 255, green: 255, blue: 255, alpha: 1))
+        let popup = SCLAlertView(appearance: appearance)
+        popup.addTextField("username")
+        popup.addTextField("password")
+        popup.addTextField("cPassword")
+    
+        popup.showCustom("Edit Profile", subTitle: "", color:UIColor(red: 255, green: 255, blue: 255, alpha: 1), icon: UIImage(named:"Elements_Genus1.1")!)*/
+        
+        // Example of using the view to add two text fields to the alert
+        // Create the subview
+        let appearance = SCLAlertView.SCLAppearance(
+            kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
+            kTextFont: UIFont(name: "HelveticaNeue", size: 14)!,
+            kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
+            showCloseButton: true
+        )
+
+        // Initialize SCLAlertView using custom Appearance
+        let alert = SCLAlertView(appearance: appearance)
+
+        // Creat the subview
+        let subview = UIView(frame: CGRect(x:0,y:0,width:250,height:200))
+        let x = (subview.frame.width - 180) / 2
+        // Add textfiel
+        let textfield1 = UITextField(frame: CGRect(x:x,y:10,width:180,height:25))
+        textfield1.layer.borderColor = UIColor.black.cgColor
+        textfield1.layer.borderWidth = 1.5
+        textfield1.layer.cornerRadius = 5
+        textfield1.placeholder = "Username"
+        textfield1.textAlignment = NSTextAlignment.center
+        subview.addSubview(textfield1)
+
+        // Add textfield 2
+        let textfield2 = UITextField(frame: CGRect(x:x,y:textfield1.frame.maxY + 30,width:180,height:25))
+        textfield2.isSecureTextEntry=true
+        textfield2.layer.borderColor = UIColor.black.cgColor
+        textfield2.layer.borderWidth = 1.5
+        textfield2.layer.cornerRadius = 5
+        textfield2.placeholder = "Password"
+        textfield2.textAlignment = NSTextAlignment.center
+        subview.addSubview(textfield2)
+        
+        //Add textfield 3
+
+        let textfield3 = UITextField(frame: CGRect(x:x,y:textfield2.frame.maxY + 30,width:180,height:25))
+        textfield3.isSecureTextEntry=true
+        textfield3.layer.borderColor = UIColor.black.cgColor
+        textfield3.layer.borderWidth = 1.5
+        textfield3.layer.cornerRadius = 5
+        textfield3.placeholder = "Confirm Password"
+        textfield3.textAlignment = NSTextAlignment.center
+        subview.addSubview(textfield3)
+        
+        
+        
+        
+        alert.addButton("Update",backgroundColor: UIColor.cyan,textColor: UIColor.blue) {
+        print("Updated")}
+        
+        // Add the subview to the alert's UI property
+        alert.customSubview = subview
+        
+        
+
+        
+
+        alert.showInfo("Edit Profile", subTitle:"", closeButtonTitle:"Close", timeout: nil,colorStyle: 0x04D9D9, colorTextButton: 0x111C59, circleIconImage:UIImage(named:"Elements_Genus1.1")!, animationStyle:SCLAnimationStyle.noAnimation)
+      
+    }
     
     @IBAction func goMyGamesAction(_ sender: Any) {
     }

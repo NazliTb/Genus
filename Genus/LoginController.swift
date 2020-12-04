@@ -10,11 +10,7 @@ import UIKit
 import Alamofire
 class LoginController: UIViewController {
     
-    //Var
- 
-    
-    
-    
+
     //Widgets
 
     @IBOutlet weak var email: UITextField! 
@@ -77,13 +73,25 @@ class LoginController: UIViewController {
                 else {
                    // self.alert(message:"Welcome you are connected !",title:"Information")
                     
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileController") as! ProfileController
-                    vc.Username=name
-                     let id1="\(idUser)"
-                     vc.id=idUser
                     
-                    self.navigationController?.pushViewController(vc, animated: true)
-                    self.present(vc, animated: true, completion: nil)
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileController") as! ProfileController
+                     vc.Username=name
+                  
+                     vc.id=idUser
+                    let alertController = UIAlertController(title: "Information", message: "Welcome you are connected !", preferredStyle: .alert)
+                    let OKAction = UIAlertAction(title: "OK", style: .default)
+                    { action -> Void in
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileController") as! ProfileController
+                         vc.Username=name
+                         vc.id=idUser
+                        self.navigationController?.pushViewController(vc, animated: true)
+                        self.present(vc, animated: true, completion: nil)
+                        
+                    }
+                    alertController.addAction(OKAction)
+                    
+                    self.present(alertController, animated: true, completion: nil)
+                    
       
            
                  
