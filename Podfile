@@ -7,6 +7,7 @@ target 'Genus' do
 
   # Pods for Genus
   pod 'Alamofire'
+  pod 'PopupDialog', '~> 0.9'
 
   target 'GenusTests' do
     inherit! :search_paths
