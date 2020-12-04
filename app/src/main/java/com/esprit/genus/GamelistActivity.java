@@ -39,8 +39,8 @@ public class GamelistActivity extends Fragment {
     INodeJS myAPI, myAPI1;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    RecyclerView recycler_games;
-    LinearLayoutManager layoutManager;
+    RecyclerView recycler_games, recycler_fav;
+    LinearLayoutManager layoutManager, layoutManagerFav;
     GameAdapter adapter;
     MaterialSearchBar materialSearchBar;
     List<String> suggestList = new ArrayList<>();
@@ -73,15 +73,23 @@ public class GamelistActivity extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         myAPI1 = retrofit1.create((INodeJS.class));
-        Call<List<Game>> listGames = myAPI1.GetGameList(idUser);
+        final Call<List<Game>> listGames = myAPI1.GetGameList(idUser);
+        final Call<List<Game>> listFavGames = myAPI1.GetFavList(idUser);
 
 
-        //View
+        //View for gameList
         recycler_games = (RecyclerView) mView.findViewById(R.id.recyclerViewGames);
         recycler_games.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
         recycler_games.setLayoutManager(layoutManager);
         recycler_games.addItemDecoration(new DividerItemDecoration(getContext(), layoutManager.getOrientation()));
+
+        //View for favList
+        recycler_fav = (RecyclerView) mView.findViewById(R.id.recyclerViewFav);
+        recycler_fav.setHasFixedSize(true);
+        layoutManagerFav = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL, false);
+        recycler_fav.setLayoutManager(layoutManagerFav);
+        recycler_fav.addItemDecoration(new DividerItemDecoration(getContext(), layoutManagerFav.getOrientation()));
 
         materialSearchBar = (MaterialSearchBar) mView.findViewById(R.id.search_bar);
         materialSearchBar.setCardViewElevation(10);
@@ -89,6 +97,7 @@ public class GamelistActivity extends Fragment {
         //Add Suggest List
         addSuggestList();
 
+        //Display elements on suggest list
         materialSearchBar.addTextChangeListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -112,11 +121,31 @@ public class GamelistActivity extends Fragment {
 
             }
         });
-        final int finalIdUser = idUser;
+
+        //Display search result
+        //final int finalIdUser = idUser;
         materialSearchBar.setOnSearchActionListener(new MaterialSearchBar.OnSearchActionListener() {
             @Override
             public void onSearchStateChanged(boolean enabled) {
-                if (!enabled) { getAllGames(finalIdUser); }
+                if (!enabled) {
+                    //getAllGames(finalIdUser);
+
+                    listGames.enqueue(new Callback<List<Game>>() {
+                        @Override
+                        public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
+                            if (!response.isSuccessful()) {
+                                return;
+                            }
+                            List<Game> games = response.body();
+                            adapter = new GameAdapter(games);
+                            recycler_games.setAdapter(adapter);
+                        }
+                        @Override
+                        public void onFailure(Call<List<Game>> call, Throwable t) {
+                            Toast.makeText(getContext(), "Not found", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
 
             @Override
@@ -132,6 +161,7 @@ public class GamelistActivity extends Fragment {
 
         //getAllGames(idUser);
 
+        //Method to call games list
         listGames.enqueue(new Callback<List<Game>>() {
             @Override
             public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
@@ -148,12 +178,29 @@ public class GamelistActivity extends Fragment {
             }
         });
 
+        //Method to call fav games list
+        listFavGames.enqueue(new Callback<List<Game>>() {
+            @Override
+            public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
+                if (!response.isSuccessful()) {
+                    return;
+                }
+                List<Game> games = response.body();
+                adapter = new GameAdapter(games);
+                recycler_fav.setAdapter(adapter);
+            }
+            @Override
+            public void onFailure(Call<List<Game>> call, Throwable t) {
+                Toast.makeText(getContext(), "Not found", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         //return inflater.inflate(R.layout.fragment_gamelist, container, false);
         return view;
     }
 
     private void startSearch(String query) {
-        compositeDisposable.add(myAPI1.searchGames(query)
+        compositeDisposable.add(myAPI.searchGames(query)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<Game>>() {
@@ -171,9 +218,9 @@ public class GamelistActivity extends Fragment {
                 }));
     }
 
-    private void getAllGames(int idUser) {
+    /*private void getAllGames(int idUser) {
 
-        /*compositeDisposable.add(myAPI1.GetGameList(idUser)
+        compositeDisposable.add(myAPI1.GetGameList(idUser)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new Consumer<List<Game>>() {
@@ -188,9 +235,9 @@ public class GamelistActivity extends Fragment {
             public void accept(Throwable throwable) throws Exception {
                 Toast.makeText(getContext(), "Not found", Toast.LENGTH_SHORT).show();
             }
-        }));*/
+        }));
 
-    }
+    }*/
 
     private void addSuggestList() {
         //load items manually for suggest list

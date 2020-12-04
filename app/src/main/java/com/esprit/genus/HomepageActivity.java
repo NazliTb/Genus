@@ -158,6 +158,7 @@ public class HomepageActivity extends AppCompatActivity {
 
                 //Fragment display
                 selectedFragment = new WishlistActivity();
+                selectedFragment.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, selectedFragment).commit();
             }
         });

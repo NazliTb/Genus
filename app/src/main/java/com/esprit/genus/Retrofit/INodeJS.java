@@ -55,6 +55,4 @@ public interface INodeJS {
 
     @GET("GetFavList/{idUser}")
     Call<List<Game>> GetFavList(@Path("idUser") int idUser);
-
-
 }
