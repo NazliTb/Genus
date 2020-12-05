@@ -26,10 +26,10 @@ class LoginController: UIViewController {
     
     //Functions
     func alert(message: String, title: String ) {
-           let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-           let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-           alertController.addAction(OKAction)
-           self.present(alertController, animated: true, completion: nil)
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(OKAction)
+        self.present(alertController, animated: true, completion: nil)
            }
         
          
@@ -42,6 +42,11 @@ class LoginController: UIViewController {
         if(email.text=="" || password.text=="")
         {
             alert(message: "Please give your email and password", title: "Warning")
+        }
+        else if (email.text!.contains("@")==false)
+        {
+            alert(message: "the email address is not correct !", title: "Warning")
+
         }
         else {
     let params = ["email":email.text, "password":password.text] as! Dictionary<String, String>
@@ -67,22 +72,16 @@ class LoginController: UIViewController {
                 let responseData = String(data: data!, encoding: String.Encoding.utf8)
                 let res = responseData!.replacingOccurrences(of: "\"", with: "")
                 if(res.caseInsensitiveCompare(error1) == .orderedSame || res.caseInsensitiveCompare(error2) == .orderedSame) {
+                   
                 self.alert(message:res,title:"Error")
                
                 }
                 else {
-                   // self.alert(message:"Welcome you are connected !",title:"Information")
-                    
-                    
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileController") as! ProfileController
-                     vc.Username=name
-                  
-                     vc.id=idUser
                     let alertController = UIAlertController(title: "Information", message: "Welcome you are connected !", preferredStyle: .alert)
                     let OKAction = UIAlertAction(title: "OK", style: .default)
                     { action -> Void in
                         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileController") as! ProfileController
-                         vc.Username=name
+                        vc.Username=name
                          vc.id=idUser
                         self.navigationController?.pushViewController(vc, animated: true)
                         self.present(vc, animated: true, completion: nil)
@@ -91,11 +90,7 @@ class LoginController: UIViewController {
                     alertController.addAction(OKAction)
                     
                     self.present(alertController, animated: true, completion: nil)
-                    
       
-           
-                 
-       
                 }
             }
         }

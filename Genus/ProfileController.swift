@@ -8,6 +8,36 @@
 import UIKit
 import SCLAlertView
 
+
+extension UIColor {
+    convenience init(hexString: String, alpha: CGFloat = 1.0) {
+        let hexString: String = hexString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        let scanner = Scanner(string: hexString)
+        if (hexString.hasPrefix("#")) {
+            scanner.scanLocation = 1
+        }
+        var color: UInt32 = 0
+        scanner.scanHexInt32(&color)
+        let mask = 0x000000FF
+        let r = Int(color >> 16) & mask
+        let g = Int(color >> 8) & mask
+        let b = Int(color) & mask
+        let red   = CGFloat(r) / 255.0
+        let green = CGFloat(g) / 255.0
+        let blue  = CGFloat(b) / 255.0
+        self.init(red:red, green:green, blue:blue, alpha:alpha)
+    }
+    func toHexString() -> String {
+        var r:CGFloat = 0
+        var g:CGFloat = 0
+        var b:CGFloat = 0
+        var a:CGFloat = 0
+        getRed(&r, green: &g, blue: &b, alpha: &a)
+        let rgb:Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
+        return String(format:"#%06x", rgb)
+    }
+}
+
 class ProfileController: UIViewController {
     
     //Widgets
@@ -15,7 +45,7 @@ class ProfileController: UIViewController {
     var Username:String = "Full Name"
     var gamesnbr: Any = 0
     var favnbr: Any  = 0
-    var wishnbr: String = "0"
+    var wishnbr: Any = 0
   
    
     @IBOutlet weak var username: UILabel!
@@ -53,7 +83,7 @@ class ProfileController: UIViewController {
             }
         }
         // Do any additional setup after loading the view.
-        username.text=Username
+      username.text=Username
     
        
     }
@@ -112,6 +142,13 @@ class ProfileController: UIViewController {
     task.resume()
     }
     
+  
+    func alert(message: String, title: String ) {
+           let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+           let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+           alertController.addAction(OKAction)
+           self.present(alertController, animated: true, completion: nil)
+           }
     
     //IBActions
     
@@ -132,59 +169,136 @@ class ProfileController: UIViewController {
             kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
             kTextFont: UIFont(name: "HelveticaNeue", size: 14)!,
             kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
-            showCloseButton: true
+            showCloseButton: true, titleColor: UIColor.init(hexString: "#04D9D9")
         )
 
         // Initialize SCLAlertView using custom Appearance
         let alert = SCLAlertView(appearance: appearance)
 
         // Creat the subview
-        let subview = UIView(frame: CGRect(x:0,y:0,width:250,height:200))
+        let subview = UIView(frame: CGRect(x:0,y:0,width:216,height:250))
         let x = (subview.frame.width - 180) / 2
         // Add textfiel
-        let textfield1 = UITextField(frame: CGRect(x:x,y:10,width:180,height:25))
-        textfield1.layer.borderColor = UIColor.black.cgColor
+        let textfield1 = UITextField(frame: CGRect(x:x,y:30,width:180,height:40))
+        textfield1.layer.borderColor = UIColor.init(hexString: "#04D9D9").cgColor
         textfield1.layer.borderWidth = 1.5
         textfield1.layer.cornerRadius = 5
         textfield1.placeholder = "Username"
-        textfield1.textAlignment = NSTextAlignment.center
+        textfield1.textAlignment = NSTextAlignment.left
         subview.addSubview(textfield1)
 
         // Add textfield 2
-        let textfield2 = UITextField(frame: CGRect(x:x,y:textfield1.frame.maxY + 30,width:180,height:25))
+        let textfield2 = UITextField(frame: CGRect(x:x,y:textfield1.frame.maxY + 30,width:180,height:40))
         textfield2.isSecureTextEntry=true
-        textfield2.layer.borderColor = UIColor.black.cgColor
+        textfield2.layer.borderColor = UIColor.init(hexString: "#04D9D9").cgColor
         textfield2.layer.borderWidth = 1.5
         textfield2.layer.cornerRadius = 5
         textfield2.placeholder = "Password"
-        textfield2.textAlignment = NSTextAlignment.center
+        textfield2.textAlignment = NSTextAlignment.left
         subview.addSubview(textfield2)
         
         //Add textfield 3
 
-        let textfield3 = UITextField(frame: CGRect(x:x,y:textfield2.frame.maxY + 30,width:180,height:25))
+        let textfield3 = UITextField(frame: CGRect(x:x,y:textfield2.frame.maxY + 30,width:180,height:40))
         textfield3.isSecureTextEntry=true
-        textfield3.layer.borderColor = UIColor.black.cgColor
+        textfield3.layer.borderColor = UIColor.init(hexString: "#04D9D9").cgColor
         textfield3.layer.borderWidth = 1.5
         textfield3.layer.cornerRadius = 5
         textfield3.placeholder = "Confirm Password"
-        textfield3.textAlignment = NSTextAlignment.center
+        textfield3.textAlignment = NSTextAlignment.left
         subview.addSubview(textfield3)
         
         
         
         
-        alert.addButton("Update",backgroundColor: UIColor.cyan,textColor: UIColor.blue) {
-        print("Updated")}
+        alert.addButton("Update",backgroundColor: UIColor(hexString: "#04D9D9"),textColor: UIColor.white) {
         
+            if(textfield1.text=="" || textfield2.text=="" || textfield3.text=="")
+            {
+               
+                    self.alert(message: "Please fill in all fields !", title: "Warning")
+               
+                
+            }
+          
+            else if (textfield2.text==textfield3.text)
+              
+        
+            {
+                let id: String = "\(self.id)"
+                let username=textfield1.text
+                let password=textfield2.text
+                let params = ["username":username,"idUser": id, "userPicture" : "", "password":password] as! Dictionary<String, String>
+        var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/editProfile")!)
+        request.httpMethod = "PUT"
+        request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let session = URLSession.shared
+        let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+                
+                
+            do {
+       
+                    DispatchQueue.main.async {
+                   
+                    let error1="Update failed"
+                    let error2="User not found"
+                    let responseData = String(data: data!, encoding: String.Encoding.utf8)
+                    let res = responseData!.replacingOccurrences(of: "\"", with: "")
+                    if(res.caseInsensitiveCompare(error1) == .orderedSame || res.caseInsensitiveCompare(error2) == .orderedSame) {
+                    self.alert(message:res,title:"Error")
+                   
+                    }
+                    else {
+                      
+                        let alertController = UIAlertController(title: "Information", message: res, preferredStyle: .alert)
+                        let OKAction = UIAlertAction(title: "OK", style: .default)
+                        { action -> Void in
+                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileController") as! ProfileController
+                            vc.id=self.id
+                            vc.Username=textfield1.text!
+                          
+                           
+                            self.navigationController?.pushViewController(vc, animated: true)
+                            self.present(vc, animated: true, completion: nil)
+                            
+                        }
+                        alertController.addAction(OKAction)
+                        
+                        self.present(alertController, animated: true, completion: nil)
+                        
+          
+               
+                     
+           
+                    }
+                }
+            }
+            catch
+            {
+                
+            }
+
+        })
+        
+        task.resume()
+            }
+        
+                else {
+                    self.alert(message: "Both passwords should be same", title: "Warning")
+                }
+   
+       
+        }
         // Add the subview to the alert's UI property
         alert.customSubview = subview
         
         
-
         
+       
 
-        alert.showInfo("Edit Profile", subTitle:"", closeButtonTitle:"Close", timeout: nil,colorStyle: 0x04D9D9, colorTextButton: 0x111C59, circleIconImage:UIImage(named:"Elements_Genus1.1")!, animationStyle:SCLAnimationStyle.noAnimation)
+       alert.showEdit("Edit Profil", subTitle:"", closeButtonTitle:"Close", timeout: nil,colorStyle: 0x04D9D9, colorTextButton: 0xFFFFFF, circleIconImage:UIImage(named:""), animationStyle:SCLAnimationStyle.noAnimation)
       
     }
     
