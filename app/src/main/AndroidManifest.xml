@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.esprit.genus">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
 
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="false"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_icon"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WishlistActivity"></activity>
-        <activity android:name=".GamelistActivity" />
+        <activity android:name=".WishlistActivity"
+            tools:ignore="Instantiatable"></activity>
+        <activity android:name=".GamelistActivity"
+            tools:ignore="Instantiatable" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".HomepageActivity" />
         <activity
