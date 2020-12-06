@@ -48,6 +48,8 @@ class LoginController: UIViewController {
             alert(message: "the email address is not correct !", title: "Warning")
 
         }
+        
+     
         else {
     let params = ["email":email.text, "password":password.text] as! Dictionary<String, String>
     var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/login")!)
@@ -57,60 +59,51 @@ class LoginController: UIViewController {
 
     let session = URLSession.shared
     let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
-        let error1="Wrong password"
-        let error2="User doesnt exist !"
-        let responseData = String(data: data!, encoding: String.Encoding.utf8)
-        let res = responseData!.replacingOccurrences(of: "\"", with: "")
-            
-        do {
-            let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String,AnyObject>
-          
-                let name = json["username"] as! String
-                let idUser=json["idUser"] as! Int
-        
-                DispatchQueue.main.async {
+    let error1="Wrong password"
+    let error2="User doesnt exist !"
+    let responseData = String(data: data!, encoding: String.Encoding.utf8)
+    let res = responseData!.replacingOccurrences(of: "\"", with: "")
+    if(res.caseInsensitiveCompare(error1) == .orderedSame || res.caseInsensitiveCompare(error2) == .orderedSame) {
+   
+        DispatchQueue.main.async {
+       
+            self.alert(message: res, title: "Error")
+        }
+    }
+    else {
+    do {
                
-                
-                if(res.caseInsensitiveCompare(error1) == .orderedSame || res.caseInsensitiveCompare(error2) == .orderedSame) {
-                   print(res)
-                self.alert(message:res,title:"Error")
-               
-                }
-                else {
-                    let alertController = UIAlertController(title: "Information", message: "Welcome you are connected !", preferredStyle: .alert)
-                    let OKAction = UIAlertAction(title: "OK", style: .default)
-                    { action -> Void in
-                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileController") as! ProfileController
-                        vc.Username=name
-                         vc.id=idUser
-                        self.navigationController?.pushViewController(vc, animated: true)
-                        self.present(vc, animated: true, completion: nil)
+let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
+        let name = json["username"] as! String
+        let idUser=json["idUser"] as! Int
+        let alertController = UIAlertController(title: "Information", message: "Welcome you are connected !", preferredStyle: .alert)
+        let OKAction = UIAlertAction(title: "OK", style: .default)
+        { action -> Void in
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileController") as! ProfileController
+        vc.Username=name
+        vc.id=idUser
+        self.navigationController?.pushViewController(vc, animated: true)
+        self.present(vc, animated: true, completion: nil)
+                                
+        }
+        alertController.addAction(OKAction)
+        DispatchQueue.main.async {
+        self.present(alertController, animated: true, completion: nil)
+        }
+                           
+    }
+   
+    catch {
                         
-                    }
-                    alertController.addAction(OKAction)
-                    
-                    self.present(alertController, animated: true, completion: nil)
-      
-                }
-            }
-        }
-        catch
-        {
-            
-        }
-
+    }
+                
+    }
     })
     
     task.resume()
     }
-        
-        
     }
-
-   
-    
-
-    
+        
     @IBAction func JoinAction(_ sender: Any) {
     
     }
