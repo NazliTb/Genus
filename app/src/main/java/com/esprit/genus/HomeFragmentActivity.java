@@ -142,7 +142,22 @@ public class HomeFragmentActivity extends Fragment {
             }
         });
 
-
+        //Method to call top picks games
+        topPicksGames.enqueue(new Callback<List<Game>>() {
+            @Override
+            public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
+                if (!response.isSuccessful()) {
+                    return;
+                }
+                List<Game> games = response.body();
+                adapter = new GameVerticalAdapter(games);
+                recycler_topPicks.setAdapter(adapter);
+            }
+            @Override
+            public void onFailure(Call<List<Game>> call, Throwable t) {
+                Toast.makeText(getContext(), "Not found", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return view;
     }
