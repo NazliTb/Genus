@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -183,13 +184,17 @@ public class ProfileActivity extends AppCompatActivity {
                 final EditText username;
                 final EditText password;
                 final EditText cPassword;
-                Button updateProfile;
+                final EditText oldPassword;
+                ImageButton editUsername;
+                Button updatePassword;
                 Button dismiss;
                 username = (EditText) vpop.findViewById(R.id.editusername);
                 password = (EditText) vpop.findViewById(R.id.editpassword);
                 cPassword = (EditText) vpop.findViewById(R.id.editcpassword);
+                oldPassword = (EditText) vpop.findViewById(R.id.editOldpassword);
 
-                updateProfile = vpop.findViewById(R.id.updateProfile_button);
+                editUsername = (ImageButton) vpop.findViewById(R.id.editUsername);
+                updatePassword= (Button) vpop.findViewById(R.id.updatePassword);
                 dismiss = vpop.findViewById(R.id.dismiss);
                 dismiss.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -197,12 +202,26 @@ public class ProfileActivity extends AppCompatActivity {
                         dialog.dismiss();
                     }
                 });
-
-                updateProfile.setOnClickListener(new View.OnClickListener() {
+                editUsername.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (username.getText().toString().equals("")||
-                                password.getText().toString().equals("")||
+                        if (username.getText().toString().equals(""))
+                        {
+                            Toast.makeText(ProfileActivity.this, "Please give a new username", Toast.LENGTH_SHORT).show();
+                        }
+
+                        else {
+                            editUsername(idUser, username.getText().toString());
+
+                        }
+
+                    }
+                });
+
+                updatePassword.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (oldPassword.getText().toString().equals("") || password.getText().toString().equals("")||
                                 cPassword.getText().toString().equals(("")))
                         {
                             Toast.makeText(ProfileActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
@@ -212,7 +231,7 @@ public class ProfileActivity extends AppCompatActivity {
                             Toast.makeText(ProfileActivity.this, "the two password fields should be same", Toast.LENGTH_SHORT).show();
                         }
                         else {
-                            updateUser(idUser, username.getText().toString(), password.getText()
+                            editPassword(idUser, oldPassword.getText().toString(), password.getText()
                                     .toString());
 
                         }
@@ -229,10 +248,28 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
-    private void updateUser(String idUser,String username, String password) {
+    private void editUsername(String idUser,String username) {
 
 
-        compositeDisposable.add(myAPI1.editProfile(Integer.parseInt(idUser),username, password,"")
+        compositeDisposable.add(myAPI1.editUsername(Integer.parseInt(idUser),username)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        Toast.makeText(ProfileActivity.this, "" + s, Toast.LENGTH_SHORT).show();
+                    }
+
+
+                }));
+
+    }
+
+
+    private void editPassword(String idUser,String oldPassword,String newPassword) {
+
+
+        compositeDisposable.add(myAPI1.editPassword(Integer.parseInt(idUser),oldPassword,newPassword)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<String>() {

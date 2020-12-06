@@ -32,10 +32,14 @@ public interface INodeJS {
     @FormUrlEncoded
     Observable<String> getForgottenPassword(@Field("email") String email);
 
-    @PUT("/editProfile")
+    @PUT("/editUsername")
     @FormUrlEncoded
-    Observable<String> editProfile(@Field ("idUser") int idUser,@Field("username") String username,@Field("password") String password,
-                                   @Field("userPicture") String userPicture);
+    Observable<String> editUsername(@Field ("idUser") int idUser,@Field("username") String username);
+
+    @PUT("/editPassword")
+    @FormUrlEncoded
+    Observable<String> editPassword(@Field ("idUser") int idUser,@Field("old_password") String old_password,
+                                   @Field("new_password") String new_password);
 
 
     @GET("GetGameList/{idUser}")
