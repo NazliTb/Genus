@@ -47,11 +47,7 @@ dependencies {
     //picasso library
     implementation 'com.squareup.picasso:picasso:2.8'
 
-
-
-
-
-
-
-
+    //this is for round images
+    //implementation 'com.mikhaellopez:circularimageview:4.2.0'
+    //implementation 'de.hdodenhof:circleimageview:3.1.0'
 }

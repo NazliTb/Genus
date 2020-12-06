@@ -44,6 +44,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!--<FrameLayout android:id="@+id/frame"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content">
+
+               <ImageView android:id="@+id/userPic"
+                   android:layout_width="150dp"
+                   android:layout_height="150dp"
+                   android:src="@drawable/default_user" />
+
+               <ImageView android:id="@+id/circle_crop"
+                   android:layout_width="150dp"
+                   android:layout_height="150dp"
+                   android:src="@drawable/circular_crop"/>
+
+           </FrameLayout>-->
         <Space
             android:layout_width="wrap_content"
             android:layout_height="10dp" />

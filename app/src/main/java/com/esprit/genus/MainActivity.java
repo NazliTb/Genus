@@ -18,10 +18,11 @@ public class MainActivity extends AppCompatActivity {
 
         /* New Handler to start the Login-Activity
          * and close this Splash-Screen after some seconds.*/
+
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {
-                /* Create an Intent that will start the Login-Activity. */
+                 //Create an Intent that will start the Login-Activity.
                 Intent mainIntent = new Intent(MainActivity.this,LoginActivity.class);
                 MainActivity.this.startActivity(mainIntent);
                 MainActivity.this.finish();
