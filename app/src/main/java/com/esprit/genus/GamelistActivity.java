@@ -77,7 +77,7 @@ public class GamelistActivity extends Fragment {
 
 
         //View for gameList
-        recycler_games = (RecyclerView) mView.findViewById(R.id.recyclerViewGames);
+        recycler_games = (RecyclerView) mView.findViewById(R.id.recyclerViewTopPicks);
         recycler_games.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
         recycler_games.setLayoutManager(layoutManager);
