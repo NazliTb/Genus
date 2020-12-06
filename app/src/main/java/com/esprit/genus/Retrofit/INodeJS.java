@@ -68,4 +68,6 @@ public interface INodeJS {
     @GET("GetBestRateGames")
     Call<List<Game>> GetBestRateGames();
 
+    @GET("GetGameDetails/{idGame}")
+    Call<List<Game>> GetGameDetails (@Path("idGame") int idGame);
 }
