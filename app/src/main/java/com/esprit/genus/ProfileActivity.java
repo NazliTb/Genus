@@ -200,6 +200,8 @@ public class ProfileActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
+                        finish();
+                        startActivity(getIntent());
                     }
                 });
                 editUsername.setOnClickListener(new View.OnClickListener() {
@@ -212,6 +214,8 @@ public class ProfileActivity extends AppCompatActivity {
 
                         else {
                             editUsername(idUser, username.getText().toString());
+                            Intent intent = getIntent();
+                            intent.putExtra("username",username.getText().toString());
 
                         }
 
