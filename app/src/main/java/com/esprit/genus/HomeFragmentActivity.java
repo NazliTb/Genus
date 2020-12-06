@@ -71,21 +71,21 @@ public class HomeFragmentActivity extends Fragment {
         //View for top picks
         recycler_topPicks= (RecyclerView) mView.findViewById(R.id.recyclerViewTopPicks);
         recycler_topPicks.setHasFixedSize(true);
-        layoutManagerTP = new LinearLayoutManager(getContext());
+        layoutManagerTP = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL, false);
         recycler_topPicks.setLayoutManager(layoutManagerTP);
         recycler_topPicks.addItemDecoration(new DividerItemDecoration(getContext(), layoutManagerTP.getOrientation()));
 
         //View for trending games
         recycler_trending= (RecyclerView) mView.findViewById(R.id.recyclerViewTrendingGames);
         recycler_trending.setHasFixedSize(true);
-        layoutManagerTG = new LinearLayoutManager(getContext());
+        layoutManagerTG = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL, false);
         recycler_trending.setLayoutManager(layoutManagerTG);
         recycler_trending.addItemDecoration(new DividerItemDecoration(getContext(), layoutManagerTG.getOrientation()));
 
         //View for best rate
         recycler_bestRate= (RecyclerView) mView.findViewById(R.id.recyclerViewBestRate);
         recycler_bestRate.setHasFixedSize(true);
-        layoutManagerBR = new LinearLayoutManager(getContext());
+        layoutManagerBR = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL, false);
         recycler_bestRate.setLayoutManager(layoutManagerBR);
         recycler_bestRate.addItemDecoration(new DividerItemDecoration(getContext(), layoutManagerBR.getOrientation()));
 
