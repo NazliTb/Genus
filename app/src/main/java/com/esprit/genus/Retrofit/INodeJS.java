@@ -46,7 +46,6 @@ public interface INodeJS {
     Observable<List<Game>> searchGames (@Field("search") String searchQuery);
 
     @GET("GetGameList/{idUser}")
-
     Call<List<Game>> GetGameListForNumber(@Path("idUser") int idUser);
     //this one for gamesNumber okay ?
 
@@ -55,4 +54,14 @@ public interface INodeJS {
 
     @GET("GetFavList/{idUser}")
     Call<List<Game>> GetFavList(@Path("idUser") int idUser);
+
+    @GET("GetTrendingGames")
+    Call<List<Game>> GetTrendingGames();
+
+    @GET("GetTopPicksGames")
+    Call<List<Game>> GetTopPicksGames();
+
+    @GET("GetBestRateGames")
+    Call<List<Game>> GetBestRateGames();
+
 }

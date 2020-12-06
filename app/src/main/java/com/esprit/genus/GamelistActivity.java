@@ -44,7 +44,6 @@ public class GamelistActivity extends Fragment {
     GameAdapter adapter;
     MaterialSearchBar materialSearchBar;
     List<String> suggestList = new ArrayList<>();
-
     protected View mView;
 
     @Nullable
