@@ -176,60 +176,27 @@ class ProfileController: UIViewController {
         let alert = SCLAlertView(appearance: appearance)
 
         // Creat the subview
-        let subview = UIView(frame: CGRect(x:0,y:0,width:216,height:250))
+        let subview = UIView(frame: CGRect(x:0,y:0,width:216,height:300))
         let x = (subview.frame.width - 180) / 2
         // Add textfiel
         let textfield1 = UITextField(frame: CGRect(x:x,y:30,width:180,height:40))
         textfield1.layer.borderColor = UIColor.init(hexString: "#04D9D9").cgColor
         textfield1.layer.borderWidth = 1.5
         textfield1.layer.cornerRadius = 5
-        textfield1.placeholder = "Username"
+        textfield1.placeholder = "username"
         textfield1.textAlignment = NSTextAlignment.left
         subview.addSubview(textfield1)
-
-        // Add textfield 2
-        let textfield2 = UITextField(frame: CGRect(x:x,y:textfield1.frame.maxY + 30,width:180,height:40))
-        textfield2.isSecureTextEntry=true
-        textfield2.layer.borderColor = UIColor.init(hexString: "#04D9D9").cgColor
-        textfield2.layer.borderWidth = 1.5
-        textfield2.layer.cornerRadius = 5
-        textfield2.placeholder = "Password"
-        textfield2.textAlignment = NSTextAlignment.left
-        subview.addSubview(textfield2)
         
-        //Add textfield 3
-
-        let textfield3 = UITextField(frame: CGRect(x:x,y:textfield2.frame.maxY + 30,width:180,height:40))
-        textfield3.isSecureTextEntry=true
-        textfield3.layer.borderColor = UIColor.init(hexString: "#04D9D9").cgColor
-        textfield3.layer.borderWidth = 1.5
-        textfield3.layer.cornerRadius = 5
-        textfield3.placeholder = "Confirm Password"
-        textfield3.textAlignment = NSTextAlignment.left
-        subview.addSubview(textfield3)
-        
-        
-        
-        
-        alert.addButton("Update",backgroundColor: UIColor(hexString: "#04D9D9"),textColor: UIColor.white) {
-        
-            if(textfield1.text=="" || textfield2.text=="" || textfield3.text=="")
+        alert.addButton("Update Username",backgroundColor: UIColor(hexString: "#04D9D9"),textColor: UIColor.white) {
+            if(textfield1.text=="")
             {
-               
-                    self.alert(message: "Please fill in all fields !", title: "Warning")
-               
-                
+                self.alert(message: "Please give your username !", title: "Warning")
             }
-          
-            else if (textfield2.text==textfield3.text)
-              
-        
-            {
+            else {
                 let id: String = "\(self.id)"
                 let username=textfield1.text
-                let password=textfield2.text
-                let params = ["username":username,"idUser": id, "userPicture" : "", "password":password] as! Dictionary<String, String>
-        var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/editProfile")!)
+                let params = ["username":username,"idUser": id] as! Dictionary<String, String>
+        var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/editUsername")!)
         request.httpMethod = "PUT"
         request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -260,8 +227,111 @@ class ProfileController: UIViewController {
                             vc.Username=textfield1.text!
                           
                            
-                            self.navigationController?.pushViewController(vc, animated: true)
-                            self.present(vc, animated: true, completion: nil)
+                           self.navigationController?.pushViewController(vc, animated: true)
+                           self.present(vc, animated: true, completion: nil)
+                            
+                        }
+                        alertController.addAction(OKAction)
+                        
+                        self.present(alertController, animated: true, completion: nil)
+   
+                    }
+                }
+            }
+            catch
+            {
+                
+            }
+
+        })
+        
+        task.resume()
+            }
+        
+                
+            }
+            
+        // Add textfield 2
+        let textfield = UITextField(frame: CGRect(x:x,y:textfield1.frame.maxY + 30,width:180,height:40))
+        textfield.isSecureTextEntry=true
+        textfield.layer.borderColor = UIColor.init(hexString: "#04D9D9").cgColor
+        textfield.layer.borderWidth = 1.5
+        textfield.layer.cornerRadius = 5
+        textfield.placeholder = "old password"
+        textfield.textAlignment = NSTextAlignment.left
+        subview.addSubview(textfield)
+        
+
+        // Add textfield 2
+        let textfield2 = UITextField(frame: CGRect(x:x,y:textfield.frame.maxY + 30,width:180,height:40))
+        textfield2.isSecureTextEntry=true
+        textfield2.layer.borderColor = UIColor.init(hexString: "#04D9D9").cgColor
+        textfield2.layer.borderWidth = 1.5
+        textfield2.layer.cornerRadius = 5
+        textfield2.placeholder = "password"
+        textfield2.textAlignment = NSTextAlignment.left
+        subview.addSubview(textfield2)
+        
+        //Add textfield 3
+
+        let textfield3 = UITextField(frame: CGRect(x:x,y:textfield2.frame.maxY + 30,width:180,height:40))
+        textfield3.isSecureTextEntry=true
+        textfield3.layer.borderColor = UIColor.init(hexString: "#04D9D9").cgColor
+        textfield3.layer.borderWidth = 1.5
+        textfield3.layer.cornerRadius = 5
+        textfield3.placeholder = "confirm password"
+        textfield3.textAlignment = NSTextAlignment.left
+        subview.addSubview(textfield3)
+        
+        
+        
+        
+        alert.addButton("Update password",backgroundColor: UIColor(hexString: "#04D9D9"),textColor: UIColor.white) {
+        
+            if(textfield.text=="" || textfield2.text=="" || textfield3.text=="")
+            {
+               
+                    self.alert(message: "Please fill in all fields !", title: "Warning")
+               
+                
+            }
+          
+            else if (textfield2.text==textfield3.text)
+              
+        
+            {
+                let id: String = "\(self.id)"
+                let oldpassword=textfield.text
+                let password=textfield2.text
+                let params = ["old_password":oldpassword,"idUser": id, "new_password" :password] as! Dictionary<String, String>
+        var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/editPassword")!)
+        request.httpMethod = "PUT"
+        request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let session = URLSession.shared
+        let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+                
+                
+            do {
+       
+                    DispatchQueue.main.async {
+                   
+                    let error1="Update failed"
+                    let error2="User not found"
+                    let error3="old password is wrong"
+                    let responseData = String(data: data!, encoding: String.Encoding.utf8)
+                    let res = responseData!.replacingOccurrences(of: "\"", with: "")
+                    if(res.caseInsensitiveCompare(error1) == .orderedSame || res.caseInsensitiveCompare(error2) == .orderedSame || res.caseInsensitiveCompare(error3) == .orderedSame) {
+                    self.alert(message:res,title:"Error")
+                   
+                    }
+                    else {
+                      
+                        let alertController = UIAlertController(title: "Information", message: res, preferredStyle: .alert)
+                        let OKAction = UIAlertAction(title: "OK", style: .default)
+                        { action -> Void in
+                        
                             
                         }
                         alertController.addAction(OKAction)
@@ -291,6 +361,9 @@ class ProfileController: UIViewController {
    
        
         }
+        
+        
+    
         // Add the subview to the alert's UI property
         alert.customSubview = subview
         

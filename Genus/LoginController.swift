@@ -57,22 +57,22 @@ class LoginController: UIViewController {
 
     let session = URLSession.shared
     let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
-            
+        let error1="Wrong password"
+        let error2="User doesnt exist !"
+        let responseData = String(data: data!, encoding: String.Encoding.utf8)
+        let res = responseData!.replacingOccurrences(of: "\"", with: "")
             
         do {
             let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String,AnyObject>
           
                 let name = json["username"] as! String
                 let idUser=json["idUser"] as! Int
-                
+        
                 DispatchQueue.main.async {
                
-                let error1="Wrong password"
-                let error2="User doesnt exist !"
-                let responseData = String(data: data!, encoding: String.Encoding.utf8)
-                let res = responseData!.replacingOccurrences(of: "\"", with: "")
+                
                 if(res.caseInsensitiveCompare(error1) == .orderedSame || res.caseInsensitiveCompare(error2) == .orderedSame) {
-                   
+                   print(res)
                 self.alert(message:res,title:"Error")
                
                 }
