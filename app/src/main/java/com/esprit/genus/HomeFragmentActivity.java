@@ -68,12 +68,26 @@ public class HomeFragmentActivity extends Fragment {
         final Call<List<Game>> bestRateGames = myAPI1.GetBestRateGames();
         final Call<List<Game>> trendingGames = myAPI1.GetTrendingGames();
 
-        //View for topPicks
+        //View for top picks
         recycler_topPicks= (RecyclerView) mView.findViewById(R.id.recyclerViewTopPicks);
         recycler_topPicks.setHasFixedSize(true);
         layoutManagerTP = new LinearLayoutManager(getContext());
         recycler_topPicks.setLayoutManager(layoutManagerTP);
         recycler_topPicks.addItemDecoration(new DividerItemDecoration(getContext(), layoutManagerTP.getOrientation()));
+
+        //View for trending games
+        recycler_trending= (RecyclerView) mView.findViewById(R.id.recyclerViewTrendingGames);
+        recycler_trending.setHasFixedSize(true);
+        layoutManagerTG = new LinearLayoutManager(getContext());
+        recycler_trending.setLayoutManager(layoutManagerTG);
+        recycler_trending.addItemDecoration(new DividerItemDecoration(getContext(), layoutManagerTG.getOrientation()));
+
+        //View for best rate
+        recycler_bestRate= (RecyclerView) mView.findViewById(R.id.recyclerViewBestRate);
+        recycler_bestRate.setHasFixedSize(true);
+        layoutManagerBR = new LinearLayoutManager(getContext());
+        recycler_bestRate.setLayoutManager(layoutManagerBR);
+        recycler_bestRate.addItemDecoration(new DividerItemDecoration(getContext(), layoutManagerBR.getOrientation()));
 
         materialSearchBar = (MaterialSearchBar) mView.findViewById(R.id.search_bar);
         materialSearchBar.setCardViewElevation(10);
@@ -152,6 +166,40 @@ public class HomeFragmentActivity extends Fragment {
                 List<Game> games = response.body();
                 adapter = new GameVerticalAdapter(games);
                 recycler_topPicks.setAdapter(adapter);
+            }
+            @Override
+            public void onFailure(Call<List<Game>> call, Throwable t) {
+                Toast.makeText(getContext(), "Not found", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //Method to call trending games
+        trendingGames.enqueue(new Callback<List<Game>>() {
+            @Override
+            public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
+                if (!response.isSuccessful()) {
+                    return;
+                }
+                List<Game> games = response.body();
+                adapter = new GameVerticalAdapter(games);
+                recycler_trending.setAdapter(adapter);
+            }
+            @Override
+            public void onFailure(Call<List<Game>> call, Throwable t) {
+                Toast.makeText(getContext(), "Not found", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //Method to call best rate games
+        bestRateGames.enqueue(new Callback<List<Game>>() {
+            @Override
+            public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
+                if (!response.isSuccessful()) {
+                    return;
+                }
+                List<Game> games = response.body();
+                adapter = new GameVerticalAdapter(games);
+                recycler_bestRate.setAdapter(adapter);
             }
             @Override
             public void onFailure(Call<List<Game>> call, Throwable t) {

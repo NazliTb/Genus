@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.esprit.genus.Adapter.GameAdapter;
+import com.esprit.genus.Adapter.GameVerticalAdapter;
 import com.esprit.genus.Model.Game;
 import com.esprit.genus.Retrofit.INodeJS;
 import com.esprit.genus.Retrofit.RetrofitClient;
@@ -42,6 +43,7 @@ public class GamelistActivity extends Fragment {
     RecyclerView recycler_games, recycler_fav;
     LinearLayoutManager layoutManager, layoutManagerFav;
     GameAdapter adapter;
+    GameVerticalAdapter vAdapter;
     MaterialSearchBar materialSearchBar;
     List<String> suggestList = new ArrayList<>();
     protected View mView;
@@ -185,8 +187,8 @@ public class GamelistActivity extends Fragment {
                     return;
                 }
                 List<Game> games = response.body();
-                adapter = new GameAdapter(games);
-                recycler_fav.setAdapter(adapter);
+                vAdapter = new GameVerticalAdapter(games);
+                recycler_fav.setAdapter(vAdapter);
             }
             @Override
             public void onFailure(Call<List<Game>> call, Throwable t) {

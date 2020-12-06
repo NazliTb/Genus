@@ -50,7 +50,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.MyViewHolder> 
 
         holder.gamePic.setImageBitmap(myBitmap);
         holder.gameName.setText(gameList.get(position).getName());
-        holder.gameStudio.setText(gameList.get(position).getCompanyName());
+        holder.gameStudio.setText("by "+gameList.get(position).getCompanyName());
         holder.gameType.setText(gameList.get(position).getType());
         holder.gameDate.setText(gameList.get(position).getReleaseDate().toString());
     }
