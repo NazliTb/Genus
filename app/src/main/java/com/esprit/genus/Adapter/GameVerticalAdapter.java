@@ -47,7 +47,7 @@ public class GameVerticalAdapter extends RecyclerView.Adapter<GameVerticalAdapte
 
         holder.gamePic.setImageBitmap(myBitmap);
         holder.gameName.setText(gameList.get(position).getName());
-        holder.gameStudio.setText(gameList.get(position).getCompanyName());
+        holder.gameStudio.setText("by "+gameList.get(position).getCompanyName());
     }
 
     @Override

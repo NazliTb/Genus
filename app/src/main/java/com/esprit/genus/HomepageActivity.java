@@ -64,7 +64,7 @@ public class HomepageActivity extends AppCompatActivity {
         chatIcon = (ImageView) findViewById(R.id.chatIcon);
         chatTitle = (TextView) findViewById(R.id.chat);
 
-        //getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new GamelistActivity()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new HomeFragmentActivity()).commit();
         loopIcon.setImageResource(R.drawable.loop);
         loopTitle.setTextColor(getResources().getColor(R.color.colorPrimary));
 
@@ -137,6 +137,9 @@ public class HomepageActivity extends AppCompatActivity {
                 heartTitle.setTextColor(getResources().getColor(R.color.hintColor));
                 chatIcon.setImageResource(R.drawable.chat2);
                 chatTitle.setTextColor(getResources().getColor(R.color.hintColor));
+
+                selectedFragment = new HomeFragmentActivity();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, selectedFragment).commit();
             }
         });
 
