@@ -14,6 +14,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.esprit.genus.GamePictureShape.RoundRectCornerImageView;
 import com.esprit.genus.Model.Game;
 import com.esprit.genus.R;
 
@@ -56,13 +57,13 @@ public class GameVerticalAdapter extends RecyclerView.Adapter<GameVerticalAdapte
 
         CardView root_view;
         TextView gameName, gameStudio;
-        ImageView gamePic;
+        RoundRectCornerImageView gamePic;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             root_view = (CardView) itemView.findViewById(R.id.root_view);
-            gamePic = (ImageView) itemView.findViewById(R.id.gamePic);
+            gamePic = (RoundRectCornerImageView) itemView.findViewById(R.id.gamePic);
             gameName = (TextView) itemView.findViewById(R.id.txt_name);
             gameStudio = (TextView) itemView.findViewById(R.id.txt_companyname);
         }

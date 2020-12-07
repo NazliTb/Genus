@@ -15,11 +15,13 @@
         android:orientation="vertical"
         android:padding="8dp">
 
-        <ImageView
+
+
+        <com.esprit.genus.GamePictureShape.RoundRectCornerImageView
             android:id="@+id/gamePic"
-            android:layout_width="100dp"
-            android:layout_height="150dp"
-            android:background="#A1A0A0"
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:scaleType="fitXY"
             android:layout_centerHorizontal="true"/>
 
         <TextView
