@@ -1,5 +1,6 @@
 package com.esprit.genus.Adapter;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.esprit.genus.Model.Game;
 import com.esprit.genus.R;
 
@@ -21,8 +23,11 @@ import java.util.List;
 public class GameVerticalAdapter extends RecyclerView.Adapter<GameVerticalAdapter.MyViewHolder> {
 
     List<Game> gameList;
-
-    public GameVerticalAdapter(List<Game> gameList) { this.gameList = gameList; }
+    Context mContext;
+    public GameVerticalAdapter(Context mContext,List<Game> gameList) {
+        this.mContext = mContext;
+        this.gameList = gameList;
+    }
 
     @NonNull
     @Override
@@ -33,19 +38,11 @@ public class GameVerticalAdapter extends RecyclerView.Adapter<GameVerticalAdapte
 
     @Override
     public void onBindViewHolder(@NonNull GameVerticalAdapter.MyViewHolder holder, int position) {
-        File myImg = new File(gameList.get(position).getGamePicture());
-        //Picasso.get().load(myImg).into(holder.gamePic);
 
-        /*InputStream is = null;
-        try {
-            is = new URL(gameList.get(position).getGamePicture()).openStream();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Bitmap bitmap = BitmapFactory.decodeStream(is);*/
-        Bitmap myBitmap = BitmapFactory.decodeFile(myImg.getAbsolutePath());
 
-        holder.gamePic.setImageBitmap(myBitmap);
+
+
+        Glide.with(mContext).load("http://10.0.2.2:3000/image/"+gameList.get(position).getGamePicture()).into(holder.gamePic);
         holder.gameName.setText(gameList.get(position).getName());
         holder.gameStudio.setText("by "+gameList.get(position).getCompanyName());
     }

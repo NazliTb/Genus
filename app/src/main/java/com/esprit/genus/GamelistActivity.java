@@ -138,7 +138,7 @@ public class GamelistActivity extends Fragment {
                                 return;
                             }
                             List<Game> games = response.body();
-                            adapter = new GameAdapter(games);
+                            adapter = new GameAdapter(getContext(),games);
                             recycler_games.setAdapter(adapter);
                         }
                         @Override
@@ -170,7 +170,7 @@ public class GamelistActivity extends Fragment {
                     return;
                 }
                 List<Game> games = response.body();
-                adapter = new GameAdapter(games);
+                adapter = new GameAdapter(getContext(),games);
                 recycler_games.setAdapter(adapter);
             }
             @Override
@@ -187,7 +187,7 @@ public class GamelistActivity extends Fragment {
                     return;
                 }
                 List<Game> games = response.body();
-                vAdapter = new GameVerticalAdapter(games);
+                vAdapter = new GameVerticalAdapter(getContext(),games);
                 recycler_fav.setAdapter(vAdapter);
             }
             @Override
@@ -207,7 +207,7 @@ public class GamelistActivity extends Fragment {
                 .subscribe(new Consumer<List<Game>>() {
                     @Override
                     public void accept(List<Game> games) throws Exception {
-                        adapter = new GameAdapter(games);
+                        adapter = new GameAdapter(getContext(),games);
                         recycler_games.setAdapter(adapter);
 
                     }

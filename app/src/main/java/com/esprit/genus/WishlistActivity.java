@@ -1,5 +1,6 @@
 package com.esprit.genus;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -45,6 +46,7 @@ public class WishlistActivity extends Fragment {
     MaterialSearchBar materialSearchBar;
     List<String> suggestList = new ArrayList<>();
 
+
     protected View mView;
 
     @Nullable
@@ -54,6 +56,7 @@ public class WishlistActivity extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_wishlist, container, false);
         this.mView = view;
+
 
         //Get userID
         String getidUser = this.getArguments().getString("idUser");
@@ -128,7 +131,7 @@ public class WishlistActivity extends Fragment {
                                 return;
                             }
                             List<Game> games = response.body();
-                            adapter = new GameAdapter(games);
+                            adapter = new GameAdapter(getContext(),games);
                             recycler_games.setAdapter(adapter);
                         }
                         @Override
@@ -158,7 +161,7 @@ public class WishlistActivity extends Fragment {
                     return;
                 }
                 List<Game> games = response.body();
-                adapter = new GameAdapter(games);
+                adapter = new GameAdapter(getContext(),games);
                 recycler_games.setAdapter(adapter);
             }
             @Override
@@ -178,7 +181,7 @@ public class WishlistActivity extends Fragment {
                 .subscribe(new Consumer<List<Game>>() {
                     @Override
                     public void accept(List<Game> games) throws Exception {
-                        adapter = new GameAdapter(games);
+                        adapter = new GameAdapter(getContext(),games);
                         recycler_games.setAdapter(adapter);
 
                     }

@@ -1,7 +1,10 @@
 package com.esprit.genus.Adapter;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,19 +15,25 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.esprit.genus.Model.Game;
 import com.esprit.genus.R;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 public class GameAdapter extends RecyclerView.Adapter<GameAdapter.MyViewHolder> {
 
     List<Game> gameList;
-
-    public GameAdapter(List<Game> gameList) {
+    Context mContext;
+    public GameAdapter(Context mContext,List<Game> gameList) {
         this.gameList = gameList;
+        this.mContext= mContext;
     }
 
     @NonNull
@@ -36,19 +45,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        File myImg = new File(gameList.get(position).getGamePicture());
-        //Picasso.get().load(myImg).into(holder.gamePic);
-
-        /*InputStream is = null;
-        try {
-            is = new URL(gameList.get(position).getGamePicture()).openStream();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Bitmap bitmap = BitmapFactory.decodeStream(is);*/
-        Bitmap myBitmap = BitmapFactory.decodeFile(myImg.getAbsolutePath());
-
-        holder.gamePic.setImageBitmap(myBitmap);
+        Glide.with(mContext).load("http://10.0.2.2:3000/image/"+gameList.get(position).getGamePicture()).into(holder.gamePic);
         holder.gameName.setText(gameList.get(position).getName());
         holder.gameStudio.setText("by "+gameList.get(position).getCompanyName());
         holder.gameType.setText(gameList.get(position).getType());

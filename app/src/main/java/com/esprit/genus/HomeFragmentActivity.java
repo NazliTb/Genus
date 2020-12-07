@@ -164,7 +164,7 @@ public class HomeFragmentActivity extends Fragment {
                     return;
                 }
                 List<Game> games = response.body();
-                adapter = new GameVerticalAdapter(games);
+                adapter = new GameVerticalAdapter(getContext(),games);
                 recycler_topPicks.setAdapter(adapter);
             }
             @Override
@@ -181,7 +181,7 @@ public class HomeFragmentActivity extends Fragment {
                     return;
                 }
                 List<Game> games = response.body();
-                adapter = new GameVerticalAdapter(games);
+                adapter = new GameVerticalAdapter(getContext(),games);
                 recycler_trending.setAdapter(adapter);
             }
             @Override
@@ -198,7 +198,7 @@ public class HomeFragmentActivity extends Fragment {
                     return;
                 }
                 List<Game> games = response.body();
-                adapter = new GameVerticalAdapter(games);
+                adapter = new GameVerticalAdapter(getContext(),games);
                 recycler_bestRate.setAdapter(adapter);
             }
             @Override
@@ -217,7 +217,7 @@ public class HomeFragmentActivity extends Fragment {
                 .subscribe(new Consumer<List<Game>>() {
                     @Override
                     public void accept(List<Game> games) throws Exception {
-                        adapter = new GameVerticalAdapter(games);
+                        adapter = new GameVerticalAdapter(getContext(),games);
                         recycler_topPicks.setAdapter(adapter);
 
                     }
