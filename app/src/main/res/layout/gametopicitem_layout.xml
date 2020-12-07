@@ -18,6 +18,7 @@
         <com.esprit.genus.GamePictureShape.RoundRectCornerImageView
             android:id="@+id/topicPic"
             android:layout_width="150dp"
+            android:background="@color/cardview_dark_background"
             android:layout_height="200dp"
             android:scaleType="fitXY" />
 
