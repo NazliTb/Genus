@@ -106,7 +106,5 @@ public class GamescreenActivity extends AppCompatActivity {
             }
         });
 
-        gameBg.setBlur(10);
-
     }
 }
