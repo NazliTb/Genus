@@ -15,12 +15,22 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
+            <com.jgabrielfreitas.core.BlurImageView
                 android:id="@+id/gameBg"
                 android:layout_width="match_parent"
-                android:layout_height="470dp"
+                android:layout_height="500dp"
                 android:layout_centerHorizontal="true"
-                android:background="#CAC8C8" />
+                android:scaleType="fitXY"
+                android:alpha="0.6"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:layout_centerHorizontal="true"
+                android:background="@android:color/black"
+                android:alpha="0.8"
+                android:scaleType="fitXY"/>
+
 
             <ImageButton
                 android:id="@+id/backButton"
@@ -40,13 +50,14 @@
                 android:backgroundTint="#00FF0303"
                 app:srcCompat="@drawable/more" />
 
-            <ImageView
+            <com.esprit.genus.GamePictureShape.RoundRectCornerImageView
                 android:id="@+id/gameImg"
-                android:layout_width="151dp"
-                android:layout_height="216dp"
+                android:layout_width="200dp"
+                android:layout_height="280dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="70dp"
-                android:background="#A1A0A0" />
+                android:scaleType="fitXY"
+                android:elevation="10dp"/>
 
             <TextView
                 android:id="@+id/gameName"
