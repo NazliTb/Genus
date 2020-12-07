@@ -1,6 +1,7 @@
 package com.esprit.genus.Retrofit;
 
 import com.esprit.genus.Model.Chat;
+import com.esprit.genus.Model.Comment;
 import com.esprit.genus.Model.Game;
 
 import java.util.List;
@@ -79,4 +80,7 @@ public interface INodeJS {
 
     @GET("GetGameDetails/{idGame}")
     Call <List<Game>> GetGameDetails (@Path("idGame") int idGame);
+
+    @GET("GetComments/{idGame}")
+    Call <List<Comment>> GetComments (@Path("idGame") int idGame);
 }
