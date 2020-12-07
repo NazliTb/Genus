@@ -78,7 +78,7 @@ public class ChatListActivity extends Fragment {
 
 
 
-        //View for gameList
+        //View for topicList
         recycler_chats = (RecyclerView) mView.findViewById(R.id.recyclerViewTopics);
         recycler_chats.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());

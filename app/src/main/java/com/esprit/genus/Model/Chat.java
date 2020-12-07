@@ -7,17 +7,17 @@ import java.util.Date;
 public class Chat {
 private int idChat;
 private String topic;
-private Date date;
+private Date Date;
 private String username;
 
 public Chat() {
 
 }
 
-    public Chat(int idChat, String topic, Date date, String username) {
+    public Chat(int idChat, String topic, Date Date, String username) {
         this.idChat = idChat;
         this.topic = topic;
-        this.date = date;
+        this.Date = Date;
         this.username = username;
     }
 
@@ -46,10 +46,10 @@ public Chat() {
     }
 
     public Date getDate() {
-        return date;
+        return Date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDate(Date Date) {
+        this.Date = Date;
     }
 }
