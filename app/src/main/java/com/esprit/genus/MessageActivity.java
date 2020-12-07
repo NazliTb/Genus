@@ -59,6 +59,7 @@ public class MessageActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat_layout);
 
+
         btnSend = (Button) findViewById(R.id.btnSend);
         inputMsg = (EditText) findViewById(R.id.inputMsg);
         listViewMessages = (ListView) findViewById(R.id.list_view_messages);

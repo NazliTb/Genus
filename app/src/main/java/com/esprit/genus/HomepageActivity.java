@@ -48,6 +48,7 @@ public class HomepageActivity extends AppCompatActivity {
         //this is to send data from activity to fragments
         final Bundle bundle = new Bundle();
         bundle.putString("idUser", idUser);
+        bundle.putString("username",username);
 
         //Init API
         Retrofit retrofit = RetrofitClient.getInstance();
