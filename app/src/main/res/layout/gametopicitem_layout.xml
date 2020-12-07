@@ -18,11 +18,9 @@
         <com.esprit.genus.GamePictureShape.RoundRectCornerImageView
             android:id="@+id/topicPic"
             android:layout_width="150dp"
-            android:background="@color/cardview_dark_background"
             android:layout_height="200dp"
+            android:background="@color/cardview_dark_background"
             android:scaleType="fitXY" />
-
-
 
         <LinearLayout
             android:orientation="vertical"
@@ -59,6 +57,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="created in"
+                android:fontFamily="@font/roboto"
+                android:textSize="18sp"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="made by"
                 android:fontFamily="@font/roboto"
                 android:textSize="18sp"
                 android:textAlignment="center"/>

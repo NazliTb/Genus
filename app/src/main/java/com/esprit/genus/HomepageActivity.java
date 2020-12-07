@@ -181,6 +181,11 @@ public class HomepageActivity extends AppCompatActivity {
                 heartTitle.setTextColor(getResources().getColor(R.color.hintColor));
                 loopIcon.setImageResource(R.drawable.loop2);
                 loopTitle.setTextColor(getResources().getColor(R.color.hintColor));
+
+                //Fragment display
+                selectedFragment = new WishlistActivity();
+                selectedFragment.setArguments(bundle);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, selectedFragment).commit();
             }
         });
 

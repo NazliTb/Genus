@@ -1,5 +1,6 @@
 package com.esprit.genus.Retrofit;
 
+import com.esprit.genus.Model.Chat;
 import com.esprit.genus.Model.Game;
 
 import java.util.List;
@@ -44,6 +45,14 @@ public interface INodeJS {
 
     @GET("GetGameList/{idUser}")
     Call<List<Game>> GetGameList(@Path("idUser") int idUser);
+
+    @GET("GetChatList")
+    Call<List<Chat>> GetChatList();
+
+
+    @POST("search")
+    @FormUrlEncoded
+    Observable<List<Chat>> searchChats (@Field("search") String searchQuery);
 
     @POST("search")
     @FormUrlEncoded
