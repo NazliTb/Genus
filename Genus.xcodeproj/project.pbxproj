@@ -25,6 +25,7 @@
 		6C7545E725651453004EA096 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C7545E525651453004EA096 /* LaunchScreen.storyboard */; };
 		6C7545F225651453004EA096 /* GenusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7545F125651453004EA096 /* GenusTests.swift */; };
 		6C7545FD25651454004EA096 /* GenusUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7545FC25651454004EA096 /* GenusUITests.swift */; };
+		6CF6140B258015CA00E73ECF /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 6CF6140A258015CA00E73ECF /* Fonts */; };
 		7EC0F5B695860C2808D13ED5 /* Pods_Genus_GenusUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 788FAD2E7A92638E1F2D50E6 /* Pods_Genus_GenusUITests.framework */; };
 		89202835D4985922D0587D15 /* Pods_Genus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00259106622C86BC7E6527BF /* Pods_Genus.framework */; };
 /* End PBXBuildFile section */
@@ -76,6 +77,7 @@
 		6C7545F825651453004EA096 /* GenusUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenusUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C7545FC25651454004EA096 /* GenusUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenusUITests.swift; sourceTree = "<group>"; };
 		6C7545FE25651454004EA096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6CF6140A258015CA00E73ECF /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = ../../../Downloads/Fonts; sourceTree = "<group>"; };
 		788FAD2E7A92638E1F2D50E6 /* Pods_Genus_GenusUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Genus_GenusUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DD2BAFCD2947D716E45D06D /* Pods-Genus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Genus.debug.xcconfig"; path = "Target Support Files/Pods-Genus/Pods-Genus.debug.xcconfig"; sourceTree = "<group>"; };
 		B1041C0CAFD842C56DA074FB /* Pods_GenusTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GenusTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,6 +124,7 @@
 		6C7545CE25651452004EA096 = {
 			isa = PBXGroup;
 			children = (
+				6CF6140A258015CA00E73ECF /* Fonts */,
 				6C7545D925651452004EA096 /* Genus */,
 				6C7545F025651453004EA096 /* GenusTests */,
 				6C7545FB25651454004EA096 /* GenusUITests */,
@@ -306,6 +309,7 @@
 				6C7545E725651453004EA096 /* LaunchScreen.storyboard in Resources */,
 				6C7545E425651453004EA096 /* Assets.xcassets in Resources */,
 				6C7545E225651452004EA096 /* Main.storyboard in Resources */,
+				6CF6140B258015CA00E73ECF /* Fonts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
