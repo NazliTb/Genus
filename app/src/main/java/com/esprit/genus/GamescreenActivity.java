@@ -59,7 +59,7 @@ public class GamescreenActivity extends AppCompatActivity {
         }
 
         //verify that we got the game ID
-        Toast.makeText(this, "idGame: " + idGame, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "idGame: " + idGame, Toast.LENGTH_SHORT).show();
 
         //Init API
         Retrofit retrofit = RetrofitClient.getInstance();
