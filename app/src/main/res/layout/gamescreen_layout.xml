@@ -231,7 +231,7 @@
                 android:id="@+id/recyclerViewComments"
                 android:layout_below="@+id/commentField"
                 android:layout_marginTop="20sp"
-                android:layout_width="350dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_centerHorizontal="true"/>

@@ -7,8 +7,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.esprit.genus.Adapter.CommentAdapter;
+import com.esprit.genus.Model.Comment;
 import com.esprit.genus.Model.Game;
 import com.esprit.genus.Retrofit.INodeJS;
 import com.esprit.genus.Retrofit.RetrofitClient;
@@ -32,6 +37,10 @@ public class GamescreenActivity extends AppCompatActivity {
     private ImageView gameImg;
     BlurImageView gameBg;
     private TextView gameName, studioName, favNbr, cmtNbr, gameDesc;
+
+    RecyclerView recycler_comments;
+    LinearLayoutManager layoutManager;
+    CommentAdapter adapter;
 
 
     @Override
@@ -62,6 +71,7 @@ public class GamescreenActivity extends AppCompatActivity {
                 .build();
         myAPI1 = retrofit1.create((INodeJS.class));
         final Call <List<Game>> myGame = myAPI1.GetGameDetails(Integer.parseInt(idGame));
+        final Call <List<Comment>> listComments = myAPI1.GetComments(Integer.parseInt(idGame));
 
         //our views
         gameImg = (ImageView) findViewById(R.id.gameImg);
@@ -72,7 +82,14 @@ public class GamescreenActivity extends AppCompatActivity {
         cmtNbr = (TextView) findViewById(R.id.cmCount);
         gameDesc = (TextView) findViewById(R.id.gameDesc);
 
-        //display our informations
+        //view for the comment section
+        recycler_comments = (RecyclerView) findViewById(R.id.recyclerViewComments);
+        recycler_comments.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recycler_comments.setLayoutManager(layoutManager);
+        recycler_comments.addItemDecoration(new DividerItemDecoration(this,layoutManager.getOrientation()));
+
+        //display our game informations
         myGame.enqueue(new Callback <List<Game>>() {
             @Override
             public void onResponse(Call <List<Game>> call, Response <List<Game>> response) {
@@ -100,5 +117,36 @@ public class GamescreenActivity extends AppCompatActivity {
             }
         });
 
+        //display our comment section
+        listComments.enqueue(new Callback<List<Comment>>() {
+            @Override
+            public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
+                if (!response.isSuccessful()) {
+                    return;
+                }
+                List <Comment> comments = response.body();
+                adapter = new CommentAdapter(GamescreenActivity.this, comments);
+                recycler_comments.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<Comment>> call, Throwable t) {
+                Toast.makeText(GamescreenActivity.this, "Not found", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    @Override
+    protected void onStop() {
+        compositeDisposable.clear();
+        super.onStop();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        compositeDisposable.clear();
+        super.onDestroy();
     }
 }

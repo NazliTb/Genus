@@ -4,12 +4,16 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.esprit.genus.Model.Comment;
 import com.esprit.genus.R;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -18,7 +22,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
     List<Comment> commentList;
     Context mContext;
 
-    public CommentAdapter(List<Comment> gameList, Context mContext) {
+    public CommentAdapter(Context mContext, List<Comment> gameList) {
         this.commentList = gameList;
         this.mContext = mContext;
     }
@@ -32,7 +36,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
+        //holder.userName.setText(commentList.get(position).getIdUser());
+        holder.comment.setText(commentList.get(position).getCommentText());
+        holder.likesNbr.setText(commentList.get(position).getLikesNbr()+"");
     }
 
     @Override
@@ -40,8 +46,18 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
+
+        CardView root_view;
+        TextView userName, comment, likesNbr;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            mContext = itemView.getContext();
+
+            root_view = (CardView) itemView.findViewById(R.id.root_view);
+            //userName = (TextView) itemView.findViewById(R.id.txt_name);
+            comment = (TextView) itemView.findViewById(R.id.txt_comment);
+            likesNbr = (TextView) itemView.findViewById(R.id.txt_likes);
         }
     }
 }
