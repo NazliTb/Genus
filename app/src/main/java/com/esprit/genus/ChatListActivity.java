@@ -59,6 +59,7 @@ public class ChatListActivity extends Fragment {
 
         //Get userID
         String getidUser = this.getArguments().getString("idUser");
+        final String username = this.getArguments().getString("username");
         int idUser = 0;
         try {
             idUser=Integer.parseInt(getidUser);
@@ -132,7 +133,7 @@ public class ChatListActivity extends Fragment {
                                 return;
                             }
                             List<Chat> chats = response.body();
-                            adapter = new ChatAdapter(getContext(),chats);
+                            adapter = new ChatAdapter(getContext(),chats,username);
                             recycler_chats.setAdapter(adapter);
                         }
                         @Override
@@ -164,7 +165,7 @@ public class ChatListActivity extends Fragment {
                     return;
                 }
                 List<Chat> Chats = response.body();
-                adapter = new ChatAdapter(getContext(),Chats);
+                adapter = new ChatAdapter(getContext(),Chats,username);
                 recycler_chats.setAdapter(adapter);
             }
             @Override
@@ -184,8 +185,8 @@ public class ChatListActivity extends Fragment {
                 .subscribe(new Consumer<List<Chat>>() {
                     @Override
                     public void accept(List<Chat> chats) throws Exception {
-                        adapter = new ChatAdapter(getContext(),chats);
-                        recycler_chats.setAdapter(adapter);
+                     //   adapter = new ChatAdapter(getContext(),chats,username);
+                      //  recycler_chats.setAdapter(adapter);
 
                     }
                 }, new Consumer<Throwable>() {

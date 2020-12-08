@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.esprit.genus.ChatListActivity;
 import com.esprit.genus.GamePictureShape.RoundRectCornerImageView;
 import com.esprit.genus.Interfaces.ITopicClickListener;
+import com.esprit.genus.MessageActivity;
 import com.esprit.genus.Model.Chat;
 import com.esprit.genus.R;
 
@@ -28,10 +29,12 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
 
     List<Chat> chatList;
     Context mContext;
+    String name;
 
-    public ChatAdapter(Context mContext,List<Chat> chatList) {
+    public ChatAdapter(Context mContext,List<Chat> chatList,String name) {
         this.chatList = chatList;
         this.mContext= mContext;
+        this.name=name;
     }
 
     @NonNull
@@ -96,7 +99,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
         public void onClick(View v) {
            topicClickListener.onTopicClick(v, getAdapterPosition());
             Intent intent;
-            intent = new Intent(mContext, ChatListActivity.class);
+            intent = new Intent(mContext, MessageActivity.class);
+            intent.putExtra("name",name);
             mContext.startActivity(intent);
         }
     }
