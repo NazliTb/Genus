@@ -62,7 +62,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="V9b-wN-rJs">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="topicCell" id="V9b-wN-rJs" customClass="TopicsCollectionViewCell" customModule="Genus" customModuleProvider="target">
                                         <rect key="frame" x="5.5" y="0.0" width="331" height="209"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Kx7-P9-u7T">
@@ -113,6 +113,14 @@
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="331" height="209"/>
+                                        <connections>
+                                            <outlet property="dateTopic" destination="BsN-CF-OQj" id="hk0-22-y1a"/>
+                                            <outlet property="imageCell" destination="HM3-aC-9FA" id="f9s-dF-llH"/>
+                                            <outlet property="joinTopic" destination="JQj-3s-TJI" id="gw7-Bd-G6M"/>
+                                            <outlet property="memberNumbers" destination="3rb-GE-U2k" id="Jtt-aZ-b7I"/>
+                                            <outlet property="topicCreator" destination="BsN-CF-OQj" id="mpw-Gm-CQr"/>
+                                            <outlet property="topicName" destination="Omf-FD-VMd" id="Uhc-d2-3ZG"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>

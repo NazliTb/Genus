@@ -15,6 +15,7 @@
 		585E885A2581557B00E93F3D /* ChatNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585E88592581557B00E93F3D /* ChatNavigationController.swift */; };
 		585E885F258155B100E93F3D /* WishListNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585E885E258155B100E93F3D /* WishListNavigationController.swift */; };
 		585E88642581561200E93F3D /* LibraryNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585E88632581561200E93F3D /* LibraryNavigationController.swift */; };
+		585E8869258181B100E93F3D /* TopicsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585E8868258181B100E93F3D /* TopicsCollectionViewCell.swift */; };
 		5860A518256D5F3400B9F622 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5860A517256D5F3400B9F622 /* LoginController.swift */; };
 		5860A51D256D69E300B9F622 /* SignupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5860A51C256D69E300B9F622 /* SignupController.swift */; };
 		5860A532256D753A00B9F622 /* passwordrecoveryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5860A531256D753A00B9F622 /* passwordrecoveryController.swift */; };
@@ -65,6 +66,7 @@
 		585E88592581557B00E93F3D /* ChatNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatNavigationController.swift; sourceTree = "<group>"; };
 		585E885E258155B100E93F3D /* WishListNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListNavigationController.swift; sourceTree = "<group>"; };
 		585E88632581561200E93F3D /* LibraryNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryNavigationController.swift; sourceTree = "<group>"; };
+		585E8868258181B100E93F3D /* TopicsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsCollectionViewCell.swift; sourceTree = "<group>"; };
 		5860A517256D5F3400B9F622 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		5860A51C256D69E300B9F622 /* SignupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupController.swift; sourceTree = "<group>"; };
 		5860A531256D753A00B9F622 /* passwordrecoveryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = passwordrecoveryController.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				6C7545DA25651452004EA096 /* AppDelegate.swift */,
+				585E8868258181B100E93F3D /* TopicsCollectionViewCell.swift */,
 				6C7545DC25651452004EA096 /* SceneDelegate.swift */,
 				6C7545E025651452004EA096 /* Main.storyboard */,
 				6C7545E325651453004EA096 /* Assets.xcassets */,
@@ -468,6 +471,7 @@
 				5860A541256D798D00B9F622 /* LibraryController.swift in Sources */,
 				6C7545DD25651452004EA096 /* SceneDelegate.swift in Sources */,
 				585E88642581561200E93F3D /* LibraryNavigationController.swift in Sources */,
+				585E8869258181B100E93F3D /* TopicsCollectionViewCell.swift in Sources */,
 				58D45836257FFE430057E82C /* ChatController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

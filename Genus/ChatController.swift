@@ -7,7 +7,21 @@
 
 import UIKit
 
-class ChatController: UIViewController {
+class ChatController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource{
+    
+    
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        <#code#>
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        <#code#>
+    }
+    
+  
+    
     
     //Widgets
     
@@ -17,6 +31,8 @@ class ChatController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        collectionView.delegate=self
+        collectionView.dataSource=self
        
     }
 
