@@ -86,11 +86,14 @@ let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, 
         vc.id=idUser
         self.navigationController?.pushViewController(vc, animated: true)
         self.present(vc, animated: true, completion: nil)*/
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LibraryController") as! LibraryController
+            
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainTabController") as! MainTabController
              vc.Username=name
              vc.id=idUser
              self.navigationController?.pushViewController(vc, animated: true)
              self.present(vc, animated: true, completion: nil)
+           
+            
         }
         alertController.addAction(OKAction)
         DispatchQueue.main.async {

@@ -2,7 +2,7 @@
 //  DiscoverController.swift
 //  Genus
 //
-//  Created by Orionsyrus24 on 12/8/20.
+//  Created by Orionsyrus24 on 12/9/20.
 //
 
 import UIKit
@@ -21,7 +21,8 @@ class DiscoverController: UIViewController {
 
     //IBActions
     
-   
-    @IBAction func searchAction(_ sender: Any) {
+    @IBAction func search(_ sender: Any) {
     }
+    
+    
 }
