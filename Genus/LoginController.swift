@@ -52,8 +52,8 @@ class LoginController: UIViewController {
      
         else {
     let params = ["email":email.text, "password":password.text] as! Dictionary<String, String>
-    //var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/login")!)
-    var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/login")!)
+    var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/login")!)
+    //var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/login")!)
             
     request.httpMethod = "POST"
     request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
@@ -81,12 +81,16 @@ let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, 
         let alertController = UIAlertController(title: "Information", message: "Welcome you are connected !", preferredStyle: .alert)
         let OKAction = UIAlertAction(title: "OK", style: .default)
         { action -> Void in
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileController") as! ProfileController
+       /* let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileController") as! ProfileController
         vc.Username=name
         vc.id=idUser
         self.navigationController?.pushViewController(vc, animated: true)
-        self.present(vc, animated: true, completion: nil)
-                                
+        self.present(vc, animated: true, completion: nil)*/
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LibraryController") as! LibraryController
+             vc.Username=name
+             vc.id=idUser
+             self.navigationController?.pushViewController(vc, animated: true)
+             self.present(vc, animated: true, completion: nil)
         }
         alertController.addAction(OKAction)
         DispatchQueue.main.async {

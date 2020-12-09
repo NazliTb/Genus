@@ -8,11 +8,16 @@
 
 import UIKit
 
+
+
 class LibraryController: UIViewController {
     
+    
+    //Var 
+    var id:Int=0
+    var Username:String = "Full Name"
+    
     //Widgets
-    
-    
  
     override func viewDidLoad() {
         super.viewDidLoad()
