@@ -576,7 +576,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="topPicksCell" id="EeA-6B-PvZ">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="topPicksCell" id="EeA-6B-PvZ" customClass="TopPicksCollectionViewCell" customModule="Genus" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="3.5" width="151" height="226"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Yq4-2U-P74">
@@ -604,6 +604,11 @@
                                             </subviews>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="151" height="226"/>
+                                        <connections>
+                                            <outlet property="companyName" destination="yWW-kn-NBE" id="oTB-6C-QDf"/>
+                                            <outlet property="gamePicture" destination="gie-tH-vyR" id="6Uo-0Y-35Q"/>
+                                            <outlet property="name" destination="Lnr-QR-gAk" id="qin-dJ-emh"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -619,7 +624,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="topPicksCell" id="UJx-8V-kFQ">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="topPicksCell" id="UJx-8V-kFQ" userLabel="trendingGamesCell" customClass="TrendingGamesCollectionViewCell" customModule="Genus" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="3.5" width="151" height="226"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Kx1-IN-ia6">
@@ -647,6 +652,11 @@
                                             </subviews>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="151" height="226"/>
+                                        <connections>
+                                            <outlet property="companyName" destination="52u-eL-aJc" id="Lkp-TT-K6S"/>
+                                            <outlet property="gamePicture" destination="Vrv-jY-DRW" id="23p-7u-PT5"/>
+                                            <outlet property="name" destination="8oS-QS-ndz" id="qbi-qO-pzl"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -662,7 +672,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="topPicksCell" id="vgk-MX-Glc">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="topPicksCell" id="vgk-MX-Glc" userLabel="bestRateCell" customClass="BestRateCollectionViewCell" customModule="Genus" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="3.5" width="151" height="226"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Ncy-9p-FbV">
@@ -690,6 +700,11 @@
                                             </subviews>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="151" height="226"/>
+                                        <connections>
+                                            <outlet property="companyName" destination="YjL-GR-CS7" id="t3e-LW-hrr"/>
+                                            <outlet property="gamePicture" destination="SZ5-9h-evX" id="aC3-NV-5cR"/>
+                                            <outlet property="name" destination="96s-Xo-GHR" id="lHi-zT-Fb1"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>

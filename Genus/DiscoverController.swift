@@ -7,10 +7,46 @@
 
 import UIKit
 
-class DiscoverController: UIViewController {
-    
+struct TopPicks {
+    let idGame:Int
+    let name:String
+    let companyName:String
+    let description:String
+    let releaseDate:Date
+    let gamePicture:String
+    let rating:Int
+    let type:String
+}
+
+struct TrendingGames {
+    let idGame:Int
+    let name:String
+    let companyName:String
+    let description:String
+    let releaseDate:Date
+    let gamePicture:String
+    let rating:Int
+    let type:String
+}
+
+struct BestRate {
+    let idGame:Int
+    let name:String
+    let companyName:String
+    let description:String
+    let releaseDate:Date
+    let gamePicture:String
+    let rating:Int
+    let type:String
+}
+
+class DiscoverController: UIViewController, UICollectionViewDataSource {
+     
     //Widgets
-    
+    //var
+    var topPicks=[TopPicks]()
+    var trendingGames=[TrendingGames]()
+    var bestRate=[BestRate]()
     
  
     override func viewDidLoad() {
@@ -23,85 +59,35 @@ class DiscoverController: UIViewController {
     
     
     func getTopPicks() {
-    let url=URL(string: "http://192.168.64.1:3000/GetTopPicksGames")!
-    // let url = URL(string: "http://192.168.247.1:3000/GetTopPicksGames")!)
-    let task = URLSession.shared.dataTask(with: url, completionHandler:{ data, response, error in guard let data = data else { return }
-    do {
-        let json = try JSONSerialization.jsonObject(with: data) as! Dictionary<String, AnyObject>
-    let idGame = json["idGame"] as! Int
-    let name=json["name"] as! String
-    let comanyName=json["companyName"] as! String
-    let description=json["description"] as! String
-    let releaseDate=json["releaseDate"] as! String
-    let gamePicture=json["gamePicture"] as! String
-    let rating=json["rating"] as! String
-    let type=json["type"] as! String
-   
-        //Naz nrmlnt houni tged mtaa collectionView
-   
-    }
-    catch let parseErr {
-    print(parseErr)
+    let url=URL(string: "http://192.168.64.1:3000/GetTopPicksGames")
+    // let url = URL(string: "http://192.168.247.1:3000/GetTopPicksGames")
     
-    }
-    })
-    task.resume()
     }
     
     
     
     func getTrendingGames() {
-    let url=URL(string: "http://192.168.64.1:3000/GetTrendingGames")!
-    // let url = URL(string: "http://192.168.247.1:3000/GetTrendingGames")!)
-    let task = URLSession.shared.dataTask(with: url, completionHandler:{ data, response, error in guard let data = data else { return }
-    do {
-        let json = try JSONSerialization.jsonObject(with: data) as! Dictionary<String, AnyObject>
-    let idGame = json["idGame"] as! Int
-    let name=json["name"] as! String
-    let comanyName=json["companyName"] as! String
-    let description=json["description"] as! String
-    let releaseDate=json["releaseDate"] as! String
-    let gamePicture=json["gamePicture"] as! String
-    let rating=json["rating"] as! String
-    let type=json["type"] as! String
-        
-   
-    }
-    catch let parseErr {
-    print(parseErr)
+    let url=URL(string: "http://192.168.64.1:3000/GetTrendingGames")
+    // let url = URL(string: "http://192.168.247.1:3000/GetTrendingGames")
     
-    }
-    })
-    task.resume()
     }
     
     func getBestRateGames() {
-    let url=URL(string: "http://192.168.64.1:3000/GetBestRateGames")!
-    // let url = URL(string: "http://192.168.247.1:3000/GetBestRateGames")!)
-    let task = URLSession.shared.dataTask(with: url, completionHandler:{ data, response, error in guard let data = data else { return }
-    do {
-        let json = try JSONSerialization.jsonObject(with: data) as! Dictionary<String, AnyObject>
-    let idGame = json["idGame"] as! Int
-    let name=json["name"] as! String
-    let comanyName=json["companyName"] as! String
-    let description=json["description"] as! String
-    let releaseDate=json["releaseDate"] as! String
-    let gamePicture=json["gamePicture"] as! String
-    let rating=json["rating"] as! String
-    let type=json["type"] as! String
-        
-   
-    }
-    catch let parseErr {
-    print(parseErr)
+    let url=URL(string: "http://192.168.64.1:3000/GetBestRateGames")
+    // let url = URL(string: "http://192.168.247.1:3000/GetBestRateGames")
     
-    }
-    })
-    task.resume()
     }
     
     
     //IBActions
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    
+    }
     
     @IBAction func search(_ sender: Any) {
     }
