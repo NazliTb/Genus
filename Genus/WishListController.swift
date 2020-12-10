@@ -7,43 +7,65 @@
 
 import UIKit
 
-class WishListController: UIViewController {
+struct wishGame :Decodable{
+    let idGame:Int
+    let name:String
+    let companyName:String
+    let description:String
+    let releaseDate:Date
+    let gamePicture:String
+    let rating:Int
+    let type:String
+    let idWishList:Int
+    let idUser:Int
+}
+
+class WishListController: UIViewController, UICollectionViewDataSource {
     
     //Widgets
     
+    //Var
+    var id:Int=0
+    var games=[wishGame]()
     
- 
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-    }
+       
+        collectionView.dataSource=self
+        GetWishList(idUser: <#T##String#>)
 
-    //Functions
+    }
+    
+    //functions
+       
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        games.count
+        <#code#>
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "wishlistCell", for: indexPath) as! WishlistCollectionViewCell
+        cell.gameName.text=games[indexPath.row].name
+        cell.studioName.text=games[indexPath.row].companyName
+        
+        return cell
+            <#code#>
+    }
+             
+    
     func GetWishList(idUser:String) {
     let url=URL(string: "http://192.168.64.1:3000/GetWishList"+idUser)!
     // let url = URL(string: "http://192.168.247.1:3000/GetWishList"+idUser)!)
-    let task = URLSession.shared.dataTask(with: url, completionHandler:{ data, response, error in guard let data = data else { return }
-    do {
-        let json = try JSONSerialization.jsonObject(with: data) as! Dictionary<String, AnyObject>
-    let idGame = json["idGame"] as! Int
-    let name=json["name"] as! String
-    let comanyName=json["companyName"] as! String
-    let description=json["description"] as! String
-    let releaseDate=json["releaseDate"] as! String
-    let gamePicture=json["gamePicture"] as! String
-    let rating=json["rating"] as! String
-    let type=json["type"] as! String
+    
    
         //Naz nrmlnt houni tged mtaa collectionView
    
-    }
-    catch let parseErr {
-    print(parseErr)
+    }    
     
-    }
-    })
-    task.resume()
-    }
 
     //IBActions
     
