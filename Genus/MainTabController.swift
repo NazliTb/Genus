@@ -25,11 +25,7 @@ class MainTabController : UITabBarController {
                 profileViewController.id=id
             }
         }
-            if let discoverNavigationController = viewController as? DiscoverNavigationController {
-                if let discoverViewController = discoverNavigationController.viewControllers.first as? DiscoverController {
-                
-            }
-            }
+         
             
             if let wishListNavigationController = viewController as? WishListNavigationController {
                 if let WishListViewController = wishListNavigationController.viewControllers.first as? WishListController {

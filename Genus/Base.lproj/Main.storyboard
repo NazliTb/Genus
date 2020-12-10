@@ -390,8 +390,11 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="Xt1-A0-G87" kind="relationship" relationship="viewControllers" id="A8T-q4-o3a"/>
-                        <segue destination="S7S-i8-xdV" kind="relationship" relationship="viewControllers" id="fZL-P2-BzV"/>
+                        <segue destination="Oqk-I5-SfQ" kind="relationship" relationship="viewControllers" id="Ka8-2Q-JOr"/>
+                        <segue destination="G4C-cX-1V5" kind="relationship" relationship="viewControllers" id="vWZ-12-Ry2"/>
+                        <segue destination="Yix-Pw-6L7" kind="relationship" relationship="viewControllers" id="HnR-dt-o1a"/>
+                        <segue destination="S7S-i8-xdV" kind="relationship" relationship="viewControllers" id="Lpg-V0-eK1"/>
+                        <segue destination="Xt1-A0-G87" kind="relationship" relationship="viewControllers" id="fey-62-dAW"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MBP-MU-8gA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -571,7 +574,6 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="29V-dP-MA7">
                                     <size key="itemSize" width="151" height="226"/>
-                                    <size key="estimatedItemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -619,7 +621,6 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2Uz-em-zx0">
                                     <size key="itemSize" width="151" height="226"/>
-                                    <size key="estimatedItemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -667,7 +668,6 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ABa-3G-r5g">
                                     <size key="itemSize" width="151" height="226"/>
-                                    <size key="estimatedItemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
