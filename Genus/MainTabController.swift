@@ -32,8 +32,15 @@ class MainTabController : UITabBarController {
             }
             
             if let wishListNavigationController = viewController as? WishListNavigationController {
-            if let WishListViewController = wishListNavigationController.viewControllers as? LibraryController {
+            if let WishListViewController = wishListNavigationController.viewControllers as? WishListController {
                 WishListViewController.id=id
+                
+            }
+            }
+            
+            if let libraryNavigationController = viewController as? LibraryNavigationController {
+            if let libraryViewController = libraryNavigationController.viewControllers as? LibraryController {
+                libraryViewController.id=id
                 
             }
             }
