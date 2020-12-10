@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9td-Sq-vtg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9td-Sq-vtg">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Orbitron-VariableFont_wght.ttf">
+        <array key="Orbitron-Regular.ttf">
             <string>Orbitron-Regular</string>
         </array>
         <array key="Roboto-Regular.ttf">
@@ -519,8 +519,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aMm-Xt-hor">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aMm-Xt-hor">
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <viewLayoutGuide key="contentLayoutGuide" id="F4d-fa-q8d"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="hW7-qd-o4v"/>
                             </scrollView>
@@ -712,12 +713,6 @@
                         <viewLayoutGuide key="safeArea" id="uFI-34-Htg"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <color key="tintColor" red="0.0" green="0.84365910290000001" blue="0.85154384370000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="aMm-Xt-hor" firstAttribute="top" secondItem="uFI-34-Htg" secondAttribute="top" id="7gO-4Z-U12"/>
-                            <constraint firstItem="aMm-Xt-hor" firstAttribute="trailing" secondItem="uFI-34-Htg" secondAttribute="trailing" id="e32-EA-LiY"/>
-                            <constraint firstItem="aMm-Xt-hor" firstAttribute="leading" secondItem="uFI-34-Htg" secondAttribute="leading" id="gZM-kD-EIN"/>
-                            <constraint firstItem="aMm-Xt-hor" firstAttribute="bottom" secondItem="uFI-34-Htg" secondAttribute="bottom" id="xif-GO-Eni"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="aA2-MH-gJq"/>
                     <connections>
@@ -889,8 +884,8 @@
                                         <size key="customSize" width="374" height="221"/>
                                         <connections>
                                             <outlet property="companyName" destination="nf3-as-CCB" id="tYK-8d-bLx"/>
+                                            <outlet property="gameImage" destination="knc-1o-Gjh" id="dKp-Vq-xia"/>
                                             <outlet property="gameName" destination="NhH-CT-W7z" id="7Xr-pc-hIw"/>
-                                            <outlet property="gamePic" destination="knc-1o-Gjh" id="POS-7N-5N9"/>
                                             <outlet property="gameType" destination="G3F-8T-ZPv" id="sEk-Bi-gaB"/>
                                             <outlet property="releaseDate" destination="Thh-9H-dyp" id="3Wz-0h-tWj"/>
                                         </connections>
@@ -902,6 +897,10 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="eeY-cu-xFu"/>
+                    <connections>
+                        <outlet property="collectionViewFavGame" destination="vbL-Br-gi2" id="o8y-tt-wpW"/>
+                        <outlet property="collectionViewGame" destination="opr-kw-XAg" id="AUb-vm-XPU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ose-ZX-PjQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -933,14 +932,16 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="My wishlist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N8f-es-8z8">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="My wishlist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N8f-es-8z8">
                                 <rect key="frame" x="20" y="86" width="154" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Orbitron-Regular" family="Orbitron" pointSize="25"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nOX-8y-AWE">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nOX-8y-AWE">
                                 <rect key="frame" x="20" y="143" width="374" height="220"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oXN-yg-1QR">
                                     <size key="itemSize" width="374" height="221"/>
@@ -956,10 +957,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="221"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qbr-XI-3mS" userLabel="Game Image">
-                                                    <rect key="frame" x="8" y="8" width="138" height="205"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Studio name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hhu-FX-GCf">
                                                     <rect key="frame" x="212" y="77" width="96" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1008,16 +1005,6 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="yB7-uF-N2o"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="nOX-8y-AWE" firstAttribute="top" secondItem="N8f-es-8z8" secondAttribute="bottom" id="Dfa-xV-NYh"/>
-                            <constraint firstItem="nOX-8y-AWE" firstAttribute="leading" secondItem="yB7-uF-N2o" secondAttribute="leading" constant="20" id="PhG-qT-TKu"/>
-                            <constraint firstItem="yB7-uF-N2o" firstAttribute="bottom" secondItem="nOX-8y-AWE" secondAttribute="bottom" id="c0G-LK-pGm"/>
-                            <constraint firstItem="yB7-uF-N2o" firstAttribute="trailing" secondItem="nOX-8y-AWE" secondAttribute="trailing" id="iao-cA-Ow5"/>
-                            <constraint firstItem="nOX-8y-AWE" firstAttribute="leading" secondItem="yB7-uF-N2o" secondAttribute="leading" id="kMD-Ni-CVx"/>
-                            <constraint firstItem="nOX-8y-AWE" firstAttribute="top" secondItem="N8f-es-8z8" secondAttribute="bottom" constant="25" id="oZ1-5n-aHj"/>
-                            <constraint firstItem="yB7-uF-N2o" firstAttribute="trailing" secondItem="nOX-8y-AWE" secondAttribute="trailing" constant="20" id="qAc-8d-u4E"/>
-                            <constraint firstItem="yB7-uF-N2o" firstAttribute="bottom" secondItem="nOX-8y-AWE" secondAttribute="bottom" constant="499" id="s77-UF-SXg"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="B69-KS-ndX"/>
                     <connections>
