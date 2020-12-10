@@ -49,20 +49,37 @@ class WishListController: UIViewController, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "wishlistCell", for: indexPath) as! WishlistCollectionViewCell
-        cell.gameName.text=games[indexPath.row].name
-        cell.studioName.text=games[indexPath.row].companyName
-        
+        cell.name.text=games[indexPath.row].name
+        cell.companyName.text=games[indexPath.row].companyName
+        cell.type.text=games[indexPath.row].type
+        cell.releaseDate.text=games[indexPath.row].releaseDate as? String
+                
         return cell
             <#code#>
     }
              
     
     func GetWishList(idUser:String) {
-    let url=URL(string: "http://192.168.64.1:3000/GetWishList"+idUser)!
-    // let url = URL(string: "http://192.168.247.1:3000/GetWishList"+idUser)!)
-    
-   
-        //Naz nrmlnt houni tged mtaa collectionView
+    let url=URL(string: "http://192.168.64.1:3000/GetWishList"+idUser)
+    // let url = URL(string: "http://192.168.247.1:3000/GetWishList"+idUser))
+        URLSession.shared.dataTask(with: url!) { (data, response, error) in
+            
+            if (error==nil) {
+            do {
+            self.games=try JSONDecoder().decode([wishGame].self, from: data!)
+               
+            }
+            catch {
+            print("ERROR")
+            }
+            
+            DispatchQueue.main.async {
+              
+                self.collectionView.reloadData()
+            }
+        }
+            
+        }.resume()
    
     }    
     

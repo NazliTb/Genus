@@ -53,7 +53,7 @@ class ChatController: UIViewController,UICollectionViewDataSource{
     
     func GetChatList() {
     let url=URL(string: "http://192.168.64.1:3000/GetChatList")
-    // let url = URL(string: "http://192.168.247.1:3000/GetChatList")!)
+    // let url = URL(string: "http://192.168.247.1:3000/GetChatList"))
     URLSession.shared.dataTask(with: url!) { (data, response, error) in
     
         if (error==nil) {
