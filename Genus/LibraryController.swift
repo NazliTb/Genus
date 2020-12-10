@@ -39,8 +39,8 @@ struct FavGame :Decodable{
 
 
 class LibraryController: UIViewController ,UICollectionViewDataSource{
-    
-    
+  
+
     //Var 
     var id:Int=0
   
@@ -64,33 +64,36 @@ class LibraryController: UIViewController ,UICollectionViewDataSource{
     
     //Functions
     
-    func collectionViewGame(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         games.count
-    }
-    
-    func collectionViewGame(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell=collectionViewGame.dequeueReusableCell(withReuseIdentifier: "GameListCell", for: indexPath) as! GamesListCollectionViewCell
-        cell..text=chats[indexPath.row].
-        cell..text=chats[indexPath.row].
-        cell..text=chats[indexPath.row].
-        
-        return cell
-    }
-    
-    
-    
-    func collectionViewFavGame(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         Favgames.count
     }
     
-    func collectionViewFavGame(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "FavGameCell", for: indexPath) as! TopicsCollectionViewCell
-        cell..text=chats[indexPath.row].
-        cell..text=chats[indexPath.row].
-        cell..text=chats[indexPath.row].
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if(collectionView == self.collectionViewGame) {
+        let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "GameListCell", for: indexPath) as! GameListCollectionViewCell
+        cell.companyName.text=games[indexPath.row].companyName
+        cell.gameName.text=games[indexPath.row].name
+        cell.gameType.text=games[indexPath.row].type
+       // cell.gameImage.text=games[indexPath.row].gamePicture
+        cell.releaseDate.text=games[indexPath.row].releaseDate
+            return cell
+        }
+        else {
+            let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "FavGameCell", for: indexPath) as! FavGameCollectionViewCell
+            
+            cell.companyName.text=Favgames[indexPath.row].companyName
+            cell.gameName.text=Favgames[indexPath.row].name
+            cell.gameType.text=Favgames[indexPath.row].type
+           // cell.gameImage.text=Favgames[indexPath.row].gamePicture
+            cell.releaseDate.text=Favgames[indexPath.row].releaseDate
+            return cell
+        }
         
-        return cell
     }
+    
+
+
     
     
     func GetGameDetails(idUser:String) {
@@ -100,7 +103,7 @@ class LibraryController: UIViewController ,UICollectionViewDataSource{
         
             if (error==nil) {
             do {
-            self.chats = try JSONDecoder().decode([Chat].self, from: data!)
+            self.games = try JSONDecoder().decode([GameList].self, from: data!)
                
             }
             catch {
@@ -109,13 +112,13 @@ class LibraryController: UIViewController ,UICollectionViewDataSource{
             
             DispatchQueue.main.async {
               
-                self.collectionView.reloadData()
+                self.collectionViewGame.reloadData()
             }
         }
             
         }.resume()
         }
-    }
+    
     
     
     
@@ -124,8 +127,25 @@ class LibraryController: UIViewController ,UICollectionViewDataSource{
     
     
     func GetFavList(idUser:String) {
-    let url=URL(string: "http://192.168.64.1:3000/GetFavList"+idUser)!
-
+    let url=URL(string: "http://192.168.64.1:3000/GetFavList"+idUser)
+        URLSession.shared.dataTask(with: url!) { (data, response, error) in
+            
+                if (error==nil) {
+                do {
+                self.Favgames = try JSONDecoder().decode([FavGame].self, from: data!)
+                   
+                }
+                catch {
+                print("ERROR")
+                }
+                
+                DispatchQueue.main.async {
+                  
+                    self.collectionViewFavGame.reloadData()
+                }
+            }
+                
+            }.resume()
     }
     
 

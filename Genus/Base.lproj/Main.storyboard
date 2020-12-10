@@ -805,11 +805,10 @@
                                         <size key="customSize" width="374" height="221"/>
                                         <connections>
                                             <outlet property="companyName" destination="nf3-as-CCB" id="tYK-8d-bLx"/>
-                                            <outlet property="gameImage" destination="knc-1o-Gjh" id="u0v-8F-MEW"/>
-                                            <outlet property="gameName" destination="NhH-CT-W7z" id="eyu-MF-rv1"/>
+                                            <outlet property="gameName" destination="NhH-CT-W7z" id="7Xr-pc-hIw"/>
                                             <outlet property="gamePic" destination="knc-1o-Gjh" id="POS-7N-5N9"/>
                                             <outlet property="gameType" destination="G3F-8T-ZPv" id="sEk-Bi-gaB"/>
-                                            <outlet property="releaseDate" destination="Thh-9H-dyp" id="Lse-cT-4nT"/>
+                                            <outlet property="releaseDate" destination="Thh-9H-dyp" id="3Wz-0h-tWj"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
