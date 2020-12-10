@@ -22,6 +22,8 @@
 		5860A537256D760E00B9F622 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5860A536256D760E00B9F622 /* ProfileController.swift */; };
 		5860A53C256D78FE00B9F622 /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5860A53B256D78FE00B9F622 /* GameController.swift */; };
 		5860A541256D798D00B9F622 /* LibraryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5860A540256D798D00B9F622 /* LibraryController.swift */; };
+		588DD1FF2582A1E300F168EF /* GameListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588DD1FE2582A1E300F168EF /* GameListCollectionViewCell.swift */; };
+		588DD2072582A22500F168EF /* FavGameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588DD2062582A22500F168EF /* FavGameCollectionViewCell.swift */; };
 		58D45831257FFE310057E82C /* WishListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D45830257FFE310057E82C /* WishListController.swift */; };
 		58D45836257FFE430057E82C /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D45835257FFE430057E82C /* ChatController.swift */; };
 		6C3021E925829747003C9231 /* WishlistCollectionViewCel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3021E825829747003C9231 /* WishlistCollectionViewCel.swift */; };
@@ -74,6 +76,8 @@
 		5860A536256D760E00B9F622 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		5860A53B256D78FE00B9F622 /* GameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
 		5860A540256D798D00B9F622 /* LibraryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryController.swift; sourceTree = "<group>"; };
+		588DD1FE2582A1E300F168EF /* GameListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListCollectionViewCell.swift; sourceTree = "<group>"; };
+		588DD2062582A22500F168EF /* FavGameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavGameCollectionViewCell.swift; sourceTree = "<group>"; };
 		58D45830257FFE310057E82C /* WishListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListController.swift; sourceTree = "<group>"; };
 		58D45835257FFE430057E82C /* ChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
 		614A8E23D723968A39C9703A /* Pods-Genus-GenusUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Genus-GenusUITests.debug.xcconfig"; path = "Target Support Files/Pods-Genus-GenusUITests/Pods-Genus-GenusUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -162,28 +166,30 @@
 			isa = PBXGroup;
 			children = (
 				6C7545DA25651452004EA096 /* AppDelegate.swift */,
-				585E8868258181B100E93F3D /* TopicsCollectionViewCell.swift */,
-				6C3021E825829747003C9231 /* WishlistCollectionViewCel.swift */,
-				6C7545DC25651452004EA096 /* SceneDelegate.swift */,
-				6C7545E025651452004EA096 /* Main.storyboard */,
 				6C7545E325651453004EA096 /* Assets.xcassets */,
-				6C7545E525651453004EA096 /* LaunchScreen.storyboard */,
-				6C7545E825651453004EA096 /* Info.plist */,
-				5860A517256D5F3400B9F622 /* LoginController.swift */,
-				5860A51C256D69E300B9F622 /* SignupController.swift */,
-				5860A531256D753A00B9F622 /* passwordrecoveryController.swift */,
-				5860A536256D760E00B9F622 /* ProfileController.swift */,
-				5860A53B256D78FE00B9F622 /* GameController.swift */,
-				5860A540256D798D00B9F622 /* LibraryController.swift */,
-				58D45830257FFE310057E82C /* WishListController.swift */,
 				58D45835257FFE430057E82C /* ChatController.swift */,
-				585E88422581462000E93F3D /* ProfileNavigationController.swift */,
-				585E8847258147C500E93F3D /* MainTabController.swift */,
+				585E88592581557B00E93F3D /* ChatNavigationController.swift */,
 				585E884F258152BF00E93F3D /* DiscoverController.swift */,
 				585E88542581544400E93F3D /* DiscoverNavigationController.swift */,
-				585E88592581557B00E93F3D /* ChatNavigationController.swift */,
-				585E885E258155B100E93F3D /* WishListNavigationController.swift */,
+				5860A53B256D78FE00B9F622 /* GameController.swift */,
+				6C7545E825651453004EA096 /* Info.plist */,
+				6C7545E525651453004EA096 /* LaunchScreen.storyboard */,
+				5860A540256D798D00B9F622 /* LibraryController.swift */,
 				585E88632581561200E93F3D /* LibraryNavigationController.swift */,
+				5860A517256D5F3400B9F622 /* LoginController.swift */,
+				6C7545E025651452004EA096 /* Main.storyboard */,
+				585E8847258147C500E93F3D /* MainTabController.swift */,
+				5860A531256D753A00B9F622 /* passwordrecoveryController.swift */,
+				5860A536256D760E00B9F622 /* ProfileController.swift */,
+				585E88422581462000E93F3D /* ProfileNavigationController.swift */,
+				6C7545DC25651452004EA096 /* SceneDelegate.swift */,
+				5860A51C256D69E300B9F622 /* SignupController.swift */,
+				585E8868258181B100E93F3D /* TopicsCollectionViewCell.swift */,
+				6C3021E825829747003C9231 /* WishlistCollectionViewCel.swift */,
+				58D45830257FFE310057E82C /* WishListController.swift */,
+				585E885E258155B100E93F3D /* WishListNavigationController.swift */,
+				588DD1FE2582A1E300F168EF /* GameListCollectionViewCell.swift */,
+				588DD2062582A22500F168EF /* FavGameCollectionViewCell.swift */,
 			);
 			path = Genus;
 			sourceTree = "<group>";
@@ -460,6 +466,7 @@
 			files = (
 				5860A537256D760E00B9F622 /* ProfileController.swift in Sources */,
 				58D45831257FFE310057E82C /* WishListController.swift in Sources */,
+				588DD2072582A22500F168EF /* FavGameCollectionViewCell.swift in Sources */,
 				585E88552581544400E93F3D /* DiscoverNavigationController.swift in Sources */,
 				5860A518256D5F3400B9F622 /* LoginController.swift in Sources */,
 				6C7545DB25651452004EA096 /* AppDelegate.swift in Sources */,
@@ -474,6 +481,7 @@
 				5860A541256D798D00B9F622 /* LibraryController.swift in Sources */,
 				6C7545DD25651452004EA096 /* SceneDelegate.swift in Sources */,
 				6C3021E925829747003C9231 /* WishlistCollectionViewCel.swift in Sources */,
+				588DD1FF2582A1E300F168EF /* GameListCollectionViewCell.swift in Sources */,
 				585E88642581561200E93F3D /* LibraryNavigationController.swift in Sources */,
 				585E8869258181B100E93F3D /* TopicsCollectionViewCell.swift in Sources */,
 				58D45836257FFE430057E82C /* ChatController.swift in Sources */,
