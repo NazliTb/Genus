@@ -12,26 +12,19 @@ struct GameList :Decodable{
     let idGame : Int
     let name : String
     let companyName : String
-    let description : String
     let releaseDate: String
     let gamePicture: String
-    let rating: String
     let type: String
-    let idGameList: Int
-    let idUser: Int
+   
 }
 
 struct FavGame :Decodable{
     let idGame : Int
     let name : String
     let companyName : String
-    let description : String
     let releaseDate: String
     let gamePicture: String
-    let rating: String
     let type: String
-    let idFav: Int
-    let idUser: Int
 }
 
 
@@ -82,6 +75,7 @@ class LibraryController: UIViewController ,UICollectionViewDataSource{
         cell.gameType.text=games[indexPath.row].type
        // cell.gameImage.text=games[indexPath.row].gamePicture
         cell.releaseDate.text=games[indexPath.row].releaseDate
+            
             return cell
         }
         else {
@@ -92,6 +86,7 @@ class LibraryController: UIViewController ,UICollectionViewDataSource{
             cell.gameType.text=Favgames[indexPath.row].type
            // cell.gameImage.text=Favgames[indexPath.row].gamePicture
             cell.releaseDate.text=Favgames[indexPath.row].releaseDate
+            
             return cell
         }
         
@@ -102,8 +97,9 @@ class LibraryController: UIViewController ,UICollectionViewDataSource{
     
     
     func GetGameDetails(idUser:String) {
-    let url=URL(string: "http://192.168.64.1:3000/GetGameDetails"+idUser)
-    // let url = URL(string: "http://192.168.247.1:3000/GetGameDetails"+idUser)
+    let url=URL(string: "http://192.168.64.1:3000/GetGameListIOS/"+idUser)
+        
+    // let url = URL(string: "http://192.168.247.1:3000/GetGameListIOS/"+idUser)
     URLSession.shared.dataTask(with: url!) { (data, response, error) in
         
             if (error==nil) {
@@ -132,7 +128,8 @@ class LibraryController: UIViewController ,UICollectionViewDataSource{
     
     
     func GetFavList(idUser:String) {
-    let url=URL(string: "http://192.168.64.1:3000/GetFavList"+idUser)
+    let url=URL(string: "http://192.168.64.1:3000/GetFavListIOS/"+idUser)
+       
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
             
                 if (error==nil) {

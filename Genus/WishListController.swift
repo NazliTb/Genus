@@ -11,13 +11,10 @@ struct wishGame :Decodable{
     let idGame:Int
     let name:String
     let companyName:String
-    let description:String
-    let releaseDate:Date
+    let releaseDate:String
     let gamePicture:String
-    let rating:Int
     let type:String
-    let idWishList:Int
-    let idUser:Int
+   
 }
 
 class WishListController: UIViewController, UICollectionViewDataSource {
@@ -50,15 +47,17 @@ class WishListController: UIViewController, UICollectionViewDataSource {
         cell.name.text=games[indexPath.row].name
         cell.companyName.text=games[indexPath.row].companyName
         cell.type.text=games[indexPath.row].type
-        cell.releaseDate.text=games[indexPath.row].releaseDate as? String
+        cell.releaseDate.text=games[indexPath.row].releaseDate
                 
         return cell
     }
              
     
     func GetWishList(idUser:String) {
-    //let url=URL(string: "http://192.168.64.1:3000/GetWishList"+idUser)
-     let url = URL(string: "http://192.168.247.1:3000/GetWishList"+idUser)
+    let url=URL(string: "http://192.168.64.1:3000/GetWishListIOS/"+idUser)
+        print(url)
+     //let url = URL(string: "http://192.168.247.1:3000/GetWishList"+idUser)
+        print(url)
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
             
             if (error==nil) {

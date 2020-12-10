@@ -26,23 +26,24 @@ class MainTabController : UITabBarController {
             }
         }
             if let discoverNavigationController = viewController as? DiscoverNavigationController {
-            if let discoverViewController = discoverNavigationController.viewControllers as? DiscoverController {
+                if let discoverViewController = discoverNavigationController.viewControllers.first as? DiscoverController {
                 
             }
             }
             
             if let wishListNavigationController = viewController as? WishListNavigationController {
-            if let WishListViewController = wishListNavigationController.viewControllers as? WishListController {
+                if let WishListViewController = wishListNavigationController.viewControllers.first as? WishListController {
                 WishListViewController.id=id
                 
             }
             }
             
             if let libraryNavigationController = viewController as? LibraryNavigationController {
-            if let libraryViewController = libraryNavigationController.viewControllers as? LibraryController {
+                if let libraryViewController = libraryNavigationController.viewControllers.first as? LibraryController {
                 libraryViewController.id=id
                 
             }
+                
             }
         }
     }
