@@ -12,7 +12,7 @@ struct TopPicks :Decodable{
     let name:String
     let companyName:String
     let description:String
-    let releaseDate:Date
+    let releaseDate:String
     let gamePicture:String
     let rating:Int
     let type:String
@@ -23,7 +23,7 @@ struct TrendingGames :Decodable{
     let name:String
     let companyName:String
     let description:String
-    let releaseDate:Date
+    let releaseDate:String
     let gamePicture:String
     let rating:Int
     let type:String
@@ -34,7 +34,7 @@ struct BestRate :Decodable{
     let name:String
     let companyName:String
     let description:String
-    let releaseDate:Date
+    let releaseDate:String
     let gamePicture:String
     let rating:Int
     let type:String
@@ -80,7 +80,7 @@ class DiscoverController: UIViewController, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if (collectionView == self.collectionViewTopPicks) {
-            let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "TopPicksCell", for: indexPath) as! TopPicksCollectionViewCell
+            let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "topPicksCell", for: indexPath) as! TopPicksCollectionViewCell
             cell.name.text=topPicks[indexPath.row].name
             cell.companyName.text=topPicks[indexPath.row].companyName
             //cell.gamePicture.text=topPicks[indexPath.row].gamePicture
