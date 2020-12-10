@@ -8,7 +8,18 @@
 
 import UIKit
 
-
+struct Game :Decodable{
+    let idGame : Int
+    let name : String
+    let companyName : String
+    let description : String
+    let releaseDate: String
+    let gamePicture: String
+    let rating: String
+    let type: String
+    let idGameList: Int
+    let idUser: Int
+}
 
 class LibraryController: UIViewController {
     

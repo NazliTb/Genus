@@ -30,6 +30,13 @@ class MainTabController : UITabBarController {
                 
             }
             }
+            
+            if let wishListNavigationController = viewController as? WishListNavigationController {
+            if let WishListViewController = wishListNavigationController.viewControllers as? LibraryController {
+                WishListViewController.id=id
+                
+            }
+            }
         }
     }
     
