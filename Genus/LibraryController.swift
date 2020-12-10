@@ -69,7 +69,7 @@ class LibraryController: UIViewController ,UICollectionViewDataSource{
     }
     
     func collectionViewGame(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell=collectionViewGame.dequeueReusableCell(withReuseIdentifier: "gameCell", for: indexPath) as! GamesCollectionViewCell
+        let cell=collectionViewGame.dequeueReusableCell(withReuseIdentifier: "GameListCell", for: indexPath) as! GamesListCollectionViewCell
         cell..text=chats[indexPath.row].
         cell..text=chats[indexPath.row].
         cell..text=chats[indexPath.row].
@@ -84,7 +84,7 @@ class LibraryController: UIViewController ,UICollectionViewDataSource{
     }
     
     func collectionViewFavGame(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "favgameCell", for: indexPath) as! TopicsCollectionViewCell
+        let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "FavGameCell", for: indexPath) as! TopicsCollectionViewCell
         cell..text=chats[indexPath.row].
         cell..text=chats[indexPath.row].
         cell..text=chats[indexPath.row].
