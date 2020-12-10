@@ -65,8 +65,13 @@ class LibraryController: UIViewController ,UICollectionViewDataSource{
     //Functions
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        games.count
-        Favgames.count
+        if(collectionView == self.collectionViewGame) {
+            return games.count
+            
+        }
+        else {
+            return Favgames.count }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
