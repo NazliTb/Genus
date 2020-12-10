@@ -11,8 +11,11 @@ class TopicsCollectionViewCell : UICollectionViewCell {
     
     //Widgets
     
-    @IBOutlet weak var imageTopic: UIImageView!
+  
     
+    
+    
+    @IBOutlet weak var topicImage: UIImageView!
     
     @IBOutlet weak var topicName: UILabel!
     

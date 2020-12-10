@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Orbitron-VariableFont_wght.ttf">
+        <array key="Orbitron-Regular.ttf">
             <string>Orbitron-Regular</string>
         </array>
         <array key="Roboto-Regular.ttf">
@@ -69,9 +69,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="331" height="209"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="HM3-aC-9FA">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="message.fill" catalog="system" id="HM3-aC-9FA">
                                                     <rect key="frame" x="8" y="8" width="142" height="193"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" red="0.45138680930000002" green="0.99309605359999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Topic name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Omf-FD-VMd">
                                                     <rect key="frame" x="176" y="8" width="133" height="33"/>
@@ -115,10 +117,10 @@
                                         <size key="customSize" width="331" height="209"/>
                                         <connections>
                                             <outlet property="dateTopic" destination="BsN-CF-OQj" id="hk0-22-y1a"/>
-                                            <outlet property="imageCell" destination="HM3-aC-9FA" id="f9s-dF-llH"/>
                                             <outlet property="joinTopic" destination="JQj-3s-TJI" id="gw7-Bd-G6M"/>
                                             <outlet property="memberNumbers" destination="3rb-GE-U2k" id="Jtt-aZ-b7I"/>
                                             <outlet property="topicCreator" destination="BsN-CF-OQj" id="mpw-Gm-CQr"/>
+                                            <outlet property="topicImage" destination="HM3-aC-9FA" id="wLd-Uz-6o7"/>
                                             <outlet property="topicName" destination="Omf-FD-VMd" id="Uhc-d2-3ZG"/>
                                         </connections>
                                     </collectionViewCell>
@@ -392,6 +394,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="Xt1-A0-G87" kind="relationship" relationship="viewControllers" id="A8T-q4-o3a"/>
+                        <segue destination="S7S-i8-xdV" kind="relationship" relationship="viewControllers" id="fZL-P2-BzV"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MBP-MU-8gA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

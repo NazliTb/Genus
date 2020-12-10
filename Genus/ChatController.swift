@@ -7,57 +7,70 @@
 
 import UIKit
 
-class ChatController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource{
+struct Chat :Decodable{
+    let idChat : Int
+    let topic : String
+    let Date : String
+    let username : String
+}
+
+class ChatController: UIViewController,UICollectionViewDataSource{
     
-    
-    
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        <#code#>
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        <#code#>
-    }
-    
-  
-    
-    
+
     //Widgets
     
+    var chats=[Chat]()
     
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        collectionView.delegate=self
+       
         collectionView.dataSource=self
+        GetChatList()
        
     }
 
     //Functions
-    func GetChatList() {
-    let url=URL(string: "http://192.168.64.1:3000/GetChatList")!
-    // let url = URL(string: "http://192.168.247.1:3000/GetChatList")!)
-    let task = URLSession.shared.dataTask(with: url, completionHandler:{ data, response, error in guard let data = data else { return }
-    do {
-        let json = try JSONSerialization.jsonObject(with: data) as! Dictionary<String, AnyObject>
-    let idChat = json["idChat"] as! Int
-    let topic=json["topic"] as! String
-    let Date=json["Date"] as! String
-    let user=json["username"] as! String
     
-   
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        chats.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "topicCell", for: indexPath) as! TopicsCollectionViewCell
+        cell.topicName.text=chats[indexPath.row].topic
+        cell.dateTopic.text=chats[indexPath.row].Date
+        cell.topicCreator.text=chats[indexPath.row].username
         
-   
+        return cell
     }
-    catch let parseErr {
-    print(parseErr)
     
+    
+    
+    
+    func GetChatList() {
+    let url=URL(string: "http://192.168.64.1:3000/GetChatList")
+    // let url = URL(string: "http://192.168.247.1:3000/GetChatList")!)
+    URLSession.shared.dataTask(with: url!) { (data, response, error) in
+    
+        if (error==nil) {
+        do {
+        self.chats = try JSONDecoder().decode([Chat].self, from: data!)
+            print(self.chats)
+        }
+        catch {
+        print("ERROR")
+        }
+        
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
     }
-    })
-    task.resume()
+        
+    }.resume()
     }
 
     //IBActions
