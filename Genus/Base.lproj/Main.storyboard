@@ -865,10 +865,10 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="wishlistCell" id="29q-Sa-OfX">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="wishlistCell" id="29q-Sa-OfX" customClass="WishlistCollectionViewCell" customModule="Genus" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="221"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Hf5-g3-0TV">
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Hf5-g3-0TV" customClass="WishlistCollectionViewCell" customModule="Genus" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="221"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -911,6 +911,13 @@
                                             </subviews>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="374" height="221"/>
+                                        <connections>
+                                            <outlet property="companyName" destination="hhu-FX-GCf" id="xUI-e3-sXG"/>
+                                            <outlet property="gamePicture" destination="swF-2A-q3o" id="boj-Ue-e0e"/>
+                                            <outlet property="name" destination="ZT4-uI-mfR" id="rA3-h8-scA"/>
+                                            <outlet property="releaseDate" destination="cHI-wE-AGx" id="3vh-yC-sXj"/>
+                                            <outlet property="type" destination="Sp6-8t-yZz" id="0GT-ty-tZD"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
