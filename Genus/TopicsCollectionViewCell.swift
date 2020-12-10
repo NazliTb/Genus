@@ -10,11 +10,7 @@ class TopicsCollectionViewCell : UICollectionViewCell {
     
     
     //Widgets
-    
-  
-    
-    
-    
+
     @IBOutlet weak var topicImage: UIImageView!
     
     @IBOutlet weak var topicName: UILabel!
@@ -29,9 +25,7 @@ class TopicsCollectionViewCell : UICollectionViewCell {
     
 
     //Actions
-    
-    
-    
+
     @IBOutlet weak var joinTopic: UIButton!
     
     

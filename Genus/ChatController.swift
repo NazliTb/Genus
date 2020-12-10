@@ -29,7 +29,7 @@ class ChatController: UIViewController,UICollectionViewDataSource{
        
         collectionView.dataSource=self
         GetChatList()
-       
+
     }
 
     //Functions
@@ -59,13 +59,14 @@ class ChatController: UIViewController,UICollectionViewDataSource{
         if (error==nil) {
         do {
         self.chats = try JSONDecoder().decode([Chat].self, from: data!)
-            print(self.chats)
+           
         }
         catch {
         print("ERROR")
         }
         
         DispatchQueue.main.async {
+          
             self.collectionView.reloadData()
         }
     }
