@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct Game :Decodable{
+struct GameList :Decodable{
     let idGame : Int
     let name : String
     let companyName : String
@@ -21,7 +21,24 @@ struct Game :Decodable{
     let idUser: Int
 }
 
-class LibraryController: UIViewController {
+struct FavGame :Decodable{
+    let idGame : Int
+    let name : String
+    let companyName : String
+    let description : String
+    let releaseDate: String
+    let gamePicture: String
+    let rating: String
+    let type: String
+    let idFav: Int
+    let idUser: Int
+}
+
+
+
+
+
+class LibraryController: UIViewController ,UICollectionViewDataSource{
     
     
     //Var 
@@ -30,66 +47,74 @@ class LibraryController: UIViewController {
     
     //Widgets
  
+    var games=[GameList]()
+    var Favgames=[FavGame]()
+    
+    @IBOutlet weak var collectionViewGame: UICollectionView!
+    @IBOutlet weak var collectionViewFavGame: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        collectionViewGame.dataSource=self
+        collectionViewFavGame.dataSource=self
+        GetGameDetails(idUser:"\(id)")
+        GetFavList(idUser:"\(id)")
     }
 
     
     //Functions
     
-    func GetFavList(idUser:String) {
-    let url=URL(string: "http://192.168.64.1:3000/GetFavList"+idUser)!
-    // let url = URL(string: "http://192.168.247.1:3000/GetFavList"+idUser)!)
-    let task = URLSession.shared.dataTask(with: url, completionHandler:{ data, response, error in guard let data = data else { return }
-    do {
-        let json = try JSONSerialization.jsonObject(with: data) as! Dictionary<String, AnyObject>
-    let idGame = json["idGame"] as! Int
-    let name=json["name"] as! String
-    let comanyName=json["companyName"] as! String
-    let description=json["description"] as! String
-    let releaseDate=json["releaseDate"] as! String
-    let gamePicture=json["gamePicture"] as! String
-    let rating=json["rating"] as! String
-    let type=json["type"] as! String
-   
-        //Naz nrmlnt houni tged mtaa collectionView
-   
-    }
-    catch let parseErr {
-    print(parseErr)
-    
-    }
-    })
-    task.resume()
+    func collectionViewGame(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        games.count
     }
     
+    func collectionViewGame(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell=collectionViewGame.dequeueReusableCell(withReuseIdentifier: "gameCell", for: indexPath) as! GamesCollectionViewCell
+        cell..text=chats[indexPath.row].
+        cell..text=chats[indexPath.row].
+        cell..text=chats[indexPath.row].
+        
+        return cell
+    }
+    
+    
+    
+    func collectionViewFavGame(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        Favgames.count
+    }
+    
+    func collectionViewFavGame(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "favgameCell", for: indexPath) as! TopicsCollectionViewCell
+        cell..text=chats[indexPath.row].
+        cell..text=chats[indexPath.row].
+        cell..text=chats[indexPath.row].
+        
+        return cell
+    }
     
     
     func GetGameDetails(idUser:String) {
-    let url=URL(string: "http://192.168.64.1:3000/GetGameDetails"+idUser)!
-    // let url = URL(string: "http://192.168.247.1:3000/GetGameDetails"+idUser)!)
-    let task = URLSession.shared.dataTask(with: url, completionHandler:{ data, response, error in guard let data = data else { return }
-    do {
-        let json = try JSONSerialization.jsonObject(with: data) as! Dictionary<String, AnyObject>
-    let idGame = json["idGame"] as! Int
-    let name=json["name"] as! String
-    let comanyName=json["companyName"] as! String
-    let description=json["description"] as! String
-    let releaseDate=json["releaseDate"] as! String
-    let gamePicture=json["gamePicture"] as! String
-    let rating=json["rating"] as! String
-    let type=json["type"] as! String
-   
-        //Naz nrmlnt houni tged mtaa collectionView
-   
-    }
-    catch let parseErr {
-    print(parseErr)
-    
-    }
-    })
-    task.resume()
+    let url=URL(string: "http://192.168.64.1:3000/GetGameDetails"+idUser)
+    // let url = URL(string: "http://192.168.247.1:3000/GetGameDetails"+idUser)
+    URLSession.shared.dataTask(with: url!) { (data, response, error) in
+        
+            if (error==nil) {
+            do {
+            self.chats = try JSONDecoder().decode([Chat].self, from: data!)
+               
+            }
+            catch {
+            print("ERROR")
+            }
+            
+            DispatchQueue.main.async {
+              
+                self.collectionView.reloadData()
+            }
+        }
+            
+        }.resume()
+        }
     }
     
     
@@ -98,8 +123,10 @@ class LibraryController: UIViewController {
     
     
     
-    
-    
+    func GetFavList(idUser:String) {
+    let url=URL(string: "http://192.168.64.1:3000/GetFavList"+idUser)!
+
+    }
     
 
     //IBActions
