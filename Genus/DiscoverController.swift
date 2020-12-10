@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct TopPicks {
+struct TopPicks :Decodable{
     let idGame:Int
     let name:String
     let companyName:String
@@ -18,7 +18,7 @@ struct TopPicks {
     let type:String
 }
 
-struct TrendingGames {
+struct TrendingGames :Decodable{
     let idGame:Int
     let name:String
     let companyName:String
@@ -29,7 +29,7 @@ struct TrendingGames {
     let type:String
 }
 
-struct BestRate {
+struct BestRate :Decodable{
     let idGame:Int
     let name:String
     let companyName:String
@@ -57,15 +57,79 @@ class DiscoverController: UIViewController, UICollectionViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        collectionViewTopPicks.dataSource=self
+        collectionViewTrendingGames.dataSource=self
+        collectionViewBestRate.dataSource=self
+        getTopPicks()
+        getTrendingGames()
+        getBestRateGames()
+        
     }
 
  
     //Functions
     
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if (collectionView == self.collectionViewTopPicks) { return topPicks.count }
+        else if (collectionView == self.collectionViewTrendingGames) { return trendingGames.count }
+        else { return bestRate.count }
+        
+        
+    
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if (collectionView == self.collectionViewTopPicks) {
+            let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "TopPicksCell", for: indexPath) as! TopPicksCollectionViewCell
+            cell.name.text=topPicks[indexPath.row].name
+            cell.companyName.text=topPicks[indexPath.row].companyName
+            //cell.gamePicture.text=topPicks[indexPath.row].gamePicture
+            
+            return cell
+        }
+        else if (collectionView == self.collectionViewTrendingGames) {
+            let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "TrendingGamesCell", for: indexPath) as! TrendingGamesCollectionViewCell
+            cell.name.text=trendingGames[indexPath.row].name
+            cell.companyName.text=trendingGames[indexPath.row].companyName
+            //cell.gamePicture.text=trendingGames[indexPath.row].gamePicture
+            
+            return cell
+        }
+        else {
+            let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "BestRateCell", for: indexPath) as! BestRateCollectionViewCell
+            cell.name.text=bestRate[indexPath.row].name
+            cell.companyName.text=bestRate[indexPath.row].companyName
+            //cell.gamePicture.text=bestRate[indexPath.row].gamePicture
+            
+            return cell
+        }
+    }
+    
+    
+    
     
     func getTopPicks() {
     let url=URL(string: "http://192.168.64.1:3000/GetTopPicksGames")
     // let url = URL(string: "http://192.168.247.1:3000/GetTopPicksGames")
+        
+        URLSession.shared.dataTask(with: url!) { (data, response, error) in
+            
+                if (error==nil) {
+                do {
+                self.topPicks = try JSONDecoder().decode([TopPicks].self, from: data!)
+                   
+                }
+                catch {
+                print("ERROR")
+                }
+                
+                DispatchQueue.main.async {
+                  
+                    self.collectionViewTopPicks.reloadData()
+                }
+            }
+                
+            }.resume()
     
     }
     
@@ -74,28 +138,57 @@ class DiscoverController: UIViewController, UICollectionViewDataSource {
     func getTrendingGames() {
     let url=URL(string: "http://192.168.64.1:3000/GetTrendingGames")
     // let url = URL(string: "http://192.168.247.1:3000/GetTrendingGames")
+        
+        URLSession.shared.dataTask(with: url!) { (data, response, error) in
+            
+                if (error==nil) {
+                do {
+                    self.trendingGames = try JSONDecoder().decode([TrendingGames].self, from: data!)
+                   
+                }
+                catch {
+                print("ERROR")
+                }
+                
+                DispatchQueue.main.async {
+                  
+                    self.collectionViewTopPicks.reloadData()
+                }
+            }
+                
+            }.resume()
     
     }
     
     func getBestRateGames() {
     let url=URL(string: "http://192.168.64.1:3000/GetBestRateGames")
     // let url = URL(string: "http://192.168.247.1:3000/GetBestRateGames")
+        
+        URLSession.shared.dataTask(with: url!) { (data, response, error) in
+            
+                if (error==nil) {
+                do {
+                self.bestRate = try JSONDecoder().decode([BestRate].self, from: data!)
+                   
+                }
+                catch {
+                print("ERROR")
+                }
+                
+                DispatchQueue.main.async {
+                  
+                    self.collectionViewTopPicks.reloadData()
+                }
+            }
+                
+            }.resume()
     
     }
     
     
     //IBActions
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    
-    }
-    
+        
     @IBAction func search(_ sender: Any) {
     }
-    
     
 }
