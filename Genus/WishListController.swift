@@ -35,8 +35,7 @@ class WishListController: UIViewController, UICollectionViewDataSource {
         // Do any additional setup after loading the view.
        
         collectionView.dataSource=self
-        GetWishList(idUser: <#T##String#>)
-
+        GetWishList(idUser:"\(id)")
     }
     
     //functions
@@ -44,7 +43,6 @@ class WishListController: UIViewController, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         games.count
-        <#code#>
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -55,13 +53,12 @@ class WishListController: UIViewController, UICollectionViewDataSource {
         cell.releaseDate.text=games[indexPath.row].releaseDate as? String
                 
         return cell
-            <#code#>
     }
              
     
     func GetWishList(idUser:String) {
-    let url=URL(string: "http://192.168.64.1:3000/GetWishList"+idUser)
-    // let url = URL(string: "http://192.168.247.1:3000/GetWishList"+idUser))
+    //let url=URL(string: "http://192.168.64.1:3000/GetWishList"+idUser)
+     let url = URL(string: "http://192.168.247.1:3000/GetWishList"+idUser)
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
             
             if (error==nil) {

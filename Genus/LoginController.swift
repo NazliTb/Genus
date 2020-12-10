@@ -52,8 +52,8 @@ class LoginController: UIViewController {
      
         else {
     let params = ["email":email.text, "password":password.text] as! Dictionary<String, String>
-    var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/login")!)
-    //var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/login")!)
+    //var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/login")!)
+    var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/login")!)
             
     request.httpMethod = "POST"
     request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
