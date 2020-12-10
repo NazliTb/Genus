@@ -721,6 +721,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="aA2-MH-gJq"/>
                     <connections>
+                        <outlet property="collectionViewBestRate" destination="Qoh-FY-AhB" id="3Re-ms-sE6"/>
+                        <outlet property="collectionViewTopPicks" destination="H3t-hV-QBc" id="ro0-75-I2I"/>
+                        <outlet property="collectionViewTrendingGames" destination="YyM-QY-QgA" id="jwx-Ra-p3G"/>
                         <outlet property="search" destination="wf1-Wu-JoV" id="V1i-jK-Mnd"/>
                     </connections>
                 </viewController>
@@ -1017,6 +1020,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="B69-KS-ndX"/>
+                    <connections>
+                        <outlet property="collectionView" destination="nOX-8y-AWE" id="fDE-Uh-UtQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BrO-Bg-p91" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

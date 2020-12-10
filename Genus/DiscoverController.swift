@@ -48,6 +48,11 @@ class DiscoverController: UIViewController, UICollectionViewDataSource {
     var trendingGames=[TrendingGames]()
     var bestRate=[BestRate]()
     
+    
+    @IBOutlet weak var collectionViewTopPicks: UICollectionView!
+    @IBOutlet weak var collectionViewTrendingGames: UICollectionView!
+    @IBOutlet weak var collectionViewBestRate: UICollectionView!
+    
  
     override func viewDidLoad() {
         super.viewDidLoad()
