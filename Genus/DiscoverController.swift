@@ -84,6 +84,7 @@ class DiscoverController: UIViewController, UICollectionViewDataSource {
             cell.name.text=topPicks[indexPath.row].name
             cell.companyName.text=topPicks[indexPath.row].companyName
             cell.gamePicture.contentMode = .scaleAspectFill
+        
             let defaultLink = "http://192.168.64.1:3000/image/"+topPicks[indexPath.row].gamePicture
             cell.gamePicture.downloaded(from: defaultLink)
             
