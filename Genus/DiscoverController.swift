@@ -83,7 +83,9 @@ class DiscoverController: UIViewController, UICollectionViewDataSource {
             let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "topPicksCell", for: indexPath) as! TopPicksCollectionViewCell
             cell.name.text=topPicks[indexPath.row].name
             cell.companyName.text=topPicks[indexPath.row].companyName
-            //cell.gamePicture.text=topPicks[indexPath.row].gamePicture
+            cell.gamePicture.contentMode = .scaleAspectFill
+            let defaultLink = "http://192.168.64.1:3000/image/"+topPicks[indexPath.row].gamePicture
+            cell.gamePicture.downloaded(from: defaultLink)
             
             return cell
         }
@@ -91,7 +93,9 @@ class DiscoverController: UIViewController, UICollectionViewDataSource {
             let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "TrendingGamesCell", for: indexPath) as! TrendingGamesCollectionViewCell
             cell.name.text=trendingGames[indexPath.row].name
             cell.companyName.text=trendingGames[indexPath.row].companyName
-            //cell.gamePicture.text=trendingGames[indexPath.row].gamePicture
+            cell.gamePicture.contentMode = .scaleAspectFill
+            let defaultLink = "http://192.168.64.1:3000/image/"+trendingGames[indexPath.row].gamePicture
+            cell.gamePicture.downloaded(from: defaultLink)
             
             return cell
         }
@@ -99,7 +103,9 @@ class DiscoverController: UIViewController, UICollectionViewDataSource {
             let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "BestRateCell", for: indexPath) as! BestRateCollectionViewCell
             cell.name.text=bestRate[indexPath.row].name
             cell.companyName.text=bestRate[indexPath.row].companyName
-            //cell.gamePicture.text=bestRate[indexPath.row].gamePicture
+            cell.gamePicture.contentMode = .scaleAspectFill
+            let defaultLink = "http://192.168.64.1:3000/image/"+bestRate[indexPath.row].gamePicture
+            cell.gamePicture.downloaded(from: defaultLink)
             
             return cell
         }

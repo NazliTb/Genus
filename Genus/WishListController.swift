@@ -17,6 +17,8 @@ struct wishGame :Decodable{
    
 }
 
+
+
 class WishListController: UIViewController, UICollectionViewDataSource {
     
     //Widgets
@@ -48,7 +50,9 @@ class WishListController: UIViewController, UICollectionViewDataSource {
         cell.companyName.text=games[indexPath.row].companyName
         cell.type.text=games[indexPath.row].type
         cell.releaseDate.text=games[indexPath.row].releaseDate
-                
+        cell.gamePicture.contentMode = .scaleAspectFill
+        let defaultLink = "http://192.168.64.1:3000/image/"+games[indexPath.row].gamePicture
+        cell.gamePicture.downloaded(from: defaultLink)
         return cell
     }
              

@@ -27,7 +27,26 @@ struct FavGame :Decodable{
     let type: String
 }
 
-
+extension UIImageView {
+    func downloaded(from url: URL, contentMode mode: UIView.ContentMode = .scaleAspectFit) {
+        contentMode = mode
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard
+                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+                let data = data, error == nil,
+                let image = UIImage(data: data)
+                else { return }
+            DispatchQueue.main.async() { [weak self] in
+                self?.image = image
+            }
+        }.resume()
+    }
+    func downloaded(from link: String, contentMode mode: UIView.ContentMode = .scaleAspectFit) {
+        guard let url = URL(string: link) else { return }
+        downloaded(from: url, contentMode: mode)
+    }
+}
 
 
 
@@ -73,7 +92,9 @@ class LibraryController: UIViewController ,UICollectionViewDataSource{
         cell.companyName.text=games[indexPath.row].companyName
         cell.gameName.text=games[indexPath.row].name
         cell.gameType.text=games[indexPath.row].type
-       // cell.gameImage.text=games[indexPath.row].gamePicture
+            cell.gameImage.contentMode = .scaleAspectFill
+            let defaultLink = "http://192.168.64.1:3000/image/"+games[indexPath.row].gamePicture
+            cell.gameImage.downloaded(from: defaultLink)
         cell.releaseDate.text=games[indexPath.row].releaseDate
             
             return cell
@@ -84,7 +105,9 @@ class LibraryController: UIViewController ,UICollectionViewDataSource{
             cell.companyName.text=Favgames[indexPath.row].companyName
             cell.gameName.text=Favgames[indexPath.row].name
             cell.gameType.text=Favgames[indexPath.row].type
-           // cell.gameImage.text=Favgames[indexPath.row].gamePicture
+            cell.gameImage.contentMode = .scaleAspectFill
+            let defaultLink = "http://192.168.64.1:3000/image/"+games[indexPath.row].gamePicture
+            cell.gameImage.downloaded(from: defaultLink)
             cell.releaseDate.text=Favgames[indexPath.row].releaseDate
             
             return cell
