@@ -14,9 +14,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.esprit.genus.Model.Game;
 import com.esprit.genus.Retrofit.INodeJS;
 import com.esprit.genus.Retrofit.RetrofitClient;
@@ -37,6 +39,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ProfileActivity extends AppCompatActivity {
     private TextView gameList, wishList, signOut,gamesNbr,favNbr,wishesNbr,username;
     private String idUser="";
+    private ImageView userPic;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     private Button editProfile;
     INodeJS myAPI;
@@ -57,6 +60,8 @@ public class ProfileActivity extends AppCompatActivity {
         wishesNbr = (TextView) findViewById(R.id.wishesNbr);
         username = (TextView) findViewById(R.id.username);
         editProfile=(Button) findViewById(R.id.editProfile);
+        userPic=(ImageView) findViewById(R.id.profilePic);
+
         //Recuperer les données de homepage
         Intent intent = getIntent();
         if (intent != null) {
@@ -72,17 +77,22 @@ public class ProfileActivity extends AppCompatActivity {
         }
         //Init API
         Retrofit retrofit = RetrofitClient.getInstance();
+        myAPI1 = retrofit.create((INodeJS.class));
 
         //this one i used for the gamenumber , wishnumber , favnumber  because i'm using Gson okay ?
-        Retrofit retrofit1 = new Retrofit.Builder().baseUrl("http://10.0.2.2:3000/")
+        Retrofit retrofit1 = new Retrofit.Builder()
+                .baseUrl("http://10.0.2.2:3000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        myAPI1 = retrofit.create((INodeJS.class));
         myAPI = retrofit1.create((INodeJS.class));
 
         Call<List<Game>> listWishGames = myAPI.GetWishList(Integer.parseInt(idUser));
         Call<List<Game>> listFavGames = myAPI.GetFavList(Integer.parseInt(idUser));
         Call<List<Game>> listGames = myAPI.GetGameListForNumber(Integer.parseInt(idUser));
+        Call <String> getProfilePic = myAPI.GetProfilePic(Integer.parseInt(idUser));
+
+
+        //dislay user number of games
         listGames.enqueue(new Callback<List<Game>>() {
             @Override
             public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
@@ -107,6 +117,7 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
 
+        //display user number of fav games
         listFavGames.enqueue(new Callback<List<Game>>() {
             @Override
             public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
@@ -130,6 +141,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        //display user number of wishlist games
         listWishGames.enqueue(new Callback<List<Game>>() {
             @Override
             public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
@@ -152,6 +164,22 @@ public class ProfileActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Game>> call, Throwable t) {
+
+            }
+        });
+
+        //display user profile picture
+        getProfilePic.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (!response.isSuccessful()) {
+                    return;
+                }
+                String pic=response.body();
+                Glide.with(ProfileActivity.this).load("http://10.0.2.2:3000/image/"+pic).into(userPic);
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
 
             }
         });

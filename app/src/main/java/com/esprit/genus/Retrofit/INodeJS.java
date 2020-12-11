@@ -83,4 +83,7 @@ public interface INodeJS {
 
     @GET("GetComments/{idGame}")
     Call <List<Comment>> GetComments (@Path("idGame") int idGame);
+
+    @GET("GetProfilePic/{idUser}")
+    Call <String> GetProfilePic (@Path("idUser") int idUser);
 }

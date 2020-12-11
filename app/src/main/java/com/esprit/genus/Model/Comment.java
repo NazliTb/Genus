@@ -3,17 +3,43 @@ package com.esprit.genus.Model;
 public class Comment {
 
     private int idComment, likesNbr, idUser, idGame;
-    private String commentText;
+    private String commentText, username, userPicture;
 
     public Comment() {
     }
 
-    public Comment(int idComment, int likesNbr, int idUser, int idGame, String commentText) {
+    public Comment(int idComment, int likesNbr, int idUser, int idGame, String commentText, String username, String userPicture) {
         this.idComment = idComment;
         this.likesNbr = likesNbr;
         this.idUser = idUser;
         this.idGame = idGame;
         this.commentText = commentText;
+        this.username = username;
+        this.userPicture = userPicture;
+    }
+
+    /*public Comment(int idComment, int likesNbr, int idUser, int idGame, String commentText) {
+        this.idComment = idComment;
+        this.likesNbr = likesNbr;
+        this.idUser = idUser;
+        this.idGame = idGame;
+        this.commentText = commentText;
+    }*/
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUserPicture() {
+        return userPicture;
+    }
+
+    public void setUserPicture(String userPicture) {
+        this.userPicture = userPicture;
     }
 
     public int getIdComment() {
