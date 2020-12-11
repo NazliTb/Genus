@@ -92,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
     private void loginUser(String username, String password) {
         final String[] idUser = {""};
         final String[] userName = {""};
+        final String[] userPicture= {""};
 
         compositeDisposable.add(myAPI.loginUser(username, password)
                 .subscribeOn(Schedulers.io())
@@ -103,6 +104,8 @@ public class LoginActivity extends AppCompatActivity {
                         int positionFinidUser;
                         int positionDebUsername;
                         int positionFinUsername;
+                        int positionDebUserpicture;
+                        int positionFinUserpicture;
                         if (s.contains("username")) {
                         /*pass to the next activity for now we'll make
                         a toast appear to test */
@@ -111,14 +114,17 @@ public class LoginActivity extends AppCompatActivity {
                             positionFinidUser = s.indexOf(",");
                             positionDebUsername= s.indexOf("username") +11;
                             positionFinUsername= s.indexOf(",",positionDebUsername)-1;
-
+                            positionDebUserpicture= s.indexOf("userPicture") +14;
+                            positionFinUserpicture= s.indexOf("}",positionDebUsername)-1;
                             idUser[0] = s.substring(positionDebidUser, positionFinidUser);
                             userName[0] = s.substring(positionDebUsername, positionFinUsername);
 
+                            userPicture[0] = s.substring(positionDebUserpicture, positionFinUserpicture);
                             Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(LoginActivity.this, HomepageActivity.class);
                             intent.putExtra("idUser",idUser[0]);
                             intent.putExtra("username",userName[0]);
+                            intent.putExtra("userPicture",userPicture[0]);
                             LoginActivity.this.startActivity(intent);
                         }
                         else

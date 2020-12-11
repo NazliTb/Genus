@@ -26,6 +26,7 @@ public class HomepageActivity extends AppCompatActivity {
     public Fragment selectedFragment = null;
     private String idUser = "";
     private String username = "";
+    private String userPicture = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,9 @@ public class HomepageActivity extends AppCompatActivity {
             }
             if (intent.hasExtra("username")) {
                 username = intent.getStringExtra("username");
+            }
+            if (intent.hasExtra("userPicture")) {
+                userPicture = intent.getStringExtra("userPicture");
             }
 
         }
@@ -77,7 +81,7 @@ public class HomepageActivity extends AppCompatActivity {
                 Intent intent = new Intent(HomepageActivity.this, ProfileActivity.class);
                 intent.putExtra("idUser", idUser);
                 intent.putExtra("username", username);
-
+                intent.putExtra("userPicture", userPicture);
                 HomepageActivity.this.startActivity(intent);
 
                 //Fragments navigation coloring
