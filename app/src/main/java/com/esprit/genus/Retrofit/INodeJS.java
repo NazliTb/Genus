@@ -26,14 +26,12 @@ public interface INodeJS {
     @POST("addTopic")
     @FormUrlEncoded
     Observable<String> addTopic(@Field("topic") String topic,
-                                    @Field("Date") Date date,
                                     @Field("idUser") int idUser);
 
 
     @POST("addMsg")
     @FormUrlEncoded
     Observable<String> addMsg(@Field("contentMsg") String contentMsg,
-                                @Field("date") Date date,
                                 @Field("idUser") int idUser,
                                 @Field("idChat") int idChat);
 
