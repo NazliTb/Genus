@@ -21,6 +21,11 @@
             android:layout_width="match_parent"
             android:layout_height="30dp" />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
         <TextView
             android:id="@+id/username"
             android:layout_width="wrap_content"
@@ -30,24 +35,25 @@
             android:text="John Doe"
             android:textColor="#FFFFFF"
             android:textSize="40sp"
+            android:layout_weight="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="20dp" />
 
         <ImageView
             android:id="@+id/profilePic"
             android:layout_width="100dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
+            android:layout_height="100dp"
+            android:layout_marginRight="10sp"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_weight="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+        </RelativeLayout>
 
         <!--<FrameLayout android:id="@+id/frame"
                android:layout_width="wrap_content"
@@ -64,9 +70,9 @@
                    android:src="@drawable/circular_crop"/>
 
            </FrameLayout>-->
-        <Space
+        <!--<Space
             android:layout_width="wrap_content"
-            android:layout_height="10dp" />
+            android:layout_height="10dp" />-->
 
         <LinearLayout
             android:layout_width="wrap_content"
