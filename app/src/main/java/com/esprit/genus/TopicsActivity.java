@@ -102,16 +102,15 @@ public class TopicsActivity extends Fragment {
                 dialog.setCancelable(true);
                 dialog.show();
                 final EditText topic=(EditText) dialog.findViewById(R.id.topic);
-                Button add=(Button) dialog.findViewById(R.id.addTopic);
+                final Button add=(Button) dialog.findViewById(R.id.addTopic);
                 Button cancel=(Button) dialog.findViewById(R.id.Cancel);
                 add.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Date today=new Date();
-                        System.out.println(today);
-                        System.out.println(topic.getText().toString());
-                        System.out.println(Integer.parseInt(getidUser));
-                        addTopic(topic.getText().toString(),today,Integer.parseInt(getidUser));
+
+                        addTopic(topic.getText().toString(),Integer.parseInt(getidUser));
+                        dialog.dismiss();
+                        getFragmentManager().beginTransaction().detach(this).attach(this).commit();
                     }
                 });
                 cancel.setOnClickListener(new View.OnClickListener() {
@@ -256,9 +255,9 @@ public class TopicsActivity extends Fragment {
     }
 
 
-private void addTopic(String topic,Date today,int idUser)
+private void addTopic(String topic,int idUser)
 {
-    compositeDisposable.add(myAPI1.addTopic(topic,today,idUser)
+    compositeDisposable.add(myAPI1.addTopic(topic,idUser)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(new Consumer<String>() {
