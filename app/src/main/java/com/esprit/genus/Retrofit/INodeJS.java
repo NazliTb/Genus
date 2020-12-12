@@ -29,6 +29,7 @@ public interface INodeJS {
                                     @Field("date") Date date,
                                     @Field("idUser") int idUser);
 
+
     @POST("addMsg")
     @FormUrlEncoded
     Observable<String> addMsg(@Field("contentMsg") String contentMsg,
@@ -36,12 +37,28 @@ public interface INodeJS {
                                 @Field("idUser") int idUser,
                                 @Field("idChat") int idChat);
 
+    @POST("AddToGameList")
+    @FormUrlEncoded
+    Observable<String> AddToGameList(@Field("idGameList") int idGameList,
+                                     @Field("idUser") int idUser,
+                                     @Field("idGame") int idGame);
+
+    @POST("AddToWishList")
+    @FormUrlEncoded
+    Observable<String> AddToWishList(@Field("idGameList") int idGameList,
+                                     @Field("idUser") int idUser,
+                                     @Field("idGame") int idGame);
+
+    @POST("AddToFavList")
+    @FormUrlEncoded
+    Observable<String> AddToFavList(@Field("idFav") int idFav,
+                                     @Field("idUser") int idUser,
+                                     @Field("idGame") int idGame);
 
     @POST("login")
     @FormUrlEncoded
     Observable<String> loginUser(@Field("email") String email,
                                     @Field("password") String password);
-
 
 
     @PUT("getForgottenPassword")
