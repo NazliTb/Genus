@@ -26,7 +26,7 @@ public interface INodeJS {
     @POST("addTopic")
     @FormUrlEncoded
     Observable<String> addTopic(@Field("topic") String topic,
-                                    @Field("date") Date date,
+                                    @Field("Date") Date date,
                                     @Field("idUser") int idUser);
 
 

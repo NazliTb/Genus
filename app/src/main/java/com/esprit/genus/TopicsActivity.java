@@ -3,12 +3,15 @@ package com.esprit.genus;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -24,9 +27,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.esprit.genus.Adapter.TopicAdapter;
 import com.esprit.genus.Model.Chat;
 import com.esprit.genus.Retrofit.INodeJS;
+import com.esprit.genus.Retrofit.RetrofitClient;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -40,7 +45,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TopicsActivity extends Fragment {
-    INodeJS myAPI;
+    INodeJS myAPI,myAPI1;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     RecyclerView recycler_chats;
     LinearLayoutManager layoutManager;
@@ -58,23 +63,10 @@ public class TopicsActivity extends Fragment {
         View view = inflater.inflate(R.layout.gametopics_layout, container, false);
         this.mView = view;
 
-        addTopic= (ImageButton) mView.findViewById(R.id.addTopic);
 
-
-        addTopic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Dialog dialog = new Dialog(getContext());
-                dialog.setContentView(R.layout.addtopic_popup_layout);
-                dialog.setTitle("Add Topic");
-                dialog.setCancelable(true);
-
-                dialog.show();
-            }
-        });
 
         //Get userID
-        String getidUser = this.getArguments().getString("idUser");
+        final String getidUser = this.getArguments().getString("idUser");
         final String username = this.getArguments().getString("username");
         int idUser = 0;
         try {
@@ -85,16 +77,54 @@ public class TopicsActivity extends Fragment {
 
         //Init API
 
-
+        Retrofit retrofit1 = RetrofitClient.getInstance();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:3000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+
+
+
         myAPI = retrofit.create((INodeJS.class));
+
+        myAPI1 = retrofit1.create((INodeJS.class));
+
+        addTopic= (ImageButton) mView.findViewById(R.id.addTopic);
+
+
+        final int finalIdUser = idUser;
+        addTopic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog dialog = new Dialog(getContext());
+                dialog.setContentView(R.layout.addtopic_popup_layout);
+                dialog.setTitle("Add Topic");
+                dialog.setCancelable(true);
+                dialog.show();
+                final EditText topic=(EditText) dialog.findViewById(R.id.topic);
+                Button add=(Button) dialog.findViewById(R.id.addTopic);
+                Button cancel=(Button) dialog.findViewById(R.id.Cancel);
+                add.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Date today=new Date();
+                        System.out.println(today);
+                        System.out.println(topic.getText().toString());
+                        System.out.println(Integer.parseInt(getidUser));
+                        addTopic(topic.getText().toString(),today,Integer.parseInt(getidUser));
+                    }
+                });
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
+
+
         final Call<List<Chat>> listChats = myAPI.GetChatList();
-
-
-
         //View for topicList
         recycler_chats = (RecyclerView) mView.findViewById(R.id.recyclerViewTopics);
         recycler_chats.setHasFixedSize(true);
@@ -226,6 +256,19 @@ public class TopicsActivity extends Fragment {
     }
 
 
+private void addTopic(String topic,Date today,int idUser)
+{
+    compositeDisposable.add(myAPI1.addTopic(topic,today,idUser)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(new Consumer<String>() {
+                @Override
+                public void accept(String s) throws Exception {
 
+                        Toast.makeText(getContext(), ""+s, Toast.LENGTH_SHORT).show();
+                }
+            })
+    );
+}
 
 }
