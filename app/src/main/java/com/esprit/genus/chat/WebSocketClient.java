@@ -1,4 +1,4 @@
-package com.codebutler.android_websockets;
+package com.esprit.genus.chat;
 
 import android.os.Handler;
 import android.os.HandlerThread;

@@ -1,148 +1,293 @@
 package com.esprit.genus;
 
-
-
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-
-import com.esprit.genus.Chat.MyAttachmentViewHolderFactory;
-import com.getstream.sdk.chat.view.ChannelHeaderView;
-import com.getstream.sdk.chat.view.MessageListView;
-import com.getstream.sdk.chat.view.messageinput.MessageInputView;
-import com.getstream.sdk.chat.viewmodel.ChannelHeaderViewModel;
-import com.getstream.sdk.chat.viewmodel.ChannelHeaderViewModelBinding;
-import com.getstream.sdk.chat.viewmodel.MessageInputViewModel;
-import com.getstream.sdk.chat.viewmodel.MessageInputViewModelBinding;
-import com.getstream.sdk.chat.viewmodel.factory.ChannelViewModelFactory;
-import com.getstream.sdk.chat.viewmodel.messages.MessageListViewModel;
-import com.getstream.sdk.chat.viewmodel.messages.MessageListViewModel.Mode.Normal;
-import com.getstream.sdk.chat.viewmodel.messages.MessageListViewModel.Mode.Thread;
-import com.getstream.sdk.chat.viewmodel.messages.MessageListViewModel.State.NavigateUp;
-import com.getstream.sdk.chat.viewmodel.messages.MessageListViewModelBinding;
-
-import java.util.HashSet;
-import java.util.LinkedList;
+import java.net.URI;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+import java.util.Locale;
 
-import io.getstream.chat.android.client.ChatClient;
-import io.getstream.chat.android.client.events.TypingStartEvent;
-import io.getstream.chat.android.client.events.TypingStopEvent;
-import io.getstream.chat.android.client.models.Channel;
-import io.getstream.chat.android.client.models.User;
-import io.getstream.chat.android.livedata.ChatDomain;
-import io.getstream.chat.android.livedata.controller.ChannelController;
-import kotlin.Unit;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class MessageActivity extends AppCompatActivity {
+import android.app.Activity;
+import android.content.Intent;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.Bundle;
 
-    private final static String CID_KEY = "key:cid";
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Toast;
 
-    public static Intent newIntent(Context context, Channel channel) {
-        final Intent intent = new Intent(context, MessageActivity.class);
-        intent.putExtra(CID_KEY, channel.getCid());
-        return intent;
+import com.esprit.genus.Adapter.MessagesListAdapter;
+import com.esprit.genus.Model.Message;
+import com.esprit.genus.chat.Utils;
+import com.esprit.genus.chat.WebSocketClient;
+import com.esprit.genus.chat.WsConfig;
+
+
+public class MessageActivity extends Activity {
+
+    // LogCat tag
+    private static final String TAG = MessageActivity.class.getSimpleName();
+
+    private Button btnSend;
+    private EditText inputMsg;
+
+    private WebSocketClient client;
+
+    // Chat messages list adapter
+    private MessagesListAdapter adapter;
+    private List<Message> listMessages;
+    private ListView listViewMessages;
+
+    private Utils utils;
+
+    // Client name
+    private String name = null;
+
+    // JSON flags to identify the kind of JSON response
+    private static final String TAG_SELF = "self", TAG_NEW = "new",
+            TAG_MESSAGE = "message", TAG_EXIT = "exit";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.chat_layout);
+
+
+        btnSend = (Button) findViewById(R.id.btnSend);
+        inputMsg = (EditText) findViewById(R.id.inputMsg);
+        listViewMessages = (ListView) findViewById(R.id.list_view_messages);
+
+        utils = new Utils(getApplicationContext());
+
+        // Getting the person name from previous screen
+        Intent i = getIntent();
+        name = i.getStringExtra("name");
+
+        btnSend.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // Sending message to web socket server
+                sendMessageToServer(utils.getSendMessageJSON(inputMsg.getText()
+                        .toString()));
+
+                // Clearing the input filed once message was sent
+                inputMsg.setText("");
+            }
+        });
+
+        listMessages = new ArrayList<Message>();
+
+        adapter = new MessagesListAdapter(this, listMessages);
+        listViewMessages.setAdapter(adapter);
+
+        /**
+         * Creating web socket client. This will have callback methods
+         * */
+        client = new WebSocketClient(URI.create(WsConfig.URL_WEBSOCKET
+                + URLEncoder.encode(name)), new WebSocketClient.Listener() {
+            @Override
+            public void onConnect() {
+
+            }
+
+            /**
+             * On receiving the message from web socket server
+             * */
+            @Override
+            public void onMessage(String message) {
+                Log.d(TAG, String.format("Got string message! %s", message));
+
+                parseMessage(message);
+
+            }
+
+            @Override
+            public void onMessage(byte[] data) {
+                Log.d(TAG, String.format("Got binary message! %s",
+                        bytesToHex(data)));
+
+                // Message will be in JSON format
+                parseMessage(bytesToHex(data));
+            }
+
+            /**
+             * Called when the connection is terminated
+             * */
+            @Override
+            public void onDisconnect(int code, String reason) {
+
+                String message = String.format(Locale.US,
+                        "Disconnected! Code: %d Reason: %s", code, reason);
+
+                showToast(message);
+
+                // clear the session id from shared preferences
+                utils.storeSessionId(null);
+            }
+
+            @Override
+            public void onError(Exception error) {
+                Log.e(TAG, "Error! : " + error);
+
+                showToast("Error! : " + error);
+            }
+
+        }, null);
+
+        client.connect();
+    }
+
+    /**
+     * Method to send message to web socket server
+     * */
+    private void sendMessageToServer(String message) {
+        if (client != null && client.isConnected()) {
+            client.send(message);
+        }
+    }
+
+    /**
+     * Parsing the JSON message received from server The intent of message will
+     * be identified by JSON node 'flag'. flag = self, message belongs to the
+     * person. flag = new, a new person joined the conversation. flag = message,
+     * a new message received from server. flag = exit, somebody left the
+     * conversation.
+     * */
+    private void parseMessage(final String msg) {
+
+        try {
+            JSONObject jObj = new JSONObject(msg);
+
+            // JSON node 'flag'
+            String flag = jObj.getString("flag");
+
+            // if flag is 'self', this JSON contains session id
+            if (flag.equalsIgnoreCase(TAG_SELF)) {
+
+                String sessionId = jObj.getString("sessionId");
+
+                // Save the session id in shared preferences
+                utils.storeSessionId(sessionId);
+
+                Log.e(TAG, "Your session id: " + utils.getSessionId());
+
+            } else if (flag.equalsIgnoreCase(TAG_NEW)) {
+                // If the flag is 'new', new person joined the room
+                String name = jObj.getString("name");
+                String message = jObj.getString("message");
+
+                // number of people online
+                String onlineCount = jObj.getString("onlineCount");
+
+                showToast(name + message + ". Currently " + onlineCount
+                        + " people online!");
+
+            } else if (flag.equalsIgnoreCase(TAG_MESSAGE)) {
+                // if the flag is 'message', new message received
+                String fromName = name;
+                String message = jObj.getString("message");
+                String sessionId = jObj.getString("sessionId");
+                boolean isSelf = true;
+
+                // Checking if the message was sent by you
+                if (!sessionId.equals(utils.getSessionId())) {
+                    fromName = jObj.getString("name");
+                    isSelf = false;
+                }
+
+                Message m = new Message();
+
+                // Appending the message to chat list
+                appendMessage(m);
+
+            } else if (flag.equalsIgnoreCase(TAG_EXIT)) {
+                // If the flag is 'exit', somebody left the conversation
+                String name = jObj.getString("name");
+                String message = jObj.getString("message");
+
+                showToast(name + message);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.chat_channel_layout);
-        String cid = getIntent().getStringExtra(CID_KEY);
-        if (cid == null) {
-            throw new IllegalStateException("Specifying a channel id is required when starting ChannelActivity");
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if(client != null & client.isConnected()){
+            client.disconnect();
         }
+    }
 
-        // Step 0 - Get View references
-        MessageListView messageListView = findViewById(R.id.messageListView);
-        ProgressBar progressBar = findViewById(R.id.progressBar);
-        ChannelHeaderView channelHeaderView = findViewById(R.id.channelHeaderView);
-        MessageInputView messageInputView = findViewById(R.id.messageInputView);
+    /**
+     * Appending message to list view
+     * */
+    private void appendMessage(final Message m) {
+        runOnUiThread(new Runnable() {
 
-        // Step 1 - Create 3 separate ViewModels for the views so it's easy to customize one of the components
-        ChannelViewModelFactory factory = new ChannelViewModelFactory(cid);
-        ViewModelProvider provider = new ViewModelProvider(this, factory);
-        ChannelHeaderViewModel channelHeaderViewModel = provider.get(ChannelHeaderViewModel.class);
-        MessageListViewModel messageListViewModel = provider.get(MessageListViewModel.class);
-        MessageInputViewModel messageInputViewModel = provider.get(MessageInputViewModel.class);
-
-        messageListView.setAttachmentViewHolderFactory(new MyAttachmentViewHolderFactory());
-
-        // Step 2 - Bind the view and ViewModels, they are loosely coupled so it's easy to customize
-        ChannelHeaderViewModelBinding.bind(channelHeaderViewModel, channelHeaderView, this);
-        MessageListViewModelBinding.bind(messageListViewModel, messageListView, this);
-        MessageInputViewModelBinding.bind(messageInputViewModel, messageInputView, this);
-
-        // Step 3 - Let the message input know when we open a thread
-        messageListViewModel.getMode().observe(this, mode -> {
-            if (mode instanceof Thread) {
-                messageInputViewModel.setActiveThread(((Thread) mode).getParentMessage());
-            } else if (mode instanceof Normal) {
-                messageInputViewModel.resetThread();
-            }
-        });
-        // Step 4 - Let the message input know when we are editing a message
-        messageListView.setOnMessageEditHandler(message -> {
-            messageInputViewModel.getEditMessage().postValue(message);
-            return Unit.INSTANCE;
-        });
-// Custom typing info header bar
-        TextView typingHeaderView = findViewById(R.id.typingHeaderView);
-        String nobodyTyping = "nobody is typing";
-        typingHeaderView.setText(nobodyTyping);
-
-        Set<String> currentlyTyping = new HashSet<>();
-        ChatClient
-                .instance()
-                .channel(cid)
-                .subscribeFor(
-                        this,
-                        new Class[]{TypingStartEvent.class, TypingStopEvent.class}, event -> {
-                            if (event instanceof TypingStartEvent) {
-                                User user = ((TypingStartEvent) event).getUser();
-                                String name = (String) user.getExtraData().get("name");
-                                currentlyTyping.add(name);
-                            } else if (event instanceof TypingStopEvent) {
-                                User user = ((TypingStopEvent) event).getUser();
-                                String name = (String) user.getExtraData().get("name");
-                                currentlyTyping.remove(name);
-                            }
-
-                            String typing = "nobody is typing";
-                            if (!currentlyTyping.isEmpty()) {
-                                typing = "typing: " + TextUtils.join(", ", currentlyTyping);
-                            }
-                            typingHeaderView.setText(typing);
-                            return Unit.INSTANCE;
-                        });
-
-
-        // Step 5 - Handle navigate up state
-        messageListViewModel.getState().observe(this, state -> {
-            if (state instanceof NavigateUp) {
-                finish();
-            }
-        });
-
-        // Step 6 - Handle back button behaviour correctly when you're in a thread
-        channelHeaderView.setOnBackClick(() -> {
-            messageListViewModel.onEvent(MessageListViewModel.Event.BackButtonPressed.INSTANCE);
-            return Unit.INSTANCE;
-        });
-        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
-            public void handleOnBackPressed() {
-                channelHeaderView.getOnBackClick().invoke();
+            public void run() {
+                listMessages.add(m);
+
+                adapter.notifyDataSetChanged();
+
+                // Playing device's notification
+                playBeep();
             }
         });
     }
+
+    private void showToast(final String message) {
+
+        runOnUiThread(new Runnable() {
+
+            @Override
+            public void run() {
+                Toast.makeText(getApplicationContext(), message,
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
+    /**
+     * Plays device's default notification sound
+     * */
+    public void playBeep() {
+
+        try {
+            Uri notification = RingtoneManager
+                    .getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            Ringtone r = RingtoneManager.getRingtone(getApplicationContext(),
+                    notification);
+            r.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    final protected static char[] hexArray = "0123456789ABCDEF".toCharArray();
+
+    public static String bytesToHex(byte[] bytes) {
+        char[] hexChars = new char[bytes.length * 2];
+        for (int j = 0; j < bytes.length; j++) {
+            int v = bytes[j] & 0xFF;
+            hexChars[j * 2] = hexArray[v >>> 4];
+            hexChars[j * 2 + 1] = hexArray[v & 0x0F];
+        }
+        return new String(hexChars);
+    }
+
 }
