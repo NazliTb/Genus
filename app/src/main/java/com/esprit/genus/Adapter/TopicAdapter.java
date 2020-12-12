@@ -17,20 +17,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.esprit.genus.GamePictureShape.RoundRectCornerImageView;
 import com.esprit.genus.Interfaces.ITopicClickListener;
-import com.esprit.genus.MessageActivity;
+import com.esprit.genus.ChatActivity;
 import com.esprit.genus.Model.Chat;
 import com.esprit.genus.R;
 
 
 import java.util.List;
 
-public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> {
+public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.MyViewHolder> {
 
     List<Chat> chatList;
     Context mContext;
     String name;
 
-    public ChatAdapter(Context mContext,List<Chat> chatList,String name) {
+    public TopicAdapter(Context mContext, List<Chat> chatList, String name) {
         this.chatList = chatList;
         this.mContext= mContext;
         this.name=name;
@@ -38,15 +38,15 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
 
     @NonNull
     @Override
-    public ChatAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TopicAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.gametopicitem_layout, parent, false);
-        return new ChatAdapter.MyViewHolder(itemView);
+        return new TopicAdapter.MyViewHolder(itemView);
     }
 
 
     @Override
-    public void onBindViewHolder(@NonNull ChatAdapter.MyViewHolder holder, int position) {
-      //  Glide.with(mContext).load("http://10.0.2.2:3000/image/"+gameList.get(position).getGamePicture()).into(holder.gamePic);
+    public void onBindViewHolder(@NonNull TopicAdapter.MyViewHolder holder, int position) {
+
         holder.topicDate.setText(chatList.get(position).getDate().toString());
         holder.topic.setText(chatList.get(position).getTopic());
         //holder.membersNumber
@@ -98,9 +98,12 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
         public void onClick(View v) {
            topicClickListener.onTopicClick(v, getAdapterPosition());
             Intent intent;
-            intent = new Intent(mContext, MessageActivity.class);
-            intent.putExtra("name",name);
+            intent = new Intent(mContext, ChatActivity.class);
+            intent.putExtra("username",name);
+            intent.putExtra("idUser","2");
+            intent.putExtra("userPicture","avatar9");
             mContext.startActivity(intent);
+
         }
     }
 

@@ -188,7 +188,7 @@ public class HomepageActivity extends AppCompatActivity {
                 loopTitle.setTextColor(getResources().getColor(R.color.hintColor));
 
                 //Fragment display
-                selectedFragment = new ChatListActivity();
+                selectedFragment = new TopicsActivity();
                 selectedFragment.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, selectedFragment).commit();
             }

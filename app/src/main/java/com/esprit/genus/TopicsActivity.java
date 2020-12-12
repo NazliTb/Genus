@@ -16,13 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.esprit.genus.Adapter.ChatAdapter;
-import com.esprit.genus.Adapter.GameAdapter;
-import com.esprit.genus.Adapter.GameVerticalAdapter;
+import com.esprit.genus.Adapter.TopicAdapter;
 import com.esprit.genus.Model.Chat;
-import com.esprit.genus.Model.Game;
 import com.esprit.genus.Retrofit.INodeJS;
-import com.esprit.genus.Retrofit.RetrofitClient;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 
 import java.util.ArrayList;
@@ -38,12 +34,12 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ChatListActivity extends Fragment {
+public class TopicsActivity extends Fragment {
     INodeJS myAPI;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     RecyclerView recycler_chats;
     LinearLayoutManager layoutManager;
-    ChatAdapter adapter;
+    TopicAdapter adapter;
     MaterialSearchBar materialSearchBar;
     List<String> suggestList = new ArrayList<>();
     protected View mView;
@@ -133,7 +129,7 @@ public class ChatListActivity extends Fragment {
                                 return;
                             }
                             List<Chat> chats = response.body();
-                            adapter = new ChatAdapter(getContext(),chats,username);
+                            adapter = new TopicAdapter(getContext(),chats,username);
                             recycler_chats.setAdapter(adapter);
                         }
                         @Override
@@ -165,7 +161,7 @@ public class ChatListActivity extends Fragment {
                     return;
                 }
                 List<Chat> Chats = response.body();
-                adapter = new ChatAdapter(getContext(),Chats,username);
+                adapter = new TopicAdapter(getContext(),Chats,username);
                 recycler_chats.setAdapter(adapter);
             }
             @Override
