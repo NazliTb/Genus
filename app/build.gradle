@@ -3,13 +3,20 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
-
+    buildFeatures {
+        viewBinding true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     defaultConfig {
         applicationId "com.esprit.genus"
         minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        ndkVersion "21.3.6528147"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -36,6 +43,7 @@ android {
 }
 
 dependencies {
+
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
     //implementation 'com.google.android.material:material:1.2.1'
@@ -67,7 +75,14 @@ dependencies {
 
 
     //for chat
-    implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+    implementation "io.getstream:stream-chat-android:4.4.6"
+    implementation "androidx.lifecycle:lifecycle-viewmodel:2.3.0-beta01"
+    implementation "io.coil-kt:coil:1.0.0"
+
+
+
+
+
 
     //this is for round images
     //implementation 'com.mikhaellopez:circularimageview:4.2.0'

@@ -14,8 +14,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.bumptech.glide.Glide;
-import com.esprit.genus.ChatListActivity;
+import com.esprit.genus.ChannelListActivity;
 import com.esprit.genus.GamePictureShape.RoundRectCornerImageView;
 import com.esprit.genus.Interfaces.ITopicClickListener;
 import com.esprit.genus.MessageActivity;
@@ -47,7 +46,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ChatAdapter.MyViewHolder holder, int position) {
-      //  Glide.with(mContext).load("http://10.0.2.2:3000/image/"+gameList.get(position).getGamePicture()).into(holder.gamePic);
+
         holder.topicDate.setText(chatList.get(position).getDate().toString());
         holder.topic.setText(chatList.get(position).getTopic());
         //holder.membersNumber
@@ -99,8 +98,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
         public void onClick(View v) {
            topicClickListener.onTopicClick(v, getAdapterPosition());
             Intent intent;
-            intent = new Intent(mContext, MessageActivity.class);
-            intent.putExtra("name",name);
+            intent = new Intent(mContext, ChannelListActivity.class);
+          //  intent.putExtra("name",name);
             mContext.startActivity(intent);
         }
     }
