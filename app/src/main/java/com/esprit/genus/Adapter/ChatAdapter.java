@@ -14,8 +14,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.bumptech.glide.Glide;
-import com.esprit.genus.ChatListActivity;
+
 import com.esprit.genus.GamePictureShape.RoundRectCornerImageView;
 import com.esprit.genus.Interfaces.ITopicClickListener;
 import com.esprit.genus.MessageActivity;

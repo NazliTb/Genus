@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.esprit.genus.Adapter.ChatAdapter;
 
+import com.esprit.genus.Adapter.ChatAdapter;
 import com.esprit.genus.Adapter.GameAdapter;
 import com.esprit.genus.Adapter.GameVerticalAdapter;
 import com.esprit.genus.Model.Chat;
