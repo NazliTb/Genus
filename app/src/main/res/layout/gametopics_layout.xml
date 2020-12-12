@@ -40,7 +40,14 @@
         android:layout_marginTop="20sp"
         android:orientation="horizontal"/>
 
-
+    <ImageButton
+        android:id="@+id/addTopic"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/button_border3"
+        android:src="@drawable/ic_add"
+        android:layout_alignParentBottom="true"/>
 
 
 </RelativeLayout>
