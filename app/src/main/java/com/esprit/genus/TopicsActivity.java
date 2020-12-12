@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -110,7 +111,16 @@ public class TopicsActivity extends Fragment {
 
                         addTopic(topic.getText().toString(),Integer.parseInt(getidUser));
                         dialog.dismiss();
-                        getFragmentManager().beginTransaction().detach(this).attach(this).commit();
+                        // Reload current fragment
+                        FragmentTransaction tr = getFragmentManager().beginTransaction();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("idUser", getidUser);
+                        bundle.putString("username", username);
+                        TopicsActivity t=new TopicsActivity();
+                        t.setArguments(bundle);
+                        tr.replace(R.id.fragmentContainer,t);
+                        tr.commit();
+
                     }
                 });
                 cancel.setOnClickListener(new View.OnClickListener() {
