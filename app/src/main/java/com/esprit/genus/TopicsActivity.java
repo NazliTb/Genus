@@ -6,6 +6,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -43,7 +44,7 @@ public class TopicsActivity extends Fragment {
     MaterialSearchBar materialSearchBar;
     List<String> suggestList = new ArrayList<>();
     protected View mView;
-
+    ImageButton addTopic;
 
     @Nullable
     @Override
@@ -52,6 +53,16 @@ public class TopicsActivity extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.gametopics_layout, container, false);
         this.mView = view;
+
+        addTopic= (ImageButton) mView.findViewById(R.id.addTopic);
+
+
+        addTopic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         //Get userID
         String getidUser = this.getArguments().getString("idUser");
@@ -204,5 +215,8 @@ public class TopicsActivity extends Fragment {
 
         materialSearchBar.setLastSuggestions(suggestList);
     }
+
+
+
 
 }

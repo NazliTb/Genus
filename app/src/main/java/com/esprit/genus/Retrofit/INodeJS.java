@@ -4,6 +4,7 @@ import com.esprit.genus.Model.Chat;
 import com.esprit.genus.Model.Comment;
 import com.esprit.genus.Model.Game;
 
+import java.util.Date;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -22,6 +23,19 @@ public interface INodeJS {
     Observable<String> registerUser(@Field("email") String email,
                                     @Field("username") String username,
                                     @Field("password") String password);
+    @POST("addTopic")
+    @FormUrlEncoded
+    Observable<String> addTopic(@Field("topic") String topic,
+                                    @Field("date") Date date,
+                                    @Field("idUser") int idUser);
+
+    @POST("addMsg")
+    @FormUrlEncoded
+    Observable<String> addMsg(@Field("contentMsg") String contentMsg,
+                                @Field("date") Date date,
+                                @Field("idUser") int idUser,
+                                @Field("idChat") int idChat);
+
 
     @POST("login")
     @FormUrlEncoded
