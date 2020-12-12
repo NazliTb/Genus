@@ -100,4 +100,6 @@ public interface INodeJS {
 
     @GET("GetProfilePic/{idUser}")
     Call <String> GetProfilePic (@Path("idUser") int idUser);
+
+
 }
