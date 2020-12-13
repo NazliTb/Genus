@@ -2,6 +2,7 @@ package com.esprit.genus;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,7 +22,10 @@ import com.jgabrielfreitas.core.BlurImageView;
 
 import java.util.List;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,10 +37,11 @@ public class GamescreenActivity extends AppCompatActivity {
     INodeJS myAPI, myAPI1;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    private String idGame = "";
+    private int idGame, idUser;
     private ImageView gameImg;
     BlurImageView gameBg;
     private TextView gameName, studioName, favNbr, cmtNbr, gameDesc;
+    private Button addGame, addWishlist, addFav;
 
     RecyclerView recycler_comments;
     LinearLayoutManager layoutManager;
@@ -49,12 +54,20 @@ public class GamescreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gamescreen_layout);
 
-        //Get game ID
+        //Get gameId
         Intent intent = getIntent();
         if (intent != null) {
 
             if (intent.hasExtra("idGame")) {
-                idGame = intent.getStringExtra("idGame");
+                idGame = Integer.parseInt(intent.getStringExtra("idGame"));
+            }
+        }
+
+        //Get userId
+        Intent intent2 = getIntent();
+        if (intent2 != null) {
+            if (intent2.hasExtra("idUser")) {
+                idUser = Integer.parseInt(intent2.getStringExtra("idUser"));
             }
         }
 
@@ -70,8 +83,8 @@ public class GamescreenActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         myAPI1 = retrofit1.create((INodeJS.class));
-        final Call <List<Game>> myGame = myAPI1.GetGameDetails(Integer.parseInt(idGame));
-        final Call <List<Comment>> listComments = myAPI1.GetComments(Integer.parseInt(idGame));
+        final Call <List<Game>> myGame = myAPI1.GetGameDetails(idGame);
+        final Call <List<Comment>> listComments = myAPI1.GetComments(idGame);
 
         //our views
         gameImg = (ImageView) findViewById(R.id.gameImg);
@@ -88,6 +101,17 @@ public class GamescreenActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recycler_comments.setLayoutManager(layoutManager);
         recycler_comments.addItemDecoration(new DividerItemDecoration(this,layoutManager.getOrientation()));
+
+        //our buttons
+        addGame = (Button) findViewById(R.id.addButton);
+        addWishlist = (Button) findViewById(R.id.addWishlist);
+        addFav = (Button) findViewById(R.id.addFavorite);
+
+        //add to the gamelist
+
+        //add to wishlist
+
+        //add to favlist
 
         //display our game informations
         myGame.enqueue(new Callback <List<Game>>() {
@@ -135,6 +159,57 @@ public class GamescreenActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void addToGameList(int idUser, int idGame){
+        final String[] idGameList = {""};
+        final String[] userId = {""};
+        final String[] gameId = {""};
+
+        compositeDisposable.add(myAPI.AddToGameList(idUser, idGame)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+
+                    }
+                })
+        );
+    }
+
+    private void addToWishList(int idUser, int idGame){
+        final String[] idWishList = {""};
+        final String[] userId = {""};
+        final String[] gameId = {""};
+
+        compositeDisposable.add(myAPI.AddToGameList(idUser, idGame)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+
+                    }
+                })
+        );
+    }
+
+    private void addToFavList(int idUser, int idGame){
+        final String[] idFav = {""};
+        final String[] userId = {""};
+        final String[] gameId = {""};
+
+        compositeDisposable.add(myAPI.AddToGameList(idUser, idGame)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+
+                    }
+                })
+        );
     }
 
     @Override

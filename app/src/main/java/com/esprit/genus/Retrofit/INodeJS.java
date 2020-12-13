@@ -37,20 +37,17 @@ public interface INodeJS {
 
     @POST("AddToGameList")
     @FormUrlEncoded
-    Observable<String> AddToGameList(@Field("idGameList") int idGameList,
-                                     @Field("idUser") int idUser,
+    Observable<String> AddToGameList(@Field("idUser") int idUser,
                                      @Field("idGame") int idGame);
 
     @POST("AddToWishList")
     @FormUrlEncoded
-    Observable<String> AddToWishList(@Field("idGameList") int idGameList,
-                                     @Field("idUser") int idUser,
+    Observable<String> AddToWishList(@Field("idUser") int idUser,
                                      @Field("idGame") int idGame);
 
     @POST("AddToFavList")
     @FormUrlEncoded
-    Observable<String> AddToFavList(@Field("idFav") int idFav,
-                                     @Field("idUser") int idUser,
+    Observable<String> AddToFavList(@Field("idUser") int idUser,
                                      @Field("idGame") int idGame);
 
     @POST("login")
