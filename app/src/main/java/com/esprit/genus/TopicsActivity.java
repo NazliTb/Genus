@@ -30,6 +30,9 @@ import com.esprit.genus.Model.Chat;
 import com.esprit.genus.Retrofit.INodeJS;
 import com.esprit.genus.Retrofit.RetrofitClient;
 import com.mancj.materialsearchbar.MaterialSearchBar;
+import com.sendbird.android.OpenChannel;
+import com.sendbird.android.OpenChannelParams;
+import com.sendbird.android.SendBirdException;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -69,6 +72,7 @@ public class TopicsActivity extends Fragment {
         //Get userID
         final String getidUser = this.getArguments().getString("idUser");
         final String username = this.getArguments().getString("username");
+        final String userPicture= this.getArguments().getString("userPicture");
         int idUser = 0;
         try {
             idUser=Integer.parseInt(getidUser);
@@ -108,7 +112,24 @@ public class TopicsActivity extends Fragment {
                 add.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        //ADD IN SENDBIRD THE TOPIC
 
+
+                        OpenChannelParams params = new OpenChannelParams()
+                                .setName(topic.getText().toString());
+
+                        OpenChannel.createChannel(params, new OpenChannel.OpenChannelCreateHandler() {
+                            @Override
+                            public void onResult(OpenChannel openChannel, SendBirdException e) {
+                                if (e != null) {    // Error.
+                                    return;
+                                }
+                            }
+                        });
+
+
+
+                        //ADD IN DATA BASE THE TOPIC
                         addTopic(topic.getText().toString(),Integer.parseInt(getidUser));
                         dialog.dismiss();
                         // Reload current fragment
@@ -188,7 +209,7 @@ public class TopicsActivity extends Fragment {
                                 return;
                             }
                             List<Chat> chats = response.body();
-                            adapter = new TopicAdapter(getContext(),chats,username);
+                            adapter = new TopicAdapter(getContext(),chats,username,getidUser,userPicture);
                             recycler_chats.setAdapter(adapter);
                         }
                         @Override
@@ -220,7 +241,7 @@ public class TopicsActivity extends Fragment {
                     return;
                 }
                 List<Chat> Chats = response.body();
-                adapter = new TopicAdapter(getContext(),Chats,username);
+                adapter = new TopicAdapter(getContext(),Chats,username,getidUser,userPicture);
                 recycler_chats.setAdapter(adapter);
             }
             @Override

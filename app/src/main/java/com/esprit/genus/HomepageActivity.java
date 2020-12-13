@@ -53,6 +53,7 @@ public class HomepageActivity extends AppCompatActivity {
         final Bundle bundle = new Bundle();
         bundle.putString("idUser", idUser);
         bundle.putString("username",username);
+        bundle.putString("userPicture",userPicture);
 
         //Init API
         Retrofit retrofit = RetrofitClient.getInstance();
