@@ -9,15 +9,19 @@ public class Message {
   private Date date;
   private int idUser;
   private int idChat;
+  private String username;
+  private String userPicture;
 
     public Message() {
     }
 
-    public Message(String contentMsg, Date date, int idUser, int idChat) {
+    public Message(String contentMsg, Date date, int idUser, int idChat,String username,String userPicture) {
         this.contentMsg = contentMsg;
         this.date = date;
         this.idUser = idUser;
         this.idChat = idChat;
+        this.username=username;
+        this.userPicture=userPicture;
     }
 
 
@@ -61,6 +65,21 @@ public class Message {
         this.idChat = idChat;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUserPicture() {
+        return userPicture;
+    }
+
+    public void setUserPicture(String userPicture) {
+        this.userPicture = userPicture;
+    }
 
     @Override
     public String toString() {

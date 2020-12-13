@@ -95,7 +95,6 @@ public class ChatActivity extends AppCompatActivity {
         mMessageEditText = (EditText) findViewById(R.id.edittext_chat);
         mChatAdapter = new ChatAdapter(Integer.parseInt(idChat));
         mChatAdapter.loadPreviousMessages(Integer.parseInt(idChat));
-
         mRecyclerView = (RecyclerView) findViewById(R.id.reycler_chat);
         mLayoutManager = new LinearLayoutManager(this);
         mLayoutManager.setReverseLayout(true);
@@ -104,24 +103,27 @@ public class ChatActivity extends AppCompatActivity {
 
 
 
+
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Message message=new Message(mMessageEditText.getText().toString(),new Date(),Integer.parseInt(idUser),Integer.parseInt(idChat));
+                Message message=new Message(mMessageEditText.getText().toString(),new Date(),Integer.parseInt(idUser),Integer.parseInt(idChat),username,userPic);
                 addMsg(mMessageEditText.getText().toString(),Integer.parseInt(idUser),Integer.parseInt(idChat));
                 mChatAdapter.sendMessage(message);
                 mMessageEditText.setText("");
+                finish();
+                startActivity(getIntent());
             }
         });
 
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+       /* mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 if (mLayoutManager.findLastVisibleItemPosition() == mChatAdapter.getItemCount() - 1) {
                     mChatAdapter.loadPreviousMessages(Integer.parseInt(idChat));
                 }
             }
-        });
+        });*/
 
     }
 
@@ -136,6 +138,7 @@ public class ChatActivity extends AppCompatActivity {
     protected void onPause() {
 
         super.onPause();
+
     }
 
     private class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -152,27 +155,7 @@ public class ChatActivity extends AppCompatActivity {
 
         }
 
-        void refresh(int idChat) {
 
-            final Call<List<Message>> listMessages = myAPI.GetMsgList(idChat);
-            listMessages.enqueue(new Callback<List<Message>>() {
-                @Override
-                public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
-                    if (!response.isSuccessful()) {
-                        return;
-                    }
-                    List<Message> msg = response.body();
-                    mMessageList = (ArrayList<Message>) msg;
-
-                    notifyDataSetChanged();
-                }
-                @Override
-                public void onFailure(Call<List<Message>> call, Throwable t) {
-                   // System.out.println("error");
-                }
-            });
-
-        }
 
         void loadPreviousMessages(int idChat) {
 
@@ -185,6 +168,7 @@ public class ChatActivity extends AppCompatActivity {
                     }
                     List<Message> msg = response.body();
                     for(Message m:msg) {
+
                         mMessageList.add(0, m);
                     }
                     notifyDataSetChanged();
@@ -197,11 +181,7 @@ public class ChatActivity extends AppCompatActivity {
 
         }
 
-        // Appends a new message to the beginning of the message list.
-        void appendMessage(Message message) {
-            mMessageList.add(0, message);
-            notifyDataSetChanged();
-        }
+
 
         // Sends a new message, and appends the sent message to the beginning of the message list.
         void sendMessage(Message message) {
@@ -263,8 +243,8 @@ public class ChatActivity extends AppCompatActivity {
 
         // Messages sent by me do not display a profile image or nickname.
         private class SentMessageHolder extends RecyclerView.ViewHolder {
-            TextView messageText, timeText,nameText;
-            ImageView profileImage;
+            TextView messageText, timeText;
+
             SentMessageHolder(View itemView) {
                 super(itemView);
 
@@ -297,9 +277,9 @@ public class ChatActivity extends AppCompatActivity {
 
             void bind(Message message) {
                 messageText.setText(message.getContentMsg());
-                nameText.setText(message.getIdUser());
-               /* Utils.displayRoundImageFromUrl(ChatActivity.this,
-                        message.getSender().getProfileUrl(), profileImage);*/
+                nameText.setText(message.getUsername());
+                Utils.displayRoundImageFromUrl(ChatActivity.this,
+                        "http://10.0.2.2:3000/image/"+message.getUserPicture(), profileImage);
                 timeText.setText(Utils.formatTime(message.getDate()));
 
             }
