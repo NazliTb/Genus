@@ -71,7 +71,7 @@ public class ProfileActivity extends AppCompatActivity {
                 username.setText(intent.getStringExtra("username"));
             }
             if (intent.hasExtra("userPicture")) {
-                System.out.println(intent.getStringExtra("userPicture"));
+
                 Glide.with(ProfileActivity.this)
                         .load("http://10.0.2.2:3000/image/"+intent.getStringExtra("userPicture"))
                         .into(userPic);

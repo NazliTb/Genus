@@ -93,14 +93,15 @@ public class ChatActivity extends AppCompatActivity {
 
         mSendButton = (Button) findViewById(R.id.button_chat_send);
         mMessageEditText = (EditText) findViewById(R.id.edittext_chat);
+        mChatAdapter = new ChatAdapter(Integer.parseInt(idChat));
+        mChatAdapter.loadPreviousMessages(Integer.parseInt(idChat));
 
         mRecyclerView = (RecyclerView) findViewById(R.id.reycler_chat);
         mLayoutManager = new LinearLayoutManager(this);
         mLayoutManager.setReverseLayout(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mChatAdapter = new ChatAdapter(Integer.parseInt(idChat));
-        mChatAdapter.loadPreviousMessages(Integer.parseInt(idChat));
         mRecyclerView.setAdapter(mChatAdapter);
+
 
 
         mSendButton.setOnClickListener(new View.OnClickListener() {
@@ -167,7 +168,7 @@ public class ChatActivity extends AppCompatActivity {
                 }
                 @Override
                 public void onFailure(Call<List<Message>> call, Throwable t) {
-                    System.out.println("error");
+                   // System.out.println("error");
                 }
             });
 
@@ -184,14 +185,13 @@ public class ChatActivity extends AppCompatActivity {
                     }
                     List<Message> msg = response.body();
                     for(Message m:msg) {
-                        System.out.println(m.toString());
                         mMessageList.add(0, m);
                     }
                     notifyDataSetChanged();
                 }
                 @Override
                 public void onFailure(Call<List<Message>> call, Throwable t) {
-                    System.out.println("error");
+                  //  System.out.println("error");
                 }
             });
 
@@ -317,7 +317,7 @@ public class ChatActivity extends AppCompatActivity {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String s) throws Exception {
-                        System.out.println("msg sent");
+                       // System.out.println("msg sent");
                     }
                 })
         );
