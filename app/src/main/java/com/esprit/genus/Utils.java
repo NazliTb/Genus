@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 public class Utils {
@@ -25,9 +26,9 @@ public class Utils {
     /**
      * Gets timestamp in millis and converts it to HH:mm (e.g. 16:44).
      */
-    public static String formatTime(long timeInMillis) {
+    public static String formatTime(Date date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
-        return dateFormat.format(timeInMillis);
+        return dateFormat.format(date);
     }
 
     /**

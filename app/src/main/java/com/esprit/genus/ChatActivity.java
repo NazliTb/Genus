@@ -12,24 +12,33 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.sendbird.android.BaseChannel;
-import com.sendbird.android.BaseMessage;
-import com.sendbird.android.OpenChannel;
-import com.sendbird.android.SendBird;
-import com.sendbird.android.SendBirdException;
-import com.sendbird.android.UserMessage;
+
+import com.esprit.genus.Model.Message;
+import com.esprit.genus.Retrofit.INodeJS;
+import com.esprit.genus.Retrofit.RetrofitClient;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class ChatActivity extends AppCompatActivity {
-   private final String mChannelUrl = "1topic";
-    private final static String CHANNEL_HANDLER_ID = "CHANNEL_HANDLER_CHAT";
+
 
     private ChatAdapter mChatAdapter;
     private RecyclerView mRecyclerView;
@@ -39,6 +48,9 @@ public class ChatActivity extends AppCompatActivity {
     private String username;
     private String idUser;
     private String userPic;
+    private String idChat;
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
+    INodeJS myAPI,myAPI1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +70,26 @@ public class ChatActivity extends AppCompatActivity {
                userPic=intent.getStringExtra("userPicture");
 
             }
+            if (intent.hasExtra("idChat")) {
+                idChat=intent.getStringExtra("idChat");
+            }
 
         }
+
+
+        //Init API
+
+        Retrofit retrofit1 = RetrofitClient.getInstance();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://10.0.2.2:3000/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+
+
+        myAPI = retrofit.create((INodeJS.class));
+
+        myAPI1 = retrofit1.create((INodeJS.class));
 
         mSendButton = (Button) findViewById(R.id.button_chat_send);
         mMessageEditText = (EditText) findViewById(R.id.edittext_chat);
@@ -68,34 +98,17 @@ public class ChatActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mLayoutManager.setReverseLayout(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
+        mChatAdapter = new ChatAdapter(Integer.parseInt(idChat));
+        mChatAdapter.loadPreviousMessages(Integer.parseInt(idChat));
+        mRecyclerView.setAdapter(mChatAdapter);
 
-       OpenChannel.getChannel(mChannelUrl, new OpenChannel.OpenChannelGetHandler() {
-            @Override
-            public void onResult(final OpenChannel openChannel, SendBirdException e) {
-                if (e != null) {
-                    e.printStackTrace();
-                    return;
-                }
-
-                openChannel.enter(new OpenChannel.OpenChannelEnterHandler() {
-                    @Override
-                    public void onResult(SendBirdException e) {
-                        if (e != null) {
-                            e.printStackTrace();
-                            return;
-                        };
-
-                        mChatAdapter = new ChatAdapter(openChannel);
-                        mRecyclerView.setAdapter(mChatAdapter);
-                    }
-                });
-            }
-        });
 
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mChatAdapter.sendMessage(mMessageEditText.getText().toString());
+                Message message=new Message(mMessageEditText.getText().toString(),new Date(),Integer.parseInt(idUser),Integer.parseInt(idChat));
+                addMsg(mMessageEditText.getText().toString(),Integer.parseInt(idUser),Integer.parseInt(idChat));
+                mChatAdapter.sendMessage(message);
                 mMessageEditText.setText("");
             }
         });
@@ -104,7 +117,7 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 if (mLayoutManager.findLastVisibleItemPosition() == mChatAdapter.getItemCount() - 1) {
-                    mChatAdapter.loadPreviousMessages();
+                    mChatAdapter.loadPreviousMessages(Integer.parseInt(idChat));
                 }
             }
         });
@@ -115,20 +128,11 @@ public class ChatActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        // Receives messages from SendBird servers
-        SendBird.addChannelHandler(CHANNEL_HANDLER_ID, new SendBird.ChannelHandler() {
-            @Override
-            public void onMessageReceived(BaseChannel baseChannel, BaseMessage baseMessage) {
-                if (baseChannel.getUrl().equals(mChannelUrl) && baseMessage instanceof UserMessage) {
-                    mChatAdapter.appendMessage((UserMessage) baseMessage);
-                }
-            }
-        });
+
     }
 
     @Override
     protected void onPause() {
-        SendBird.removeChannelHandler(CHANNEL_HANDLER_ID);
 
         super.onPause();
     }
@@ -137,80 +141,81 @@ public class ChatActivity extends AppCompatActivity {
         private static final int VIEW_TYPE_MESSAGE_SENT = 1;
         private static final int VIEW_TYPE_MESSAGE_RECEIVED = 2;
 
-        private ArrayList<BaseMessage> mMessageList;
-        private OpenChannel mChannel;
+        private ArrayList<Message> mMessageList;
+        private int idChat;
 
-        ChatAdapter(OpenChannel channel) {
+        ChatAdapter(int idChat) {
             mMessageList = new ArrayList<>();
-            mChannel = channel;
+            idChat=idChat;
 
-            refresh();
-        }
-
-        // Retrieves 30 most recent messages.
-        void refresh() {
-            mChannel.getPreviousMessagesByTimestamp(Long.MAX_VALUE, true, 30, true,
-                    BaseChannel.MessageTypeFilter.USER, null, new BaseChannel.GetMessagesHandler() {
-                        @Override
-                        public void onResult(List<BaseMessage> list, SendBirdException e) {
-                            if (e != null) {
-                                e.printStackTrace();
-                                return;
-                            }
-                            mMessageList = (ArrayList<BaseMessage>) list;
-
-                            notifyDataSetChanged();
-
-                        }
-                    });
 
         }
 
-        void loadPreviousMessages() {
-            final long lastTimestamp = mMessageList.get(mMessageList.size() - 1).getCreatedAt();
-            mChannel.getPreviousMessagesByTimestamp(lastTimestamp, false, 30, true,
-                    BaseChannel.MessageTypeFilter.USER, null, new BaseChannel.GetMessagesHandler() {
-                        @Override
-                        public void onResult(List<BaseMessage> list, SendBirdException e) {
-                            if (e != null) {
-                                e.printStackTrace();
-                                return;
-                            }
-                            mMessageList.addAll(list);
+        void refresh(int idChat) {
 
-                            notifyDataSetChanged();
-                        }
-                    });
+            final Call<List<Message>> listMessages = myAPI.GetMsgList(idChat);
+            listMessages.enqueue(new Callback<List<Message>>() {
+                @Override
+                public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
+                    if (!response.isSuccessful()) {
+                        return;
+                    }
+                    List<Message> msg = response.body();
+                    mMessageList = (ArrayList<Message>) msg;
+
+                    notifyDataSetChanged();
+                }
+                @Override
+                public void onFailure(Call<List<Message>> call, Throwable t) {
+                    System.out.println("error");
+                }
+            });
+
+        }
+
+        void loadPreviousMessages(int idChat) {
+
+            final Call<List<Message>> listMessages = myAPI.GetMsgList(idChat);
+            listMessages.enqueue(new Callback<List<Message>>() {
+                @Override
+                public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
+                    if (!response.isSuccessful()) {
+                        return;
+                    }
+                    List<Message> msg = response.body();
+                    for(Message m:msg) {
+                        System.out.println(m.toString());
+                        mMessageList.add(0, m);
+                    }
+                    notifyDataSetChanged();
+                }
+                @Override
+                public void onFailure(Call<List<Message>> call, Throwable t) {
+                    System.out.println("error");
+                }
+            });
+
         }
 
         // Appends a new message to the beginning of the message list.
-        void appendMessage(UserMessage message) {
+        void appendMessage(Message message) {
             mMessageList.add(0, message);
             notifyDataSetChanged();
         }
 
         // Sends a new message, and appends the sent message to the beginning of the message list.
-        void sendMessage(final String message) {
-            mChannel.sendUserMessage(message, new BaseChannel.SendUserMessageHandler() {
-                @Override
-                public void onSent(UserMessage userMessage, SendBirdException e) {
-                    if (e != null) {
-                        e.printStackTrace();
-                        return;
-                    }
+        void sendMessage(Message message) {
+            mMessageList.add(0, message);
+            notifyDataSetChanged();
 
-                    mMessageList.add(0, userMessage);
-                    notifyDataSetChanged();
-                }
-            });
         }
 
         // Determines the appropriate ViewType according to the sender of the message.
         @Override
         public int getItemViewType(int position) {
-            UserMessage message = (UserMessage) mMessageList.get(position);
+            Message message = (Message) mMessageList.get(position);
 
-            if (message.getSender().getUserId().equals(SendBird.getCurrentUser().getUserId())) {
+            if (message.getIdUser()==Integer.parseInt(idUser)) {
                 // If the current user is the sender of the message
                 return VIEW_TYPE_MESSAGE_SENT;
             } else {
@@ -240,7 +245,7 @@ public class ChatActivity extends AppCompatActivity {
         // Passes the message object to a ViewHolder so that the contents can be bound to UI.
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-            UserMessage message = (UserMessage) mMessageList.get(position);
+            Message message = (Message) mMessageList.get(position);
 
             switch (holder.getItemViewType()) {
                 case VIEW_TYPE_MESSAGE_SENT:
@@ -268,11 +273,11 @@ public class ChatActivity extends AppCompatActivity {
 
             }
 
-            void bind(UserMessage message) {
-                messageText.setText(message.getMessage());
+            void bind(Message message) {
+                messageText.setText(message.getContentMsg());
 
                 // Format the stored timestamp into a readable String using method.
-                timeText.setText(Utils.formatTime(message.getCreatedAt()));
+                timeText.setText(Utils.formatTime(message.getDate()));
             }
         }
 
@@ -290,16 +295,32 @@ public class ChatActivity extends AppCompatActivity {
                 profileImage = (ImageView) itemView.findViewById(R.id.image_message_profile);
             }
 
-            void bind(UserMessage message) {
-                messageText.setText(message.getMessage());
-                nameText.setText(message.getSender().getNickname());
-                Utils.displayRoundImageFromUrl(ChatActivity.this,
-                        message.getSender().getProfileUrl(), profileImage);
-                timeText.setText(Utils.formatTime(message.getCreatedAt()));
+            void bind(Message message) {
+                messageText.setText(message.getContentMsg());
+                nameText.setText(message.getIdUser());
+               /* Utils.displayRoundImageFromUrl(ChatActivity.this,
+                        message.getSender().getProfileUrl(), profileImage);*/
+                timeText.setText(Utils.formatTime(message.getDate()));
 
             }
         }
 
 
     }
+
+
+    private void addMsg(String msg,int idUser,int idChat)
+    {
+        compositeDisposable.add(myAPI1.addMsg(msg,idUser,idChat)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        System.out.println("msg sent");
+                    }
+                })
+        );
+    }
+
 }

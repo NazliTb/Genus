@@ -12,9 +12,7 @@ import android.widget.Toast;
 
 import com.esprit.genus.Retrofit.INodeJS;
 import com.esprit.genus.Retrofit.RetrofitClient;
-import com.sendbird.android.SendBird;
-import com.sendbird.android.SendBirdException;
-import com.sendbird.android.User;
+
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -31,20 +29,13 @@ public class LoginActivity extends AppCompatActivity {
     Button login_button;
     TextView sign_up;
     TextView forgottenpassword;
-   // private static final String APP_ID ="45E9746B-BD9C-4B7B-B4DE-897615293FC5";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
         //getSupportActionBar().hide();
-
-
-
-
-        // Initialize the SendBird SDK.
-    //    SendBird.init(APP_ID, this.getApplicationContext());
-
 
 
 
@@ -160,56 +151,5 @@ public class LoginActivity extends AppCompatActivity {
         compositeDisposable.clear();
         super.onDestroy();
     }
-
-
-
- /*   private void connectToSendBird(final String userId, final String userNickname) {
-
-
-        SendBird.connect(userId, new SendBird.ConnectHandler() {
-            @Override
-            public void onConnected(User user, SendBirdException e) {
-
-                if (e != null) {
-                    // Error!
-                    Toast.makeText(
-                            LoginActivity.this, "" + e.getCode() + ": " + e.getMessage(),
-                            Toast.LENGTH_SHORT)
-                            .show();
-
-
-                    return;
-                }
-
-                // Update the user's nickname
-                updateCurrentUserInfo(userNickname);
-
-
-            }
-        });
-    }
-
-
-    private void updateCurrentUserInfo(String userNickname) {
-        SendBird.updateCurrentUserInfo(userNickname, null, new SendBird.UserInfoUpdateHandler() {
-            @Override
-            public void onUpdated(SendBirdException e) {
-                if (e != null) {
-                    // Error!
-                    Toast.makeText(
-                            LoginActivity.this, "" + e.getCode() + ":" + e.getMessage(),
-                            Toast.LENGTH_SHORT)
-                            .show();
-
-                    return;
-                }
-
-            }
-        });
-    }*/
-
-
-
-
 
 }

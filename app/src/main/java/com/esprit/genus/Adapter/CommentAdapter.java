@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide;
 import com.esprit.genus.Model.Comment;
 import com.esprit.genus.R;
 
-import org.w3c.dom.Text;
+
 
 import java.util.List;
 

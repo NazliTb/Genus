@@ -267,7 +267,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.MyViewHolder
                     intent.putExtra("username",name);
                     intent.putExtra("idUser",idUser);
                     intent.putExtra("userPicture",userPicture);
-                    intent.putExtra("idChat",chatList.get(getAdapterPosition()).getIdChat());
+                    intent.putExtra("idChat",chatList.get(getAdapterPosition()).getIdChat()+"");
                     mContext.startActivity(intent);
                 }
                 @Override

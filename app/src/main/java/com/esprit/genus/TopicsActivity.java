@@ -30,9 +30,7 @@ import com.esprit.genus.Model.Chat;
 import com.esprit.genus.Retrofit.INodeJS;
 import com.esprit.genus.Retrofit.RetrofitClient;
 import com.mancj.materialsearchbar.MaterialSearchBar;
-import com.sendbird.android.OpenChannel;
-import com.sendbird.android.OpenChannelParams;
-import com.sendbird.android.SendBirdException;
+
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -112,20 +110,7 @@ public class TopicsActivity extends Fragment {
                 add.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //ADD IN SENDBIRD THE TOPIC
 
-
-                     /*   OpenChannelParams params = new OpenChannelParams()
-                                .setName(topic.getText().toString());
-
-                        OpenChannel.createChannel(params, new OpenChannel.OpenChannelCreateHandler() {
-                            @Override
-                            public void onResult(OpenChannel openChannel, SendBirdException e) {
-                                if (e != null) {    // Error.
-                                    return;
-                                }
-                            }
-                        });*/
 
 
 
