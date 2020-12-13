@@ -21,15 +21,24 @@ import com.esprit.genus.Interfaces.ITopicClickListener;
 import com.esprit.genus.ChatActivity;
 import com.esprit.genus.Model.Chat;
 import com.esprit.genus.R;
-import com.sendbird.android.OpenChannel;
-import com.sendbird.android.OpenChannelParams;
-import com.sendbird.android.SendBirdException;
+import com.esprit.genus.Retrofit.INodeJS;
+import com.esprit.genus.Retrofit.RetrofitClient;
 
 
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.MyViewHolder> {
 
@@ -38,6 +47,14 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.MyViewHolder
     String name;
     String idUser;
     String userPicture;
+    INodeJS myAPI,myAPI1;
+    Retrofit retrofit = RetrofitClient.getInstance();
+    Retrofit retrofit1 = new Retrofit.Builder()
+            .baseUrl("http://10.0.2.2:3000/")
+                .addConverterFactory(GsonConverterFactory.create())
+            .build();
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
+
     List<String> idLists=new List<String>() {
         @Override
         public int size() {
@@ -231,35 +248,54 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.MyViewHolder
         @Override
         public void onClick(View v) {
            topicClickListener.onTopicClick(v, getAdapterPosition());
-
-         /*   OpenChannel.getChannel("1topic", new OpenChannel.OpenChannelGetHandler() {
+            myAPI = retrofit.create((INodeJS.class));
+            myAPI1 = retrofit1.create((INodeJS.class));
+            final Call<String> existe = myAPI1.verifyParticipation(Integer.parseInt(idUser),chatList.get(getAdapterPosition()).getIdChat());
+            existe.enqueue(new Callback<String>() {
                 @Override
-                public void onResult(OpenChannel openChannel, SendBirdException e) {
-                    if (e != null) {    // Error.
+                public void onResponse(Call<String> call, Response<String> response) {
+                    if (!response.isSuccessful()) {
                         return;
                     }
-                    idLists.add(idUser);
-                    OpenChannelParams params = new OpenChannelParams()
-                            .setOperatorUserIds(idLists);
-                    openChannel.updateChannel(params, new OpenChannel.OpenChannelUpdateHandler() {
-                        @Override
-                        public void onResult(OpenChannel openChannel, SendBirdException e) {
-                            if (e != null) {    // Error.
-                                return;
-                            }
-                        }
-                    });;
+                    String existe = response.body();
+                    if(existe.contains("false"))
+                    {
+                        addParticipation(Integer.parseInt(idUser),chatList.get(getAdapterPosition()).getIdChat());
+                    }
+                    Intent intent;
+                    intent = new Intent(mContext, ChatActivity.class);
+                    intent.putExtra("username",name);
+                    intent.putExtra("idUser",idUser);
+                    intent.putExtra("userPicture",userPicture);
+                    intent.putExtra("idChat",chatList.get(getAdapterPosition()).getIdChat());
+                    mContext.startActivity(intent);
                 }
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
 
-            });*/
-            Intent intent;
-            intent = new Intent(mContext, ChatActivity.class);
-            intent.putExtra("username",name);
-            intent.putExtra("idUser",idUser);
-            intent.putExtra("userPicture",userPicture);
-            mContext.startActivity(intent);
+                }
+            });
+
+
 
         }
+
+
     }
 
+    private void addParticipation(final int idUser, final int idChat)
+    {
+        compositeDisposable.add(myAPI.addParticipation(idUser,idChat)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        System.out.println(s);
+
+                    }
+                })
+        );
+    }
 }
+

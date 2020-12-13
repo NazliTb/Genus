@@ -16,9 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.esprit.genus.R;
-import com.esprit.genus.Utils;
+
 import com.sendbird.android.BaseChannel;
 import com.sendbird.android.BaseMessage;
 import com.sendbird.android.OpenChannel;
@@ -30,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
-    private final String mChannelUrl = "1topic";
+   private final String mChannelUrl = "1topic";
     private final static String CHANNEL_HANDLER_ID = "CHANNEL_HANDLER_CHAT";
 
     private ChatAdapter mChatAdapter;
@@ -71,7 +69,7 @@ public class ChatActivity extends AppCompatActivity {
         mLayoutManager.setReverseLayout(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        OpenChannel.getChannel(mChannelUrl, new OpenChannel.OpenChannelGetHandler() {
+       OpenChannel.getChannel(mChannelUrl, new OpenChannel.OpenChannelGetHandler() {
             @Override
             public void onResult(final OpenChannel openChannel, SendBirdException e) {
                 if (e != null) {

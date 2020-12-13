@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     Button login_button;
     TextView sign_up;
     TextView forgottenpassword;
-    private static final String APP_ID ="45E9746B-BD9C-4B7B-B4DE-897615293FC5";
+   // private static final String APP_ID ="45E9746B-BD9C-4B7B-B4DE-897615293FC5";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         // Initialize the SendBird SDK.
-        SendBird.init(APP_ID, this.getApplicationContext());
+    //    SendBird.init(APP_ID, this.getApplicationContext());
 
 
 
@@ -119,9 +119,7 @@ public class LoginActivity extends AppCompatActivity {
                         int positionDebUserpicture;
                         int positionFinUserpicture;
                         if (s.contains("username")) {
-                        /*pass to the next activity for now we'll make
-                        a toast appear to test */
-                            //Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+
                             positionDebidUser = s.indexOf("idUser") + 8;
                             positionFinidUser = s.indexOf(",");
                             positionDebUsername= s.indexOf("username") +11;
@@ -133,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             userPicture[0] = s.substring(positionDebUserpicture, positionFinUserpicture);
 
-                            connectToSendBird(idUser[0], userName[0]);
+                           // connectToSendBird(idUser[0], userName[0]);
                             Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(LoginActivity.this, HomepageActivity.class);
                             intent.putExtra("idUser",idUser[0]);
@@ -165,7 +163,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-    private void connectToSendBird(final String userId, final String userNickname) {
+ /*   private void connectToSendBird(final String userId, final String userNickname) {
 
 
         SendBird.connect(userId, new SendBird.ConnectHandler() {
@@ -208,7 +206,7 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
-    }
+    }*/
 
 
 

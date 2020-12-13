@@ -115,7 +115,7 @@ public class TopicsActivity extends Fragment {
                         //ADD IN SENDBIRD THE TOPIC
 
 
-                        OpenChannelParams params = new OpenChannelParams()
+                     /*   OpenChannelParams params = new OpenChannelParams()
                                 .setName(topic.getText().toString());
 
                         OpenChannel.createChannel(params, new OpenChannel.OpenChannelCreateHandler() {
@@ -125,7 +125,7 @@ public class TopicsActivity extends Fragment {
                                     return;
                                 }
                             }
-                        });
+                        });*/
 
 
 

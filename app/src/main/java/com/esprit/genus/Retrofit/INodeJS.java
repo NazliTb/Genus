@@ -35,6 +35,16 @@ public interface INodeJS {
                                 @Field("idUser") int idUser,
                                 @Field("idChat") int idChat);
 
+
+
+
+
+
+    @POST("addParticipation")
+    @FormUrlEncoded
+    Observable<String> addParticipation(@Field("idUser") int idUser,
+                              @Field("idChat") int idChat);
+
     @POST("AddToGameList")
     @FormUrlEncoded
     Observable<String> AddToGameList(@Field("idUser") int idUser,
@@ -77,9 +87,13 @@ public interface INodeJS {
     Call<List<Chat>> GetChatList();
 
 
+    @GET("verifyParticipation/{idUser}/{idChat}")
+    Call <String> verifyParticipation (@Path("idUser") int idUser,@Path("idChat") int idChat);
+
     @POST("search")
     @FormUrlEncoded
     Observable<List<Chat>> searchChats (@Field("search") String searchQuery);
+
 
     @POST("search")
     @FormUrlEncoded
