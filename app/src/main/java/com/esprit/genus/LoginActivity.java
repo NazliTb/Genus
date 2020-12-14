@@ -14,6 +14,11 @@ import com.esprit.genus.Retrofit.INodeJS;
 import com.esprit.genus.Retrofit.RetrofitClient;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.URISyntaxException;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
@@ -29,6 +34,16 @@ public class LoginActivity extends AppCompatActivity {
     Button login_button;
     TextView sign_up;
     TextView forgottenpassword;
+
+    //Socket thing
+   /* private Socket mSocket;
+    {
+        try {
+            mSocket = IO.socket(Constants.CHAT_SERVER_URL);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+    }*/
 
 
     @Override
@@ -122,12 +137,16 @@ public class LoginActivity extends AppCompatActivity {
 
                             userPicture[0] = s.substring(positionDebUserpicture, positionFinUserpicture);
 
-                           // connectToSendBird(idUser[0], userName[0]);
+
                             Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(LoginActivity.this, HomepageActivity.class);
                             intent.putExtra("idUser",idUser[0]);
                             intent.putExtra("username",userName[0]);
                             intent.putExtra("userPicture",userPicture[0]);
+                            //Socket thing
+                            // perform the user login attempt.
+                           // mSocket.emit("add user", userName[0]);
+                           // mSocket.on("login", onLogin);
                             LoginActivity.this.startActivity(intent);
                         }
                         else
@@ -150,6 +169,28 @@ public class LoginActivity extends AppCompatActivity {
     protected void onDestroy() {
         compositeDisposable.clear();
         super.onDestroy();
+        //Socket thing
+      //  mSocket.off("login", onLogin);
     }
 
+
+    /*private Emitter.Listener onLogin = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            JSONObject data = (JSONObject) args[0];
+
+            int numUsers;
+            try {
+                numUsers = data.getInt("numUsers");
+            } catch (JSONException e) {
+                return;
+            }
+
+            Intent intent = new Intent(LoginActivity.this, HomepageActivity.class);
+
+            intent.putExtra("numUsers", numUsers);
+            setResult(RESULT_OK, intent);
+            finish();
+        }
+    };*/
 }

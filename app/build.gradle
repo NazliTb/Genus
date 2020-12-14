@@ -31,7 +31,10 @@ android {
             exclude 'META-INF/notice.txt'
             exclude 'META-INF/ASL2.0'
         }
-
+    compileOptions {
+        sourceCompatibility '1.8'
+        targetCompatibility '1.8'
+    }
 
 }
 
@@ -66,9 +69,9 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
     implementation 'com.github.jgabrielfreitas:BlurImageView:1.0.1'
 
+    //socket stuff
 
-
-
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
 
     //this is for round images
     //implementation 'com.mikhaellopez:circularimageview:4.2.0'

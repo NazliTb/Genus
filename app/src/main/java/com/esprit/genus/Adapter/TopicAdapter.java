@@ -1,7 +1,10 @@
 package com.esprit.genus.Adapter;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +14,16 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-
+import com.esprit.genus.ChatActivitySocket;
 import com.esprit.genus.GamePictureShape.RoundRectCornerImageView;
 import com.esprit.genus.Interfaces.ITopicClickListener;
-import com.esprit.genus.ChatActivity;
 import com.esprit.genus.Model.Chat;
 import com.esprit.genus.R;
 import com.esprit.genus.Retrofit.INodeJS;
@@ -246,7 +251,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.MyViewHolder
         }
 
         @Override
-        public void onClick(View v) {
+        public void onClick(final View v) {
            topicClickListener.onTopicClick(v, getAdapterPosition());
             myAPI = retrofit.create((INodeJS.class));
             myAPI1 = retrofit1.create((INodeJS.class));
@@ -262,9 +267,13 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.MyViewHolder
                     {
                         addParticipation(Integer.parseInt(idUser),chatList.get(getAdapterPosition()).getIdChat());
                     }
-                    Intent intent;
-                    intent = new Intent(mContext, ChatActivity.class);
-                    intent.putExtra("username",name);
+
+
+                   Intent intent;
+                    intent = new Intent(mContext, ChatActivitySocket.class);
+
+
+                   intent.putExtra("username",name);
                     intent.putExtra("idUser",idUser);
                     intent.putExtra("userPicture",userPicture);
                     intent.putExtra("idChat",chatList.get(getAdapterPosition()).getIdChat()+"");
