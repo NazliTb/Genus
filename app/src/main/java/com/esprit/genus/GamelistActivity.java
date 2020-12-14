@@ -138,7 +138,7 @@ public class GamelistActivity extends Fragment {
                                 return;
                             }
                             List<Game> games = response.body();
-                            adapter = new GameAdapter(getContext(),games);
+                            adapter = new GameAdapter(getContext(),games,Integer.parseInt(getidUser));
                             recycler_games.setAdapter(adapter);
                         }
                         @Override
@@ -170,7 +170,7 @@ public class GamelistActivity extends Fragment {
                     return;
                 }
                 List<Game> games = response.body();
-                adapter = new GameAdapter(getContext(),games);
+                adapter = new GameAdapter(getContext(),games,Integer.parseInt(getidUser));
                 recycler_games.setAdapter(adapter);
             }
             @Override
@@ -207,7 +207,7 @@ public class GamelistActivity extends Fragment {
                 .subscribe(new Consumer<List<Game>>() {
                     @Override
                     public void accept(List<Game> games) throws Exception {
-                        adapter = new GameAdapter(getContext(),games);
+                      //  adapter = new GameAdapter(getContext(),games,Integer.parseInt(getidUser));
                         recycler_games.setAdapter(adapter);
 
                     }

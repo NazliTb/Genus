@@ -145,6 +145,7 @@ public class HomepageActivity extends AppCompatActivity {
                 chatTitle.setTextColor(getResources().getColor(R.color.hintColor));
 
                 selectedFragment = new HomeFragmentActivity();
+                selectedFragment.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, selectedFragment).commit();
             }
         });
