@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +45,8 @@ public class GamescreenActivity extends AppCompatActivity {
     BlurImageView gameBg;
     private TextView gameName, studioName, favNbr, cmtNbr, gameDesc;
     private Button addGame, addWishlist, addFav;
+    private ImageButton comment;
+    private EditText commentText;
 
     RecyclerView recycler_comments;
     LinearLayoutManager layoutManager;
@@ -104,11 +108,13 @@ public class GamescreenActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recycler_comments.setLayoutManager(layoutManager);
         recycler_comments.addItemDecoration(new DividerItemDecoration(this, layoutManager.getOrientation()));
+        commentText = (EditText) findViewById(R.id.commentField);
 
         //our buttons
         addGame = (Button) findViewById(R.id.addButton);
         addWishlist = (Button) findViewById(R.id.addWishlist);
         addFav = (Button) findViewById(R.id.addFavorite);
+        comment = (ImageButton) findViewById(R.id.sendComment);
 
 
         //add to the gamelist
@@ -162,7 +168,6 @@ public class GamescreenActivity extends AppCompatActivity {
         });
 
         //add to favlist
-
         addFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -184,6 +189,16 @@ public class GamescreenActivity extends AppCompatActivity {
 
                     }
                 });*/
+            }
+        });
+
+        //add comment
+        comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addComment(commentText.getText().toString(),idUser,idGame);
+                finish();
+                startActivity(getIntent());
             }
         });
 
@@ -272,6 +287,20 @@ public class GamescreenActivity extends AppCompatActivity {
                     @Override
                     public void accept(String s) throws Exception {
                         Toast.makeText(GamescreenActivity.this, "Game Added", Toast.LENGTH_SHORT).show();
+                    }
+                })
+        );
+    }
+
+    private void addComment (String commentText, int idUser, int idGame) {
+
+        compositeDisposable.add(myAPI.AddComment(commentText,idUser,idGame)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        Toast.makeText(GamescreenActivity.this, "Comment Added", Toast.LENGTH_SHORT).show();
                     }
                 })
         );
