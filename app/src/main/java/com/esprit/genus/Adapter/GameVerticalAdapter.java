@@ -25,10 +25,12 @@ public class GameVerticalAdapter extends RecyclerView.Adapter<GameVerticalAdapte
 
     List<Game> gameList;
     Context mContext;
+    int idUser;
 
-    public GameVerticalAdapter(Context mContext,List<Game> gameList) {
+    public GameVerticalAdapter(Context mContext,List<Game> gameList, int idUser) {
         this.mContext = mContext;
         this.gameList = gameList;
+        this.idUser = idUser;
     }
 
     @NonNull

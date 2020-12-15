@@ -72,7 +72,9 @@ public class GamescreenActivity extends AppCompatActivity {
         }
 
         //verify that we got the game ID
-        //Toast.makeText(this, "idGame: " + idGame, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "idGame: " + idGame, Toast.LENGTH_SHORT).show();
+        //verify that we got the user ID
+        Toast.makeText(this, "idUser: " + idUser, Toast.LENGTH_SHORT).show();
 
         //Init API
         Retrofit retrofit = RetrofitClient.getInstance();
@@ -106,6 +108,7 @@ public class GamescreenActivity extends AppCompatActivity {
         addGame = (Button) findViewById(R.id.addButton);
         addWishlist = (Button) findViewById(R.id.addWishlist);
         addFav = (Button) findViewById(R.id.addFavorite);
+
 
         //add to the gamelist
 

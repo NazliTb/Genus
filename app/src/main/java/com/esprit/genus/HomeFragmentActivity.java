@@ -55,6 +55,15 @@ public class HomeFragmentActivity extends Fragment {
         View view = inflater.inflate(R.layout.fragment_homepage, container, false);
         this.mView = view;
 
+        //Get userID
+        String getidUser = this.getArguments().getString("idUser");
+        int idUser = 0;
+        try {
+            idUser=Integer.parseInt(getidUser);
+        } catch (NumberFormatException e) {
+            Toast.makeText(getContext(), "No user logged in", Toast.LENGTH_SHORT).show();
+        }
+
         //Init API
         Retrofit retrofit = RetrofitClient.getInstance();
         myAPI = retrofit.create((INodeJS.class));
@@ -121,13 +130,13 @@ public class HomeFragmentActivity extends Fragment {
         });
 
         //Display search result
-        materialSearchBar.setOnSearchActionListener(new MaterialSearchBar.OnSearchActionListener() {
+/*        materialSearchBar.setOnSearchActionListener(new MaterialSearchBar.OnSearchActionListener() {
             @Override
             public void onSearchStateChanged(boolean enabled) {
                 if (!enabled) {
                     //getAllGames(finalIdUser);
 
-                    /*listGames.enqueue(new Callback<List<Game>>() {
+                    listGames.enqueue(new Callback<List<Game>>() {
                         @Override
                         public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
                             if (!response.isSuccessful()) {
@@ -141,7 +150,7 @@ public class HomeFragmentActivity extends Fragment {
                         public void onFailure(Call<List<Game>> call, Throwable t) {
                             Toast.makeText(getContext(), "Not found", Toast.LENGTH_SHORT).show();
                         }
-                    });*/
+                    });
                 }
             }
 
@@ -154,7 +163,7 @@ public class HomeFragmentActivity extends Fragment {
             public void onButtonClicked(int buttonCode) {
 
             }
-        });
+        });*/
 
         //Method to call top picks games
         topPicksGames.enqueue(new Callback<List<Game>>() {
@@ -164,7 +173,7 @@ public class HomeFragmentActivity extends Fragment {
                     return;
                 }
                 List<Game> games = response.body();
-                adapter = new GameVerticalAdapter(getContext(),games);
+                adapter = new GameVerticalAdapter(getContext(),games,Integer.parseInt(getidUser));
                 recycler_topPicks.setAdapter(adapter);
             }
             @Override
@@ -181,7 +190,7 @@ public class HomeFragmentActivity extends Fragment {
                     return;
                 }
                 List<Game> games = response.body();
-                adapter = new GameVerticalAdapter(getContext(),games);
+                adapter = new GameVerticalAdapter(getContext(),games,Integer.parseInt(getidUser));
                 recycler_trending.setAdapter(adapter);
             }
             @Override
@@ -198,7 +207,7 @@ public class HomeFragmentActivity extends Fragment {
                     return;
                 }
                 List<Game> games = response.body();
-                adapter = new GameVerticalAdapter(getContext(),games);
+                adapter = new GameVerticalAdapter(getContext(),games,Integer.parseInt(getidUser));
                 recycler_bestRate.setAdapter(adapter);
             }
             @Override
@@ -210,14 +219,15 @@ public class HomeFragmentActivity extends Fragment {
         return view;
     }
 
-    private void startSearch(String query) {
+
+/*    private void startSearch(String query) {
         compositeDisposable.add(myAPI.searchGames(query)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<Game>>() {
                     @Override
                     public void accept(List<Game> games) throws Exception {
-                        adapter = new GameVerticalAdapter(getContext(),games);
+                       adapter = new GameVerticalAdapter(getContext(),games,Integer.parseInt(getidUser));
                         recycler_topPicks.setAdapter(adapter);
 
                     }
@@ -227,7 +237,7 @@ public class HomeFragmentActivity extends Fragment {
                         Toast.makeText(getContext(), "Not found", Toast.LENGTH_SHORT).show();
                     }
                 }));
-    }
+    }*/
 
     private void addSuggestList() {
         //load items manually for suggest list

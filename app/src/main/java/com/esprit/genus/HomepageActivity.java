@@ -97,9 +97,6 @@ public class HomepageActivity extends AppCompatActivity {
                 heartTitle.setTextColor(getResources().getColor(R.color.hintColor));
                 chatIcon.setImageResource(R.drawable.chat2);
                 chatTitle.setTextColor(getResources().getColor(R.color.hintColor));
-
-
-
             }
         });
 
