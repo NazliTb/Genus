@@ -61,6 +61,13 @@ public interface INodeJS {
     Observable<String> AddToFavList(@Field("idUser") int idUser,
                                      @Field("idGame") int idGame);
 
+    @POST("AddComment")
+    @FormUrlEncoded
+    Observable<String> AddComment (@Field("commentText") String commentText,
+                                   @Field("idUser") int idUser,
+                                   @Field("idGame") int idGame);
+
+
     @POST("login")
     @FormUrlEncoded
     Observable<String> loginUser(@Field("email") String email,
@@ -95,10 +102,23 @@ public interface INodeJS {
     @GET("verifyParticipation/{idUser}/{idChat}")
     Call <String> verifyParticipation (@Path("idUser") int idUser,@Path("idChat") int idChat);
 
+
+    @GET("VerifyGamelist/{idUser}/{idChat}")
+    Call <String> VerifyGamelist (@Path("idUser") int idUser,
+                                  @Path("idChat") int idGame);
+
+    @GET("VerifyWishlist/{idUser}/{idChat}")
+    Call <String> VerifyWishlist (@Path("idUser") int idUser,
+                                  @Path("idChat") int idGame);
+
+    @GET("VerifyFavlist/{idUser}/{idChat}")
+    Call <String> VerifyFavlist (@Path("idUser") int idUser,
+                                 @Path("idChat") int idGame);
+
+
     @POST("search")
     @FormUrlEncoded
     Observable<List<Chat>> searchChats (@Field("search") String searchQuery);
-
 
     @POST("search")
     @FormUrlEncoded

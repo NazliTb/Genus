@@ -88,6 +88,7 @@ public class GameVerticalAdapter extends RecyclerView.Adapter<GameVerticalAdapte
             Intent intent;
             intent = new Intent(mContext, GamescreenActivity.class);
             intent.putExtra("idGame", gameList.get(getAdapterPosition()).getIdGame()+"");
+            intent.putExtra("idUser", idUser+"");
             mContext.startActivity(intent);
         }
     }

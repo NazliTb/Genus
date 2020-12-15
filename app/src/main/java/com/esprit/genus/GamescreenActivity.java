@@ -2,6 +2,7 @@ package com.esprit.genus;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -72,9 +73,9 @@ public class GamescreenActivity extends AppCompatActivity {
         }
 
         //verify that we got the game ID
-        Toast.makeText(this, "idGame: " + idGame, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "idGame: " + idGame, Toast.LENGTH_SHORT).show();
         //verify that we got the user ID
-        Toast.makeText(this, "idUser: " + idUser, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "idUser: " + idUser, Toast.LENGTH_SHORT).show();
 
         //Init API
         Retrofit retrofit = RetrofitClient.getInstance();
@@ -85,8 +86,8 @@ public class GamescreenActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         myAPI1 = retrofit1.create((INodeJS.class));
-        final Call <List<Game>> myGame = myAPI1.GetGameDetails(idGame);
-        final Call <List<Comment>> listComments = myAPI1.GetComments(idGame);
+        final Call<List<Game>> myGame = myAPI1.GetGameDetails(idGame);
+        final Call<List<Comment>> listComments = myAPI1.GetComments(idGame);
 
         //our views
         gameImg = (ImageView) findViewById(R.id.gameImg);
@@ -102,7 +103,7 @@ public class GamescreenActivity extends AppCompatActivity {
         recycler_comments.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recycler_comments.setLayoutManager(layoutManager);
-        recycler_comments.addItemDecoration(new DividerItemDecoration(this,layoutManager.getOrientation()));
+        recycler_comments.addItemDecoration(new DividerItemDecoration(this, layoutManager.getOrientation()));
 
         //our buttons
         addGame = (Button) findViewById(R.id.addButton);
@@ -111,36 +112,106 @@ public class GamescreenActivity extends AppCompatActivity {
 
 
         //add to the gamelist
+        addGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*final Call<String> verif = myAPI1.VerifyGamelist(idUser, idGame);
+                verif.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        if (!response.isSuccessful()) {
+                            return;
+                        }
+                        String result = response.body();
+                        if (result.contains("false")) {*/
+                            addToGameList(idUser,idGame);
+                       /* }
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+
+                    }
+                });*/
+            }
+        });
 
         //add to wishlist
+        addWishlist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*final Call<String> verif = myAPI1.VerifyWishlist(idUser, idGame);
+                verif.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        if (!response.isSuccessful()) {
+                            return;
+                        }
+                        String result = response.body();
+                        if (result.contains("false")) {*/
+                            addToWishList(idUser,idGame);
+                        /*}
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+
+                    }
+                });*/
+            }
+        });
 
         //add to favlist
 
-        //display our game informations
-        myGame.enqueue(new Callback <List<Game>>() {
+        addFav.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call <List<Game>> call, Response <List<Game>> response) {
+            public void onClick(View v) {
+                /*final Call<String> verif = myAPI1.VerifyFavlist(idUser, idGame);
+                verif.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        if (!response.isSuccessful()) {
+                            return;
+                        }
+                        String result = response.body();
+                        if (result.contains("false")) {*/
+                            addToFavList(idUser,idGame);
+                        /*}
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+
+                    }
+                });*/
+            }
+        });
+
+        //display our game informations
+        myGame.enqueue(new Callback<List<Game>>() {
+            @Override
+            public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
                 if (!response.isSuccessful()) {
                     return;
                 }
                 List<Game> gameDetails = response.body();
-                int cpt=0;
-                for (Game g:gameDetails) {
+                int cpt = 0;
+                for (Game g : gameDetails) {
                     gameName.setText(g.getName());
-                    studioName.setText("by "+g.getCompanyName());
+                    studioName.setText("by " + g.getCompanyName());
                     gameDesc.setText(g.getDescription());
                     Glide.with(GamescreenActivity.this)
-                            .load("http://10.0.2.2:3000/image/"+g.getGamePicture())
+                            .load("http://10.0.2.2:3000/image/" + g.getGamePicture())
                             .into(gameImg);
                     Glide.with(GamescreenActivity.this)
-                            .load("http://10.0.2.2:3000/image/"+g.getGamePicture())
+                            .load("http://10.0.2.2:3000/image/" + g.getGamePicture())
                             .into(gameBg);
                 }
             }
 
             @Override
-            public void onFailure(Call <List<Game>> call, Throwable t) {
-                Toast.makeText(GamescreenActivity.this, "Not found" , Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<List<Game>> call, Throwable t) {
+                Toast.makeText(GamescreenActivity.this, "Not found", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -151,7 +222,7 @@ public class GamescreenActivity extends AppCompatActivity {
                 if (!response.isSuccessful()) {
                     return;
                 }
-                List <Comment> comments = response.body();
+                List<Comment> comments = response.body();
                 adapter = new CommentAdapter(GamescreenActivity.this, comments);
                 recycler_comments.setAdapter(adapter);
             }
@@ -164,10 +235,7 @@ public class GamescreenActivity extends AppCompatActivity {
 
     }
 
-    private void addToGameList(int idUser, int idGame){
-        final String[] idGameList = {""};
-        final String[] userId = {""};
-        final String[] gameId = {""};
+    private void addToGameList(int idUser, int idGame) {
 
         compositeDisposable.add(myAPI.AddToGameList(idUser, idGame)
                 .subscribeOn(Schedulers.io())
@@ -175,41 +243,35 @@ public class GamescreenActivity extends AppCompatActivity {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String s) throws Exception {
-
+                        Toast.makeText(GamescreenActivity.this, "Game Added", Toast.LENGTH_SHORT).show();
                     }
                 })
         );
     }
 
-    private void addToWishList(int idUser, int idGame){
-        final String[] idWishList = {""};
-        final String[] userId = {""};
-        final String[] gameId = {""};
+    private void addToWishList(int idUser, int idGame) {
 
-        compositeDisposable.add(myAPI.AddToGameList(idUser, idGame)
+        compositeDisposable.add(myAPI.AddToWishList(idUser, idGame)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String s) throws Exception {
-
+                        Toast.makeText(GamescreenActivity.this, "Game Added", Toast.LENGTH_SHORT).show();
                     }
                 })
         );
     }
 
-    private void addToFavList(int idUser, int idGame){
-        final String[] idFav = {""};
-        final String[] userId = {""};
-        final String[] gameId = {""};
+    private void addToFavList(int idUser, int idGame) {
 
-        compositeDisposable.add(myAPI.AddToGameList(idUser, idGame)
+        compositeDisposable.add(myAPI.AddToFavList(idUser, idGame)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String s) throws Exception {
-
+                        Toast.makeText(GamescreenActivity.this, "Game Added", Toast.LENGTH_SHORT).show();
                     }
                 })
         );

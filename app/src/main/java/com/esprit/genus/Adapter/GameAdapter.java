@@ -95,6 +95,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.MyViewHolder> 
             Intent intent;
             intent = new Intent(mContext, GamescreenActivity.class);
             intent.putExtra("idGame", gameList.get(getAdapterPosition()).getIdGame()+"");
+            intent.putExtra("idUser", idUser+"");
             mContext.startActivity(intent);
         }
     }
