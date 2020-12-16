@@ -14,7 +14,7 @@ struct Chat :Decodable{
     let username : String
 }
 
-class ChatController: UIViewController,UICollectionViewDataSource{
+class ChatController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegate{
     
 
     //Widgets
@@ -29,6 +29,10 @@ class ChatController: UIViewController,UICollectionViewDataSource{
         // Do any additional setup after loading the view.
        
         collectionView.dataSource=self
+        collectionView.delegate = self
+        collectionView.allowsSelection = true
+       
+
         GetChatList()
 
     }
@@ -46,22 +50,18 @@ class ChatController: UIViewController,UICollectionViewDataSource{
         cell.dateTopic.text=chats[indexPath.row].Date
         cell.topicCreator.text=chats[indexPath.row].username
         idChat=chats[indexPath.row].idChat
-        cell.joinTopic.addTarget(self, action: #selector(buttonClicked),  for: .touchUpInside)
-        cell.joinTopic.tag = indexPath.row
-        
         return cell
     }
 
-    @objc func buttonClicked(sender:UIButton!) {
-           
-        let vc = MessagesController()
-        print(idChat)
-        vc.idChat = idChat
-        self.navigationController?.pushViewController(vc, animated: true)
-        self.present(vc, animated: true, completion: nil)
+ 
     
     
-        }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+       
+        let vc=MessagesController()
+         self.navigationController?.pushViewController(vc, animated: true)
+         self.present(vc, animated: true, completion: nil)
+    }
     
     func GetChatList() {
     let url=URL(string: "http://192.168.64.1:3000/GetChatList")

@@ -22,6 +22,7 @@
 		5860A537256D760E00B9F622 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5860A536256D760E00B9F622 /* ProfileController.swift */; };
 		5860A53C256D78FE00B9F622 /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5860A53B256D78FE00B9F622 /* GameController.swift */; };
 		5860A541256D798D00B9F622 /* LibraryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5860A540256D798D00B9F622 /* LibraryController.swift */; };
+		586D0256258A877500E140AE /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586D0255258A877500E140AE /* MessageTableViewCell.swift */; };
 		586D4CEA258A34160006D27E /* MessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586D4CE9258A34160006D27E /* MessagesController.swift */; };
 		588DD1FF2582A1E300F168EF /* GameListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588DD1FE2582A1E300F168EF /* GameListCollectionViewCell.swift */; };
 		588DD2072582A22500F168EF /* FavGameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588DD2062582A22500F168EF /* FavGameCollectionViewCell.swift */; };
@@ -80,6 +81,7 @@
 		5860A536256D760E00B9F622 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		5860A53B256D78FE00B9F622 /* GameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
 		5860A540256D798D00B9F622 /* LibraryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryController.swift; sourceTree = "<group>"; };
+		586D0255258A877500E140AE /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		586D4CE9258A34160006D27E /* MessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesController.swift; sourceTree = "<group>"; };
 		588DD1FE2582A1E300F168EF /* GameListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListCollectionViewCell.swift; sourceTree = "<group>"; };
 		588DD2062582A22500F168EF /* FavGameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavGameCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				588DD2062582A22500F168EF /* FavGameCollectionViewCell.swift */,
 				6C3021F82582C59F003C9231 /* TopPickCollectionViewCell.swift */,
 				586D4CE9258A34160006D27E /* MessagesController.swift */,
+				586D0255258A877500E140AE /* MessageTableViewCell.swift */,
 			);
 			path = Genus;
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 				585E88552581544400E93F3D /* DiscoverNavigationController.swift in Sources */,
 				5860A518256D5F3400B9F622 /* LoginController.swift in Sources */,
 				6C7545DB25651452004EA096 /* AppDelegate.swift in Sources */,
+				586D0256258A877500E140AE /* MessageTableViewCell.swift in Sources */,
 				585E885A2581557B00E93F3D /* ChatNavigationController.swift in Sources */,
 				5860A51D256D69E300B9F622 /* SignupController.swift in Sources */,
 				585E8848258147C500E93F3D /* MainTabController.swift in Sources */,
