@@ -43,7 +43,7 @@ public class GamescreenActivity extends AppCompatActivity {
     private int idGame, idUser;
     private ImageView gameImg;
     BlurImageView gameBg;
-    private TextView gameName, studioName, favNbr, cmtNbr, gameDesc;
+    private TextView gameName, studioName, favNbr, cmtNbr, gameDesc, favCount, cmCount;
     private Button addGame, addWishlist, addFav;
     private ImageButton comment;
     private EditText commentText;
@@ -92,6 +92,8 @@ public class GamescreenActivity extends AppCompatActivity {
         myAPI1 = retrofit1.create((INodeJS.class));
         final Call<List<Game>> myGame = myAPI1.GetGameDetails(idGame);
         final Call<List<Comment>> listComments = myAPI1.GetComments(idGame);
+        final Call <String> nbFav = myAPI1.GetFavoriteNbr(idGame);
+        final Call <String> nbComments = myAPI1.GetCommentNbr(idGame);
 
         //our views
         gameImg = (ImageView) findViewById(R.id.gameImg);
@@ -101,6 +103,8 @@ public class GamescreenActivity extends AppCompatActivity {
         favNbr = (TextView) findViewById(R.id.favCount);
         cmtNbr = (TextView) findViewById(R.id.cmCount);
         gameDesc = (TextView) findViewById(R.id.gameDesc);
+        favCount = (TextView) findViewById(R.id.favCount);
+        cmCount = (TextView) findViewById(R.id.cmCount);
 
         //view for the comment section
         recycler_comments = (RecyclerView) findViewById(R.id.recyclerViewComments);
@@ -245,6 +249,40 @@ public class GamescreenActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Comment>> call, Throwable t) {
                 Toast.makeText(GamescreenActivity.this, "Not found", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //display number of favorites
+        nbFav.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (!response.isSuccessful()) {
+                    return;
+                }
+                String result = response.body();
+                favCount.setText(result);
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+
+        //display number of comments
+        nbComments.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (!response.isSuccessful()) {
+                    return;
+                }
+                String result = response.body();
+                cmCount.setText(result);
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
             }
         });
 

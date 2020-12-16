@@ -152,5 +152,10 @@ public interface INodeJS {
     @GET("GetProfilePic/{idUser}")
     Call <String> GetProfilePic (@Path("idUser") int idUser);
 
+    @GET("GetCommentNbr/{idGame}")
+    Call <String> GetCommentNbr (@Path("idGame") int idGame);
+
+    @GET("GetFavoriteNbr/{idGame}")
+    Call <String> GetFavoriteNbr (@Path("idGame") int idGame);
 
 }
