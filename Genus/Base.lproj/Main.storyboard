@@ -137,6 +137,36 @@
             </objects>
             <point key="canvasLocation" x="459.4202898550725" y="-425.22321428571428"/>
         </scene>
+        <!--Messages Controller-->
+        <scene sceneID="mw3-8f-ieD">
+            <objects>
+                <viewController id="JzC-nP-p2I" customClass="MessagesController" customModule="Genus" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="M9y-7U-i2M">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Lh6-rr-Z9b">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="4ka-oU-aDu"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Lh6-rr-Z9b" firstAttribute="top" secondItem="4ka-oU-aDu" secondAttribute="top" id="226-wT-BAl"/>
+                            <constraint firstItem="Lh6-rr-Z9b" firstAttribute="trailing" secondItem="4ka-oU-aDu" secondAttribute="trailing" id="WCa-wl-U3P"/>
+                            <constraint firstItem="4ka-oU-aDu" firstAttribute="bottom" secondItem="Lh6-rr-Z9b" secondAttribute="bottom" id="Z8e-sz-Fph"/>
+                            <constraint firstItem="Lh6-rr-Z9b" firstAttribute="leading" secondItem="4ka-oU-aDu" secondAttribute="leading" id="aOw-eQ-inj"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="messagesTable" destination="Lh6-rr-Z9b" id="EXG-1A-Com"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1ks-ZA-ucm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="495.6521739130435" y="549.77678571428567"/>
+        </scene>
         <!--Profile Screen-->
         <scene sceneID="4Ou-a4-4dI">
             <objects>
@@ -518,7 +548,6 @@
         <!--Discover-->
         <scene sceneID="u2r-rL-YX1">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yxu-bn-cde" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="DiscoverController" id="jqV-cx-Omj" userLabel="Discover" customClass="DiscoverController" customModule="Genus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bdb-G2-IiD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -714,6 +743,7 @@
                         <outlet property="collectionViewTrendingGames" destination="u5S-UP-4mV" id="ECd-1o-PJx"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yxu-bn-cde" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-4865.217391304348" y="-425.22321428571428"/>
         </scene>
@@ -1259,7 +1289,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gIN-Me-jRI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5089.8550724637689" y="-573.21428571428567"/>
+            <point key="canvasLocation" x="4323" y="-745"/>
         </scene>
         <!--Discover-->
         <scene sceneID="rdM-yP-J6Q">

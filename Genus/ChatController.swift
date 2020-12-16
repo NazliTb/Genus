@@ -44,12 +44,19 @@ class ChatController: UIViewController,UICollectionViewDataSource{
         cell.topicName.text=chats[indexPath.row].topic
         cell.dateTopic.text=chats[indexPath.row].Date
         cell.topicCreator.text=chats[indexPath.row].username
+        cell.joinTopic.addTarget(self, action: #selector(buttonClicked),  for: .touchUpInside)
+        cell.contentView.isUserInteractionEnabled = false
         
         return cell
     }
     
     
+    func buttonClicked(sender:UIButton!) {
+           
+        let vc=MessagesController()
+        
     
+        }
     
     func GetChatList() {
     let url=URL(string: "http://192.168.64.1:3000/GetChatList")
