@@ -85,7 +85,8 @@ class DiscoverController: UIViewController, UICollectionViewDataSource {
             cell.companyName.text=topPicks[indexPath.row].companyName
             cell.gamePicture.contentMode = .scaleAspectFill
         
-            let defaultLink = "http://192.168.64.1:3000/image/"+topPicks[indexPath.row].gamePicture
+            //let defaultLink = "http://192.168.64.1:3000/image/"+topPicks[indexPath.row].gamePicture
+            let defaultLink = "http://192.168.247.1:3000/image/"+topPicks[indexPath.row].gamePicture
             cell.gamePicture.downloaded(from: defaultLink)
             
             return cell
@@ -95,7 +96,8 @@ class DiscoverController: UIViewController, UICollectionViewDataSource {
             cell.name.text=trendingGames[indexPath.row].name
             cell.companyName.text=trendingGames[indexPath.row].companyName
             cell.gamePicture.contentMode = .scaleAspectFill
-            let defaultLink = "http://192.168.64.1:3000/image/"+trendingGames[indexPath.row].gamePicture
+            //let defaultLink = "http://192.168.64.1:3000/image/"+trendingGames[indexPath.row].gamePicture
+            let defaultLink = "http://192.168.247.1:3000/image/"+trendingGames[indexPath.row].gamePicture
             cell.gamePicture.downloaded(from: defaultLink)
             
             return cell
@@ -105,7 +107,8 @@ class DiscoverController: UIViewController, UICollectionViewDataSource {
             cell.name.text=bestRate[indexPath.row].name
             cell.companyName.text=bestRate[indexPath.row].companyName
             cell.gamePicture.contentMode = .scaleAspectFill
-            let defaultLink = "http://192.168.64.1:3000/image/"+bestRate[indexPath.row].gamePicture
+            //let defaultLink = "http://192.168.64.1:3000/image/"+bestRate[indexPath.row].gamePicture
+            let defaultLink = "http://192.168.247.1:3000/image/"+bestRate[indexPath.row].gamePicture
             cell.gamePicture.downloaded(from: defaultLink)
             
             return cell
@@ -116,8 +119,8 @@ class DiscoverController: UIViewController, UICollectionViewDataSource {
     
     
     func getTopPicks() {
-    let url=URL(string: "http://192.168.64.1:3000/GetTopPicksGames")
-    // let url = URL(string: "http://192.168.247.1:3000/GetTopPicksGames")
+    //let url=URL(string: "http://192.168.64.1:3000/GetTopPicksGames")
+    let url = URL(string: "http://192.168.247.1:3000/GetTopPicksGames")
         
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
             
@@ -143,8 +146,8 @@ class DiscoverController: UIViewController, UICollectionViewDataSource {
     
     
     func getTrendingGames() {
-    let url=URL(string: "http://192.168.64.1:3000/GetTrendingGames")
-    // let url = URL(string: "http://192.168.247.1:3000/GetTrendingGames")
+    //let url=URL(string: "http://192.168.64.1:3000/GetTrendingGames")
+    let url = URL(string: "http://192.168.247.1:3000/GetTrendingGames")
         
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
             
@@ -168,8 +171,8 @@ class DiscoverController: UIViewController, UICollectionViewDataSource {
     }
     
     func getBestRateGames() {
-    let url=URL(string: "http://192.168.64.1:3000/GetBestRateGames")
-    // let url = URL(string: "http://192.168.247.1:3000/GetBestRateGames")
+    //let url=URL(string: "http://192.168.64.1:3000/GetBestRateGames")
+    let url = URL(string: "http://192.168.247.1:3000/GetBestRateGames")
         
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
             
