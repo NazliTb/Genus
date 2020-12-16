@@ -81,11 +81,7 @@ let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, 
         let alertController = UIAlertController(title: "Information", message: "Welcome you are connected !", preferredStyle: .alert)
         let OKAction = UIAlertAction(title: "OK", style: .default)
         { action -> Void in
-       /* let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileController") as! ProfileController
-        vc.Username=name
-        vc.id=idUser
-        self.navigationController?.pushViewController(vc, animated: true)
-        self.present(vc, animated: true, completion: nil)*/
+     
             
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainTabController") as! MainTabController
              vc.Username=name

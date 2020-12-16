@@ -20,6 +20,7 @@ class ChatController: UIViewController,UICollectionViewDataSource{
     //Widgets
     
     var chats=[Chat]()
+    var idChat:Int=0
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -44,17 +45,21 @@ class ChatController: UIViewController,UICollectionViewDataSource{
         cell.topicName.text=chats[indexPath.row].topic
         cell.dateTopic.text=chats[indexPath.row].Date
         cell.topicCreator.text=chats[indexPath.row].username
+        idChat=chats[indexPath.row].idChat
         cell.joinTopic.addTarget(self, action: #selector(buttonClicked),  for: .touchUpInside)
-        cell.contentView.isUserInteractionEnabled = false
+        cell.joinTopic.tag = indexPath.row
         
         return cell
     }
-    
-    
-    func buttonClicked(sender:UIButton!) {
+
+    @objc func buttonClicked(sender:UIButton!) {
            
-        let vc=MessagesController()
-        
+        let vc = MessagesController()
+        print(idChat)
+        vc.idChat = idChat
+        self.navigationController?.pushViewController(vc, animated: true)
+        self.present(vc, animated: true, completion: nil)
+    
     
         }
     

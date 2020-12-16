@@ -6,33 +6,29 @@
 //
 
 import UIKit
-import MessageKit
 
 
-struct Sender: SenderType {
-    
-    var senderId: String
-    var displayName: String
-}
-
-struct Message: MessageType {
-    
-    var sender: SenderType
-    var messageId: String
-    var sentDate: Date
-    var kind: MessageKind
-}
-
-
-
-
-class MessagesController : MessagesViewController,MessagesDataSource ,MessagesLayoutDelegate,MessagesDisplayDelegate, UITableViewDelegate, UITableViewDataSource{
+struct Msg :Decodable{
+    let idMessage : Int
+    let contentMsg : String
+    let date : String
+    let idUser : Int
+    let idChat : Int
+    let username : String
+    let userPicture : String
    
+}
+
+
+
+class MessagesController : UIViewController, UITableViewDelegate, UITableViewDataSource{
+   
+    //var
     
+    var idChat:Int=0
+    var msg=[Msg]()
     
-    let currentUser = Sender (senderId: "2", displayName: "Sihem")
-    let otherUser = Sender (senderId: "3", displayName: "Senjiro")
-    var messages = [MessageType]()
+    //Widgets
     
     @IBOutlet weak var messagesTable: UITableView!
     
@@ -40,41 +36,49 @@ class MessagesController : MessagesViewController,MessagesDataSource ,MessagesLa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        messagesTable.register(UITableViewCell.self, forCellReuseIdentifier: "messagesCell")
         messagesTable.delegate=self
         messagesTable.dataSource=self
-        messages.append(Message(sender: currentUser,
-                                messageId: "1",
-                                sentDate: Date(),
-                                kind: .text("hey")))
-        messages.append(Message(sender: otherUser,
-                                messageId: "2",
-                                sentDate: Date(),
-                                kind: .text("hello")))
-        messagesCollectionView.messagesDataSource=self
-        messagesCollectionView.messagesLayoutDelegate=self
-        messagesCollectionView.messagesDisplayDelegate=self
+        getMessages(idChat: idChat)
+       
     }
     
+    //Functions
     
-    func currentSender() -> SenderType {
-        return currentUser
-    }
-    
-    func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
-        return messages[indexPath.row]
-    }
-    
-    func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
-        return messages.count
-    }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return msg.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = messagesTable.dequeueReusableCell(withIdentifier: "messagesCell",for : indexPath)
+        
         return cell
+    }
+    
+    
+    func getMessages(idChat:Int)
+    {
+        var id="\(idChat)"
+        let url=URL(string: "http://192.168.64.1:3000/ListMessages/"+id)
+            
+        // let url = URL(string: "http://192.168.247.1:3000/ListMessages/"+id)
+        URLSession.shared.dataTask(with: url!) { (data, response, error) in
+            
+                if (error==nil) {
+                do {
+                self.msg = try JSONDecoder().decode([Msg].self, from: data!)
+                   
+                }
+                catch {
+                print("ERROR")
+                }
+                
+                DispatchQueue.main.async {
+                  
+                    self.messagesTable.reloadData()
+                }
+            }
+                
+            }.resume()
     }
 }
