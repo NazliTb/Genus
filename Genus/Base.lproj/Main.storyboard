@@ -150,7 +150,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="97" id="TKT-F7-9qF" customClass="MessageTableViewCell" customModule="Genus" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="messagesCell" rowHeight="97" id="TKT-F7-9qF" customClass="MessageTableViewCell" customModule="Genus" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="97"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TKT-F7-9qF" id="crX-1Y-U6B">
@@ -169,6 +169,14 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="11:44" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kI3-IX-eLy">
+                                                    <rect key="frame" x="182" y="34" width="49" height="28"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <color key="textColor" red="0.1012260839343071" green="0.080147974193096161" blue="0.39709371328353882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Hello what's up ? " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6n1-k3-YFX">
                                                     <rect key="frame" x="20" y="47" width="150" height="40"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -180,21 +188,14 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="timeMsg" destination="kI3-IX-eLy" id="rW4-xO-mA8"/>
-                                            <outlet property="userName" destination="47I-Jz-sHm" id="D5w-Ql-CXj"/>
-                                            <outlet property="userPic" destination="eyS-es-MNV" id="ZdT-ZO-8IQ"/>
+                                            <outlet property="msgContent" destination="6n1-k3-YFX" id="JqD-45-PLr"/>
+                                            <outlet property="timeMSG" destination="kI3-IX-eLy" id="b1N-M0-s6d"/>
+                                            <outlet property="userName" destination="47I-Jz-sHm" id="B5v-xz-IIC"/>
+                                            <outlet property="userPic" destination="eyS-es-MNV" id="VpL-n3-Pc2"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="11:44" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kI3-IX-eLy">
-                                <rect key="frame" x="174" y="142" width="49" height="28"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <color key="textColor" red="0.1012260839343071" green="0.080147974193096161" blue="0.39709371328353882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4ka-oU-aDu"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
