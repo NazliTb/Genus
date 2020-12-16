@@ -29,16 +29,18 @@ class MessagesController : UIViewController, UITableViewDelegate, UITableViewDat
     var msg=[Msg]()
     
     //Widgets
+
     
-    @IBOutlet weak var messagesTable: UITableView!
     
-    
+    @IBOutlet weak var messagesTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        messagesTable.delegate=self
-        messagesTable.dataSource=self
-        getMessages(idChat: idChat)
+      
+        messagesTableView.dataSource=self
+        messagesTableView.delegate=self
+     
+        getMessages(idChat: 1)
        
     }
     
@@ -50,8 +52,14 @@ class MessagesController : UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = messagesTable.dequeueReusableCell(withIdentifier: "messagesCell",for : indexPath)
-        
+        let cell = messagesTableView.dequeueReusableCell(withIdentifier: "messagesCell",for : indexPath) as! MessageTableViewCell
+        cell.msg.text=msg[indexPath.row].contentMsg
+        cell.timeMsg.text=msg[indexPath.row].date
+        cell.userName.text=msg[indexPath.row].username
+        cell.userPic.contentMode = .scaleAspectFill
+    
+        let defaultLink = "http://192.168.64.1:3000/image/"+msg[indexPath.row].userPicture
+        cell.userPic.downloaded(from: defaultLink)
         return cell
     }
     
@@ -75,7 +83,7 @@ class MessagesController : UIViewController, UITableViewDelegate, UITableViewDat
                 
                 DispatchQueue.main.async {
                   
-                    self.messagesTable.reloadData()
+                    self.messagesTableView.reloadData()
                 }
             }
                 
