@@ -105,6 +105,41 @@ class MessagesController : UIViewController, UITableViewDelegate, UITableViewDat
     
     
     @IBAction func sendMsg(_ sender: Any) {
+        let msg=msgToSend.text
+        let params = ["idUser":"2", "contentMsg":msg,"idChat":"1"] as! Dictionary<String, String>
+        var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/addMsg")!)
+    request.httpMethod = "POST"
+    request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
+    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+    
+    let session = URLSession.shared
+    let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+    
+        
+            do {
+                let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
+      
+                
+                }
+                catch {
+                    self.messagesTableView.reloadData()
+            }
+       
+       
+    
+        
+        DispatchQueue.main.async {
+           
+    
+        }
+        
+        })
+        
+     
+        task.resume()
+    
+    
+    }
     }
     
-}
+
