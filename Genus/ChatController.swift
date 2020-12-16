@@ -58,9 +58,9 @@ class ChatController: UIViewController,UICollectionViewDataSource, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
        
-        let vc=MessagesController()
+       let vc = self.storyboard?.instantiateViewController(withIdentifier: "MessagesController") as! MessagesController
          self.navigationController?.pushViewController(vc, animated: true)
-         self.present(vc, animated: true, completion: nil)
+         //self.present(vc, animated: true, completion: nil)
     }
     
     func GetChatList() {

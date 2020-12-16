@@ -25,7 +25,7 @@ class MessageTableViewCell: UITableViewCell {
     @IBOutlet weak var userPic: UIImageView!
     
 
-    @IBOutlet weak var msgContent: UITextView!
+    @IBOutlet weak var msgContent: UILabel!
     
     
     

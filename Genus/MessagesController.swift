@@ -34,9 +34,14 @@ class MessagesController : UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBOutlet weak var messagesTableView: UITableView!
     
+    
+    @IBOutlet weak var msgToSend: UITextField!
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         messagesTableView.dataSource=self
         messagesTableView.delegate=self
      
@@ -47,16 +52,19 @@ class MessagesController : UIViewController, UITableViewDelegate, UITableViewDat
     //Functions
     
 
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return msg.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = messagesTableView.dequeueReusableCell(withIdentifier: "messagesCell",for : indexPath) as! MessageTableViewCell
         cell.msgContent.text=msg[indexPath.row].contentMsg
+        print(msg[indexPath.row].date)
         cell.timeMSG.text=msg[indexPath.row].date
         cell.userName.text=msg[indexPath.row].username
         cell.userPic.contentMode = .scaleAspectFill
@@ -70,7 +78,7 @@ class MessagesController : UIViewController, UITableViewDelegate, UITableViewDat
     func getMessages(idChat:Int)
     {
         var id="\(idChat)"
-        let url=URL(string: "http://192.168.64.1:3000/ListMessages/"+id)
+        let url=URL(string: "http://192.168.64.1:3000/ListMessages/1")
             
         // let url = URL(string: "http://192.168.247.1:3000/ListMessages/"+id)
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
@@ -92,4 +100,11 @@ class MessagesController : UIViewController, UITableViewDelegate, UITableViewDat
                 
             }.resume()
     }
+    
+    
+    
+    
+    @IBAction func sendMsg(_ sender: Any) {
+    }
+    
 }
