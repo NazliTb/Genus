@@ -20,7 +20,7 @@ class ChatController: UIViewController,UICollectionViewDataSource, UICollectionV
     //Widgets
     
     var chats=[Chat]()
-    var idChat:Int=0
+    var id:Int=0
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -49,7 +49,7 @@ class ChatController: UIViewController,UICollectionViewDataSource, UICollectionV
         cell.topicName.text=chats[indexPath.row].topic
         cell.dateTopic.text=chats[indexPath.row].Date
         cell.topicCreator.text=chats[indexPath.row].username
-        idChat=chats[indexPath.row].idChat
+    
         return cell
     }
 
@@ -59,6 +59,8 @@ class ChatController: UIViewController,UICollectionViewDataSource, UICollectionV
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
        
        let vc = self.storyboard?.instantiateViewController(withIdentifier: "MessagesController") as! MessagesController
+        vc.idChat=chats[indexPath.row].idChat
+              vc.id=id
          self.navigationController?.pushViewController(vc, animated: true)
          //self.present(vc, animated: true, completion: nil)
     }

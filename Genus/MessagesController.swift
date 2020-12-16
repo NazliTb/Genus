@@ -27,6 +27,7 @@ class MessagesController : UIViewController, UITableViewDelegate, UITableViewDat
     
     var idChat:Int=0
     var msg=[Msg]()
+    var id:Int=0
     
     //Widgets
 
@@ -45,9 +46,18 @@ class MessagesController : UIViewController, UITableViewDelegate, UITableViewDat
         messagesTableView.dataSource=self
         messagesTableView.delegate=self
      
-        getMessages(idChat: 1)
+        getMessages(idChat: idChat)
        
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+            super.viewDidLoad()
+            messagesTableView.dataSource=self
+            messagesTableView.delegate=self
+         
+            getMessages(idChat: idChat)
+        }
+        
     
     //Functions
     
@@ -78,7 +88,7 @@ class MessagesController : UIViewController, UITableViewDelegate, UITableViewDat
     func getMessages(idChat:Int)
     {
         var id="\(idChat)"
-        let url=URL(string: "http://192.168.64.1:3000/ListMessages/1")
+        let url=URL(string: "http://192.168.64.1:3000/ListMessages/"+id)
             
         // let url = URL(string: "http://192.168.247.1:3000/ListMessages/"+id)
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
@@ -95,6 +105,7 @@ class MessagesController : UIViewController, UITableViewDelegate, UITableViewDat
                 DispatchQueue.main.async {
                   
                     self.messagesTableView.reloadData()
+                    self.viewWillAppear(true)
                 }
             }
                 
@@ -106,7 +117,7 @@ class MessagesController : UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func sendMsg(_ sender: Any) {
         let msg=msgToSend.text
-        let params = ["idUser":"2", "contentMsg":msg,"idChat":"1"] as! Dictionary<String, String>
+        let params = ["idUser":"\(id)", "contentMsg":msg,"idChat":"\(idChat)"] as! Dictionary<String, String>
         var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/addMsg")!)
     request.httpMethod = "POST"
     request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
