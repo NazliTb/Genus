@@ -52,7 +52,7 @@ class designedMessageCell: UITableViewCell {
     }
     
     
-    var leadingConstraint = 
+    //var leadingConstraint = 
     
     
     required init?(coder: NSCoder) {
