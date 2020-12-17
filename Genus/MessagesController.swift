@@ -30,6 +30,7 @@ class MessagesController : UIViewController, UITableViewDelegate, UITableViewDat
     var id:Int=0
     var username:String=""
     var userPicture:String=""
+    fileprivate let cellId="messagesCell"
     
     //Widgets
 
@@ -115,8 +116,9 @@ class MessagesController : UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = messagesTableView.dequeueReusableCell(withIdentifier: "messagesCell",for : indexPath) as! MessageTableViewCell
+        let cell = messagesTableView.dequeueReusableCell(withIdentifier: cellId,for : indexPath) as! MessageTableViewCell
         cell.msgContent.text=msg[indexPath.row].contentMsg
+        cell.msgContent.numberOfLines=0
         let str=msg[indexPath.row].date
         cell.timeMSG.text=str
         cell.userName.text=msg[indexPath.row].username
