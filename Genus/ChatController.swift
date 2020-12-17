@@ -21,6 +21,7 @@ class ChatController: UIViewController,UICollectionViewDataSource, UICollectionV
     
     var chats=[Chat]()
     var id:Int=0
+    var userPicture:String=""
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -61,8 +62,10 @@ class ChatController: UIViewController,UICollectionViewDataSource, UICollectionV
        let vc = self.storyboard?.instantiateViewController(withIdentifier: "MessagesController") as! MessagesController
         vc.idChat=chats[indexPath.row].idChat
               vc.id=id
+        vc.username=chats[indexPath.row].username
+        vc.userPicture=userPicture
          self.navigationController?.pushViewController(vc, animated: true)
-         //self.present(vc, animated: true, completion: nil)
+        
     }
     
     func GetChatList() {

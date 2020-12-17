@@ -48,6 +48,7 @@ class MainTabController : UITabBarController {
             if let ChatNavigationController = viewController as? ChatNavigationController {
                               if let ChatViewController = ChatNavigationController.viewControllers.first as? ChatController {
                               ChatViewController.id=id
+                                ChatViewController.userPicture=userPic
                               
                           }
                           

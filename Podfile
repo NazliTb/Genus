@@ -9,7 +9,7 @@ target 'Genus' do
   pod 'Alamofire'
   pod 'PopupDialog', '~> 0.9'
   pod 'SCLAlertView'
-  pod 'MessageKit'
+  pod 'SwiftWebSocket'
   
   target 'GenusTests' do
     inherit! :search_paths

@@ -1,7 +1,6 @@
 ${PODS_ROOT}/Target Support Files/Pods-Genus/Pods-Genus-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
 ${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework
-${BUILT_PRODUCTS_DIR}/InputBarAccessoryView/InputBarAccessoryView.framework
-${BUILT_PRODUCTS_DIR}/MessageKit/MessageKit.framework
 ${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework
 ${BUILT_PRODUCTS_DIR}/SCLAlertView/SCLAlertView.framework
+${BUILT_PRODUCTS_DIR}/SwiftWebSocket/SwiftWebSocket.framework

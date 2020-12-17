@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import SwiftWebSocket
 
 struct Msg :Decodable{
     let idMessage : Int
@@ -28,6 +28,8 @@ class MessagesController : UIViewController, UITableViewDelegate, UITableViewDat
     var idChat:Int=0
     var msg=[Msg]()
     var id:Int=0
+    var username:String=""
+    var userPicture:String=""
     
     //Widgets
 
@@ -38,11 +40,35 @@ class MessagesController : UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBOutlet weak var msgToSend: UITextField!
     
-    
+    var socket : WebSocket!
     
     
     override func viewDidLoad() {
+
         super.viewDidLoad()
+        
+        
+        socket = WebSocket("ws://192.168.64.1:3001")
+        //socket = WebSocket("ws://192.168.247.1:3001")
+        socket.event.open = {
+            print("opened")
+        }
+         
+        socket.event.close = { code, reason, clean in
+            print("closed")
+        }
+         
+        socket.event.error = { error in
+            print("error \(error)")
+        }
+         
+        socket.event.message = { message in
+            if let text = message as? String {
+                self.handleMessage(jsonString:text)
+            }
+        }
+        socket.open()
+        
         messagesTableView.dataSource=self
         messagesTableView.delegate=self
      
@@ -50,19 +76,36 @@ class MessagesController : UIViewController, UITableViewDelegate, UITableViewDat
        
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-            super.viewDidLoad()
-            messagesTableView.dataSource=self
-            messagesTableView.delegate=self
-         
-            getMessages(idChat: idChat)
-        }
+ 
         
     
     //Functions
     
+    func handleMessage(jsonString:String){
+        if let data = jsonString.data(using:String.Encoding.utf8){
+            do {
+                let JSON : [String:AnyObject] = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) as! [String : AnyObject]
+                print("We've successfully parsed the message into a Dictionary! Yay!\n\(JSON)")
+                let sender : String = JSON["name"] as! String
+                let message : String = JSON["message"] as! String
+                let time : String = JSON["time"] as! String
+                let pic : String = JSON["pic"] as! String
+                let id: Int = JSON["id"] as! Int
+                let m = Msg (idMessage: 1, contentMsg: message, date: time, idUser: id, idChat: idChat, username: sender, userPicture: pic)
+              
+                msg.append(m)
+                messagesTableView.reloadData()
+                
+                
+                
+            } catch let error{
+                print("Error parsing json: \(error)")
+            }
+        }
+    }
 
-
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return msg.count
     }
@@ -75,12 +118,7 @@ class MessagesController : UIViewController, UITableViewDelegate, UITableViewDat
         let cell = messagesTableView.dequeueReusableCell(withIdentifier: "messagesCell",for : indexPath) as! MessageTableViewCell
         cell.msgContent.text=msg[indexPath.row].contentMsg
         let str=msg[indexPath.row].date
-        let start = str.index(str.startIndex, offsetBy: 11)
-        let end = str.index(str.endIndex, offsetBy: -8)
-        let range = start..<end
-        let mySubstring = str[range]
-        cell.timeMSG.text=String(mySubstring)
-        
+        cell.timeMSG.text=str
         cell.userName.text=msg[indexPath.row].username
         cell.userPic.contentMode = .scaleAspectFill
     
@@ -110,7 +148,7 @@ class MessagesController : UIViewController, UITableViewDelegate, UITableViewDat
                 DispatchQueue.main.async {
                   
                     self.messagesTableView.reloadData()
-                    self.viewWillAppear(true)
+                   
                 }
             }
                 
@@ -122,6 +160,32 @@ class MessagesController : UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func sendMsg(_ sender: Any) {
         let msg=msgToSend.text
+        var json = [String:AnyObject]()
+        json["name"] = username as AnyObject
+        json["message"] = msg as AnyObject?
+        json["pic"] = userPicture as AnyObject
+        json["id"] = id as AnyObject
+        let dateFormatter = DateFormatter()
+           dateFormatter.dateFormat = "HH:mm"
+        json["time"] = dateFormatter.string(from: NSDate() as Date) as AnyObject
+        
+           do {
+            let jsonData = try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted);
+            if let string = String(data: jsonData, encoding: String.Encoding.utf8){
+                   socket.send(string)
+                    
+               } else {
+                   print("Couldn't create json string");
+               }
+           } catch let error {
+               print("Couldn't create json data: \(error)");
+           }
+        
+        let m = Msg (idMessage: 1, contentMsg: msg!, date: dateFormatter.string(from: NSDate() as Date) , idUser: id, idChat: idChat, username: username, userPicture: userPicture)
+      
+        self.msg.append(m)
+        self.messagesTableView.reloadData()
+        
         let params = ["idUser":"\(id)", "contentMsg":msg,"idChat":"\(idChat)"] as! Dictionary<String, String>
         var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/addMsg")!)
     request.httpMethod = "POST"
@@ -138,16 +202,9 @@ class MessagesController : UIViewController, UITableViewDelegate, UITableViewDat
                 
                 }
                 catch {
-                    self.messagesTableView.reloadData()
+                    
             }
-       
-       
-    
-        
-        DispatchQueue.main.async {
-           
-    
-        }
+  
         
         })
         
