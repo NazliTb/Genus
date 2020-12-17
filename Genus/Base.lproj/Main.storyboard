@@ -511,26 +511,8 @@
                                 <rect key="frame" x="124" y="66" width="155" height="238"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hx4-ld-mpm" userLabel="returnButton">
-                                <rect key="frame" x="20" y="44" width="40" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" backgroundImage="arrow.uturn.left.circle.fill" catalog="system"/>
-                                <connections>
-                                    <action selector="returnAction:" destination="RDj-bg-2ia" eventType="touchUpInside" id="Hd2-eF-Cqy"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4xi-nC-OFs" userLabel="returnButton">
-                                <rect key="frame" x="354" y="44.5" width="40" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" backgroundImage="ellipsis.circle.fill" catalog="system"/>
-                                <connections>
-                                    <action selector="settingAction:" destination="RDj-bg-2ia" eventType="touchUpInside" id="FRr-c7-yEY"/>
-                                </connections>
-                            </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Y5N-rE-FHH">
-                                <rect key="frame" x="39" y="480" width="339" height="140"/>
+                                <rect key="frame" x="39" y="466" width="339" height="140"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </string>
@@ -632,21 +614,21 @@
                                 <state key="normal" image="paperplane.fill" catalog="system"/>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PnF-z1-jvd" userLabel="Collection View Comment">
-                                <rect key="frame" x="37" y="795" width="339" height="93"/>
+                                <rect key="frame" x="31" y="788" width="339" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="xFE-HS-KcG">
-                                    <size key="itemSize" width="337" height="92"/>
+                                    <size key="itemSize" width="337" height="96"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="seK-ng-VLK" userLabel="Comments Cell">
-                                        <rect key="frame" x="1" y="0.0" width="337" height="92"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="seK-ng-VLK" userLabel="Comments Cell" customClass="CommentCollectionViewCell" customModule="Genus" customModuleProvider="target">
+                                        <rect key="frame" x="1" y="0.0" width="337" height="96"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="CR2-xG-aV6">
-                                            <rect key="frame" x="0.0" y="0.0" width="337" height="92"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="337" height="96"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n9f-27-Mma" userLabel="user picture">
@@ -657,13 +639,6 @@
                                                     <rect key="frame" x="66" y="8" width="69" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="15"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Comment text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EsV-HJ-7bs">
-                                                    <rect key="frame" x="66" y="34" width="244" height="46"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -679,9 +654,22 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Comment text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EsV-HJ-7bs">
+                                                    <rect key="frame" x="66" y="33" width="244" height="46"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="337" height="92"/>
+                                        <size key="customSize" width="337" height="96"/>
+                                        <connections>
+                                            <outlet property="commentText" destination="EsV-HJ-7bs" id="NIU-go-l66"/>
+                                            <outlet property="likesNbr" destination="1ls-pe-Rpd" id="aku-UK-vMg"/>
+                                            <outlet property="userName" destination="PR0-8l-FBb" id="ssf-ks-VPN"/>
+                                            <outlet property="userPic" destination="n9f-27-Mma" id="JVO-be-J4c"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -690,12 +678,19 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
+                        <outlet property="addFavlist" destination="etm-j5-3Cx" id="H0D-bW-bWV"/>
+                        <outlet property="addGamelist" destination="Pt1-OT-BgR" id="2Nd-fe-ed8"/>
+                        <outlet property="addWishlist" destination="9Z6-5m-aEF" id="dAh-KN-fki"/>
+                        <outlet property="collectionView" destination="PnF-z1-jvd" id="MHo-Zs-Owk"/>
+                        <outlet property="comment" destination="LIh-0s-61p" id="ODL-l7-ccf"/>
                         <outlet property="commentNbr" destination="72d-fC-va0" id="3P1-wP-yKL"/>
                         <outlet property="favNbr" destination="JlR-IM-EWX" id="Uxd-hy-jk8"/>
+                        <outlet property="gameBg" destination="O5D-Qi-Mvw" id="gnv-8R-eQ4"/>
                         <outlet property="gameDescription" destination="Y5N-rE-FHH" id="uNk-j1-wzI"/>
                         <outlet property="gameName" destination="Ug8-gC-Ea6" id="YZy-ri-RBo"/>
                         <outlet property="gamePic" destination="O5D-Qi-Mvw" id="lxx-XG-cap"/>
                         <outlet property="gameStudio" destination="yWh-Pp-0Fq" id="D1C-Xh-vm7"/>
+                        <outlet property="sencCmnt" destination="LuN-b2-X4r" id="VSD-2R-82J"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yBI-yP-fMH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1538,10 +1533,8 @@
         <image name="Elements_twitter" width="2510" height="2509"/>
         <image name="a.book.closed.fill.ja" catalog="system" width="115" height="128"/>
         <image name="arrow.right.square.fill" catalog="system" width="128" height="114"/>
-        <image name="arrow.uturn.left.circle.fill" catalog="system" width="128" height="121"/>
         <image name="bell.fill" catalog="system" width="128" height="124"/>
         <image name="books.vertical.fill" catalog="system" width="128" height="100"/>
-        <image name="ellipsis.circle.fill" catalog="system" width="128" height="121"/>
         <image name="envelope.fill" catalog="system" width="128" height="93"/>
         <image name="gamecontroller.fill" catalog="system" width="128" height="80"/>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
