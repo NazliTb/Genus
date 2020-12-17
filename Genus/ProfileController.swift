@@ -43,6 +43,7 @@ class ProfileController: UIViewController {
     //Widgets
     var id:Int=0
     var Username:String = "Full Name"
+    var userPic:String = ""
     var gamesnbr: Any = 0
     var favnbr: Any  = 0
     var wishnbr: Any = 0
@@ -84,6 +85,9 @@ class ProfileController: UIViewController {
         }
         // Do any additional setup after loading the view.
       username.text=Username
+        let defaultLink = "http://192.168.64.1:3000/image/"+userPic
+       // let defaultLink = "http://192.168.247.1:3000/image/"+userPic
+        profilePic.downloaded(from: defaultLink)
     
        
     }

@@ -52,8 +52,8 @@ class LoginController: UIViewController {
      
         else {
     let params = ["email":email.text, "password":password.text] as! Dictionary<String, String>
-    //var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/login")!)
-    var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/login")!)
+    var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/login")!)
+    //var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/login")!)
             
     request.httpMethod = "POST"
     request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
@@ -78,6 +78,7 @@ class LoginController: UIViewController {
 let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
         let name = json["username"] as! String
         let idUser=json["idUser"] as! Int
+        let userPicture=json["userPicture"] as! String
         let alertController = UIAlertController(title: "Information", message: "Welcome you are connected !", preferredStyle: .alert)
         let OKAction = UIAlertAction(title: "OK", style: .default)
         { action -> Void in
@@ -86,6 +87,7 @@ let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, 
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainTabController") as! MainTabController
              vc.Username=name
              vc.id=idUser
+            vc.userPic=userPicture
              self.navigationController?.pushViewController(vc, animated: true)
              self.present(vc, animated: true, completion: nil)
            

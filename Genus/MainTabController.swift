@@ -12,6 +12,7 @@ class MainTabController : UITabBarController {
     
     var id:Int = 0
     var Username:String = "Full Name"
+    var userPic:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +24,7 @@ class MainTabController : UITabBarController {
             if let profileViewController = profileNavigationController.viewControllers.first as? ProfileController {
                 profileViewController.Username=Username
                 profileViewController.id=id
+                profileViewController.userPic=userPic
             }
         }
          
