@@ -37,7 +37,7 @@ class GameController: UIViewController {
     
     func gameInformations (idGame:Int){
         //let url=URL(string: "http://192.168.64.1:3000/GetGameListIOS/"+idUser)
-        let url = URL(string: "http://192.168.247.1:3000/GetGameListIOS/"+idUser)
+        let url = URL(string: "http://192.168.247.1:3000/GetGameListIOS/"+"\(idUser)")
         
         
     }
