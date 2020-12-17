@@ -88,13 +88,18 @@ class designedMessageController: UITableViewController {
         cell.messageLabel.text=msg[indexPath.row].contentMsg
         if(msg[indexPath.row].idUser==id) {
         cell.isIncoming = true
-            cell.leadingConstraint.isActive=true
-            cell.trailingConstraint.isActive=false
+            cell.leadingConstraint.isActive=false
+            cell.leadingConstraintPic.isActive=false
+            cell.trailingConstraint.isActive=true
+            cell.trailingConstraintPic.isActive=true
         }
         else {
         cell.isIncoming = false
-            cell.leadingConstraint.isActive=false
-            cell.trailingConstraint.isActive=true
+            cell.leadingConstraint.isActive=true
+            cell.leadingConstraintPic.isActive=true
+            cell.trailingConstraint.isActive=false
+            cell.trailingConstraintPic.isActive=false
+            
         }
 
       /*  let str=msg[indexPath.row].date
