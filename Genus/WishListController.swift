@@ -38,6 +38,15 @@ class WishListController: UIViewController, UICollectionViewDataSource {
     }
     
     //functions
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "GameController") as! GameController
+        vc.idUser=id
+        vc.idGame=games[indexPath.row].idGame
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
        
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
