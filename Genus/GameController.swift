@@ -44,7 +44,8 @@ class GameController: UIViewController {
             if (error==nil) {
             do {
                 let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
-                let defaultLink = "http://192.168.247.1:3000/image/"+json["gamePicture"] as! AnyObject
+                let pic = json["gamePicture"] as? String
+                let defaultLink = "http://192.168.247.1:3000/image/"+pic! 
                 self.gameBg.downloaded(from: defaultLink)
                 self.gamePic.downloaded(from: defaultLink)
                 self.gameName.text=json["name"] as? String

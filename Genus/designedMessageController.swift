@@ -79,6 +79,8 @@ class designedMessageController: UITableViewController {
         return msg.count
     }
     
+
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId,for : indexPath) as!
         designedMessageCell
@@ -86,19 +88,22 @@ class designedMessageController: UITableViewController {
         cell.messageLabel.text=msg[indexPath.row].contentMsg
         if(msg[indexPath.row].idUser==id) {
         cell.isIncoming = true
+            cell.leadingConstraint.isActive=true
+            cell.trailingConstraint.isActive=false
         }
         else {
         cell.isIncoming = false
+            cell.leadingConstraint.isActive=false
+            cell.trailingConstraint.isActive=true
         }
-       /* cell.msgContent.text=msg[indexPath.row].contentMsg
-        cell.msgContent.numberOfLines=0
-        let str=msg[indexPath.row].date
+
+      /*  let str=msg[indexPath.row].date
         cell.timeMSG.text=str
-        cell.userName.text=msg[indexPath.row].username
-        cell.userPic.contentMode = .scaleAspectFill
+        cell.userName.text=msg[indexPath.row].username*/
+        
     
         let defaultLink = "http://192.168.64.1:3000/image/"+msg[indexPath.row].userPicture
-        cell.userPic.downloaded(from: defaultLink)*/
+        cell.userPic.downloaded(from: defaultLink)
         return cell
     }
     
