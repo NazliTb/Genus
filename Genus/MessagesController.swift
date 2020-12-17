@@ -74,8 +74,13 @@ class MessagesController : UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = messagesTableView.dequeueReusableCell(withIdentifier: "messagesCell",for : indexPath) as! MessageTableViewCell
         cell.msgContent.text=msg[indexPath.row].contentMsg
-        print(msg[indexPath.row].date)
-        cell.timeMSG.text=msg[indexPath.row].date
+        let str=msg[indexPath.row].date
+        let start = str.index(str.startIndex, offsetBy: 11)
+        let end = str.index(str.endIndex, offsetBy: -8)
+        let range = start..<end
+        let mySubstring = str[range]
+        cell.timeMSG.text=String(mySubstring)
+        
         cell.userName.text=msg[indexPath.row].username
         cell.userPic.contentMode = .scaleAspectFill
     
