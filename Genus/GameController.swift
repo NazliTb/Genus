@@ -36,9 +36,32 @@ class GameController: UIViewController {
     }
     
     func gameInformations (idGame:Int){
-        //let url=URL(string: "http://192.168.64.1:3000/GetGameListIOS/"+idUser)
-        let url = URL(string: "http://192.168.247.1:3000/GetGameListIOS/"+"\(idUser)")
-        
+
+            
+        //let url=URL(string: "http://192.168.64.1:3000/GetGameDetails/"+"\(idGame)")
+        let url = URL(string: "http://192.168.247.1:3000/GetGameDetails/"+"\(idGame)")
+        URLSession.shared.dataTask(with: url!) { (data, response, error) in            
+            if (error==nil) {
+            do {
+                let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
+                let defaultLink = "http://192.168.247.1:3000/image/"+json["gamePicture"] as! AnyObject
+                self.gameBg.downloaded(from: defaultLink)
+                self.gamePic.downloaded(from: defaultLink)
+                self.gameName.text=json["name"] as? String
+                self.gameStudio.text=json["companyName"] as? String
+                self.gameDescription.text=json["description"] as? String
+                                               
+            }
+            catch {
+            print("ERROR")
+            }
+            
+            DispatchQueue.main.async {
+              
+            }
+        }
+            
+        }.resume()
         
     }
 
