@@ -9,6 +9,12 @@ import UIKit
 
 class GameController: UIViewController {
     
+  //var
+    var idGame:Int=0
+    var idUser:Int=0
+    
+    
+    
     //Widgets
     
    

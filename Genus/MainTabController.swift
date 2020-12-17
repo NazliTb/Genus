@@ -48,7 +48,19 @@ class MainTabController : UITabBarController {
             if let ChatNavigationController = viewController as? ChatNavigationController {
                               if let ChatViewController = ChatNavigationController.viewControllers.first as? ChatController {
                               ChatViewController.id=id
+                                ChatViewController.username=Username
                                 ChatViewController.userPicture=userPic
+                              
+                          }
+                          
+                      }
+            
+            
+            if let DiscoverNavigationController = viewController as? DiscoverNavigationController {
+                              if let DiscoverViewController = DiscoverNavigationController.viewControllers.first as? DiscoverController {
+                              DiscoverViewController.id=id
+                                DiscoverViewController.username=Username
+                                
                               
                           }
                           
