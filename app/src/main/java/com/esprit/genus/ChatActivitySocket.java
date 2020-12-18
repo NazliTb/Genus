@@ -197,6 +197,7 @@ public class ChatActivitySocket extends AppCompatActivity implements TextWatcher
         recyclerView = findViewById(R.id.recyclerView);
 
         messageAdapter = new MessageAdapter(Integer.parseInt(idUser),Integer.parseInt(idChat),getLayoutInflater(),this);
+
         messageAdapter.loadPreviousMessages(Integer.parseInt(idChat));
         recyclerView.setAdapter(messageAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -211,6 +212,7 @@ public class ChatActivitySocket extends AppCompatActivity implements TextWatcher
                 jsonObject.put("name", username);
                 jsonObject.put("message", messageEdit.getText().toString());
                 jsonObject.put("userPicture", userPic);
+
                 addMsg(messageEdit.getText().toString(),Integer.parseInt(idUser),Integer.parseInt(idChat));
                 webSocket.send(jsonObject.toString());
 

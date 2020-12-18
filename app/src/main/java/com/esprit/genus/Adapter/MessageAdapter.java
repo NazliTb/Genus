@@ -56,11 +56,14 @@ public class MessageAdapter extends RecyclerView.Adapter {
     private class SentMessageHolder extends RecyclerView.ViewHolder {
 
         TextView messageTxt;
+        TextView time;
+
 
         public SentMessageHolder(@NonNull View itemView) {
             super(itemView);
 
             messageTxt = itemView.findViewById(R.id.sentTxt);
+            time = itemView.findViewById(R.id.text_message_time);
         }
     }
 
@@ -78,6 +81,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
     private class ReceivedMessageHolder extends RecyclerView.ViewHolder {
 
         TextView nameTxt, messageTxt;
+        TextView time;
         ImageView pic;
 
         public ReceivedMessageHolder(@NonNull View itemView) {
@@ -86,6 +90,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
             nameTxt = itemView.findViewById(R.id.nameTxt);
             messageTxt = itemView.findViewById(R.id.receivedTxt);
             pic = itemView.findViewById(R.id.image_message_profile);
+            time = itemView.findViewById(R.id.text_message_time);
 
         }
     }
@@ -174,6 +179,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
                     SentMessageHolder messageHolder = (SentMessageHolder) holder;
                     messageHolder.messageTxt.setText(message.getString("message"));
+                    messageHolder.time.setText(message.getString("time"));
 
                 } else {
 
@@ -193,6 +199,8 @@ public class MessageAdapter extends RecyclerView.Adapter {
                     messageHolder.messageTxt.setText(message.getString("message"));
                     Utils.displayRoundImageFromUrl(mContext,
                             "http://10.0.2.2:3000/image/"+message.getString("userPicture"),messageHolder.pic);
+                    messageHolder.time.setText(message.getString("time"));
+
 
                 } else {
 
@@ -250,6 +258,8 @@ public class MessageAdapter extends RecyclerView.Adapter {
                         jsonObject.put("name", m.getUsername());
                         jsonObject.put("userPicture", m.getUserPicture());
                         jsonObject.put("message", m.getContentMsg());
+                        jsonObject.put("time",m.getDate());
+
                         if(m.getIdUser()==idUser)
                         {
                             jsonObject.put("isSent", true);

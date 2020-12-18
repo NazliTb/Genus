@@ -6,7 +6,7 @@ public class Message {
 
   private  int idMessage;
   private String contentMsg;
-  private Date date;
+  private String date;
   private int idUser;
   private int idChat;
   private String username;
@@ -15,7 +15,7 @@ public class Message {
     public Message() {
     }
 
-    public Message(String contentMsg, Date date, int idUser, int idChat,String username,String userPicture) {
+    public Message(String contentMsg, String date, int idUser, int idChat,String username,String userPicture) {
         this.contentMsg = contentMsg;
         this.date = date;
         this.idUser = idUser;
@@ -41,11 +41,11 @@ public class Message {
         this.contentMsg = contentMsg;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
