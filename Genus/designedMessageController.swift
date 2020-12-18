@@ -85,7 +85,7 @@ class designedMessageController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId,for : indexPath) as!
         designedMessageCell
  
-        cell.messageLabel.text=msg[indexPath.row].contentMsg
+        cell.userMsg/*messageLabel*/.text=msg[indexPath.row].contentMsg
         if(msg[indexPath.row].idUser==id) {
         cell.isIncoming = true
             cell.leadingConstraint.isActive=false
@@ -108,7 +108,7 @@ class designedMessageController: UITableViewController {
         
     
         let defaultLink = "http://192.168.64.1:3000/image/"+msg[indexPath.row].userPicture
-        cell.userPic.downloaded(from: defaultLink)
+        cell.userPicture.downloaded(from: defaultLink)
         return cell
     }
     

@@ -20,15 +20,17 @@ class MessageTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    @IBOutlet weak var timeMSG: UITextView!
+   
     
     @IBOutlet weak var userPic: UIImageView!
     
 
-    @IBOutlet weak var msgContent: UILabel!
+    @IBOutlet weak var timeMSG: UILabel!
     
     
+    @IBOutlet weak var userName: UILabel!
     
-    @IBOutlet weak var userName: UITextView!
+   
     
+    @IBOutlet weak var msgContent: UITextView!
 }

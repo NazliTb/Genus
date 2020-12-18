@@ -160,41 +160,47 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xud-EM-9hq">
+                                                    <rect key="frame" x="332" y="0.0" width="82" height="100"/>
+                                                </stackView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eyS-es-MNV">
-                                                    <rect key="frame" x="2" y="12" width="50" height="58"/>
+                                                    <rect key="frame" x="12" y="0.0" width="55" height="50"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="John Doe" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="47I-Jz-sHm">
-                                                    <rect key="frame" x="61" y="1" width="82" height="26"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="John Doe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7yL-7g-oOW">
+                                                    <rect key="frame" x="75" y="22" width="73" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                    <color key="textColor" red="0.1012260839343071" green="0.080147974193096161" blue="0.39709371328353882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                </textView>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="11:44" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kI3-IX-eLy">
-                                                    <rect key="frame" x="211" y="43" width="49" height="28"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                    <color key="textColor" red="0.1012260839343071" green="0.080147974193096161" blue="0.39709371328353882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                </textView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello what's up ?" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cLT-Nh-1bG">
-                                                    <rect key="frame" x="60" y="35" width="143" height="36"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="hey what's up ?" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8kv-Dc-V91">
+                                                    <rect key="frame" x="12" y="51" width="169" height="38"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.45138680930000002" green="0.99309605359999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="textColor" systemColor="labelColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="11:11" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Htg-rN-hPw">
+                                                    <rect key="frame" x="189" y="62" width="35" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="xud-EM-9hq" secondAttribute="bottom" id="F4B-nP-aXc"/>
+                                                <constraint firstItem="xud-EM-9hq" firstAttribute="top" secondItem="crX-1Y-U6B" secondAttribute="top" id="Iul-km-dzj"/>
+                                                <constraint firstAttribute="trailing" secondItem="xud-EM-9hq" secondAttribute="trailing" id="ZOn-mQ-Uas"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
-                                            <outlet property="msgContent" destination="cLT-Nh-1bG" id="Slg-ts-beU"/>
-                                            <outlet property="timeMSG" destination="kI3-IX-eLy" id="b1N-M0-s6d"/>
-                                            <outlet property="userName" destination="47I-Jz-sHm" id="B5v-xz-IIC"/>
+                                            <outlet property="msgContent" destination="8kv-Dc-V91" id="SZq-6c-BM5"/>
+                                            <outlet property="timeMSG" destination="Htg-rN-hPw" id="eHt-cL-ITQ"/>
+                                            <outlet property="userName" destination="7yL-7g-oOW" id="tI6-De-MMP"/>
                                             <outlet property="userPic" destination="eyS-es-MNV" id="VpL-n3-Pc2"/>
                                         </connections>
                                     </tableViewCell>
