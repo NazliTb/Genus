@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9td-Sq-vtg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9td-Sq-vtg">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -164,13 +164,13 @@
                                                     <rect key="frame" x="10" y="0.0" width="394" height="100"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1Nl-kQ-bqs">
-                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="67"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="50"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eyS-es-MNV">
-                                                                    <rect key="frame" x="0.0" y="8.5" width="55" height="50"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="55" height="50"/>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="John Doe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7yL-7g-oOW">
-                                                                    <rect key="frame" x="55" y="23.5" width="73" height="20.5"/>
+                                                                    <rect key="frame" x="55" y="15" width="73" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -178,20 +178,32 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vhF-Ar-in9">
-                                                            <rect key="frame" x="0.0" y="67" width="222" height="33"/>
+                                                            <rect key="frame" x="0.0" y="50" width="185.5" height="50"/>
                                                             <subviews>
-                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="hey what's up ?" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8kv-Dc-V91">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="111" height="33"/>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tCJ-G4-Ycc">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="151" height="50"/>
+                                                                    <subviews>
+                                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="hey what's up ?" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8kv-Dc-V91">
+                                                                            <rect key="frame" x="7" y="0.0" width="137" height="50"/>
+                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="230" id="xrt-qG-z75"/>
+                                                                            </constraints>
+                                                                            <color key="textColor" systemColor="labelColor"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                                        </textView>
+                                                                    </subviews>
                                                                     <color key="backgroundColor" red="0.45138680930000002" green="0.99309605359999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="230" id="xrt-qG-z75"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="8kv-Dc-V91" secondAttribute="trailing" constant="7" id="GVV-ci-hea"/>
+                                                                        <constraint firstItem="8kv-Dc-V91" firstAttribute="leading" secondItem="tCJ-G4-Ycc" secondAttribute="leading" constant="7" id="JdW-nb-JyK"/>
+                                                                        <constraint firstItem="8kv-Dc-V91" firstAttribute="top" secondItem="tCJ-G4-Ycc" secondAttribute="top" id="Ycx-OT-8PF"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="8kv-Dc-V91" secondAttribute="bottom" id="fCl-kK-oP3"/>
                                                                     </constraints>
-                                                                    <color key="textColor" systemColor="labelColor"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                                </textView>
+                                                                </view>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11:11" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Htg-rN-hPw">
-                                                                    <rect key="frame" x="111" y="0.0" width="111" height="33"/>
+                                                                    <rect key="frame" x="151" y="0.0" width="34.5" height="50"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>

@@ -128,8 +128,6 @@ class MessagesController : UIViewController, UITableViewDelegate, UITableViewDat
         let str=msg[indexPath.row].date
         cell.timeMSG.text=str
         cell.userName.text=msg[indexPath.row].username
-        cell.userPic.contentMode = .scaleAspectFill
-    
         let defaultLink = "http://192.168.64.1:3000/image/"+msg[indexPath.row].userPicture
         cell.userPic.downloaded(from: defaultLink)
         return cell
