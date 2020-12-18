@@ -19,7 +19,7 @@ struct wishGame :Decodable{
 
 
 
-class WishListController: UIViewController, UICollectionViewDataSource {
+class WishListController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     //Widgets
     
@@ -34,6 +34,8 @@ class WishListController: UIViewController, UICollectionViewDataSource {
         // Do any additional setup after loading the view.
        
         collectionView.dataSource=self
+        collectionView.allowsSelection = true
+        collectionView.delegate = self
         GetWishList(idUser:"\(id)")
     }
     

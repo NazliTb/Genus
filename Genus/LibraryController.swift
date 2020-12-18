@@ -50,7 +50,7 @@ extension UIImageView {
 
 
 
-class LibraryController: UIViewController ,UICollectionViewDataSource{
+class LibraryController: UIViewController ,UICollectionViewDataSource, UICollectionViewDelegate{
   
 
     //Var 
@@ -69,6 +69,10 @@ class LibraryController: UIViewController ,UICollectionViewDataSource{
         super.viewDidLoad()
         collectionViewGame.dataSource=self
         collectionViewFavGame.dataSource=self
+        collectionViewGame.allowsSelection = true
+        collectionViewFavGame.allowsSelection = true
+        collectionViewGame.delegate = self
+        collectionViewFavGame.delegate = self
         GetGameDetails(idUser:"\(id)")
         GetFavList(idUser:"\(id)")
     }
