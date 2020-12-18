@@ -40,7 +40,7 @@ struct BestRate :Decodable{
     let type:String
 }
 
-class DiscoverController: UIViewController, UICollectionViewDataSource {
+class DiscoverController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
      
     //Widgets
     //var
@@ -62,6 +62,12 @@ class DiscoverController: UIViewController, UICollectionViewDataSource {
         collectionViewTopPicks.dataSource=self
         collectionViewTrendingGames.dataSource=self
         collectionViewBestRate.dataSource=self
+        collectionViewBestRate.allowsSelection = true
+        collectionViewTopPicks.allowsSelection = true
+        collectionViewTrendingGames.allowsSelection = true
+        collectionViewTopPicks.delegate = self
+        collectionViewBestRate.delegate = self
+        collectionViewTrendingGames.delegate = self
         getTopPicks()
         getTrendingGames()
         getBestRateGames()

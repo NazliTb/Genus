@@ -33,6 +33,7 @@ class GameController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        gameInformations(idGame: idGame)
     }
     
     func gameInformations (idGame:Int){
