@@ -22,6 +22,7 @@ class MessageTableViewCell: UITableViewCell {
     
    
     
+    @IBOutlet weak var stack: UIStackView!
     @IBOutlet weak var userPic: UIImageView!
     
 

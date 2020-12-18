@@ -118,7 +118,13 @@ class MessagesController : UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = messagesTableView.dequeueReusableCell(withIdentifier: cellId,for : indexPath) as! MessageTableViewCell
         cell.msgContent.text=msg[indexPath.row].contentMsg
-        cell.msgContent.numberOfLines=0
+       
+        if(msg[indexPath.row].idUser==id) {
+            cell.stack.alignment = .trailing
+        }
+        else {
+            cell.stack.alignment = .leading
+        }
         let str=msg[indexPath.row].date
         cell.timeMSG.text=str
         cell.userName.text=msg[indexPath.row].username
