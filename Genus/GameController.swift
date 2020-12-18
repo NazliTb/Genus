@@ -134,13 +134,72 @@ class GameController: UIViewController, UICollectionViewDataSource {
     //IBActions
     
     @IBAction func addGameAction(_ sender: Any) {
+        
+        let params = ["idUser":idUser, "idGame":idGame] as! Dictionary<String, Any>
+       // var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/AddToGameList")!)
+        var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/AddToGameList")!)
+        request.httpMethod = "POST"
+        request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        let session = URLSession.shared
+        let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
+                    }
+                    catch {
+                }
+            DispatchQueue.main.async {
+                print("Game added to library")
+            }
+            })
+            task.resume()
     }
     
     
     @IBAction func addFavGameAction(_ sender: Any) {
+        
+        let params = ["idUser":idUser, "idGame":idGame] as! Dictionary<String, Any>
+       // var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/AddToFavList")!)
+        var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/AddToFavList")!)
+        request.httpMethod = "POST"
+        request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        let session = URLSession.shared
+        let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
+                    }
+                    catch {
+                }
+            DispatchQueue.main.async {
+                print("Game added to favorites")
+            }
+            })
+            task.resume()
+        
     }
     
     @IBAction func addWishlistAction(_ sender: Any) {
+        
+        let params = ["idUser":idUser, "idGame":idGame] as! Dictionary<String, Any>
+       // var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/AddToWishList")!)
+        var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/AddToWishList")!)
+        request.httpMethod = "POST"
+        request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        let session = URLSession.shared
+        let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
+                    }
+                    catch {
+                }
+            DispatchQueue.main.async {
+                print("Game added to wishlist")
+            }
+            })
+            task.resume()
+        
     }
     
     @IBAction func addCommentAction(_ sender: Any) {
