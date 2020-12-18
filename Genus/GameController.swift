@@ -21,6 +21,12 @@ class GameController: UIViewController, UICollectionViewDataSource {
     var idUser:Int=0
     var comments=[commentList]()
     
+    var gamePicture :  String = ""
+    var gamename :  String = ""
+    var gamestudio : String = ""
+    var gameDesc : String = ""
+    
+    
     
     //Widgets
    
@@ -68,27 +74,30 @@ class GameController: UIViewController, UICollectionViewDataSource {
     func gameInformations (idGame:Int){
 
             
-        //let url=URL(string: "http://192.168.64.1:3000/GetGameDetails/"+"\(idGame)")
-        let url = URL(string: "http://192.168.247.1:3000/GetGameDetails/"+"\(idGame)")
+        //let url=URL(string: "http://192.168.64.1:3000/GetGameDetailsiOS/"+"\(idGame)")
+        let url = URL(string: "http://192.168.247.1:3000/GetGameDetailsiOS/"+"\(idGame)")
         URLSession.shared.dataTask(with: url!) { (data, response, error) in            
             if (error==nil) {
-            do {
-                let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
-                let pic = json["gamePicture"] as? String
-                let defaultLink = "http://192.168.247.1:3000/image/"+pic! 
-                self.gameBg.downloaded(from: defaultLink)
-                self.gamePic.downloaded(from: defaultLink)
-                self.gameName.text=json["name"] as? String
-                self.gameStudio.text=json["companyName"] as? String
-                self.gameDescription.text=json["description"] as? String
-                                               
-            }
-            catch {
-            print("ERROR")
-            }
+                do {
+                    // make sure this JSON is in the format we expect
+                    if let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
+                        self.gamePicture = json["gamePicture"] as! String
+                        self.gamename = json["name"] as! String
+                        self.gamestudio = json["companyName"] as! String
+                        self.gameDesc = json["description"] as! String
+                        
+                    }
+                } catch let error as NSError {
+                    print("Failed to load: \(error.localizedDescription)")
+                }
             
             DispatchQueue.main.async {
-              
+                let defaultLink = "http://192.168.247.1:3000/image/"+self.gamePicture
+                self.gameBg.downloaded(from: defaultLink)
+                self.gamePic.downloaded(from: defaultLink)
+                self.gameName.text = self.gamename
+                self.gameStudio.text = self.gamestudio
+                self.gameDescription.text = self.gameDesc
             }
         }
             
@@ -130,11 +139,26 @@ class GameController: UIViewController, UICollectionViewDataSource {
     
     @IBAction func addWishlistAction(_ sender: Any) {
     }
+    
     @IBAction func addCommentAction(_ sender: Any) {
+        
         let params = ["commentText":comment.text, "idUser":idUser, "idGame":idGame] as! Dictionary<String, String>
         var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/AddComment")!)
         request.httpMethod = "POST"
         request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        let session = URLSession.shared
+        let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
+                    }
+                    catch {
+                }
+            DispatchQueue.main.async {
+                print("Comment added")
+            }
+            })
+            task.resume()
     }
 }
+
