@@ -115,8 +115,8 @@ class LibraryController: UIViewController ,UICollectionViewDataSource, UICollect
             cell.companyName.text=Favgames[indexPath.row].companyName
             cell.gameName.text=Favgames[indexPath.row].name
             cell.gameImage.contentMode = .scaleAspectFill
-            //let defaultLink = "http://192.168.64.1:3000/image/"+Favgames[indexPath.row].gamePicture
-            let defaultLink = "http://192.168.247.1:3000/image/"+Favgames[indexPath.row].gamePicture
+            let defaultLink = "http://192.168.64.1:3000/image/"+Favgames[indexPath.row].gamePicture
+           // let defaultLink = "http://192.168.247.1:3000/image/"+Favgames[indexPath.row].gamePicture
             cell.gameImage.downloaded(from: defaultLink)
             
             return cell

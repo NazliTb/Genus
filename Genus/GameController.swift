@@ -64,8 +64,8 @@ class GameController: UIViewController, UICollectionViewDataSource {
        //cell.commentText.text=comments[indexPath.row].companyName
        // cell.likesNbr.text=comments[indexPath.row].likesNbr
         cell.userPic.contentMode = .scaleAspectFill
-        //let defaultLink = "http://192.168.64.1:3000/image/"+comments[indexPath.row].userPicture
-        let defaultLink = "http://192.168.247.1:3000/image/"+comments[indexPath.row].userPicture
+        let defaultLink = "http://192.168.64.1:3000/image/"+comments[indexPath.row].userPicture
+       // let defaultLink = "http://192.168.247.1:3000/image/"+comments[indexPath.row].userPicture
         cell.userPic.downloaded(from: defaultLink)
         return cell
     }
@@ -74,13 +74,15 @@ class GameController: UIViewController, UICollectionViewDataSource {
     func gameInformations (idGame:Int){
 
             
-        //let url=URL(string: "http://192.168.64.1:3000/GetGameDetailsiOS/"+"\(idGame)")
-        let url = URL(string: "http://192.168.247.1:3000/GetGameDetailsiOS/"+"\(idGame)")
+        let url=URL(string: "http://192.168.64.1:3000/GetGameDetailsiOS/"+"\(idGame)")
+       // let url = URL(string: "http://192.168.247.1:3000/GetGameDetailsiOS/"+"\(idGame)")
+        
         URLSession.shared.dataTask(with: url!) { (data, response, error) in            
-            if (error==nil) {
+          
                 do {
                     // make sure this JSON is in the format we expect
                     if let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
+                        print(json)
                         self.gamePicture = json["gamePicture"] as! String
                         self.gamename = json["name"] as! String
                         self.gamestudio = json["companyName"] as! String
@@ -92,14 +94,15 @@ class GameController: UIViewController, UICollectionViewDataSource {
                 }
             
             DispatchQueue.main.async {
-                let defaultLink = "http://192.168.247.1:3000/image/"+self.gamePicture
+              //  let defaultLink = "http://192.168.247.1:3000/image/"+self.gamePicture
+                let defaultLink = "http://192.168.64.1:3000/image/"+self.gamePicture
                 self.gameBg.downloaded(from: defaultLink)
                 self.gamePic.downloaded(from: defaultLink)
                 self.gameName.text = self.gamename
                 self.gameStudio.text = self.gamestudio
                 self.gameDescription.text = self.gameDesc
             }
-        }
+        
             
         }.resume()
         
@@ -107,8 +110,8 @@ class GameController: UIViewController, UICollectionViewDataSource {
     
     func GetComments (idGame:Int){
         
-        //let url=URL(string: "http://192.168.64.1:3000/GetCommentsiOS/"+"\(idGame)")
-        let url = URL(string: "http://192.168.247.1:3000/GetCommentsiOS/"+"\(idGame)")
+        let url=URL(string: "http://192.168.64.1:3000/GetCommentsiOS/"+"\(idGame)")
+       // let url = URL(string: "http://192.168.247.1:3000/GetCommentsiOS/"+"\(idGame)")
         
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
             
@@ -142,8 +145,9 @@ class GameController: UIViewController, UICollectionViewDataSource {
     
     @IBAction func addCommentAction(_ sender: Any) {
         
-        let params = ["commentText":comment.text, "idUser":idUser, "idGame":idGame] as! Dictionary<String, String>
-        var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/AddComment")!)
+        let params = ["commentText":comment.text, "idUser":idUser, "idGame":idGame] as! Dictionary<String, Any>
+       // var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/AddComment")!)
+        var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/AddComment")!)
         request.httpMethod = "POST"
         request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
