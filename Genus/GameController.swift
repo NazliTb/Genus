@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct comment :Decodable{
+struct commentList :Decodable{
     let commentText:String
     let likesNbr:Int
     let userPicture:String
@@ -122,17 +122,20 @@ class GameController: UIViewController, UICollectionViewDataSource {
 
     //IBActions
     
-    @IBAction func addAction(_ sender: Any) {
+    @IBAction func addGameAction(_ sender: Any) {
     }
     
     
-    @IBAction func returnAction(_ sender: Any) {
+    @IBAction func addFavGameAction(_ sender: Any) {
     }
     
-    
-    @IBAction func settingAction(_ sender: Any) {
+    @IBAction func addWishlistAction(_ sender: Any) {
     }
-    
-    
-    
+    @IBAction func addCommentAction(_ sender: Any) {
+        let params = ["commentText":comment.text, "idUser":idUser, "idGame":idGame] as! Dictionary<String, String>
+        var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/AddComment")!)
+        request.httpMethod = "POST"
+        request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+    }
 }
