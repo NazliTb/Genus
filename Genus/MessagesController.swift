@@ -36,6 +36,7 @@ class MessagesController : UIViewController, UITableViewDelegate, UITableViewDat
 
     
     
+    
     @IBOutlet weak var messagesTableView: UITableView!
     
     
@@ -72,6 +73,7 @@ class MessagesController : UIViewController, UITableViewDelegate, UITableViewDat
         
         messagesTableView.dataSource=self
         messagesTableView.delegate=self
+        messagesTableView.allowsSelection=false
      
         getMessages(idChat: idChat)
        
@@ -120,13 +122,17 @@ class MessagesController : UIViewController, UITableViewDelegate, UITableViewDat
         cell.msgContent.text=msg[indexPath.row].contentMsg
        
         if(msg[indexPath.row].idUser==id) {
+            cell.msgContent.textColor = .black
             cell.stack.alignment = .trailing
+            cell.chatTextBubble.backgroundColor = UIColor.init(hexString: "#04D9D9")
         }
         else {
             cell.stack.alignment = .leading
+            cell.chatTextBubble.backgroundColor = UIColor.init(hexString: "#111C59")
+            cell.msgContent.textColor = .white
         }
-        let str=msg[indexPath.row].date
-        cell.timeMSG.text=str
+      //  let str=msg[indexPath.row].date
+        cell.timeMSG.text="22:00"
         cell.userName.text=msg[indexPath.row].username
         let defaultLink = "http://192.168.64.1:3000/image/"+msg[indexPath.row].userPicture
         cell.userPic.downloaded(from: defaultLink)

@@ -19,7 +19,7 @@ class GameController: UIViewController, UICollectionViewDataSource {
   //var
     var idGame:Int=0
     var idUser:Int=0
-    var comments=[comment]()
+    var comments=[commentList]()
     
     
     //Widgets
@@ -47,17 +47,16 @@ class GameController: UIViewController, UICollectionViewDataSource {
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         comments.count
     }
+    
+  
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "CommentsCell", for: indexPath) as! CommentCollectionViewCell
         cell.userName.text=comments[indexPath.row].userName
-        cell.commentText.text=comments[indexPath.row].companyName
-        cell.likesNbr.text=comments[indexPath.row].likesNbr
+       //cell.commentText.text=comments[indexPath.row].companyName
+       // cell.likesNbr.text=comments[indexPath.row].likesNbr
         cell.userPic.contentMode = .scaleAspectFill
         //let defaultLink = "http://192.168.64.1:3000/image/"+comments[indexPath.row].userPicture
         let defaultLink = "http://192.168.247.1:3000/image/"+comments[indexPath.row].userPicture
@@ -106,7 +105,7 @@ class GameController: UIViewController, UICollectionViewDataSource {
             
             if (error==nil) {
             do {
-            self.comments=try JSONDecoder().decode([comment].self, from: data!)
+            self.comments=try JSONDecoder().decode([commentList].self, from: data!)
             }
             catch {
             print("ERROR")

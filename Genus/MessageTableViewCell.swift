@@ -11,7 +11,7 @@ class MessageTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        chatTextBubble.layer.cornerRadius = 12
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -21,6 +21,13 @@ class MessageTableViewCell: UITableViewCell {
     }
     
    
+    @IBOutlet weak var msgTimeStack: UIStackView!
+    
+    @IBOutlet weak var usernamePicStack: UIStackView!
+    
+    
+    
+    @IBOutlet weak var chatTextBubble: UIView!
     
     @IBOutlet weak var stack: UIStackView!
     @IBOutlet weak var userPic: UIImageView!
