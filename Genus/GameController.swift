@@ -7,11 +7,19 @@
 
 import UIKit
 
-class GameController: UIViewController {
-    
+struct comment :Decodable{
+    let commentText:String
+    let likesNbr:Int
+    let userPicture:String
+    let userName:String
+}
+
+class GameController: UIViewController, UICollectionViewDataSource {
+        
   //var
     var idGame:Int=0
     var idUser:Int=0
+    var comments=[comment]()
     
     
     //Widgets
@@ -33,8 +41,30 @@ class GameController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        collectionView.dataSource=self
         gameInformations(idGame: idGame)
     }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        comments.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "CommentsCell", for: indexPath) as! CommentCollectionViewCell
+        cell.userName.text=comments[indexPath.row].userName
+        cell.commentText.text=comments[indexPath.row].companyName
+        cell.likesNbr.text=comments[indexPath.row].likesNbr
+        cell.userPic.contentMode = .scaleAspectFill
+        //let defaultLink = "http://192.168.64.1:3000/image/"+comments[indexPath.row].userPicture
+        let defaultLink = "http://192.168.247.1:3000/image/"+comments[indexPath.row].userPicture
+        cell.userPic.downloaded(from: defaultLink)
+        return cell
+    }
+    
     
     func gameInformations (idGame:Int){
 
@@ -65,6 +95,28 @@ class GameController: UIViewController {
             
         }.resume()
         
+    }
+    
+    func GetComments (idGame:Int){
+        
+        //let url=URL(string: "http://192.168.64.1:3000/GetCommentsiOS/"+"\(idGame)")
+        let url = URL(string: "http://192.168.247.1:3000/GetCommentsiOS/"+"\(idGame)")
+        
+        URLSession.shared.dataTask(with: url!) { (data, response, error) in
+            
+            if (error==nil) {
+            do {
+            self.comments=try JSONDecoder().decode([comment].self, from: data!)
+            }
+            catch {
+            print("ERROR")
+            }
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+            
+        }.resume()
     }
 
 
