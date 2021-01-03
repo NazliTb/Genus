@@ -103,17 +103,17 @@ public interface INodeJS {
     Call <String> verifyParticipation (@Path("idUser") int idUser,@Path("idChat") int idChat);
 
 
-    @GET("VerifyGamelist/{idUser}/{idChat}")
+    @GET("VerifyGamelist/{idUser}/{idGame}")
     Call <String> VerifyGamelist (@Path("idUser") int idUser,
-                                  @Path("idChat") int idGame);
+                                  @Path("idGame") int idGame);
 
-    @GET("VerifyWishlist/{idUser}/{idChat}")
+    @GET("VerifyWishlist/{idUser}/{idGame}")
     Call <String> VerifyWishlist (@Path("idUser") int idUser,
-                                  @Path("idChat") int idGame);
+                                  @Path("idGame") int idGame);
 
-    @GET("VerifyFavlist/{idUser}/{idChat}")
+    @GET("VerifyFavlist/{idUser}/{idGame}")
     Call <String> VerifyFavlist (@Path("idUser") int idUser,
-                                 @Path("idChat") int idGame);
+                                 @Path("idGame") int idGame);
 
 
     @POST("search")

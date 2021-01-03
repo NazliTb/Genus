@@ -125,7 +125,7 @@ public class GamescreenActivity extends AppCompatActivity {
         addGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*final Call<String> verif = myAPI1.VerifyGamelist(idUser, idGame);
+                final Call<String> verif = myAPI1.VerifyGamelist(idUser, idGame);
                 verif.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
@@ -133,16 +133,19 @@ public class GamescreenActivity extends AppCompatActivity {
                             return;
                         }
                         String result = response.body();
-                        if (result.contains("false")) {*/
+                        if (result.contains("false")) {
                             addToGameList(idUser,idGame);
-                       /* }
+                        }
+                        else {
+                            Toast.makeText(GamescreenActivity.this, "You have this game!", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
 
                     }
-                });*/
+                });
             }
         });
 
@@ -150,7 +153,7 @@ public class GamescreenActivity extends AppCompatActivity {
         addWishlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*final Call<String> verif = myAPI1.VerifyWishlist(idUser, idGame);
+                final Call<String> verif = myAPI1.VerifyWishlist(idUser, idGame);
                 verif.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
@@ -158,16 +161,19 @@ public class GamescreenActivity extends AppCompatActivity {
                             return;
                         }
                         String result = response.body();
-                        if (result.contains("false")) {*/
+                        if (result.contains("false")) {
                             addToWishList(idUser,idGame);
-                        /*}
+                        } else {
+                            Toast.makeText(GamescreenActivity.this, "You have this game!", Toast.LENGTH_SHORT).show();
+                        }
+
                     }
 
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
 
                     }
-                });*/
+                });
             }
         });
 
@@ -175,7 +181,7 @@ public class GamescreenActivity extends AppCompatActivity {
         addFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*final Call<String> verif = myAPI1.VerifyFavlist(idUser, idGame);
+                final Call<String> verif = myAPI1.VerifyFavlist(idUser, idGame);
                 verif.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
@@ -183,16 +189,19 @@ public class GamescreenActivity extends AppCompatActivity {
                             return;
                         }
                         String result = response.body();
-                        if (result.contains("false")) {*/
+                        if (result.contains("false")) {
                             addToFavList(idUser,idGame);
-                        /*}
+                        }
+                        else {
+                            Toast.makeText(GamescreenActivity.this, "You have this game!", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
 
                     }
-                });*/
+                });
             }
         });
 
