@@ -273,7 +273,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.MyViewHolder
                     intent = new Intent(mContext, ChatActivitySocket.class);
 
 
-                   intent.putExtra("username",name);
+                    intent.putExtra("username",name);
                     intent.putExtra("idUser",idUser);
                     intent.putExtra("userPicture",userPicture);
                     intent.putExtra("idChat",chatList.get(getAdapterPosition()).getIdChat()+"");

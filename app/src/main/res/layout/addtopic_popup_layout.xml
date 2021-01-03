@@ -42,17 +42,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:weightSum="2">
 
-        <Space
-            android:layout_width="30dp"
-            android:layout_height="wrap_content" />
+
 
         <Button
             android:id="@+id/addTopic"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="20dp"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:layout_gravity="center_horizontal"
             android:layout_weight="1"
             android:background="@drawable/button_border"
             android:fontFamily="@font/orbitron"
@@ -60,16 +60,13 @@
             android:textColor="@color/white"
             android:textSize="15sp" />
 
-        <Space
-            android:layout_width="10dp"
-            android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/Cancel"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:layout_gravity="center_horizontal"
             android:layout_weight="1"
+            android:layout_marginLeft="15dp"
             android:background="@drawable/button_border"
             android:fontFamily="@font/orbitron"
             android:text="CANCEL"
