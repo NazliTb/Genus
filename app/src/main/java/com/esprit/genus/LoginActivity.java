@@ -3,6 +3,7 @@ package com.esprit.genus;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -34,7 +35,9 @@ public class LoginActivity extends AppCompatActivity {
     Button login_button;
     TextView sign_up;
     TextView forgottenpassword;
-
+    //Declaration shared preferances
+    private SharedPreferences mPreferences;
+    public static final String sharedPrefFile ="UserData";
 
 
 
@@ -44,6 +47,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.login_layout);
         //getSupportActionBar().hide();
 
+        //init shared preferances
+        mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
 
 
         //Init API
@@ -59,6 +64,10 @@ public class LoginActivity extends AppCompatActivity {
         sign_up = (TextView) findViewById(R.id.sign_up);
 
         forgottenpassword = (TextView) findViewById(R.id.forgotten_password);
+
+        //recuperation shared preferances data
+        username.setText( mPreferences.getString("login","") );
+        password.setText( mPreferences.getString("password","") );
 
         //Event
         login_button.setOnClickListener(new View.OnClickListener() {
@@ -135,6 +144,11 @@ public class LoginActivity extends AppCompatActivity {
                             intent.putExtra("idUser",idUser[0]);
                             intent.putExtra("username",userName[0]);
                             intent.putExtra("userPicture",userPicture[0]);
+                            //save user data in shared preferances
+                            SharedPreferences.Editor preferencesEditor = mPreferences.edit();
+                            preferencesEditor.putString("login", username);
+                            preferencesEditor.putString("password",password);
+                            preferencesEditor.apply();
                             LoginActivity.this.startActivity(intent);
                         }
                         else

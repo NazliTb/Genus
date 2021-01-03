@@ -32,7 +32,7 @@
                 android:scaleType="fitXY"/>
 
 
-            <ImageButton
+            <!--<ImageButton
                 android:id="@+id/backButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:backgroundTint="#00FF0303"
-                app:srcCompat="@drawable/more" />
+                app:srcCompat="@drawable/more" />-->
 
             <com.esprit.genus.GamePictureShape.RoundRectCornerImageView
                 android:id="@+id/gameImg"
