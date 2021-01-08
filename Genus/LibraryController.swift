@@ -102,8 +102,8 @@ class LibraryController: UIViewController ,UICollectionViewDataSource, UICollect
         cell.gameName.text=games[indexPath.row].name
         cell.gameType.text=games[indexPath.row].type
             cell.gameImage.contentMode = .scaleAspectFill
-            //let defaultLink = "http://192.168.64.1:3000/image/"+games[indexPath.row].gamePicture
-            let defaultLink = "http://192.168.247.1:3000/image/"+games[indexPath.row].gamePicture
+            let defaultLink = "http://192.168.64.1:3000/image/"+games[indexPath.row].gamePicture
+           // let defaultLink = "http://192.168.247.1:3000/image/"+games[indexPath.row].gamePicture
             cell.gameImage.downloaded(from: defaultLink)
         cell.releaseDate.text=games[indexPath.row].releaseDate
             
@@ -125,23 +125,23 @@ class LibraryController: UIViewController ,UICollectionViewDataSource, UICollect
     }
     
 
-   /* func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+ /*  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "GameController") as! GameController
         vc.idUser=id
-        if (collectionView == self.collectionViewGame {
+        if (collectionView == self.collectionViewGame{
             vc.idGame=games[indexPath.row].idGame }
             else {
             vc.idGame=Favgames[indexPath.row].idGame }
         
         self.navigationController?.pushViewController(vc, animated: true)
         
-    }
-*/
+    }*/
+
     
     func GetGameDetails(idUser:String) {
-    //let url=URL(string: "http://192.168.64.1:3000/GetGameListIOS/"+idUser)
-    let url = URL(string: "http://192.168.247.1:3000/GetGameListIOS/"+idUser)
+    let url=URL(string: "http://192.168.64.1:3000/GetGameListIOS/"+idUser)
+   // let url = URL(string: "http://192.168.247.1:3000/GetGameListIOS/"+idUser)
     URLSession.shared.dataTask(with: url!) { (data, response, error) in
         
             if (error==nil) {
@@ -170,8 +170,8 @@ class LibraryController: UIViewController ,UICollectionViewDataSource, UICollect
     
     
     func GetFavList(idUser:String) {
-    //let url=URL(string: "http://192.168.64.1:3000/GetFavListIOS/"+idUser)
-    let url=URL(string: "http://192.168.247.1:3000/GetFavListIOS/"+idUser)
+    let url=URL(string: "http://192.168.64.1:3000/GetFavListIOS/"+idUser)
+   // let url=URL(string: "http://192.168.247.1:3000/GetFavListIOS/"+idUser)
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
             
                 if (error==nil) {

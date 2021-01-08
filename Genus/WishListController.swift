@@ -62,18 +62,18 @@ class WishListController: UIViewController, UICollectionViewDataSource, UICollec
         cell.type.text=games[indexPath.row].type
         cell.releaseDate.text=games[indexPath.row].releaseDate
         cell.gamePicture.contentMode = .scaleAspectFill
-        //let defaultLink = "http://192.168.64.1:3000/image/"+games[indexPath.row].gamePicture
-        let defaultLink = "http://192.168.247.1:3000/image/"+games[indexPath.row].gamePicture
+        let defaultLink = "http://192.168.64.1:3000/image/"+games[indexPath.row].gamePicture
+        //let defaultLink = "http://192.168.247.1:3000/image/"+games[indexPath.row].gamePicture
         cell.gamePicture.downloaded(from: defaultLink)
         return cell
     }
              
     
     func GetWishList(idUser:String) {
-    //let url=URL(string: "http://192.168.64.1:3000/GetWishListIOS/"+idUser)
-        //print(url)
-        let url=URL(string: "http://192.168.247.1:3000/GetWishListIOS/"+idUser)
-        print(url)
+    let url=URL(string: "http://192.168.64.1:3000/GetWishListIOS/"+idUser)
+       
+      //  let url=URL(string: "http://192.168.247.1:3000/GetWishListIOS/"+idUser)
+      
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
             
             if (error==nil) {

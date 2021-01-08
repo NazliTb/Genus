@@ -1,13 +1,13 @@
 //
-//  TopPickCollectionViewCell.swift
+//  TopPicksCollectionViewCell.swift
 //  Genus
 //
-//  Created by Nazli on 12/10/20.
+//  Created by Orionsyrus24 on 1/8/21.
 //
 
 import UIKit
-class TopPicksCollectionViewCell: UICollectionViewCell{
-    
+
+class TopPicksCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var gamePicture: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var companyName: UILabel!

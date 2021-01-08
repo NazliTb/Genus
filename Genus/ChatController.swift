@@ -61,7 +61,6 @@ class ChatController: UIViewController,UICollectionViewDataSource, UICollectionV
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
        
       let vc = self.storyboard?.instantiateViewController(withIdentifier: "MessagesController")as! MessagesController
-      //  let vc = self.storyboard?.instantiateViewController(withIdentifier: "designedMessageController") as! designedMessageController
         vc.idChat=chats[indexPath.row].idChat
               vc.id=id
         vc.username=username

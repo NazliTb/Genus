@@ -6,20 +6,22 @@
 //
 
 import UIKit
+import Alamofire
 
-struct commentList :Decodable{
+struct  commentaire :Decodable {
+    
     let commentText:String
     let likesNbr:Int
     let userPicture:String
-    let userName:String
+    let username:String
 }
 
 class GameController: UIViewController, UICollectionViewDataSource {
         
   //var
-    var idGame:Int=0
-    var idUser:Int=0
-    var comments=[commentList]()
+    var idGame:Int = 0
+    var idUser:Int = 0
+    var comments = [commentaire]()
     
     var gamePicture :  String = ""
     var gamename :  String = ""
@@ -49,6 +51,7 @@ class GameController: UIViewController, UICollectionViewDataSource {
         // Do any additional setup after loading the view.
         collectionView.dataSource=self
         gameInformations(idGame: idGame)
+        GetComments(idGame: idGame)
     }
     
     
@@ -59,14 +62,15 @@ class GameController: UIViewController, UICollectionViewDataSource {
   
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "CommentsCell", for: indexPath) as! CommentCollectionViewCell
-        cell.userName.text=comments[indexPath.row].userName
-       //cell.commentText.text=comments[indexPath.row].companyName
-       // cell.likesNbr.text=comments[indexPath.row].likesNbr
-        cell.userPic.contentMode = .scaleAspectFill
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommentsCell", for: indexPath) as! CommentCollectionViewCell
+        cell.userName.text=comments[indexPath.row].username
+       cell.commentText.text=comments[indexPath.row].commentText
+       cell.likesNbr.text="\(comments[indexPath.row].likesNbr)"
+       
         let defaultLink = "http://192.168.64.1:3000/image/"+comments[indexPath.row].userPicture
        // let defaultLink = "http://192.168.247.1:3000/image/"+comments[indexPath.row].userPicture
-        cell.userPic.downloaded(from: defaultLink)
+       // cell.userPic.downloaded(from: defaultLink)
         return cell
     }
     
@@ -74,7 +78,7 @@ class GameController: UIViewController, UICollectionViewDataSource {
     func gameInformations (idGame:Int){
 
             
-        let url=URL(string: "http://192.168.64.1:3000/GetGameDetailsiOS/"+"\(idGame)")
+   /*     let url=URL(string: "http://192.168.64.1:3000/GetGameDetailsiOS/"+"\(idGame)")
        // let url = URL(string: "http://192.168.247.1:3000/GetGameDetailsiOS/"+"\(idGame)")
         
         URLSession.shared.dataTask(with: url!) { (data, response, error) in            
@@ -104,7 +108,8 @@ class GameController: UIViewController, UICollectionViewDataSource {
             }
         
             
-        }.resume()
+        }.resume()*/
+  
         
     }
     
@@ -114,14 +119,18 @@ class GameController: UIViewController, UICollectionViewDataSource {
        // let url = URL(string: "http://192.168.247.1:3000/GetCommentsiOS/"+"\(idGame)")
         
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
+        
             
             if (error==nil) {
             do {
-            self.comments=try JSONDecoder().decode([commentList].self, from: data!)
+                self.comments = try JSONDecoder().decode([commentaire].self, from: data!)
+        
             }
             catch {
+                
             print("ERROR")
             }
+                
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
