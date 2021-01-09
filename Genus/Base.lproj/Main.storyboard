@@ -724,6 +724,7 @@
                         <viewLayoutGuide key="safeArea" id="xZu-eB-Jvr"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="edb-7Q-e5c"/>
                     <connections>
                         <outlet property="collectionView" destination="PnF-z1-jvd" id="MHo-Zs-Owk"/>
                         <outlet property="comment" destination="LIh-0s-61p" id="ODL-l7-ccf"/>
@@ -739,7 +740,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yBI-yP-fMH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3281.1594202898555" y="-425.22321428571428"/>
+            <point key="canvasLocation" x="-4872" y="343"/>
         </scene>
         <!--Discover-->
         <scene sceneID="u2r-rL-YX1">
@@ -978,8 +979,8 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="jqV-cx-Omj" id="4un-yf-8Je"/>
-                                    <outlet property="delegate" destination="jqV-cx-Omj" id="yY1-Ba-xyd"/>
+                                    <outlet property="dataSource" destination="jqV-cx-Omj" id="M27-e4-hD5"/>
+                                    <outlet property="delegate" destination="jqV-cx-Omj" id="mNk-iI-KeY"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -994,7 +995,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yxu-bn-cde" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4872" y="-411"/>
+            <point key="canvasLocation" x="-4872.463768115942" y="-411.16071428571428"/>
         </scene>
         <!--Library-->
         <scene sceneID="wcU-QA-bap">
@@ -1370,7 +1371,7 @@
                         <viewLayoutGuide key="safeArea" id="f1o-26-Jok"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="QZN-PK-J5i"/>
+                    <navigationItem key="navigationItem" title="Sign in" id="QZN-PK-J5i"/>
                     <connections>
                         <outlet property="email" destination="yMN-Hj-ytg" id="0tY-Ex-fOn"/>
                         <outlet property="password" destination="Vqz-up-Uze" id="aTM-HZ-ara"/>
@@ -1378,7 +1379,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QCC-qx-0eN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="542.02898550724638" y="-1495.3125"/>
+            <point key="canvasLocation" x="1450.7246376811595" y="-1495.3125"/>
         </scene>
         <!--Sign Up Screen-->
         <scene sceneID="BCl-KG-fxP">
@@ -1468,7 +1469,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qbM-No-GwY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1768.1159420289857" y="-1495.3125"/>
+            <point key="canvasLocation" x="2678.2608695652175" y="-1495.3125"/>
         </scene>
         <!--Password Recovery Screen-->
         <scene sceneID="wVF-EP-0CA">

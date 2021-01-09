@@ -28,10 +28,11 @@ class TopPicksTableViewCell: UITableViewCell {
     
     var topPicks=[TopPicks]()
   
-    
-    //Widgets
-    
 
+    //Widgets
+   
+    var delegate: collectionViewCellClicked?
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     override  func awakeFromNib() {
@@ -42,11 +43,14 @@ class TopPicksTableViewCell: UITableViewCell {
        
          
     }
+    
+
 
 }
 
-extension TopPicksTableViewCell: UICollectionViewDelegate,UICollectionViewDataSource {
+extension TopPicksTableViewCell:UICollectionViewDelegate,UICollectionViewDataSource {
     
+   
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
@@ -69,20 +73,11 @@ extension TopPicksTableViewCell: UICollectionViewDelegate,UICollectionViewDataSo
     }
     
     
-  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-           
-          /* let vc = self.storyboard?.instantiateViewController(withIdentifier: "GameController") as! GameController
-        vc.idUser=id
-        if (collectionView == self.collectionViewTopPicks) {
-           
-            vc.idGame=topPicks[indexPath.row].idGame
-        }
-        
-            
-                 
-       self.navigationController?.pushViewController(vc, animated: true)*/
-            
-        }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+  
+        delegate?.cellClicked(idGame: topPicks[indexPath.row].idGame)
+      
+    }
     
     func getTopPicks() {
      let url=URL(string: "http://192.168.64.1:3000/GetTopPicksGames")

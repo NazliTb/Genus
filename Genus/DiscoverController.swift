@@ -8,8 +8,16 @@
 import UIKit
 
 
-class DiscoverController: UIViewController {
-
+class DiscoverController: UIViewController,collectionViewCellClicked,collectionViewCellClicked2,collectionViewCellClicked3
+{
+    func cellClicked(idGame:Int) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "GameController") as! GameController
+        vc.idUser=id
+        vc.idGame=idGame
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
           
 
     //Widgets
@@ -21,12 +29,11 @@ class DiscoverController: UIViewController {
    
     
  
-    
+  
  
     override func viewDidLoad() {
         super.viewDidLoad()
-   
-        
+       
     }
 
     
@@ -35,7 +42,7 @@ class DiscoverController: UIViewController {
     @IBAction func search(_ sender: Any) {
     }
     
-   
+    
     
 }
 
@@ -45,19 +52,30 @@ extension DiscoverController: UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:UITableViewCell
+       
         if(indexPath.row == 0) {
-        cell = tableView.dequeueReusableCell(withIdentifier: "firstCell", for: indexPath)
+       let cell = tableView.dequeueReusableCell(withIdentifier: "firstCell", for: indexPath)
+            as! TopPicksTableViewCell
+        cell.delegate = self
+            return cell
+           
+            
         }
         else if (indexPath.row == 1)
         {
-            cell = tableView.dequeueReusableCell(withIdentifier: "secondCell", for: indexPath)
+          let  cell = tableView.dequeueReusableCell(withIdentifier: "secondCell", for: indexPath) as! TrendingGamesTableViewCell
+           cell.delegate = self
+            return cell
         }
         else {
-            cell = tableView.dequeueReusableCell(withIdentifier: "lastCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "lastCell", for: indexPath) as! BestRateTableViewCell
+            cell.delegate = self
+            return cell
+           
         }
-        return cell
+    
+       
     }
     
-    
+ 
 }

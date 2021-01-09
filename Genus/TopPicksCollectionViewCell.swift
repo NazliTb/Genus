@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol collectionViewCellClicked:class{
+    func cellClicked(idGame:Int)
+}
+
 class TopPicksCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var gamePicture: UIImageView!
     @IBOutlet weak var name: UILabel!

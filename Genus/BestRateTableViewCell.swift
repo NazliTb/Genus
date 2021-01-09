@@ -27,6 +27,8 @@ class BestRateTableViewCell: UITableViewCell {
     
     //Widgets
     
+    var delegate: collectionViewCellClicked3?
+    
     @IBOutlet weak var collectionView: UICollectionView!
 
     override func awakeFromNib() {
@@ -71,21 +73,7 @@ extension BestRateTableViewCell: UICollectionViewDelegate,UICollectionViewDataSo
     
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
            
-          /* let vc = self.storyboard?.instantiateViewController(withIdentifier: "GameController") as! GameController
-        vc.idUser=id
-        if (collectionView == self.collectionViewTopPicks) {
-           
-            vc.idGame=topPicks[indexPath.row].idGame
-        }
-        else if (collectionView == self.collectionViewTrendingGames) {
-            vc.idGame=trendingGames[indexPath.row].idGame
-        }
-        else {
-            vc.idGame=bestRate[indexPath.row].idGame
-        }
-            
-                 
-       self.navigationController?.pushViewController(vc, animated: true)*/
+    delegate?.cellClicked(idGame: bestRate[indexPath.row].idGame)
             
         }
     

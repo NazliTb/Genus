@@ -25,6 +25,7 @@ class TrendingGamesTableViewCell: UITableViewCell {
     var trendingGames=[TrendingGames]()
 
     //Widgets
+    var delegate: collectionViewCellClicked2?
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -73,21 +74,7 @@ extension TrendingGamesTableViewCell: UICollectionViewDelegate,UICollectionViewD
     
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
            
-          /* let vc = self.storyboard?.instantiateViewController(withIdentifier: "GameController") as! GameController
-        vc.idUser=id
-        if (collectionView == self.collectionViewTopPicks) {
-           
-            vc.idGame=topPicks[indexPath.row].idGame
-        }
-        else if (collectionView == self.collectionViewTrendingGames) {
-            vc.idGame=trendingGames[indexPath.row].idGame
-        }
-        else {
-            vc.idGame=bestRate[indexPath.row].idGame
-        }
-            
-                 
-       self.navigationController?.pushViewController(vc, animated: true)*/
+    delegate?.cellClicked(idGame: trendingGames[indexPath.row].idGame)
             
         }
     
