@@ -56,7 +56,7 @@ class MainTabController : UITabBarController {
                       }
             
             
-            if let DiscoverNavigationController = viewController as? DiscoverNavigationController {
+           if let DiscoverNavigationController = viewController as? DiscoverNavigationController {
                               if let DiscoverViewController = DiscoverNavigationController.viewControllers.first as? DiscoverController {
                               DiscoverViewController.id=id
                                 DiscoverViewController.username=Username
@@ -65,6 +65,11 @@ class MainTabController : UITabBarController {
                           }
                           
                       }
+            
+         /*   if let DiscoverViewController = viewControllers.first as? DiscoverController {
+                DiscoverViewController.id=id
+                  DiscoverViewController.username=Username
+            }*/
         }
     }
     

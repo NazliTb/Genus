@@ -83,13 +83,24 @@ let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, 
         let OKAction = UIAlertAction(title: "OK", style: .default)
         { action -> Void in
      
-            
+          
+                
+    
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainTabController") as! MainTabController
-             vc.Username=name
-             vc.id=idUser
-            vc.userPic=userPicture
-             self.navigationController?.pushViewController(vc, animated: true)
-             self.present(vc, animated: true, completion: nil)
+            vc.Username=name
+            vc.id=idUser
+           vc.userPic=userPicture
+            
+            // This is to get the SceneDelegate object from your view controller
+            // then call the change root view controller function to change to main tab bar
+            if #available(iOS 13.0, *) {
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(vc)
+            } else {
+                // Fallback on earlier versions
+            }
+            
+         /*    self.navigationController?.pushViewController(vc, animated: true)
+             self.present(vc, animated: true, completion: nil)*/
            
             
         }
