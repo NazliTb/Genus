@@ -50,6 +50,11 @@ class GameController: UIViewController, UICollectionViewDataSource {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         collectionView.dataSource=self
+        
+        
+ 
+
+        
         gameInformations(idGame: idGame)
         GetComments(idGame: idGame)
     }
@@ -74,41 +79,68 @@ class GameController: UIViewController, UICollectionViewDataSource {
         return cell
     }
     
+    func blurBgImage(image: UIImage) -> UIImage? {
+            let radius: CGFloat = 20;
+            let context = CIContext(options: nil);
+            let inputImage = CIImage(cgImage: image.cgImage!);
+            let filter = CIFilter(name: "CIGaussianBlur");
+ 
+            filter?.setValue(inputImage, forKey: kCIInputImageKey);
+            filter?.setValue("\(radius)", forKey:kCIInputRadiusKey);
+
+            if let result = filter?.value(forKey: kCIOutputImageKey) as? CIImage{
+
+                let rect = CGRect(origin: CGPoint(x: radius * 2,y :radius * 2), size: CGSize(width: image.size.width - radius * 4, height: image.size.height - radius * 4))
+
+                if let cgImage = context.createCGImage(result, from: rect){
+                    return UIImage(cgImage: cgImage);
+                    }
+            }
+            return nil;
+        }
     
     func gameInformations (idGame:Int){
 
+    var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/GetGameDetailsiOS/"+"\(idGame)")!)
+    //var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/GetGameDetailsiOS/"+"\(idGame)")!)
             
-   /*     let url=URL(string: "http://192.168.64.1:3000/GetGameDetailsiOS/"+"\(idGame)")
-       // let url = URL(string: "http://192.168.247.1:3000/GetGameDetailsiOS/"+"\(idGame)")
-        
-        URLSession.shared.dataTask(with: url!) { (data, response, error) in            
-          
-                do {
-                    // make sure this JSON is in the format we expect
-                    if let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
-                        print(json)
-                        self.gamePicture = json["gamePicture"] as! String
-                        self.gamename = json["name"] as! String
-                        self.gamestudio = json["companyName"] as! String
-                        self.gameDesc = json["description"] as! String
+    request.httpMethod = "GET"
+
+
+    let session = URLSession.shared
+    let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+
+    do {
+               
+let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
+        self.gamePicture = json["gamePicture"] as! String
+        self.gamename = json["name"] as! String
+        self.gamestudio = json["companyName"] as! String
+        self.gameDesc = json["description"] as! String
+                           
+    }
+   
+    catch {
                         
-                    }
-                } catch let error as NSError {
-                    print("Failed to load: \(error.localizedDescription)")
-                }
-            
-            DispatchQueue.main.async {
-              //  let defaultLink = "http://192.168.247.1:3000/image/"+self.gamePicture
-                let defaultLink = "http://192.168.64.1:3000/image/"+self.gamePicture
-                self.gameBg.downloaded(from: defaultLink)
-                self.gamePic.downloaded(from: defaultLink)
-                self.gameName.text = self.gamename
-                self.gameStudio.text = self.gamestudio
-                self.gameDescription.text = self.gameDesc
-            }
+    }
         
-            
-        }.resume()*/
+        DispatchQueue.main.async {
+          //  let defaultLink = "http://192.168.247.1:3000/image/"+self.gamePicture
+            let defaultLink = "http://192.168.64.1:3000/image/"+self.gamePicture
+            let url = URL(string: "http://192.168.64.1:3000/image/"+self.gamePicture)
+            let data = try? Data(contentsOf: url!)
+            let image = UIImage(data: data!)
+            self.gameBg.image = self.blurBgImage(image: image!)
+            self.gamePic.downloaded(from: defaultLink)
+            self.gameName.text = self.gamename
+            self.gameStudio.text = self.gamestudio
+            self.gameDescription.text = self.gameDesc
+        }
+    }
+    )
+    
+    task.resume()
+    
   
         
     }
@@ -144,7 +176,7 @@ class GameController: UIViewController, UICollectionViewDataSource {
     
     @IBAction func addGameAction(_ sender: Any) {
         
-        let params = ["idUser":idUser, "idGame":idGame] as! Dictionary<String, Any>
+        let params = ["idUser":idUser, "idGame":idGame] as Dictionary<String, Any>
        // var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/AddToGameList")!)
         var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/AddToGameList")!)
         request.httpMethod = "POST"
@@ -153,7 +185,7 @@ class GameController: UIViewController, UICollectionViewDataSource {
         let session = URLSession.shared
         let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
                 do {
-                    let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
+                    _ = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
                     }
                     catch {
                 }
@@ -167,7 +199,7 @@ class GameController: UIViewController, UICollectionViewDataSource {
     
     @IBAction func addFavGameAction(_ sender: Any) {
         
-        let params = ["idUser":idUser, "idGame":idGame] as! Dictionary<String, Any>
+        let params = ["idUser":idUser, "idGame":idGame] as Dictionary<String, Any>
        // var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/AddToFavList")!)
         var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/AddToFavList")!)
         request.httpMethod = "POST"
@@ -176,7 +208,7 @@ class GameController: UIViewController, UICollectionViewDataSource {
         let session = URLSession.shared
         let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
                 do {
-                    let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
+                    _ = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
                     }
                     catch {
                 }
@@ -190,7 +222,7 @@ class GameController: UIViewController, UICollectionViewDataSource {
     
     @IBAction func addWishlistAction(_ sender: Any) {
         
-        let params = ["idUser":idUser, "idGame":idGame] as! Dictionary<String, Any>
+        let params = ["idUser":idUser, "idGame":idGame] as Dictionary<String, Any>
        // var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/AddToWishList")!)
         var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/AddToWishList")!)
         request.httpMethod = "POST"
@@ -199,7 +231,7 @@ class GameController: UIViewController, UICollectionViewDataSource {
         let session = URLSession.shared
         let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
                 do {
-                    let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
+                    _ = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
                     }
                     catch {
                 }
@@ -213,7 +245,7 @@ class GameController: UIViewController, UICollectionViewDataSource {
     
     @IBAction func addCommentAction(_ sender: Any) {
         
-        let params = ["commentText":comment.text, "idUser":idUser, "idGame":idGame] as! Dictionary<String, Any>
+        let params = ["commentText":comment.text!, "idUser":idUser, "idGame":idGame] as [String : Any]
        // var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/AddComment")!)
         var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/AddComment")!)
         request.httpMethod = "POST"
@@ -222,7 +254,7 @@ class GameController: UIViewController, UICollectionViewDataSource {
         let session = URLSession.shared
         let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
                 do {
-                    let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
+                    _ = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
                     }
                     catch {
                 }
