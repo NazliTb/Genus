@@ -51,11 +51,40 @@ class ChatController: UIViewController,UICollectionViewDataSource, UICollectionV
         cell.topicName.text=chats[indexPath.row].topic
         cell.dateTopic.text=chats[indexPath.row].Date
         cell.topicCreator.text=chats[indexPath.row].username
+        
+        
+        
+        getMembersNbr(idChat: chats[indexPath.row].idChat) { (nbr,error) in
+            if let x = nbr {
+                cell.memberNumbers.text="Members : "+"\(x)"
+                
+            }
+        }
+        
+        
+        
         cell.joinTopic.addTarget(self, action: #selector(ChatController.joinThatTopic(_:)), for:.touchUpInside)
         cell.joinTopic.tag = chats[indexPath.row].idChat
         return cell
     }
 
+    
+    func getMembersNbr(idChat:Int,completionHandler: @escaping (String?,Error?)->
+    Void) {
+    let url=URL(string: "http://192.168.64.1:3000/GetMembersNbr/"+"\(idChat)")!
+    let task = URLSession.shared.dataTask(with: url, completionHandler:{ data, response, error in guard let data = data else { return }
+    do {
+        let responseData = String(data: data, encoding: String.Encoding.utf8)
+    let res = responseData!.replacingOccurrences(of: "\"", with: "")
+    completionHandler(res,nil)
+    }
+    catch let parseErr {
+    print(parseErr)
+    
+    }
+    })
+    task.resume()
+    }
  
     @objc func joinThatTopic(_ sender: UIButton) {
        
@@ -99,6 +128,7 @@ class ChatController: UIViewController,UICollectionViewDataSource, UICollectionV
                             let OKAction = UIAlertAction(title: "OK", style: .default)
                             { action -> Void in
                                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "MessagesController")as! MessagesController
+                                self.collectionView.reloadData()
                                   vc.idChat=idTopic
                                 vc.id=self.id
                                 vc.username=self.username
