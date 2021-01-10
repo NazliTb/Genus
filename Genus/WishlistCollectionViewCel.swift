@@ -11,13 +11,13 @@ class WishlistCollectionViewCell: UICollectionViewCell{
     
     @IBOutlet weak var gamePicture: UIImageView!
     
-    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var name: UITextView!
     
     
-    @IBOutlet weak var companyName: UILabel!
+    @IBOutlet weak var companyName: UITextView!
     
-    @IBOutlet weak var type: UILabel!
+    @IBOutlet weak var type: UITextView!
     
     
-    @IBOutlet weak var releaseDate: UILabel!
+    @IBOutlet weak var releaseDate: UITextView!
 }

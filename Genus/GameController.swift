@@ -30,6 +30,7 @@ class GameController: UIViewController, UICollectionViewDataSource {
     
     
     
+    
     //Widgets
    
     @IBOutlet weak var gamePic: UIImageView!
@@ -75,7 +76,7 @@ class GameController: UIViewController, UICollectionViewDataSource {
        
         let defaultLink = "http://192.168.64.1:3000/image/"+comments[indexPath.row].userPicture
        // let defaultLink = "http://192.168.247.1:3000/image/"+comments[indexPath.row].userPicture
-       // cell.userPic.downloaded(from: defaultLink)
+     cell.userPic.downloaded(from: defaultLink)
         return cell
     }
     
@@ -100,6 +101,7 @@ class GameController: UIViewController, UICollectionViewDataSource {
         }
     
     func gameInformations (idGame:Int){
+        
 
     var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/GetGameDetailsiOS/"+"\(idGame)")!)
     //var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/GetGameDetailsiOS/"+"\(idGame)")!)
@@ -146,16 +148,18 @@ let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, 
     }
     
     func GetComments (idGame:Int){
-        
+     
         let url=URL(string: "http://192.168.64.1:3000/GetCommentsiOS/"+"\(idGame)")
        // let url = URL(string: "http://192.168.247.1:3000/GetCommentsiOS/"+"\(idGame)")
-        
+  
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
         
             
             if (error==nil) {
             do {
+               
                 self.comments = try JSONDecoder().decode([commentaire].self, from: data!)
+                
         
             }
             catch {
@@ -173,73 +177,165 @@ let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, 
 
 
     //IBActions
+    func ExisteGameList(idUser: Int,idGame: Int) {
+ 
+        let url=URL(string: "http://192.168.64.1:3000/VerifyGamelist/"+"\(idUser)"+"/"+"\(idGame)")!
+        //let url=URL(string:"http://192.168.247.1:3000/VerifyGamelist/"+"\(idUser)"+"/"+"\(idGame)")!
+        let task = URLSession.shared.dataTask(with: url, completionHandler:{ data, response, error in guard let data = data else { return }
+        do {
+            let responseData = String(data: data, encoding: String.Encoding.utf8)
+        let res = responseData!.replacingOccurrences(of: "\"", with: "")
+            if(res.caseInsensitiveCompare("true") == .orderedSame ) {
+                DispatchQueue.main.async {
+                  
+                    self.alert(message: "You added this game already !",title: "Message")
+                }
+                
+            }
+            else {
+                let params = ["idUser":idUser, "idGame":idGame] as Dictionary<String, Any>
+                   // var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/AddToGameList")!)
+                    var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/AddToGameList")!)
+                    request.httpMethod = "POST"
+                    request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
+                    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+                    let session = URLSession.shared
+                    let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+                            do {
+                                let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
+                                }
+                                catch {
+                            }
+                        DispatchQueue.main.async {
+                            self.alert(message: "Game added !",title: "Message")
+                        }
+                        })
+                        task.resume()
+            }
+        }
+        catch let parseErr {
+        print(parseErr)
+         
+        }
+        })
+        task.resume()
+       
+    }
+    
+    //IBActions
+    func ExisteFavList(idUser: Int,idGame: Int) {
+ 
+        let url=URL(string: "http://192.168.64.1:3000/VerifyFavlist/"+"\(idUser)"+"/"+"\(idGame)")!
+        //let url=URL(string:"http://192.168.247.1:3000/VerifyFavlist/"+"\(idUser)"+"/"+"\(idGame)")!
+        let task = URLSession.shared.dataTask(with: url, completionHandler:{ data, response, error in guard let data = data else { return }
+        do {
+            let responseData = String(data: data, encoding: String.Encoding.utf8)
+        let res = responseData!.replacingOccurrences(of: "\"", with: "")
+            if(res.caseInsensitiveCompare("true") == .orderedSame ) {
+                DispatchQueue.main.async {
+                  
+                    self.alert(message: "You added this game already !",title: "Message")
+                }
+                
+            }
+            else {
+                let params = ["idUser":idUser, "idGame":idGame] as Dictionary<String, Any>
+                   // var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/AddToFavList")!)
+                    var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/AddToFavList")!)
+                    request.httpMethod = "POST"
+                    request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
+                    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+                    let session = URLSession.shared
+                    let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+                            do {
+                                let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
+                                }
+                                catch {
+                            }
+                        DispatchQueue.main.async {
+                            self.alert(message: "Game added !",title: "Message")
+                        }
+                        })
+                        task.resume()
+            }
+        }
+        catch let parseErr {
+        print(parseErr)
+         
+        }
+        })
+        task.resume()
+       
+    }
+    
+    //IBActions
+    func ExisteWishList(idUser: Int,idGame: Int) {
+ 
+        let url=URL(string: "http://192.168.64.1:3000/VerifyWishlist/"+"\(idUser)"+"/"+"\(idGame)")!
+        //let url=URL(string:"http://192.168.247.1:3000/VerifyWishlist/"+"\(idUser)"+"/"+"\(idGame)")!
+        let task = URLSession.shared.dataTask(with: url, completionHandler:{ data, response, error in guard let data = data else { return }
+        do {
+            let responseData = String(data: data, encoding: String.Encoding.utf8)
+        let res = responseData!.replacingOccurrences(of: "\"", with: "")
+            if(res.caseInsensitiveCompare("true") == .orderedSame ) {
+                DispatchQueue.main.async {
+                  
+                    self.alert(message: "You added this game already !",title: "Message")
+                }
+                
+            }
+            else {
+                let params = ["idUser":idUser, "idGame":idGame] as Dictionary<String, Any>
+                   // var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/AddToWishList")!)
+                    var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/AddToWishList")!)
+                    request.httpMethod = "POST"
+                    request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
+                    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+                    let session = URLSession.shared
+                    let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+                            do {
+                                let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
+                                }
+                                catch {
+                            }
+                        DispatchQueue.main.async {
+                            self.alert(message: "Game added !",title: "Message")
+                        }
+                        })
+                        task.resume()
+            }
+        }
+        catch let parseErr {
+        print(parseErr)
+         
+        }
+        })
+        task.resume()
+       
+    }
     
     @IBAction func addGameAction(_ sender: Any) {
         
-        let params = ["idUser":idUser, "idGame":idGame] as Dictionary<String, Any>
-       // var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/AddToGameList")!)
-        var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/AddToGameList")!)
-        request.httpMethod = "POST"
-        request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        let session = URLSession.shared
-        let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
-                do {
-                    _ = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
-                    }
-                    catch {
-                }
-            DispatchQueue.main.async {
-                print("Game added to library")
-            }
-            })
-            task.resume()
+        ExisteGameList(idUser: idUser,idGame: idGame)
+
     }
     
+    func alert(message: String, title: String ) {
+           let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+           let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+           alertController.addAction(OKAction)
+           self.present(alertController, animated: true, completion: nil)
+           }
     
     @IBAction func addFavGameAction(_ sender: Any) {
-        
-        let params = ["idUser":idUser, "idGame":idGame] as Dictionary<String, Any>
-       // var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/AddToFavList")!)
-        var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/AddToFavList")!)
-        request.httpMethod = "POST"
-        request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        let session = URLSession.shared
-        let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
-                do {
-                    _ = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
-                    }
-                    catch {
-                }
-            DispatchQueue.main.async {
-                print("Game added to favorites")
-            }
-            })
-            task.resume()
+        ExisteFavList(idUser: idUser,idGame: idGame)
+
         
     }
     
     @IBAction func addWishlistAction(_ sender: Any) {
         
-        let params = ["idUser":idUser, "idGame":idGame] as Dictionary<String, Any>
-       // var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/AddToWishList")!)
-        var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/AddToWishList")!)
-        request.httpMethod = "POST"
-        request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        let session = URLSession.shared
-        let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
-                do {
-                    _ = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
-                    }
-                    catch {
-                }
-            DispatchQueue.main.async {
-                print("Game added to wishlist")
-            }
-            })
-            task.resume()
+        ExisteWishList(idUser: idUser,idGame: idGame)
         
     }
     
@@ -254,12 +350,13 @@ let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, 
         let session = URLSession.shared
         let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
                 do {
-                    _ = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
+                    let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
                     }
                     catch {
                 }
             DispatchQueue.main.async {
-                print("Comment added")
+           
+                self.viewDidLoad()
             }
             })
             task.resume()

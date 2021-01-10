@@ -55,7 +55,7 @@ class LibraryController: UIViewController ,UICollectionViewDataSource, UICollect
 
     //Var 
     var id:Int=0
-  
+    var id2:Int=0
     
     //Widgets
  
@@ -125,19 +125,19 @@ class LibraryController: UIViewController ,UICollectionViewDataSource, UICollect
     }
     
 
- /*  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "GameController") as! GameController
-        vc.idUser=id
-        if (collectionView == self.collectionViewGame{
-            vc.idGame=games[indexPath.row].idGame }
-            else {
-            vc.idGame=Favgames[indexPath.row].idGame }
-        
-        self.navigationController?.pushViewController(vc, animated: true)
-        
-    }*/
-
+func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let vc = self.storyboard?.instantiateViewController(withIdentifier: "GameController") as! GameController
+    vc.idUser=id
+    if(collectionView == self.collectionViewFavGame) {
+        vc.idGame=Favgames[indexPath.row].idGame
+    }
+    else {
+        vc.idGame=games[indexPath.row].idGame
+    }
+    self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
     
     func GetGameDetails(idUser:String) {
     let url=URL(string: "http://192.168.64.1:3000/GetGameListIOS/"+idUser)

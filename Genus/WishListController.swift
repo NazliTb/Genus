@@ -23,33 +23,38 @@ class WishListController: UIViewController, UICollectionViewDataSource, UICollec
     
     //Widgets
     
+    @IBOutlet weak var collectionWish: UICollectionView!
     //Var
     var id:Int=0
     var games=[wishGame]()
     
-    @IBOutlet weak var collectionView: UICollectionView!
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
        
-        collectionView.dataSource=self
-        collectionView.allowsSelection = true
-        collectionView.delegate = self
+        collectionWish.dataSource=self
+        collectionWish.allowsSelection = true
+        collectionWish.delegate = self
         GetWishList(idUser:"\(id)")
     }
     
     //functions
     
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        if(collectionView == self.collectionWish) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "GameController") as! GameController
         vc.idUser=id
-        vc.idGame=games[indexPath.row].idGame
-        self.navigationController?.pushViewController(vc, animated: true)
-        
-    }
        
+            vc.idGame=games[indexPath.row].idGame
+      
+        self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+   
+ 
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         games.count
@@ -87,7 +92,7 @@ class WishListController: UIViewController, UICollectionViewDataSource, UICollec
             
             DispatchQueue.main.async {
               
-                self.collectionView.reloadData()
+                self.collectionWish.reloadData()
             }
         }
             
