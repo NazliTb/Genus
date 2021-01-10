@@ -10,6 +10,7 @@ import Alamofire
 
 struct  commentaire :Decodable {
     
+    let idComment:Int
     let commentText:String
     let likesNbr:Int
     let userPicture:String
@@ -51,15 +52,59 @@ class GameController: UIViewController, UICollectionViewDataSource {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         collectionView.dataSource=self
-        
-        
- 
-
-        
         gameInformations(idGame: idGame)
         GetComments(idGame: idGame)
+        
+        getCommentsNbr(idGame: idGame) { (nbr,error) in
+            if let x = nbr {
+                self.commentNbr.text="\(x)"
+                
+            }
+        }
+        
+        getFavNbr(idGame: idGame) { (nbr,error) in
+            if let x = nbr {
+                self.favNbr.text="\(x)"
+                
+            }
+        }
     }
     
+    //Functions
+    
+    func getFavNbr(idGame:Int,completionHandler: @escaping (String?,Error?)->
+    Void) {
+    let url=URL(string: "http://192.168.64.1:3000/GetFavoriteNbr/"+"\(idGame)")!
+    let task = URLSession.shared.dataTask(with: url, completionHandler:{ data, response, error in guard let data = data else { return }
+    do {
+        let responseData = String(data: data, encoding: String.Encoding.utf8)
+    let res = responseData!.replacingOccurrences(of: "\"", with: "")
+    completionHandler(res,nil)
+    }
+    catch let parseErr {
+    print(parseErr)
+    
+    }
+    })
+    task.resume()
+    }
+    
+    func getCommentsNbr(idGame:Int,completionHandler: @escaping (String?,Error?)->
+    Void) {
+    let url=URL(string: "http://192.168.64.1:3000/GetCommentNbr/"+"\(idGame)")!
+    let task = URLSession.shared.dataTask(with: url, completionHandler:{ data, response, error in guard let data = data else { return }
+    do {
+        let responseData = String(data: data, encoding: String.Encoding.utf8)
+    let res = responseData!.replacingOccurrences(of: "\"", with: "")
+    completionHandler(res,nil)
+    }
+    catch let parseErr {
+    print(parseErr)
+    
+    }
+    })
+    task.resume()
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         comments.count
@@ -77,8 +122,39 @@ class GameController: UIViewController, UICollectionViewDataSource {
         let defaultLink = "http://192.168.64.1:3000/image/"+comments[indexPath.row].userPicture
        // let defaultLink = "http://192.168.247.1:3000/image/"+comments[indexPath.row].userPicture
      cell.userPic.downloaded(from: defaultLink)
+        
+      
+        cell.likeComment.addTarget(self, action: #selector(GameController.likeAComment(_:)), for:.touchUpInside)
+        cell.likeComment.tag = comments[indexPath.row].idComment
         return cell
     }
+    
+    @objc func likeAComment(_ sender: UIButton) {
+       
+        let id = sender.tag
+        
+        let params = ["idComment":id] as [String : Any]
+       // var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/LikeComment")!)
+        var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/LikeComment")!)
+        request.httpMethod = "POST"
+        request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        let session = URLSession.shared
+        let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
+                    }
+                    catch {
+                }
+            DispatchQueue.main.async {
+           
+                self.viewDidLoad()
+            }
+            })
+            task.resume()
+            
+        }
+    
     
     func blurBgImage(image: UIImage) -> UIImage? {
             let radius: CGFloat = 20;

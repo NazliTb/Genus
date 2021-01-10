@@ -13,4 +13,7 @@ class CommentCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var commentText: UILabel!
     @IBOutlet weak var likesNbr: UILabel!
     
+    
+    @IBOutlet weak var likeComment: UIButton!
+    
 }
