@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SCLAlertView
 
 struct Chat :Decodable{
     let idChat : Int
@@ -26,10 +27,15 @@ class ChatController: UIViewController,UICollectionViewDataSource, UICollectionV
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    
+    @IBOutlet weak var addTopic: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
        
+        addTopic.layer.cornerRadius = 0.5 * addTopic.bounds.size.width
+        addTopic.clipsToBounds = true
         collectionView.dataSource=self
         collectionView.delegate = self
         collectionView.allowsSelection = true
@@ -195,4 +201,99 @@ class ChatController: UIViewController,UICollectionViewDataSource, UICollectionV
    
     @IBAction func searchAction(_ sender: Any) {
     }
+    
+    
+    
+    @IBAction func addTopic(_ sender: Any) {
+        
+            let appearance = SCLAlertView.SCLAppearance(
+                kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
+                kTextFont: UIFont(name: "HelveticaNeue", size: 14)!,
+                kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
+                showCloseButton: true, titleColor: UIColor.init(hexString: "#04D9D9")
+            )
+
+            // Initialize SCLAlertView using custom Appearance
+            let alert = SCLAlertView(appearance: appearance)
+
+            // Creat the subview
+            let subview = UIView(frame: CGRect(x:0,y:0,width:216,height:100))
+       
+            // Add textfiel
+            let textfield1 = UITextField(frame: CGRect(x:0,y:30,width:216,height:40))
+            textfield1.layer.borderColor = UIColor.init(hexString: "#04D9D9").cgColor
+            textfield1.layer.borderWidth = 1.5
+            textfield1.layer.cornerRadius = 5
+            textfield1.placeholder = "name a topic"
+            textfield1.textAlignment = NSTextAlignment.center
+            subview.addSubview(textfield1)
+            
+            alert.addButton("Add",backgroundColor: UIColor(hexString: "#04D9D9"),textColor: UIColor.white) {
+                if(textfield1.text=="")
+                {
+                   self.alert(message: "Please give a topic name!", title: "Warning")
+                }
+                else {
+                    let id: String = "\(self.id)"
+                    let topic=textfield1.text
+                    let params = ["topic":topic,"idUser": id] as! Dictionary<String, String>
+            var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/addTopic")!)
+            request.httpMethod = "POST"
+            request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+            let session = URLSession.shared
+            let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+                    
+                    
+                do {
+           
+                        DispatchQueue.main.async {
+                       
+                       
+                          
+                            let alertController = UIAlertController(title: "Message", message: "Topic added ! ", preferredStyle: .alert)
+                            let OKAction = UIAlertAction(title: "OK", style: .default)
+                            { action -> Void in
+                                let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileController") as! ProfileController
+                                self.GetChatList()
+                                
+                            }
+                            alertController.addAction(OKAction)
+                            
+                            self.present(alertController, animated: true, completion: nil)
+       
+                        }
+                    }
+                
+                catch
+                {
+                    
+                }
+
+            })
+            
+            task.resume()
+                }
+            
+                    
+                }
+   
+  
+            // Add the subview to the alert's UI property
+            alert.customSubview = subview
+            
+
+           alert.showEdit("Add a topic", subTitle:"", closeButtonTitle:"Close", timeout: nil,colorStyle: 0x04D9D9, colorTextButton: 0xFFFFFF, circleIconImage:UIImage(named:""), animationStyle:SCLAnimationStyle.noAnimation)
+    }
+    
+    
+    
+      func alert(message: String, title: String ) {
+             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+             let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+             alertController.addAction(OKAction)
+             self.present(alertController, animated: true, completion: nil)
+             }
+      
 }

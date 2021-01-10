@@ -158,17 +158,7 @@ class ProfileController: UIViewController {
     
     @IBAction func editProfileAction(_ sender: Any) {
         
-     
-        /*let appearance = SCLAlertView.SCLAppearance(/*kTitleFont:UIFont(name: "Orbitron", size: 20)!, kTextFont: UIFont(name: "Orbitron", size: 20)!, kButtonFont: UIFont(name: "Orbitron", size: 20)!,*/kCircleHeight:70, kCircleIconHeight: 100, kWindowWidth: 300, kWindowHeight: 1000, showCloseButton: true,circleBackgroundColor: UIColor(red: 255, green: 255, blue: 255, alpha: 1), contentViewBorderColor:UIColor(red: 255, green: 255, blue: 255, alpha: 1))
-        let popup = SCLAlertView(appearance: appearance)
-        popup.addTextField("username")
-        popup.addTextField("password")
-        popup.addTextField("cPassword")
     
-        popup.showCustom("Edit Profile", subTitle: "", color:UIColor(red: 255, green: 255, blue: 255, alpha: 1), icon: UIImage(named:"Elements_Genus1.1")!)*/
-        
-        // Example of using the view to add two text fields to the alert
-        // Create the subview
         let appearance = SCLAlertView.SCLAppearance(
             kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
             kTextFont: UIFont(name: "HelveticaNeue", size: 14)!,
