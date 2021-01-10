@@ -41,10 +41,10 @@ public class GamescreenActivity extends AppCompatActivity {
     CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     private int idGame, idUser;
-    private ImageView gameImg;
+    private ImageView gameImg, star1, star2, star3, star4, star5;
     BlurImageView gameBg;
     private TextView gameName, studioName, favNbr, cmtNbr, gameDesc, favCount, cmCount;
-    private Button addGame, addWishlist, addFav;
+    private Button addGame, addWishlist, addFav, removeWishlist, removeFav;
     private ImageButton comment;
     private EditText commentText;
 
@@ -92,8 +92,8 @@ public class GamescreenActivity extends AppCompatActivity {
         myAPI1 = retrofit1.create((INodeJS.class));
         final Call<List<Game>> myGame = myAPI1.GetGameDetails(idGame);
         final Call<List<Comment>> listComments = myAPI1.GetComments(idGame);
-        final Call <String> nbFav = myAPI1.GetFavoriteNbr(idGame);
-        final Call <String> nbComments = myAPI1.GetCommentNbr(idGame);
+        final Call<String> nbFav = myAPI1.GetFavoriteNbr(idGame);
+        final Call<String> nbComments = myAPI1.GetCommentNbr(idGame);
 
         //our views
         gameImg = (ImageView) findViewById(R.id.gameImg);
@@ -105,6 +105,12 @@ public class GamescreenActivity extends AppCompatActivity {
         gameDesc = (TextView) findViewById(R.id.gameDesc);
         favCount = (TextView) findViewById(R.id.favCount);
         cmCount = (TextView) findViewById(R.id.cmCount);
+        star1 = (ImageView) findViewById(R.id.star_empty1);
+        star2 = (ImageView) findViewById(R.id.star_empty2);
+        star3 = (ImageView) findViewById(R.id.star_empty3);
+        star4 = (ImageView) findViewById(R.id.star_empty4);
+        star5 = (ImageView) findViewById(R.id.star_empty5);
+
 
         //view for the comment section
         recycler_comments = (RecyclerView) findViewById(R.id.recyclerViewComments);
@@ -119,7 +125,11 @@ public class GamescreenActivity extends AppCompatActivity {
         addWishlist = (Button) findViewById(R.id.addWishlist);
         addFav = (Button) findViewById(R.id.addFavorite);
         comment = (ImageButton) findViewById(R.id.sendComment);
+        removeFav = (Button) findViewById(R.id.removeFavorite);
+        removeWishlist = (Button) findViewById(R.id.removeWishlist);
 
+        removeFav.setVisibility(View.GONE);
+        removeWishlist.setVisibility(View.GONE);
 
         //add to the gamelist
         addGame.setOnClickListener(new View.OnClickListener() {
@@ -134,9 +144,9 @@ public class GamescreenActivity extends AppCompatActivity {
                         }
                         String result = response.body();
                         if (result.contains("false")) {
-                            addToGameList(idUser,idGame);
-                        }
-                        else {
+                            addToGameList(idUser, idGame);
+                            addGame.setText("remove this game");
+                        } else {
                             Toast.makeText(GamescreenActivity.this, "You have this game!", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -162,7 +172,8 @@ public class GamescreenActivity extends AppCompatActivity {
                         }
                         String result = response.body();
                         if (result.contains("false")) {
-                            addToWishList(idUser,idGame);
+                            addToWishList(idUser, idGame);
+                            removeWishlist.setVisibility(View.VISIBLE);
                         } else {
                             Toast.makeText(GamescreenActivity.this, "You have this game!", Toast.LENGTH_SHORT).show();
                         }
@@ -190,9 +201,9 @@ public class GamescreenActivity extends AppCompatActivity {
                         }
                         String result = response.body();
                         if (result.contains("false")) {
-                            addToFavList(idUser,idGame);
-                        }
-                        else {
+                            addToFavList(idUser, idGame);
+                            removeFav.setVisibility(View.VISIBLE);
+                        } else {
                             Toast.makeText(GamescreenActivity.this, "You have this game!", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -209,7 +220,7 @@ public class GamescreenActivity extends AppCompatActivity {
         comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addComment(commentText.getText().toString(),idUser,idGame);
+                addComment(commentText.getText().toString(), idUser, idGame);
                 finish();
                 startActivity(getIntent());
             }
@@ -222,7 +233,12 @@ public class GamescreenActivity extends AppCompatActivity {
                 if (!response.isSuccessful()) {
                     return;
                 }
+
                 List<Game> gameDetails = response.body();
+                Call<String> verifGame = myAPI1.VerifyGamelist(idUser, idGame);
+                Call<String> verifFav = myAPI1.VerifyFavlist(idUser, idGame);
+                Call<String> verifWish = myAPI1.VerifyWishlist(idUser, idGame);
+
                 int cpt = 0;
                 for (Game g : gameDetails) {
                     gameName.setText(g.getName());
@@ -234,6 +250,89 @@ public class GamescreenActivity extends AppCompatActivity {
                     Glide.with(GamescreenActivity.this)
                             .load("http://10.0.2.2:3000/image/" + g.getGamePicture())
                             .into(gameBg);
+
+                    switch (g.getRating()) {
+                        case 5:
+                            star1.setImageResource(R.drawable.ic_star_full);
+                            star2.setImageResource(R.drawable.ic_star_full);
+                            star3.setImageResource(R.drawable.ic_star_full);
+                            star4.setImageResource(R.drawable.ic_star_full);
+                            star5.setImageResource(R.drawable.ic_star_full);
+                            break;
+
+                        case 4:
+                            star1.setImageResource(R.drawable.ic_star_full);
+                            star2.setImageResource(R.drawable.ic_star_full);
+                            star3.setImageResource(R.drawable.ic_star_full);
+                            star4.setImageResource(R.drawable.ic_star_full);
+                            break;
+
+                        case 3:
+                            star1.setImageResource(R.drawable.ic_star_full);
+                            star2.setImageResource(R.drawable.ic_star_full);
+                            star3.setImageResource(R.drawable.ic_star_full);
+                            break;
+
+                        case 2:
+                            star1.setImageResource(R.drawable.ic_star_full);
+                            star2.setImageResource(R.drawable.ic_star_full);
+                            break;
+
+                        case 1:
+                            star1.setImageResource(R.drawable.ic_star_full);
+                            break;
+                    }
+
+                    verifGame.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            if (!response.isSuccessful()) {
+                                return;
+                            }
+                            String result = response.body();
+                            if (result.contains("true")) {
+                                addGame.setText("remove this game");
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+                        }
+                    });
+
+                    verifFav.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            if (!response.isSuccessful()) {
+                                return;
+                            }
+                            String result = response.body();
+                            if (result.contains("true")) {
+                                removeFav.setVisibility(View.VISIBLE);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+                        }
+                    });
+
+                    verifWish.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            if (!response.isSuccessful()) {
+                                return;
+                            }
+                            String result = response.body();
+                            if (result.contains("true")) {
+                                removeWishlist.setVisibility(View.VISIBLE);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+                        }
+                    });
                 }
             }
 
@@ -339,9 +438,9 @@ public class GamescreenActivity extends AppCompatActivity {
         );
     }
 
-    private void addComment (String commentText, int idUser, int idGame) {
+    private void addComment(String commentText, int idUser, int idGame) {
 
-        compositeDisposable.add(myAPI.AddComment(commentText,idUser,idGame)
+        compositeDisposable.add(myAPI.AddComment(commentText, idUser, idGame)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<String>() {
