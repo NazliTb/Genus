@@ -43,8 +43,8 @@ class GameController: UIViewController, UICollectionViewDataSource {
     @IBOutlet weak var commentNbr: UILabel!
     @IBOutlet weak var gameDescription: UITextView!
     @IBOutlet weak var addGamelist: UIButton!
-    @IBOutlet weak var addFavlist: UIButton!
-    @IBOutlet weak var addWishlist: UIButton!
+    @IBOutlet weak var addFavlist: UIImageView!
+    @IBOutlet weak var addWishlist: UIImageView!
     @IBOutlet weak var comment: UITextField!
     @IBOutlet weak var sencCmnt: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -61,6 +61,8 @@ class GameController: UIViewController, UICollectionViewDataSource {
     
     @IBOutlet weak var starFive: UIImageView!
     
+    
+    @IBOutlet weak var addGamebutton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -85,9 +87,202 @@ class GameController: UIViewController, UICollectionViewDataSource {
                 
             }
         }
+        
+        ExisteFavList(idUser: idUser, idGame: idGame)
+        
+        ExisteWishList(idUser: idUser, idGame: idGame)
+        
+        ExisteGameList(idUser: idUser, idGame: idGame)
+        
+        if #available(iOS 13.0, *) {
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+            addFavlist.isUserInteractionEnabled = true
+            addFavlist.addGestureRecognizer(tapGestureRecognizer)
+        } else {
+            // Fallback on earlier versions
+        }
+           
+        
+        if #available(iOS 13.0, *) {
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+            addWishlist.isUserInteractionEnabled = true
+            addWishlist.addGestureRecognizer(tapGestureRecognizer)
+        } else {
+            // Fallback on earlier versions
+        }
+
+     
     }
     
     //Functions
+    
+    @available(iOS 13.0, *)
+    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
+    {
+        let tappedImage = tapGestureRecognizer.view as! UIImageView
+
+        if (tappedImage.image==UIImage(systemName:"heart.fill")){
+            deleteGameFromFavList(idGame: idGame,idUser: idUser)
+            tappedImage.image=UIImage(systemName: "heart")
+        }
+        else  if (tappedImage.image==UIImage(systemName:"heart")) {
+            addGameToFavList(idGame: idGame,idUser: idUser)
+            tappedImage.image=UIImage(systemName: "heart.fill")
+        }
+        else if (tappedImage.image==UIImage(systemName:"pin.fill")){
+            deleteGameFromWishList(idGame: idGame,idUser: idUser)
+            tappedImage.image=UIImage(systemName: "pin")
+          
+        }
+        else  if (tappedImage.image==UIImage(systemName:"pin")) {
+            addGameToWishList(idGame: idGame,idUser: idUser)
+            tappedImage.image=UIImage(systemName: "pin.fill")
+          
+         
+        }
+        
+        
+    }
+    
+    func deleteGameFromWishList(idGame:Int,idUser:Int)
+    {
+        /*guard let url = URL(string: "http://192.168.247.1:3000/deleteFromWishList/"+"\(idGame)"+"/"+"\(idUser)") else {
+         print("Error: cannot create URL")
+         return
+     }*/
+        guard let url = URL(string: "http://192.168.64.1:3000/deleteFromWishList/"+"\(idGame)"+"/"+"\(idUser)") else {
+                   print("Error: cannot create URL")
+                   return
+               }
+               // Create the request
+               var request = URLRequest(url: url)
+               request.httpMethod = "DELETE"
+               URLSession.shared.dataTask(with: request) { data, response, error in
+                   guard error == nil else {
+                       print("Error: error calling DELETE")
+                       print(error!)
+                       return
+                   }
+                   guard let data = data else {
+                       print("Error: Did not receive data")
+                       return
+                   }
+                   guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
+                       print("Error: HTTP request failed")
+                       return
+                   }
+                   do {
+                       guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+                           print("Error: Cannot convert data to JSON")
+                           return
+                       }
+                       guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
+                           print("Error: Cannot convert JSON object to Pretty JSON data")
+                           return
+                       }
+                       guard let prettyPrintedJson = String(data: prettyJsonData, encoding: .utf8) else {
+                           print("Error: Could print JSON in String")
+                           return
+                       }
+                       
+                       print(prettyPrintedJson)
+                   } catch {
+                       print("Error: Trying to convert JSON data to string")
+                       return
+                   }
+               }.resume()
+    }
+    func deleteGameFromFavList(idGame:Int,idUser:Int)
+    {
+        /*guard let url = URL(string: "http://192.168.247.1:3000/deleteFromFavList/"+"\(idGame)"+"/"+"\(idUser)") else {
+         print("Error: cannot create URL")
+         return
+     }*/
+        guard let url = URL(string: "http://192.168.64.1:3000/deleteFromFavList/"+"\(idGame)"+"/"+"\(idUser)") else {
+                   print("Error: cannot create URL")
+                   return
+               }
+               // Create the request
+               var request = URLRequest(url: url)
+               request.httpMethod = "DELETE"
+               URLSession.shared.dataTask(with: request) { data, response, error in
+                   guard error == nil else {
+                       print("Error: error calling DELETE")
+                       print(error!)
+                       return
+                   }
+                   guard let data = data else {
+                       print("Error: Did not receive data")
+                       return
+                   }
+                   guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
+                       print("Error: HTTP request failed")
+                       return
+                   }
+                   do {
+                       guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+                           print("Error: Cannot convert data to JSON")
+                           return
+                       }
+                       guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
+                           print("Error: Cannot convert JSON object to Pretty JSON data")
+                           return
+                       }
+                       guard let prettyPrintedJson = String(data: prettyJsonData, encoding: .utf8) else {
+                           print("Error: Could print JSON in String")
+                           return
+                       }
+                       
+                       print(prettyPrintedJson)
+                   } catch {
+                       print("Error: Trying to convert JSON data to string")
+                       return
+                   }
+               }.resume()
+    }
+    func addGameToWishList(idGame:Int,idUser:Int)
+    {
+        let params = ["idUser":idUser, "idGame":idGame] as Dictionary<String, Any>
+           // var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/AddToWishList")!)
+            var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/AddToWishList")!)
+            request.httpMethod = "POST"
+            request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            let session = URLSession.shared
+            let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+                    do {
+                        let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
+                        }
+                        catch {
+                    }
+                DispatchQueue.main.async {
+                 
+                }
+                })
+                task.resume()
+    }
+    
+    func addGameToFavList(idGame:Int,idUser:Int)
+    {
+        let params = ["idUser":idUser, "idGame":idGame] as Dictionary<String, Any>
+           // var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/AddToFavList")!)
+            var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/AddToFavList")!)
+            request.httpMethod = "POST"
+            request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            let session = URLSession.shared
+            let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+                    do {
+                        let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
+                        }
+                        catch {
+                    }
+                DispatchQueue.main.async {
+                 
+                }
+                })
+                task.resume()
+    }
     
     func getFavNbr(idGame:Int,completionHandler: @escaping (String?,Error?)->
     Void) {
@@ -141,11 +336,16 @@ class GameController: UIViewController, UICollectionViewDataSource {
      cell.userPic.downloaded(from: defaultLink)
         
       
-        cell.likeComment.addTarget(self, action: #selector(GameController.likeAComment(_:)), for:.touchUpInside)
+        if #available(iOS 13.0, *) {
+            cell.likeComment.addTarget(self, action: #selector(GameController.likeAComment(_:)), for:.touchUpInside)
+        } else {
+            // Fallback on earlier versions
+        }
         cell.likeComment.tag = comments[indexPath.row].idComment
         return cell
     }
     
+    @available(iOS 13.0, *)
     @objc func likeAComment(_ sender: UIButton) {
        
         let id = sender.tag
@@ -315,29 +515,13 @@ let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, 
             if(res.caseInsensitiveCompare("true") == .orderedSame ) {
                 DispatchQueue.main.async {
                   
-                    self.alert(message: "You added this game already !",title: "Message")
+                    
+                    self.addGamebutton.setTitle("Remove this game", for: .normal)
                 }
                 
             }
             else {
-                let params = ["idUser":idUser, "idGame":idGame] as Dictionary<String, Any>
-                   // var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/AddToGameList")!)
-                    var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/AddToGameList")!)
-                    request.httpMethod = "POST"
-                    request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
-                    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-                    let session = URLSession.shared
-                    let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
-                            do {
-                                let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
-                                }
-                                catch {
-                            }
-                        DispatchQueue.main.async {
-                            self.alert(message: "Game added !",title: "Message")
-                        }
-                        })
-                        task.resume()
+                self.addGamebutton.setTitle("Add this game", for: .normal)
             }
         }
         catch let parseErr {
@@ -361,29 +545,20 @@ let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, 
             if(res.caseInsensitiveCompare("true") == .orderedSame ) {
                 DispatchQueue.main.async {
                   
-                    self.alert(message: "You added this game already !",title: "Message")
+                    if #available(iOS 13.0, *) {
+                        self.addFavlist.image=UIImage(systemName: "heart.fill")
+                    } else {
+                        // Fallback on earlier versions
+                    }
                 }
                 
             }
             else {
-                let params = ["idUser":idUser, "idGame":idGame] as Dictionary<String, Any>
-                   // var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/AddToFavList")!)
-                    var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/AddToFavList")!)
-                    request.httpMethod = "POST"
-                    request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
-                    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-                    let session = URLSession.shared
-                    let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
-                            do {
-                                let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
-                                }
-                                catch {
-                            }
-                        DispatchQueue.main.async {
-                            self.alert(message: "Game added !",title: "Message")
-                        }
-                        })
-                        task.resume()
+                if #available(iOS 13.0, *) {
+                    self.addFavlist.image=UIImage(systemName: "heart")
+                } else {
+                    // Fallback on earlier versions
+                }
             }
         }
         catch let parseErr {
@@ -407,29 +582,20 @@ let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, 
             if(res.caseInsensitiveCompare("true") == .orderedSame ) {
                 DispatchQueue.main.async {
                   
-                    self.alert(message: "You added this game already !",title: "Message")
+                    if #available(iOS 13.0, *) {
+                        self.addWishlist.image=UIImage(systemName: "pin.fill")
+                    } else {
+                        // Fallback on earlier versions
+                    }
                 }
                 
             }
             else {
-                let params = ["idUser":idUser, "idGame":idGame] as Dictionary<String, Any>
-                   // var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/AddToWishList")!)
-                    var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/AddToWishList")!)
-                    request.httpMethod = "POST"
-                    request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
-                    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-                    let session = URLSession.shared
-                    let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
-                            do {
-                                let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
-                                }
-                                catch {
-                            }
-                        DispatchQueue.main.async {
-                            self.alert(message: "Game added !",title: "Message")
-                        }
-                        })
-                        task.resume()
+                if #available(iOS 13.0, *) {
+                    self.addWishlist.image=UIImage(systemName: "pin")
+                } else {
+                    // Fallback on earlier versions
+                }
             }
         }
         catch let parseErr {
@@ -443,8 +609,91 @@ let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, 
     
     @IBAction func addGameAction(_ sender: Any) {
         
-        ExisteGameList(idUser: idUser,idGame: idGame)
-
+        if(addGamebutton.titleLabel?.text=="Add this game")
+        {
+            addGameToList(idGame: idGame,idUser: idUser)
+            addGamebutton.setTitle("Remove this game", for: .normal)
+           
+            
+        }
+        else
+        {
+            deleteGameFromList(idGame: idGame,idUser: idUser)
+            addGamebutton.setTitle("Add this game", for: .normal)
+           
+        }
+       
+    }
+    
+    func deleteGameFromList(idGame:Int,idUser:Int)
+    {
+        /*guard let url = URL(string: "http://192.168.247.1:3000/deleteFromList/"+"\(idGame)"+"/"+"\(idUser)") else {
+         print("Error: cannot create URL")
+         return
+     }*/
+        guard let url = URL(string: "http://192.168.64.1:3000/deleteFromList/"+"\(idGame)"+"/"+"\(idUser)") else {
+                   print("Error: cannot create URL")
+                   return
+               }
+               // Create the request
+               var request = URLRequest(url: url)
+               request.httpMethod = "DELETE"
+               URLSession.shared.dataTask(with: request) { data, response, error in
+                   guard error == nil else {
+                       print("Error: error calling DELETE")
+                       print(error!)
+                       return
+                   }
+                   guard let data = data else {
+                       print("Error: Did not receive data")
+                       return
+                   }
+                   guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
+                       print("Error: HTTP request failed")
+                       return
+                   }
+                   do {
+                       guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+                           print("Error: Cannot convert data to JSON")
+                           return
+                       }
+                       guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
+                           print("Error: Cannot convert JSON object to Pretty JSON data")
+                           return
+                       }
+                       guard let prettyPrintedJson = String(data: prettyJsonData, encoding: .utf8) else {
+                           print("Error: Could print JSON in String")
+                           return
+                       }
+                       
+                       print(prettyPrintedJson)
+                   } catch {
+                       print("Error: Trying to convert JSON data to string")
+                       return
+                   }
+               }.resume()
+    }
+    
+    func addGameToList(idGame:Int,idUser:Int)
+    {
+        let params = ["idUser":idUser, "idGame":idGame] as Dictionary<String, Any>
+           // var request = URLRequest(url: URL(string: "http://192.168.247.1:3000/AddToGameList")!)
+            var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/AddToGameList")!)
+            request.httpMethod = "POST"
+            request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            let session = URLSession.shared
+            let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+                    do {
+                        let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
+                        }
+                        catch {
+                    }
+                DispatchQueue.main.async {
+                 
+                }
+                })
+                task.resume()
     }
     
     func alert(message: String, title: String ) {
@@ -454,17 +703,7 @@ let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, 
            self.present(alertController, animated: true, completion: nil)
            }
     
-    @IBAction func addFavGameAction(_ sender: Any) {
-        ExisteFavList(idUser: idUser,idGame: idGame)
-
-        
-    }
-    
-    @IBAction func addWishlistAction(_ sender: Any) {
-        
-        ExisteWishList(idUser: idUser,idGame: idGame)
-        
-    }
+ 
     
     @IBAction func addCommentAction(_ sender: Any) {
         

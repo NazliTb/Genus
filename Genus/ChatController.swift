@@ -55,7 +55,10 @@ class ChatController: UIViewController,UICollectionViewDataSource, UICollectionV
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "topicCell", for: indexPath) as! TopicsCollectionViewCell
         cell.topicName.text=chats[indexPath.row].topic
-        cell.dateTopic.text=chats[indexPath.row].Date
+        let index = chats[indexPath.row].Date.index(chats[indexPath.row].Date.startIndex, offsetBy: 10)
+        let mySubstring = chats[indexPath.row].Date[..<index]
+     
+        cell.dateTopic.text=String(mySubstring)
         cell.topicCreator.text=chats[indexPath.row].username
         
         

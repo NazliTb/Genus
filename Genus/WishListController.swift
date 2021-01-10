@@ -37,11 +37,12 @@ class WishListController: UIViewController, UICollectionViewDataSource, UICollec
         collectionWish.dataSource=self
         collectionWish.allowsSelection = true
         collectionWish.delegate = self
+    
         GetWishList(idUser:"\(id)")
     }
     
     //functions
-    
+
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if(collectionView == self.collectionWish) {
@@ -65,7 +66,9 @@ class WishListController: UIViewController, UICollectionViewDataSource, UICollec
         cell.name.text=games[indexPath.row].name
         cell.companyName.text=games[indexPath.row].companyName
         cell.type.text=games[indexPath.row].type
-        cell.releaseDate.text=games[indexPath.row].releaseDate
+        let index = games[indexPath.row].releaseDate.index(games[indexPath.row].releaseDate.startIndex, offsetBy: 10)
+        let mySubstring = games[indexPath.row].releaseDate[..<index]
+    cell.releaseDate.text=String(mySubstring)
         cell.gamePicture.contentMode = .scaleAspectFill
         let defaultLink = "http://192.168.64.1:3000/image/"+games[indexPath.row].gamePicture
         //let defaultLink = "http://192.168.247.1:3000/image/"+games[indexPath.row].gamePicture

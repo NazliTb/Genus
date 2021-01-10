@@ -33,6 +33,7 @@ class MainTabController : UITabBarController {
                 if let WishListViewController = wishListNavigationController.viewControllers.first as? WishListController {
                 WishListViewController.id=id
                 
+                
             }
             }
             
@@ -66,10 +67,7 @@ class MainTabController : UITabBarController {
                           
                       }
             
-         /*   if let DiscoverViewController = viewControllers.first as? DiscoverController {
-                DiscoverViewController.id=id
-                  DiscoverViewController.username=Username
-            }*/
+     
         }
     }
     

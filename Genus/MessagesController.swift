@@ -131,8 +131,9 @@ class MessagesController : UIViewController, UITableViewDelegate, UITableViewDat
             cell.chatTextBubble.backgroundColor = UIColor.init(hexString: "#111C59")
             cell.msgContent.textColor = .white
         }
-      
-        cell.timeMSG.text=msg[indexPath.row].date
+        let index = msg[indexPath.row].date.index(msg[indexPath.row].date.startIndex, offsetBy: 5)
+        let mySubstring = msg[indexPath.row].date[..<index]
+        cell.timeMSG.text=String(mySubstring)
         cell.userName.text=msg[indexPath.row].username
         let defaultLink = "http://192.168.64.1:3000/image/"+msg[indexPath.row].userPicture
         cell.userPic.downloaded(from: defaultLink)

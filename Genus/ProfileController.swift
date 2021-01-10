@@ -157,6 +157,20 @@ class ProfileController: UIViewController {
     //IBActions
     
     @IBAction func editProfileAction(_ sender: Any) {
+   
+      
+    }
+    
+    @IBAction func goMyGamesAction(_ sender: Any) {
+    }
+    
+    
+    @IBAction func goMyWishlistAction(_ sender: Any) {
+    }
+    
+    
+    @IBAction func goMyAccountAction(_ sender: Any) {
+        
         
     
         let appearance = SCLAlertView.SCLAppearance(
@@ -170,111 +184,39 @@ class ProfileController: UIViewController {
         let alert = SCLAlertView(appearance: appearance)
 
         // Creat the subview
-        let subview = UIView(frame: CGRect(x:0,y:0,width:216,height:300))
+        let subview = UIView(frame: CGRect(x:0,y:0,width:216,height:200))
         let x = (subview.frame.width - 180) / 2
-        // Add textfiel
-        let textfield1 = UITextField(frame: CGRect(x:x,y:30,width:180,height:40))
-        textfield1.layer.borderColor = UIColor.init(hexString: "#04D9D9").cgColor
-        textfield1.layer.borderWidth = 1.5
-        textfield1.layer.cornerRadius = 5
-        textfield1.placeholder = "username"
-        textfield1.textAlignment = NSTextAlignment.left
-        subview.addSubview(textfield1)
-        
-        alert.addButton("Update Username",backgroundColor: UIColor(hexString: "#04D9D9"),textColor: UIColor.white) {
-            if(textfield1.text=="")
-            {
-                self.alert(message: "Please give your username !", title: "Warning")
-            }
-            else {
-                let id: String = "\(self.id)"
-                let username=textfield1.text
-                let params = ["username":username,"idUser": id] as! Dictionary<String, String>
-        var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/editUsername")!)
-        request.httpMethod = "PUT"
-        request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-
-        let session = URLSession.shared
-        let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
-                
-                
-            do {
-       
-                    DispatchQueue.main.async {
-                   
-                    let error1="Update failed"
-                    let error2="User not found"
-                    let responseData = String(data: data!, encoding: String.Encoding.utf8)
-                    let res = responseData!.replacingOccurrences(of: "\"", with: "")
-                    if(res.caseInsensitiveCompare(error1) == .orderedSame || res.caseInsensitiveCompare(error2) == .orderedSame) {
-                    self.alert(message:res,title:"Error")
-                   
-                    }
-                    else {
-                      
-                        let alertController = UIAlertController(title: "Information", message: res, preferredStyle: .alert)
-                        let OKAction = UIAlertAction(title: "OK", style: .default)
-                        { action -> Void in
-                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileController") as! ProfileController
-                            vc.id=self.id
-                            vc.Username=textfield1.text!
-                          
-                           
-                           self.navigationController?.pushViewController(vc, animated: true)
-                           self.present(vc, animated: true, completion: nil)
-                            
-                        }
-                        alertController.addAction(OKAction)
-                        
-                        self.present(alertController, animated: true, completion: nil)
-   
-                    }
-                }
-            }
-            catch
-            {
-                
-            }
-
-        })
-        
-        task.resume()
-            }
-        
-                
-            }
-            
+     
         // Add textfield 2
-        let textfield = UITextField(frame: CGRect(x:x,y:textfield1.frame.maxY + 30,width:180,height:40))
+        let textfield = UITextField(frame: CGRect(x:0,y:0,width:216,height:40))
         textfield.isSecureTextEntry=true
         textfield.layer.borderColor = UIColor.init(hexString: "#04D9D9").cgColor
         textfield.layer.borderWidth = 1.5
         textfield.layer.cornerRadius = 5
         textfield.placeholder = "old password"
-        textfield.textAlignment = NSTextAlignment.left
+        textfield.textAlignment = NSTextAlignment.center
         subview.addSubview(textfield)
         
 
         // Add textfield 2
-        let textfield2 = UITextField(frame: CGRect(x:x,y:textfield.frame.maxY + 30,width:180,height:40))
+        let textfield2 = UITextField(frame: CGRect(x:0,y:textfield.frame.maxY + 30,width:216,height:40))
         textfield2.isSecureTextEntry=true
         textfield2.layer.borderColor = UIColor.init(hexString: "#04D9D9").cgColor
         textfield2.layer.borderWidth = 1.5
         textfield2.layer.cornerRadius = 5
         textfield2.placeholder = "password"
-        textfield2.textAlignment = NSTextAlignment.left
+        textfield2.textAlignment = NSTextAlignment.center
         subview.addSubview(textfield2)
         
         //Add textfield 3
 
-        let textfield3 = UITextField(frame: CGRect(x:x,y:textfield2.frame.maxY + 30,width:180,height:40))
+        let textfield3 = UITextField(frame: CGRect(x:0,y:textfield2.frame.maxY + 30,width:216,height:40))
         textfield3.isSecureTextEntry=true
         textfield3.layer.borderColor = UIColor.init(hexString: "#04D9D9").cgColor
         textfield3.layer.borderWidth = 1.5
         textfield3.layer.cornerRadius = 5
         textfield3.placeholder = "confirm password"
-        textfield3.textAlignment = NSTextAlignment.left
+        textfield3.textAlignment = NSTextAlignment.center
         subview.addSubview(textfield3)
         
         
@@ -366,18 +308,6 @@ class ProfileController: UIViewController {
        
 
        alert.showEdit("Edit Profil", subTitle:"", closeButtonTitle:"Close", timeout: nil,colorStyle: 0x04D9D9, colorTextButton: 0xFFFFFF, circleIconImage:UIImage(named:""), animationStyle:SCLAnimationStyle.noAnimation)
-      
-    }
-    
-    @IBAction func goMyGamesAction(_ sender: Any) {
-    }
-    
-    
-    @IBAction func goMyWishlistAction(_ sender: Any) {
-    }
-    
-    
-    @IBAction func goMyAccountAction(_ sender: Any) {
     }
     
     
@@ -385,9 +315,7 @@ class ProfileController: UIViewController {
     }
     
     
-    
-    @IBAction func notificationAction(_ sender: Any) {
-    }
+
     
     
     @IBAction func languageAction(_ sender: Any) {
@@ -402,5 +330,103 @@ class ProfileController: UIViewController {
     }
     
     
+    @IBAction func editUsername(_ sender: Any) {
+        
+        let appearance = SCLAlertView.SCLAppearance(
+            kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
+            kTextFont: UIFont(name: "HelveticaNeue", size: 14)!,
+            kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
+            showCloseButton: true, titleColor: UIColor.init(hexString: "#04D9D9")
+        )
+
+        // Initialize SCLAlertView using custom Appearance
+        let alert = SCLAlertView(appearance: appearance)
+
+        // Creat the subview
+        let subview = UIView(frame: CGRect(x:0,y:0,width:216,height:100))
+        let x = (subview.frame.width - 180) / 2
+        // Add textfiel
+        let textfield1 = UITextField(frame: CGRect(x:0,y:30,width:216,height:40))
+        textfield1.layer.borderColor = UIColor.init(hexString: "#04D9D9").cgColor
+        textfield1.layer.borderWidth = 1.5
+        textfield1.layer.cornerRadius = 5
+        textfield1.placeholder = "username"
+        textfield1.textAlignment = NSTextAlignment.center
+        subview.addSubview(textfield1)
+        
+        alert.addButton("Update Username",backgroundColor: UIColor(hexString: "#04D9D9"),textColor: UIColor.white) {
+            if(textfield1.text=="")
+            {
+                self.alert(message: "Please give your username !", title: "Warning")
+            }
+            else {
+                let id: String = "\(self.id)"
+                let username=textfield1.text
+                let params = ["username":username,"idUser": id] as! Dictionary<String, String>
+        var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/editUsername")!)
+        request.httpMethod = "PUT"
+        request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let session = URLSession.shared
+        let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+                
+                
+            do {
+       
+                    DispatchQueue.main.async {
+                   
+                    let error1="Update failed"
+                    let error2="User not found"
+                    let responseData = String(data: data!, encoding: String.Encoding.utf8)
+                    let res = responseData!.replacingOccurrences(of: "\"", with: "")
+                    if(res.caseInsensitiveCompare(error1) == .orderedSame || res.caseInsensitiveCompare(error2) == .orderedSame) {
+                    self.alert(message:res,title:"Error")
+                   
+                    }
+                    else {
+                      
+                        let alertController = UIAlertController(title: "Information", message: res, preferredStyle: .alert)
+                        let OKAction = UIAlertAction(title: "OK", style: .default)
+                        { action -> Void in
+                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileController") as! ProfileController
+                            vc.id=self.id
+                            vc.Username=textfield1.text!
+                            vc.userPic=self.userPic
+                           
+                           self.navigationController?.pushViewController(vc, animated: true)
+                          
+                            
+                        }
+                        alertController.addAction(OKAction)
+                        
+                        self.present(alertController, animated: true, completion: nil)
+   
+                    }
+                }
+            }
+            catch
+            {
+                
+            }
+
+        })
+        
+        task.resume()
+            }
+        
+                
+            }
+    
+    
+    // Add the subview to the alert's UI property
+    alert.customSubview = subview
+    
+    
+    
+   
+
+   alert.showEdit("Edit Username", subTitle:"", closeButtonTitle:"Close", timeout: nil,colorStyle: 0x04D9D9, colorTextButton: 0xFFFFFF, circleIconImage:UIImage(named:""), animationStyle:SCLAnimationStyle.noAnimation)
+    }
     
 }

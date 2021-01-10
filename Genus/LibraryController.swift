@@ -105,7 +105,9 @@ class LibraryController: UIViewController ,UICollectionViewDataSource, UICollect
             let defaultLink = "http://192.168.64.1:3000/image/"+games[indexPath.row].gamePicture
            // let defaultLink = "http://192.168.247.1:3000/image/"+games[indexPath.row].gamePicture
             cell.gameImage.downloaded(from: defaultLink)
-        cell.releaseDate.text=games[indexPath.row].releaseDate
+            let index = games[indexPath.row].releaseDate.index(games[indexPath.row].releaseDate.startIndex, offsetBy: 10)
+            let mySubstring = games[indexPath.row].releaseDate[..<index]
+        cell.releaseDate.text=String(mySubstring)
             
             return cell
         }
