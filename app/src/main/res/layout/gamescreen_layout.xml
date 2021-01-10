@@ -235,6 +235,18 @@
                 android:text="Add this game"/>
 
             <Button
+                android:id="@+id/removeButton"
+                android:layout_width="156dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/gameDesc"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/button_border"
+                android:fontFamily="@font/orbitron_medium"
+                android:text="Remove this game"
+                android:textSize="12dp"/>
+
+            <Button
                 android:id="@+id/addFavorite"
                 android:layout_width="30dp"
                 android:layout_height="30dp"

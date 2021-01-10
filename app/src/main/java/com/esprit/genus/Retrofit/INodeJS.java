@@ -87,6 +87,20 @@ public interface INodeJS {
     Observable<String> editPassword(@Field ("idUser") int idUser,@Field("old_password") String old_password,
                                    @Field("new_password") String new_password);
 
+    @POST("/deleteFromFavList/{idGame}/{idUser}")
+    @FormUrlEncoded
+    Observable<String> deleteFromFavList(@Field ("idGame") int idGame,
+                                         @Field ("idUser") int idUser);
+
+    @PUT("/deleteFromWishList/{idGame}/{idUser}")
+    @FormUrlEncoded
+    Observable<String> deleteFromWishList(@Field ("idGame") int idGame,
+                                          @Field ("idUser") int idUser);
+
+    @PUT("/deleteFromList/{idGame}/{idUser}")
+    @FormUrlEncoded
+    Observable<String> deleteFromList(@Field ("idGame") int idGame,
+                                      @Field ("idUser") int idUser);
 
     @GET("GetGameList/{idUser}")
     Call<List<Game>> GetGameList(@Path("idUser") int idUser);

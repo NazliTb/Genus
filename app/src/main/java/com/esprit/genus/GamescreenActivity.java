@@ -44,7 +44,7 @@ public class GamescreenActivity extends AppCompatActivity {
     private ImageView gameImg, star1, star2, star3, star4, star5;
     BlurImageView gameBg;
     private TextView gameName, studioName, favNbr, cmtNbr, gameDesc, favCount, cmCount;
-    private Button addGame, addWishlist, addFav, removeWishlist, removeFav;
+    private Button addGame, addWishlist, addFav, removeWishlist, removeFav, removeGame;
     private ImageButton comment;
     private EditText commentText;
 
@@ -130,6 +130,7 @@ public class GamescreenActivity extends AppCompatActivity {
 
         removeFav.setVisibility(View.GONE);
         removeWishlist.setVisibility(View.GONE);
+        removeGame.setVisibility(View.GONE);
 
         //add to the gamelist
         addGame.setOnClickListener(new View.OnClickListener() {
@@ -145,7 +146,7 @@ public class GamescreenActivity extends AppCompatActivity {
                         String result = response.body();
                         if (result.contains("false")) {
                             addToGameList(idUser, idGame);
-                            addGame.setText("remove this game");
+                            removeGame.setVisibility(View.VISIBLE);
                         } else {
                             Toast.makeText(GamescreenActivity.this, "You have this game!", Toast.LENGTH_SHORT).show();
                         }
@@ -216,6 +217,34 @@ public class GamescreenActivity extends AppCompatActivity {
             }
         });
 
+        //remove from list
+        removeGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeFromGameList(idGame, idUser);
+                removeGame.setVisibility(View.GONE);
+            }
+        });
+
+        //remove from favlist
+        removeFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeFromFavList(idGame, idUser);
+                removeFav.setVisibility(View.GONE);
+            }
+        });
+
+        //remove from wishlist
+        removeWishlist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeFromWishList(idGame, idUser);
+                removeWishlist.setVisibility(View.GONE);
+            }
+        });
+
+
         //add comment
         comment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -225,6 +254,8 @@ public class GamescreenActivity extends AppCompatActivity {
                 startActivity(getIntent());
             }
         });
+
+
 
         //display our game informations
         myGame.enqueue(new Callback<List<Game>>() {
@@ -447,6 +478,48 @@ public class GamescreenActivity extends AppCompatActivity {
                     @Override
                     public void accept(String s) throws Exception {
                         Toast.makeText(GamescreenActivity.this, "Comment Added", Toast.LENGTH_SHORT).show();
+                    }
+                })
+        );
+    }
+
+    private void removeFromGameList (int idGame, int idUser) {
+
+        compositeDisposable.add(myAPI.deleteFromList(idGame, idUser)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        Toast.makeText(GamescreenActivity.this, "Game Removed", Toast.LENGTH_SHORT).show();
+                    }
+                })
+        );
+    }
+
+    private void removeFromWishList (int idGame, int idUser) {
+
+        compositeDisposable.add(myAPI.deleteFromWishList(idGame, idUser)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        Toast.makeText(GamescreenActivity.this, "Game Removed", Toast.LENGTH_SHORT).show();
+                    }
+                })
+        );
+    }
+
+    private void removeFromFavList (int idGame, int idUser) {
+
+        compositeDisposable.add(myAPI.deleteFromFavList(idGame, idUser)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        Toast.makeText(GamescreenActivity.this, "Game Removed", Toast.LENGTH_SHORT).show();
                     }
                 })
         );
