@@ -28,6 +28,7 @@ class GameController: UIViewController, UICollectionViewDataSource {
     var gamename :  String = ""
     var gamestudio : String = ""
     var gameDesc : String = ""
+    var rate : Int = 0
     
     
     
@@ -48,11 +49,27 @@ class GameController: UIViewController, UICollectionViewDataSource {
     @IBOutlet weak var sencCmnt: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet weak var starOne: UIImageView!
+    
+    @IBOutlet weak var starTwo: UIImageView!
+    
+    @IBOutlet weak var starThree: UIImageView!
+    
+    
+    @IBOutlet weak var starFour: UIImageView!
+    
+    
+    @IBOutlet weak var starFive: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         collectionView.dataSource=self
-        gameInformations(idGame: idGame)
+        if #available(iOS 13.0, *) {
+            gameInformations(idGame: idGame)
+        } else {
+            // Fallback on earlier versions
+        }
         GetComments(idGame: idGame)
         
         getCommentsNbr(idGame: idGame) { (nbr,error) in
@@ -176,6 +193,7 @@ class GameController: UIViewController, UICollectionViewDataSource {
             return nil;
         }
     
+    @available(iOS 13.0, *)
     func gameInformations (idGame:Int){
         
 
@@ -195,7 +213,9 @@ let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, 
         self.gamename = json["name"] as! String
         self.gamestudio = json["companyName"] as! String
         self.gameDesc = json["description"] as! String
-                           
+        self.rate = json["rating"] as! Int
+     
+        
     }
    
     catch {
@@ -213,6 +233,37 @@ let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, 
             self.gameName.text = self.gamename
             self.gameStudio.text = self.gamestudio
             self.gameDescription.text = self.gameDesc
+            if(self.rate==5)
+            {
+               
+                self.starOne.image=UIImage(systemName:"star.fill")
+               
+                self.starTwo.image=UIImage(systemName:"star.fill")
+                self.starThree.image=UIImage(systemName:"star.fill")
+                self.starFour.image=UIImage(systemName:"star.fill")
+                self.starFive.image=UIImage(systemName:"star.fill")
+            }
+            else if (self.rate==4) {
+                self.starOne.image=UIImage(systemName:"star.fill")
+                self.starTwo.image=UIImage(systemName:"star.fill")
+                self.starThree.image=UIImage(systemName:"star.fill")
+                self.starFour.image=UIImage(systemName:"star.fill")
+            }
+            else if (self.rate==3) {
+                self.starOne.image=UIImage(systemName:"star.fill")
+                self.starTwo.image=UIImage(systemName:"star.fill")
+                self.starThree.image=UIImage(systemName:"star.fill")
+            }
+            else if (self.rate==2) {
+                self.starOne.image=UIImage(systemName:"star.fill")
+                self.starTwo.image=UIImage(systemName:"star.fill")
+              
+            }
+            else if (self.rate==1)
+            {
+                self.starOne.image=UIImage(systemName:"star.fill")
+               
+            }
         }
     }
     )
