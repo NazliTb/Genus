@@ -10,13 +10,18 @@ import UIKit
 
 class MainTabController : UITabBarController {
     
+ 
+    
+    
     var id:Int = 0
     var Username:String = "Full Name"
     var userPic:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let viewControllers = viewControllers else {
+  
+    
+  guard let viewControllers = viewControllers else {
         return
         }
         for viewController in viewControllers {
@@ -32,6 +37,9 @@ class MainTabController : UITabBarController {
             if let wishListNavigationController = viewController as? WishListNavigationController {
                 if let WishListViewController = wishListNavigationController.viewControllers.first as? WishListController {
                 WishListViewController.id=id
+                  
+             
+               
                 
                 
             }
@@ -47,7 +55,7 @@ class MainTabController : UITabBarController {
             
             
             if let ChatNavigationController = viewController as? ChatNavigationController {
-                              if let ChatViewController = ChatNavigationController.viewControllers.first as? ChatController {
+                if let ChatViewController = ChatNavigationController.viewControllers.first as? ChatController {
                               ChatViewController.id=id
                                 ChatViewController.username=Username
                                 ChatViewController.userPicture=userPic
@@ -59,8 +67,9 @@ class MainTabController : UITabBarController {
             
            if let DiscoverNavigationController = viewController as? DiscoverNavigationController {
                               if let DiscoverViewController = DiscoverNavigationController.viewControllers.first as? DiscoverController {
-                              DiscoverViewController.id=id
+                                DiscoverViewController.id=id
                                 DiscoverViewController.username=Username
+                                
                                 
                               
                           }
@@ -69,7 +78,10 @@ class MainTabController : UITabBarController {
             
      
         }
+        
+
     }
     
-   
+    
+
 }

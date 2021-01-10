@@ -74,10 +74,27 @@ class ChatController: UIViewController,UICollectionViewDataSource, UICollectionV
         
         cell.joinTopic.addTarget(self, action: #selector(ChatController.joinThatTopic(_:)), for:.touchUpInside)
         cell.joinTopic.tag = chats[indexPath.row].idChat
+        
+        
+        cell.deleteTopic.addTarget(self, action: #selector(ChatController.deleteThatTopic(_:)), for: .touchUpInside)
+        
+        cell.deleteTopic.tag = chats[indexPath.row].idChat
+        
         return cell
     }
 
+
     
+        
+        func alert(message: String, title: String ) {
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(OKAction)
+            self.present(alertController, animated: true, completion: nil)
+               }
+        
+        
+        
     func getMembersNbr(idChat:Int,completionHandler: @escaping (String?,Error?)->
     Void) {
     let url=URL(string: "http://192.168.64.1:3000/GetMembersNbr/"+"\(idChat)")!
@@ -95,6 +112,83 @@ class ChatController: UIViewController,UICollectionViewDataSource, UICollectionV
     task.resume()
     }
  
+    @objc func deleteThatTopic(_ sender: UIButton) {
+        let idTopic = sender.tag
+        let url=URL(string:"http://192.168.64.1:3000/VerifyTopicCreator/"+"\(self.id)"+"/"+"\(idTopic)")!
+        //let url=URL(string:"http://192.168.247.1:3000/VerifyTopicCreator/"+"\(id)"+"/"+"\(idTopic)")!
+        let task = URLSession.shared.dataTask(with: url, completionHandler:{ data, response, error in guard let data = data else { return }
+            do {
+                let responseData = String(data: data, encoding: String.Encoding.utf8)
+            let res = responseData!.replacingOccurrences(of: "\"", with: "")
+                if(res.caseInsensitiveCompare("true") == .orderedSame ) {
+                    DispatchQueue.main.async {
+                      
+                        /*guard let url = URL(string: "http://192.168.247.1:3000/deleteTopic/"+"\(idTopic)"+"/"+"\(id)") else {
+                         print("Error: cannot create URL")
+                         return
+                     }*/
+                        guard let url = URL(string: "http://192.168.64.1:3000/deleteTopic/"+"\(idTopic)"+"/"+"\(self.id)") else {
+                                   print("Error: cannot create URL")
+                                   return
+                               }
+                               // Create the request
+                               var request = URLRequest(url: url)
+                               request.httpMethod = "DELETE"
+                               URLSession.shared.dataTask(with: request) { data, response, error in
+                                   guard error == nil else {
+                                       print("Error: error calling DELETE")
+                                       print(error!)
+                                       return
+                                   }
+                                   guard let data = data else {
+                                       print("Error: Did not receive data")
+                                       return
+                                   }
+                                   guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
+                                       print("Error: HTTP request failed")
+                                       return
+                                   }
+                                   do {
+                                       guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+                                           print("Error: Cannot convert data to JSON")
+                                           return
+                                       }
+                                       guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
+                                           print("Error: Cannot convert JSON object to Pretty JSON data")
+                                           return
+                                       }
+                                       guard let prettyPrintedJson = String(data: prettyJsonData, encoding: .utf8) else {
+                                           print("Error: Could print JSON in String")
+                                           return
+                                       }
+                                       
+                                       print(prettyPrintedJson)
+                                   } catch {
+                                       print("Error: Trying to convert JSON data to string")
+                                       return
+                                   }
+                               }.resume()
+                        
+                        self.viewDidLoad()
+                    }
+                    
+                }
+                else {
+                    DispatchQueue.main.async {
+                    self.alert(message: "You can't delete the topic , you're not the creator", title: "Error")
+                    }
+                }
+            }
+            catch  {
+            
+             
+            }
+            })
+            task.resume()
+
+        
+    }
+        
     @objc func joinThatTopic(_ sender: UIButton) {
        
         let idTopic = sender.tag
@@ -165,16 +259,7 @@ class ChatController: UIViewController,UICollectionViewDataSource, UICollectionV
     
     
     
-    /*func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-       
-      let vc = self.storyboard?.instantiateViewController(withIdentifier: "MessagesController")as! MessagesController
-        vc.idChat=chats[indexPath.row].idChat
-              vc.id=id
-        vc.username=username
-        vc.userPicture=userPicture
-         self.navigationController?.pushViewController(vc, animated: true)
-        
-    }*/
+
     
     func GetChatList() {
     let url=URL(string: "http://192.168.64.1:3000/GetChatList")
@@ -292,11 +377,7 @@ class ChatController: UIViewController,UICollectionViewDataSource, UICollectionV
     
     
     
-      func alert(message: String, title: String ) {
-             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-             let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-             alertController.addAction(OKAction)
-             self.present(alertController, animated: true, completion: nil)
-             }
+    
+             
       
 }

@@ -132,17 +132,22 @@ class GameController: UIViewController, UICollectionViewDataSource {
         else if (tappedImage.image==UIImage(systemName:"pin.fill")){
             deleteGameFromWishList(idGame: idGame,idUser: idUser)
             tappedImage.image=UIImage(systemName: "pin")
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
+         
           
         }
         else  if (tappedImage.image==UIImage(systemName:"pin")) {
             addGameToWishList(idGame: idGame,idUser: idUser)
             tappedImage.image=UIImage(systemName: "pin.fill")
           
+          
          
         }
         
         
     }
+    
+ 
     
     func deleteGameFromWishList(idGame:Int,idUser:Int)
     {

@@ -101,10 +101,17 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JQj-3s-TJI" userLabel="joinButton">
-                                                    <rect key="frame" x="229" y="143" width="111" height="45"/>
+                                                    <rect key="frame" x="197" y="143" width="111" height="45"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Orbitron-Regular" family="Orbitron" pointSize="20"/>
                                                     <state key="normal" title="JOIN" backgroundImage="Elements_Rectangle 3"/>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z9T-pg-2CI">
+                                                    <rect key="frame" x="321" y="146" width="31" height="39"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal">
+                                                        <imageReference key="image" image="trash.fill" catalog="system" symbolScale="large"/>
+                                                    </state>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -112,6 +119,7 @@
                                         <size key="customSize" width="380" height="209"/>
                                         <connections>
                                             <outlet property="dateTopic" destination="Unr-Bv-4CR" id="EFY-pV-43r"/>
+                                            <outlet property="deleteTopic" destination="Z9T-pg-2CI" id="KyP-wd-s5n"/>
                                             <outlet property="joinTopic" destination="JQj-3s-TJI" id="gw7-Bd-G6M"/>
                                             <outlet property="memberNumbers" destination="3rb-GE-U2k" id="Jtt-aZ-b7I"/>
                                             <outlet property="topicCreator" destination="BsN-CF-OQj" id="sbf-qm-cwC"/>
@@ -1717,6 +1725,7 @@
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="star" catalog="system" width="128" height="116"/>
         <image name="text.bubble.fill" catalog="system" width="128" height="110"/>
+        <image name="trash.fill" catalog="system" width="121" height="128"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

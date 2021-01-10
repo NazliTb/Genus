@@ -19,7 +19,7 @@ struct wishGame :Decodable{
 
 
 
-class WishListController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class WishListController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITabBarControllerDelegate {
     
     //Widgets
     
@@ -29,7 +29,7 @@ class WishListController: UIViewController, UICollectionViewDataSource, UICollec
     var games=[wishGame]()
     
    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -39,8 +39,11 @@ class WishListController: UIViewController, UICollectionViewDataSource, UICollec
         collectionWish.delegate = self
     
         GetWishList(idUser:"\(id)")
+     
+      
     }
     
+ 
     //functions
 
     

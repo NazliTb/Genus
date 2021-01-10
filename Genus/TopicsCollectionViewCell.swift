@@ -28,5 +28,6 @@ class TopicsCollectionViewCell : UICollectionViewCell {
 
     @IBOutlet weak var joinTopic: UIButton!
     
+    @IBOutlet weak var deleteTopic: UIButton!
     
 }
