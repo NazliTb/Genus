@@ -455,7 +455,7 @@ public class GamescreenActivity extends AppCompatActivity {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String s) throws Exception {
-                        Toast.makeText(GamescreenActivity.this, "Game Added", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(GamescreenActivity.this, "Game Added to wishlist", Toast.LENGTH_SHORT).show();
                     }
                 })
         );
@@ -469,7 +469,7 @@ public class GamescreenActivity extends AppCompatActivity {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String s) throws Exception {
-                        Toast.makeText(GamescreenActivity.this, "Game Added", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(GamescreenActivity.this, "Game Added to favorite list", Toast.LENGTH_SHORT).show();
                     }
                 })
         );
@@ -511,7 +511,7 @@ public class GamescreenActivity extends AppCompatActivity {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String s) throws Exception {
-                        Toast.makeText(GamescreenActivity.this, "Game Removed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(GamescreenActivity.this, "Game Removed from wishlist", Toast.LENGTH_SHORT).show();
                     }
                 })
         );
@@ -525,7 +525,7 @@ public class GamescreenActivity extends AppCompatActivity {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String s) throws Exception {
-                        Toast.makeText(GamescreenActivity.this, "Game Removed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(GamescreenActivity.this, "Game Removed from favorite list", Toast.LENGTH_SHORT).show();
                     }
                 })
         );
