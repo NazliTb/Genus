@@ -150,7 +150,7 @@ public class GamescreenActivity extends AppCompatActivity {
                             addToGameList(idUser, idGame);
                             removeGame.setVisibility(View.VISIBLE);
                         } else {
-                            Toast.makeText(GamescreenActivity.this, "You have this game!", Toast.LENGTH_SHORT).show();
+                           addGame.setVisibility(View.GONE);
                         }
                     }
 
@@ -178,7 +178,7 @@ public class GamescreenActivity extends AppCompatActivity {
                             addToWishList(idUser, idGame);
                             removeWishlist.setVisibility(View.VISIBLE);
                         } else {
-                            Toast.makeText(GamescreenActivity.this, "You have this game!", Toast.LENGTH_SHORT).show();
+                           addWishlist.setVisibility(View.GONE);
                         }
 
                     }
@@ -207,7 +207,7 @@ public class GamescreenActivity extends AppCompatActivity {
                             addToFavList(idUser, idGame);
                             removeFav.setVisibility(View.VISIBLE);
                         } else {
-                            Toast.makeText(GamescreenActivity.this, "You have this game!", Toast.LENGTH_SHORT).show();
+                           addFav.setVisibility(View.GONE);
                         }
                     }
 
@@ -225,6 +225,7 @@ public class GamescreenActivity extends AppCompatActivity {
             public void onClick(View v) {
                 removeFromGameList(idGame, idUser);
                 removeGame.setVisibility(View.GONE);
+                addGame.setVisibility(View.VISIBLE);
             }
         });
 
@@ -234,6 +235,7 @@ public class GamescreenActivity extends AppCompatActivity {
             public void onClick(View v) {
                 removeFromFavList(idGame, idUser);
                 removeFav.setVisibility(View.GONE);
+                addFav.setVisibility(View.VISIBLE);
             }
         });
 
@@ -243,6 +245,7 @@ public class GamescreenActivity extends AppCompatActivity {
             public void onClick(View v) {
                 removeFromWishList(idGame, idUser);
                 removeWishlist.setVisibility(View.GONE);
+                addWishlist.setVisibility(View.VISIBLE);
             }
         });
 
@@ -324,7 +327,8 @@ public class GamescreenActivity extends AppCompatActivity {
                             }
                             String result = response.body();
                             if (result.contains("true")) {
-                                addGame.setText("remove this game");
+                                addGame.setVisibility(View.INVISIBLE);
+                                removeGame.setVisibility(View.VISIBLE);
                             }
                         }
 

@@ -50,8 +50,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_layout);
 
-        gameList = (TextView) findViewById(R.id.games);
-        wishList = (TextView) findViewById(R.id.wishList);
+
         signOut = (TextView) findViewById(R.id.signout);
         gamesNbr = (TextView) findViewById(R.id.gamesNbr);
         favNbr = (TextView) findViewById(R.id.favNbr);
