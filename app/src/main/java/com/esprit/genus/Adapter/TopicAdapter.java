@@ -53,6 +53,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.MyViewHolder
     Context mContext;
     String name;
     String idUser;
+
     String userPicture;
     INodeJS myAPI,myAPI1;
     Retrofit retrofit = RetrofitClient.getInstance();
@@ -60,7 +61,9 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.MyViewHolder
             .baseUrl("http://10.0.2.2:3000/")
                 .addConverterFactory(GsonConverterFactory.create())
             .build();
+
     CompositeDisposable compositeDisposable = new CompositeDisposable();
+
 
     List<String> idLists=new List<String>() {
         @Override
@@ -211,13 +214,33 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.MyViewHolder
         //holder.membersNumber
         holder.username.setText(chatList.get(position).getUsername());
 
+
+
+
         holder.setTopicClickListener(new ITopicClickListener() {
             @Override
             public void onTopicClick(View view, int position) {
                 Toast.makeText(mContext, ""+chatList.get(position).getTopic(), Toast.LENGTH_SHORT).show();
             }
         });
+        myAPI1 = retrofit1.create((INodeJS.class));
+        final Call<String> cpt = myAPI1.GetMembersNbr(chatList.get(position).getIdChat());
+        //display number of favorites
+        cpt.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (!response.isSuccessful()) {
+                    return;
+                }
+                String result = response.body();
+                holder.membersNumber.setText("Members : "+result);
+            }
 
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
 
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
