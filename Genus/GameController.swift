@@ -64,6 +64,7 @@ class GameController: UIViewController, UICollectionViewDataSource {
     
     @IBOutlet weak var addGamebutton: UIButton!
     override func viewDidLoad() {
+        comment.text=""
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         collectionView.dataSource=self
@@ -143,12 +144,9 @@ class GameController: UIViewController, UICollectionViewDataSource {
           
          
         }
-        
-        
+    
     }
-    
- 
-    
+   
     func deleteGameFromWishList(idGame:Int,idUser:Int)
     {
         /*guard let url = URL(string: "http://192.168.247.1:3000/deleteFromWishList/"+"\(idGame)"+"/"+"\(idUser)") else {
