@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 
@@ -28,6 +29,7 @@ import com.esprit.genus.Model.Chat;
 import com.esprit.genus.R;
 import com.esprit.genus.Retrofit.INodeJS;
 import com.esprit.genus.Retrofit.RetrofitClient;
+import com.esprit.genus.TopicsActivity;
 
 
 import java.util.Collection;
@@ -214,6 +216,40 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.MyViewHolder
                 Toast.makeText(mContext, ""+chatList.get(position).getTopic(), Toast.LENGTH_SHORT).show();
             }
         });
+
+
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myAPI = retrofit.create((INodeJS.class));
+                myAPI1 = retrofit1.create((INodeJS.class));
+                final Call<String> existe = myAPI1.VerifyTopicCreator(Integer.parseInt(idUser),chatList.get(position).getIdChat());
+                existe.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        if (!response.isSuccessful()) {
+                            return;
+                        }
+                        String existe = response.body();
+                        if(existe.contains("true"))
+                        {
+
+                            deleteTopic(Integer.parseInt(idUser),chatList.get(position).getIdChat());
+                            chatList.remove(position);
+                            notifyDataSetChanged();
+                        }
+                        else
+                        {
+                            Toast.makeText(mContext, "You can't delete this topic !  you're not the creator", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
     }
 
     @Override
@@ -227,6 +263,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.MyViewHolder
         TextView topic,membersNumber,topicDate,username;
         RoundRectCornerImageView topicPic;
         Button btnJoin;
+        Button delete;
 
         ITopicClickListener topicClickListener;
 
@@ -245,6 +282,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.MyViewHolder
             topicDate = (TextView) itemView.findViewById(R.id.topicDate);
             username = (TextView) itemView.findViewById(R.id.username);
             btnJoin = (Button) itemView.findViewById(R.id.btnJoin);
+            delete = (Button) itemView.findViewById(R.id.btnDelete);
 
             itemView.setOnClickListener(this);
 
@@ -266,6 +304,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.MyViewHolder
                     if(existe.contains("false"))
                     {
                         addParticipation(Integer.parseInt(idUser),chatList.get(getAdapterPosition()).getIdChat());
+                        Toast.makeText(mContext, "Welcome to party !", Toast.LENGTH_SHORT).show();
                     }
 
 
@@ -301,6 +340,21 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.MyViewHolder
                     @Override
                     public void accept(String s) throws Exception {
                        // System.out.println(s);
+
+                    }
+                })
+        );
+    }
+
+    private void deleteTopic(final int idUser, final int idChat)
+    {
+        compositeDisposable.add(myAPI.deleteTopic(idChat,idUser)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        // System.out.println(s);
 
                     }
                 })

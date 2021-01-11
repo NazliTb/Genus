@@ -51,6 +51,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_layout);
 
+
         signOut = (TextView) findViewById(R.id.signout);
         gamesNbr = (TextView) findViewById(R.id.gamesNbr);
         favNbr = (TextView) findViewById(R.id.favNbr);
@@ -159,7 +160,7 @@ public class ProfileActivity extends AppCompatActivity {
                 int cpt=0;
                 for(Game g:wishGames)
                 {
-                 
+
                     cpt++;
                 }
                 wishesNbr.setText(cpt+"");
