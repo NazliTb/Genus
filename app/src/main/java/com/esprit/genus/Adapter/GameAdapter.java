@@ -46,7 +46,9 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.MyViewHolder> 
         holder.gameName.setText(gameList.get(position).getName());
         holder.gameStudio.setText("by "+gameList.get(position).getCompanyName());
         holder.gameType.setText(gameList.get(position).getType());
-        holder.gameDate.setText(gameList.get(position).getReleaseDate().toString());
+        String part1 = gameList.get(position).getReleaseDate().toString().substring(0,10);
+        String part2 = gameList.get(position).getReleaseDate().toString().substring(30,34);
+        holder.gameDate.setText(part1+" "+part2/*gameList.get(position).getReleaseDate().toString()*/);
 
         holder.setGameClickListener(new IGameClickListener() {
             @Override

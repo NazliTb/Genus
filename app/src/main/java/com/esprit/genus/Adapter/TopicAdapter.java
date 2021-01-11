@@ -204,8 +204,9 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull TopicAdapter.MyViewHolder holder, int position) {
-
-        holder.topicDate.setText(chatList.get(position).getDate().toString());
+        String part1 = chatList.get(position).getDate().toString().substring(0,10);
+        String part2 = chatList.get(position).getDate().toString().substring(30,34);
+        holder.topicDate.setText(part1+" "+part2);
         holder.topic.setText(chatList.get(position).getTopic());
         //holder.membersNumber
         holder.username.setText(chatList.get(position).getUsername());
