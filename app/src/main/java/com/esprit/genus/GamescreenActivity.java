@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.ButtonBarLayout;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -127,6 +128,7 @@ public class GamescreenActivity extends AppCompatActivity {
         comment = (ImageButton) findViewById(R.id.sendComment);
         removeFav = (Button) findViewById(R.id.removeFavorite);
         removeWishlist = (Button) findViewById(R.id.removeWishlist);
+        removeGame = (Button) findViewById(R.id.removeButton);
 
         removeFav.setVisibility(View.GONE);
         removeWishlist.setVisibility(View.GONE);
