@@ -38,6 +38,10 @@ extension UIColor {
     }
 }
 
+class MyTapGesture: UITapGestureRecognizer {
+    var pic:String = ""
+}
+
 class ProfileController: UIViewController {
     
     //Widgets
@@ -154,19 +158,269 @@ class ProfileController: UIViewController {
            self.present(alertController, animated: true, completion: nil)
            }
     
+    
+    @available(iOS 13.0, *)
+    @objc func imageTapped(tapGestureRecognizer: MyTapGesture)
+    {
+        let tappedImage = tapGestureRecognizer.view as! UIImageView
+        userPic = tapGestureRecognizer.pic
+        let id: String = "\(self.id)"
+       
+        let params = ["userPicture":userPic,"idUser": id] as! Dictionary<String, String>
+var request = URLRequest(url: URL(string: "http://192.168.64.1:3000/editUserPicture")!)
+request.httpMethod = "PUT"
+request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
+request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+let session = URLSession.shared
+let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+        
+        
+    do {
+
+            DispatchQueue.main.async {
+              
+                self.viewDidLoad()
+
+            }
+        
+    }
+    catch
+    {
+        
+    }
+
+})
+
+task.resume()
+    
+        
+    }
+    
+    
     //IBActions
     
     @IBAction func editProfileAction(_ sender: Any) {
    
-      
+        let appearance = SCLAlertView.SCLAppearance(
+            kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
+            kTextFont: UIFont(name: "HelveticaNeue", size: 14)!,
+            kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
+            showCloseButton: true, titleColor: UIColor.init(hexString: "#04D9D9")
+        )
+
+        // Initialize SCLAlertView using custom Appearance
+        let alert = SCLAlertView(appearance: appearance)
+
+        // Creat the subview
+        let subview = UIView(frame: CGRect(x:0,y:0,width:800,height:300))
+       
+
+        let image1 = UIImageView(frame: CGRect(x:0,y:30,width:70,height:70))
+        image1.contentMode = .scaleAspectFill
+        let defaultLink1 = "http://192.168.64.1:3000/image/avatar0.png"
+       // let defaultLink = "http://192.168.247.1:3000/image/avatar0.png"
+        image1.downloaded(from: defaultLink1)
+        image1.layer.cornerRadius = 5
+        subview.addSubview(image1)
+        
+        if #available(iOS 13.0, *) {
+            let tapGestureRecognizer = MyTapGesture(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+            tapGestureRecognizer.pic="avatar0.png"
+            image1.isUserInteractionEnabled = true
+            image1.addGestureRecognizer(tapGestureRecognizer)
+  
+           
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        
+        
+        
+        
+        let image2 = UIImageView(frame: CGRect(x:70,y:30,width:70,height:70))
+        image2.contentMode = .scaleAspectFill
+        let defaultLink2 = "http://192.168.64.1:3000/image/avatar1.png"
+       // let defaultLink = "http://192.168.247.1:3000/image/avatar1.png"
+        image2.downloaded(from: defaultLink2)
+        image2.layer.cornerRadius = 5
+        subview.addSubview(image2)
+        
+        if #available(iOS 13.0, *) {
+            let tapGestureRecognizer = MyTapGesture(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+            tapGestureRecognizer.pic="avatar1.png"
+            image2.isUserInteractionEnabled = true
+            image2.addGestureRecognizer(tapGestureRecognizer)
+           
+          
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        
+        let image3 = UIImageView(frame: CGRect(x:140,y:30,width:70,height:70))
+        image3.contentMode = .scaleAspectFill
+        let defaultLink3 = "http://192.168.64.1:3000/image/avatar2.png"
+       // let defaultLink = "http://192.168.247.1:3000/image/avatar2.png"
+        image3.downloaded(from: defaultLink3)
+        image3.layer.cornerRadius = 5
+        subview.addSubview(image3)
+        
+        if #available(iOS 13.0, *) {
+            let tapGestureRecognizer = MyTapGesture(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+            tapGestureRecognizer.pic="avatar2.png"
+            image3.isUserInteractionEnabled = true
+            image3.addGestureRecognizer(tapGestureRecognizer)
+       
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        
+        let image4 = UIImageView(frame: CGRect(x:0,y:100,width:70,height:70))
+        image4.contentMode = .scaleAspectFill
+        let defaultLink4 = "http://192.168.64.1:3000/image/avatar3.png"
+       // let defaultLink = "http://192.168.247.1:3000/image/avatar3.png"
+        image4.downloaded(from: defaultLink4)
+        image4.layer.cornerRadius = 5
+        subview.addSubview(image4)
+        
+        
+        if #available(iOS 13.0, *) {
+            let tapGestureRecognizer = MyTapGesture(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+            tapGestureRecognizer.pic="avatar3.png"
+            image4.isUserInteractionEnabled = true
+            image4.addGestureRecognizer(tapGestureRecognizer)
+        
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        let image5 = UIImageView(frame: CGRect(x:70,y:100,width:70,height:70))
+        image5.contentMode = .scaleAspectFill
+        let defaultLink5 = "http://192.168.64.1:3000/image/avatar4.png"
+       // let defaultLink = "http://192.168.247.1:3000/image/avatar4.png"
+        image5.downloaded(from: defaultLink5)
+        image5.layer.cornerRadius = 5
+        subview.addSubview(image5)
+        
+        if #available(iOS 13.0, *) {
+            let tapGestureRecognizer = MyTapGesture(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+            tapGestureRecognizer.pic="avatar4.png"
+            image5.isUserInteractionEnabled = true
+            image5.addGestureRecognizer(tapGestureRecognizer)
+       
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        
+        let image6 = UIImageView(frame: CGRect(x:140,y:100,width:70,height:70))
+        image6.contentMode = .scaleAspectFill
+        let defaultLink6 = "http://192.168.64.1:3000/image/avatar5.png"
+       // let defaultLink = "http://192.168.247.1:3000/image/avatar5.png"
+        image6.downloaded(from: defaultLink6)
+        image6.layer.cornerRadius = 5
+        subview.addSubview(image6)
+        
+        if #available(iOS 13.0, *) {
+            let tapGestureRecognizer = MyTapGesture(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+            tapGestureRecognizer.pic="avatar5.png"
+            image6.isUserInteractionEnabled = true
+            image6.addGestureRecognizer(tapGestureRecognizer)
+     
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        
+        let image7 = UIImageView(frame: CGRect(x:0,y:170,width:70,height:70))
+        image7.contentMode = .scaleAspectFill
+        let defaultLink7 = "http://192.168.64.1:3000/image/avatar6.png"
+       // let defaultLink = "http://192.168.247.1:3000/image/avatar6.png"
+        image7.downloaded(from: defaultLink7)
+        image7.layer.cornerRadius = 5
+        subview.addSubview(image7)
+        
+        if #available(iOS 13.0, *) {
+            let tapGestureRecognizer = MyTapGesture(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+            tapGestureRecognizer.pic="avatar6.png"
+            image7.isUserInteractionEnabled = true
+            image7.addGestureRecognizer(tapGestureRecognizer)
+    
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        
+        let image8 = UIImageView(frame: CGRect(x:70,y:170,width:70,height:70))
+        image8.contentMode = .scaleAspectFill
+        let defaultLink8 = "http://192.168.64.1:3000/image/avatar7.png"
+       // let defaultLink = "http://192.168.247.1:3000/image/avatar7.png"
+        image8.downloaded(from: defaultLink8)
+        image8.layer.cornerRadius = 5
+        subview.addSubview(image8)
+        
+        if #available(iOS 13.0, *) {
+            let tapGestureRecognizer = MyTapGesture(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+            tapGestureRecognizer.pic="avatar7.png"
+            image8.isUserInteractionEnabled = true
+            image8.addGestureRecognizer(tapGestureRecognizer)
+         
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        let image9 = UIImageView(frame: CGRect(x:140,y:170,width:70,height:70))
+        image9.contentMode = .scaleAspectFill
+        let defaultLink9 = "http://192.168.64.1:3000/image/avatar8.png"
+       // let defaultLink = "http://192.168.247.1:3000/image/avatar8.png"
+        image9.downloaded(from: defaultLink9)
+        image9.layer.cornerRadius = 5
+        subview.addSubview(image9)
+        
+        if #available(iOS 13.0, *) {
+            let tapGestureRecognizer = MyTapGesture(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+            tapGestureRecognizer.pic="avatar8.png"
+            image9.isUserInteractionEnabled = true
+            image9.addGestureRecognizer(tapGestureRecognizer)
+       
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        let image10 = UIImageView(frame: CGRect(x:70,y:240,width:70,height:70))
+        image10.contentMode = .scaleAspectFill
+        let defaultLink10 = "http://192.168.64.1:3000/image/avatar9.png"
+       // let defaultLink = "http://192.168.247.1:3000/image/avatar9.png"
+        image10.downloaded(from: defaultLink10)
+        image10.layer.cornerRadius = 5
+        subview.addSubview(image10)
+        
+        if #available(iOS 13.0, *) {
+            let tapGestureRecognizer = MyTapGesture(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+            tapGestureRecognizer.pic="avatar9.png"
+            image10.isUserInteractionEnabled = true
+            image10.addGestureRecognizer(tapGestureRecognizer)
+            
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        
+    // Add the subview to the alert's UI property
+    alert.customSubview = subview
+    
+    
+    
+   
+
+   alert.showEdit("Pick up an avatar", subTitle:"", closeButtonTitle:"Close", timeout: nil,colorStyle: 0x04D9D9, colorTextButton: 0xFFFFFF, circleIconImage:UIImage(named:""), animationStyle:SCLAnimationStyle.noAnimation)
     }
     
-    @IBAction func goMyGamesAction(_ sender: Any) {
-    }
     
-    
-    @IBAction func goMyWishlistAction(_ sender: Any) {
-    }
+ 
     
     
     @IBAction func goMyAccountAction(_ sender: Any) {
@@ -312,6 +566,7 @@ class ProfileController: UIViewController {
     
     
     @IBAction func nightModeAction(_ sender: Any) {
+        self.alert(message: "Information", title: "Coming soon")
     }
     
     
@@ -319,14 +574,15 @@ class ProfileController: UIViewController {
     
     
     @IBAction func languageAction(_ sender: Any) {
+        self.alert(message: "Information", title: "Coming soon")
     }
     
     
-    @IBAction func helpAction(_ sender: Any) {
-    }
+  
     
     
     @IBAction func signoutAction(_ sender: Any) {
+        
     }
     
     

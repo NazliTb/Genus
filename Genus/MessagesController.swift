@@ -197,6 +197,7 @@ class MessagesController : UIViewController, UITableViewDelegate, UITableViewDat
         let m = Msg (idMessage: 1, contentMsg: msg!, date: dateFormatter.string(from: NSDate() as Date) , idUser: id, idChat: idChat, username: username, userPicture: userPicture)
       
         self.msg.append(m)
+        self.msgToSend.text=""
         self.messagesTableView.reloadData()
         
         let params = ["idUser":"\(id)", "contentMsg":msg,"idChat":"\(idChat)"] as! Dictionary<String, String>
