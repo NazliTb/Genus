@@ -41,9 +41,14 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
 
     CompositeDisposable compositeDisposable = new CompositeDisposable();
 
+
     public CommentAdapter(Context mContext, int idUser,List<Comment> gameList) {
         this.commentList = gameList;
-        this.idUser=idUser;
+        this.idUser = idUser;
+    }
+    public CommentAdapter(Context mContext, List<Comment> commentList) {
+        this.commentList = commentList;
+
         this.mContext = mContext;
     }
 
