@@ -8,6 +8,7 @@ target 'Genus' do
   # Pods for Genus
   pod 'Alamofire'
   pod 'PopupDialog', '~> 0.9'
+  pod 'SDWebImage', '~> 5.0'
   pod 'SCLAlertView'
   pod 'SwiftWebSocket'
   

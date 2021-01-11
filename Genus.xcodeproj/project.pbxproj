@@ -28,6 +28,8 @@
 		5860A541256D798D00B9F622 /* LibraryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5860A540256D798D00B9F622 /* LibraryController.swift */; };
 		586D025E258A9A6F00E140AE /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586D025D258A9A6F00E140AE /* MessageTableViewCell.swift */; };
 		586D4CEA258A34160006D27E /* MessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586D4CE9258A34160006D27E /* MessagesController.swift */; };
+		586E3C3025ACBF110044AA87 /* AllGamesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586E3C2F25ACBF110044AA87 /* AllGamesTableViewCell.swift */; };
+		586E3C3525ACBF820044AA87 /* AllGamesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586E3C3425ACBF820044AA87 /* AllGamesCollectionViewCell.swift */; };
 		588DD1FF2582A1E300F168EF /* GameListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588DD1FE2582A1E300F168EF /* GameListCollectionViewCell.swift */; };
 		588DD2072582A22500F168EF /* FavGameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588DD2062582A22500F168EF /* FavGameCollectionViewCell.swift */; };
 		58D45831257FFE310057E82C /* WishListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D45830257FFE310057E82C /* WishListController.swift */; };
@@ -91,6 +93,8 @@
 		5860A540256D798D00B9F622 /* LibraryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryController.swift; sourceTree = "<group>"; };
 		586D025D258A9A6F00E140AE /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		586D4CE9258A34160006D27E /* MessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesController.swift; sourceTree = "<group>"; };
+		586E3C2F25ACBF110044AA87 /* AllGamesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllGamesTableViewCell.swift; sourceTree = "<group>"; };
+		586E3C3425ACBF820044AA87 /* AllGamesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllGamesCollectionViewCell.swift; sourceTree = "<group>"; };
 		588DD1FE2582A1E300F168EF /* GameListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListCollectionViewCell.swift; sourceTree = "<group>"; };
 		588DD2062582A22500F168EF /* FavGameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavGameCollectionViewCell.swift; sourceTree = "<group>"; };
 		58D45830257FFE310057E82C /* WishListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListController.swift; sourceTree = "<group>"; };
@@ -217,6 +221,8 @@
 				585CEC0C25A8DC6300EF0846 /* TrendingGamesTableViewCell.swift */,
 				585CEC1125A8DD9100EF0846 /* BestRateTableViewCell.swift */,
 				585CEC1925A8EA0600EF0846 /* TopPicksCollectionViewCell.swift */,
+				586E3C2F25ACBF110044AA87 /* AllGamesTableViewCell.swift */,
+				586E3C3425ACBF820044AA87 /* AllGamesCollectionViewCell.swift */,
 			);
 			path = Genus;
 			sourceTree = "<group>";
@@ -507,8 +513,10 @@
 				586D4CEA258A34160006D27E /* MessagesController.swift in Sources */,
 				585E885F258155B100E93F3D /* WishListNavigationController.swift in Sources */,
 				5860A53C256D78FE00B9F622 /* GameController.swift in Sources */,
+				586E3C3525ACBF820044AA87 /* AllGamesCollectionViewCell.swift in Sources */,
 				585E88432581462000E93F3D /* ProfileNavigationController.swift in Sources */,
 				5860A532256D753A00B9F622 /* passwordrecoveryController.swift in Sources */,
+				586E3C3025ACBF110044AA87 /* AllGamesTableViewCell.swift in Sources */,
 				585CEC0D25A8DC6300EF0846 /* TrendingGamesTableViewCell.swift in Sources */,
 				6C087C10258BE2150072B8FE /* CommentCollectionViewCell.swift in Sources */,
 				585E8850258152BF00E93F3D /* DiscoverController.swift in Sources */,

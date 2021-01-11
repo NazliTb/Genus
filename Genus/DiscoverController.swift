@@ -8,7 +8,7 @@
 import UIKit
 
 
-class DiscoverController: UIViewController,collectionViewCellClicked,collectionViewCellClicked2,collectionViewCellClicked3
+class DiscoverController: UIViewController,collectionViewCellClicked,collectionViewCellClicked2,collectionViewCellClicked3,collectionViewCellClicked4
 {
     func cellClicked(idGame:Int) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "GameController") as! GameController
@@ -48,7 +48,7 @@ class DiscoverController: UIViewController,collectionViewCellClicked,collectionV
 
 extension DiscoverController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return 3
+       return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -67,13 +67,19 @@ extension DiscoverController: UITableViewDelegate,UITableViewDataSource {
            cell.delegate = self
             return cell
         }
-        else {
+        else if (indexPath.row == 2) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "lastCell", for: indexPath) as! BestRateTableViewCell
             cell.delegate = self
             return cell
            
         }
-    
+        
+        else  {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "otherGames", for: indexPath) as! AllGamesTableViewCell
+            cell.delegate = self
+            return cell
+           
+        }
        
     }
     
