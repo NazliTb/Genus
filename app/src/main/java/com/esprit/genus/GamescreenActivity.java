@@ -387,7 +387,7 @@ public class GamescreenActivity extends AppCompatActivity {
                     return;
                 }
                 List<Comment> comments = response.body();
-                adapter = new CommentAdapter(GamescreenActivity.this, comments);
+                adapter = new CommentAdapter(GamescreenActivity.this, idUser,comments);
                 recycler_comments.setAdapter(adapter);
             }
 

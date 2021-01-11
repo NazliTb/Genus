@@ -70,7 +70,7 @@ public interface INodeJS {
 
     @POST("LikeComment")
     @FormUrlEncoded
-    Observable<String> LikeComment (@Field("idGame") int idGame);
+    Observable<String> LikeComment (@Field("idComment") int idComment);
 
 
     @POST("login")
