@@ -35,7 +35,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ProfileActivity extends AppCompatActivity {
-    private TextView gameList, wishList, signOut,gamesNbr,favNbr,wishesNbr,username;
+
+    private TextView account, nightmode, languages, signOut, gamesNbr, favNbr, wishesNbr, username;
     private String idUser="";
     private ImageView userPic;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -50,8 +51,6 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_layout);
 
-        gameList = (TextView) findViewById(R.id.games);
-        wishList = (TextView) findViewById(R.id.wishList);
         signOut = (TextView) findViewById(R.id.signout);
         gamesNbr = (TextView) findViewById(R.id.gamesNbr);
         favNbr = (TextView) findViewById(R.id.favNbr);
@@ -59,6 +58,9 @@ public class ProfileActivity extends AppCompatActivity {
         username = (TextView) findViewById(R.id.username);
         editProfile=(Button) findViewById(R.id.editProfile);
         userPic=(ImageView) findViewById(R.id.profilePic);
+        account = (TextView) findViewById(R.id.account);
+        nightmode = (TextView) findViewById(R.id.nightmode);
+        languages = (TextView) findViewById(R.id.language);
 
         //Recuperer les données de homepage
         Intent intent = getIntent();
@@ -188,16 +190,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-
-        gameList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /*Intent intent = new Intent(ProfileActivity.this, GamelistActivity.class);
-                ProfileActivity.this.startActivity(intent);*/
-
-            }
-        });
-
+        //Sign out
         signOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -206,6 +199,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        //edit profile
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -279,6 +273,22 @@ public class ProfileActivity extends AppCompatActivity {
               builder.setView(vpop);
               dialog=builder.create();
               dialog.show();
+            }
+        });
+
+        //activate nightmode
+        nightmode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ProfileActivity.this, "Coming Soon", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //edit language
+        languages.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ProfileActivity.this, "Coming Soon", Toast.LENGTH_SHORT).show();
             }
         });
 

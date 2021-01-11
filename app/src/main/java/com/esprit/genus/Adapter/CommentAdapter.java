@@ -25,8 +25,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
     List<Comment> commentList;
     Context mContext;
 
-    public CommentAdapter(Context mContext, List<Comment> gameList) {
-        this.commentList = gameList;
+    public CommentAdapter(Context mContext, List<Comment> commentList) {
+        this.commentList = commentList;
         this.mContext = mContext;
     }
 
