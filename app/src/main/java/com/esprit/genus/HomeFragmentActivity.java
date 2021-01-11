@@ -41,9 +41,10 @@ public class HomeFragmentActivity extends Fragment {
     INodeJS myAPI, myAPI1;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    RecyclerView recycler_topPicks, recycler_bestRate, recycler_trending;
+    RecyclerView recycler_topPicks, recycler_bestRate, recycler_trending, recycler_games;
     LinearLayoutManager layoutManagerTP, layoutManagerBR, layoutManagerTG;
     GameVerticalAdapter adapter;
+    GameAdapter myAdapter;
     MaterialSearchBar materialSearchBar;
     List<String> suggestList = new ArrayList<>();
     protected View mView;
@@ -76,6 +77,7 @@ public class HomeFragmentActivity extends Fragment {
         final Call<List<Game>> topPicksGames = myAPI1.GetTopPicksGames();
         final Call<List<Game>> bestRateGames = myAPI1.GetBestRateGames();
         final Call<List<Game>> trendingGames = myAPI1.GetTrendingGames();
+        final Call<List<Game>> allGames = myAPI1.GetGames();
 
         //View for top picks
         recycler_topPicks= (RecyclerView) mView.findViewById(R.id.recyclerViewTopPicks);
@@ -97,6 +99,13 @@ public class HomeFragmentActivity extends Fragment {
         layoutManagerBR = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL, false);
         recycler_bestRate.setLayoutManager(layoutManagerBR);
         recycler_bestRate.addItemDecoration(new DividerItemDecoration(getContext(), layoutManagerBR.getOrientation()));
+
+        //View for all games
+        recycler_games= (RecyclerView) mView.findViewById(R.id.recyclerViewAllGames);
+        recycler_games.setHasFixedSize(true);
+        layoutManagerBR = new LinearLayoutManager(getContext());
+        recycler_games.setLayoutManager(layoutManagerBR);
+        recycler_games.addItemDecoration(new DividerItemDecoration(getContext(), layoutManagerBR.getOrientation()));
 
         materialSearchBar = (MaterialSearchBar) mView.findViewById(R.id.search_bar);
         materialSearchBar.setCardViewElevation(10);
@@ -209,6 +218,23 @@ public class HomeFragmentActivity extends Fragment {
                 List<Game> games = response.body();
                 adapter = new GameVerticalAdapter(getContext(),games,Integer.parseInt(getidUser));
                 recycler_bestRate.setAdapter(adapter);
+            }
+            @Override
+            public void onFailure(Call<List<Game>> call, Throwable t) {
+                Toast.makeText(getContext(), "Not found", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //Method to call all games
+        allGames.enqueue(new Callback<List<Game>>() {
+            @Override
+            public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
+                if (!response.isSuccessful()) {
+                    return;
+                }
+                List<Game> games = response.body();
+                myAdapter = new GameAdapter(getContext(),games,Integer.parseInt(getidUser));
+                recycler_games.setAdapter(myAdapter);
             }
             @Override
             public void onFailure(Call<List<Game>> call, Throwable t) {

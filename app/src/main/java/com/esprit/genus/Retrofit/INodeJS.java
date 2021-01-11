@@ -161,6 +161,10 @@ public interface INodeJS {
     @GET("GetTrendingGames")
     Call<List<Game>> GetTrendingGames();
 
+
+    @GET("GetGames")
+    Call<List<Game>> GetGames();
+
     @GET("GetTopPicksGames")
     Call<List<Game>> GetTopPicksGames();
 

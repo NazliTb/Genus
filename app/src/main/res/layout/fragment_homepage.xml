@@ -81,6 +81,25 @@
                 android:layout_marginTop="20sp"
                 android:orientation="horizontal" />
 
+            <TextView
+                android:id="@+id/allGamesTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/recyclerViewBestRate"
+                android:layout_marginTop="20sp"
+                android:layout_weight="1"
+                android:fontFamily="@font/orbitron"
+                android:text="Other Games"
+                android:textSize="25sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewAllGames"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/allGamesTitle"
+                android:layout_marginTop="20sp"
+                android:orientation="horizontal" />
+
         </RelativeLayout>
     </ScrollView>
 

@@ -118,11 +118,10 @@ public class WishlistActivity extends Fragment {
 
         //Display search result
         //final int finalIdUser = idUser;
-/*        materialSearchBar.setOnSearchActionListener(new MaterialSearchBar.OnSearchActionListener() {
+        materialSearchBar.setOnSearchActionListener(new MaterialSearchBar.OnSearchActionListener() {
             @Override
             public void onSearchStateChanged(boolean enabled) {
                 if (!enabled) {
-                    //getAllGames(finalIdUser);
 
                     listGames.enqueue(new Callback<List<Game>>() {
                         @Override
@@ -144,14 +143,14 @@ public class WishlistActivity extends Fragment {
 
             @Override
             public void onSearchConfirmed(CharSequence text) {
-                startSearch(text.toString());
+                startSearch(text.toString(),Integer.parseInt(getidUser),listGames);
             }
 
             @Override
             public void onButtonClicked(int buttonCode) {
 
             }
-        });*/
+        });
 
         //Method to call games list
         listGames.enqueue(new Callback<List<Game>>() {
@@ -174,14 +173,14 @@ public class WishlistActivity extends Fragment {
         return view;
     }
 
-/*    private void startSearch(String query) {
-        compositeDisposable.add(myAPI.searchGames(query)
+    private void startSearch(String query,int id ,final Call<List<Game>> listGames ) {
+      /*  compositeDisposable.add(myAPI.searchGames(query)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<Game>>() {
                     @Override
                     public void accept(List<Game> games) throws Exception {
-                        adapter = new GameAdapter(getContext(),games,Integer.parseInt(getidUser));
+                        adapter = new GameAdapter(getContext(),games,id);
                         recycler_games.setAdapter(adapter);
 
                     }
@@ -190,8 +189,24 @@ public class WishlistActivity extends Fragment {
                     public void accept(Throwable throwable) throws Exception {
                         Toast.makeText(getContext(), "Not found", Toast.LENGTH_SHORT).show();
                     }
-                }));
-    }*/
+                }));*/
+
+        listGames.enqueue(new Callback<List<Game>>() {
+            @Override
+            public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
+                if (!response.isSuccessful()) {
+                    return;
+                }
+                List<Game> games = response.body();
+                adapter = new GameAdapter(getContext(),games,id);
+                recycler_games.setAdapter(adapter);
+            }
+            @Override
+            public void onFailure(Call<List<Game>> call, Throwable t) {
+                Toast.makeText(getContext(), "Not found", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
 
 
