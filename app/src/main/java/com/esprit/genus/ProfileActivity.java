@@ -197,6 +197,8 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
                 ProfileActivity.this.startActivity(intent);
+                finish();
+                startActivity(intent);
             }
         });
 
