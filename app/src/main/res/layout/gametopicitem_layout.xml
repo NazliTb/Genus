@@ -43,7 +43,7 @@
                 android:id="@+id/membersNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="50 members"
+                android:text="50 members max"
                 style="@style/TextAppearance.AppCompat.Subhead"
                 android:fontFamily="@font/roboto"
                 android:textSize="18sp"
