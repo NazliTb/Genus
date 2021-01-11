@@ -250,68 +250,13 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/lay1"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
+            android:layout_height="61dp"
             android:background="#FFFFFF"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
-
-            <TextView
-                android:id="@+id/games"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
-                android:text="My Games"
-                android:textColor="@color/design_default_color_on_secondary"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.304"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.117" />
-
-            <ImageView
-                android:id="@+id/gamesIcon"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.073"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.122"
-                app:srcCompat="@drawable/game" />
-
-            <TextView
-                android:id="@+id/wishList"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
-                android:text="WishList"
-                android:textAlignment="viewStart"
-                android:textColor="@color/design_default_color_on_secondary"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.304"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/heartIcon"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/wishList"
-                app:layout_constraintHorizontal_bias="0.158"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.496"
-                app:srcCompat="@drawable/heart" />
 
             <TextView
                 android:id="@+id/account"
@@ -325,8 +270,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.304"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.882" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/userIcon"
@@ -334,10 +278,9 @@
                 android:layout_height="30dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.072"
+                app:layout_constraintHorizontal_bias="0.06"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/gamesIcon"
-                app:layout_constraintVertical_bias="0.811"
+                app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/user3" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -367,7 +310,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/lay2"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="318dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -400,32 +343,6 @@
                 app:layout_constraintVertical_bias="0.082"
                 app:srcCompat="@drawable/nightmode" />
 
-            <TextView
-                android:id="@+id/notification"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
-                android:text="Notifications"
-                android:textColor="@color/design_default_color_on_secondary"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.319"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.308" />
-
-            <ImageView
-                android:id="@+id/bellIcon"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.069"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.297"
-                app:srcCompat="@drawable/bell" />
 
             <TextView
                 android:id="@+id/language"
@@ -437,10 +354,10 @@
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.321"
+                app:layout_constraintHorizontal_bias="0.32"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.505" />
+                app:layout_constraintTop_toBottomOf="@+id/nightmodeIcon"
+                app:layout_constraintVertical_bias="0.16000003" />
 
             <ImageView
                 android:id="@+id/languageIcon"
@@ -451,7 +368,7 @@
                 app:layout_constraintHorizontal_bias="0.069"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/nightmodeIcon"
-                app:layout_constraintVertical_bias="0.383"
+                app:layout_constraintVertical_bias="0.16000003"
                 app:srcCompat="@drawable/language" />
 
             <TextView
@@ -467,7 +384,7 @@
                 app:layout_constraintHorizontal_bias="0.27"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.71000004" />
+                app:layout_constraintVertical_bias="0.51" />
 
             <ImageView
                 android:id="@+id/helpIcon"
@@ -475,10 +392,10 @@
                 android:layout_height="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.07"
+                app:layout_constraintHorizontal_bias="0.069"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bellIcon"
-                app:layout_constraintVertical_bias="0.495"
+                app:layout_constraintTop_toBottomOf="@+id/nightmodeIcon"
+                app:layout_constraintVertical_bias="0.41000003"
                 app:srcCompat="@drawable/help" />
 
             <TextView
@@ -491,10 +408,10 @@
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.317"
+                app:layout_constraintHorizontal_bias="0.3"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.905" />
+                app:layout_constraintVertical_bias="0.7" />
 
             <ImageView
                 android:id="@+id/logoutIcon"
@@ -502,10 +419,10 @@
                 android:layout_height="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/language"
-                app:layout_constraintHorizontal_bias="0.44"
+                app:layout_constraintHorizontal_bias="0.42"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/language"
-                app:layout_constraintVertical_bias="0.75"
+                app:layout_constraintVertical_bias="0.57"
                 app:srcCompat="@drawable/logout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

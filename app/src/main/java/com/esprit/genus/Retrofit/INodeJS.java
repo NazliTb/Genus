@@ -68,11 +68,15 @@ public interface INodeJS {
                                    @Field("idUser") int idUser,
                                    @Field("idGame") int idGame);
 
+    @POST("LikeComment")
+    @FormUrlEncoded
+    Observable<String> LikeComment (@Field("idGame") int idGame);
+
 
     @POST("login")
     @FormUrlEncoded
     Observable<String> loginUser(@Field("email") String email,
-                                    @Field("password") String password);
+                                 @Field("password") String password);
 
 
     @PUT("getForgottenPassword")

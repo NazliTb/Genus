@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,6 +43,12 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
         holder.userName.setText(commentList.get(position).getUsername());
         holder.comment.setText(commentList.get(position).getCommentText());
         holder.likesNbr.setText(commentList.get(position).getLikesNbr()+"");
+        holder.like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override
@@ -53,6 +60,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
         CardView root_view;
         TextView userName, comment, likesNbr;
         ImageView userPic;
+        ImageButton like;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -63,6 +71,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
             userPic = (ImageView) itemView.findViewById(R.id.userPic);
             comment = (TextView) itemView.findViewById(R.id.txt_comment);
             likesNbr = (TextView) itemView.findViewById(R.id.txt_likes);
+            like = (ImageButton) itemView.findViewById(R.id.btn_like);
         }
     }
 }

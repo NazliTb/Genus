@@ -61,11 +61,12 @@
                 android:orientation="horizontal"
                 android:padding="10dp">
 
-                <ImageView
+                <ImageButton
+                    android:id="@+id/btn_like"
                     android:layout_width="15sp"
                     android:layout_height="15sp"
                     android:layout_marginLeft="300dp"
-                    android:src="@drawable/heart" />
+                    android:background="@drawable/heart"/>
 
                 <TextView
                     android:id="@+id/txt_likes"
