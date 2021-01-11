@@ -104,6 +104,10 @@ public interface INodeJS {
     Observable<String> deleteFromList(@Path ("idGame") int idGame,
                                       @Path ("idUser") int idUser);
 
+    @DELETE("/deleteTopic/{idChat}/{idUser}")
+    Observable<String> deleteTopic(@Path ("idChat") int idChat,
+                                      @Path ("idUser") int idUser);
+
     @GET("GetGameList/{idUser}")
     Call<List<Game>> GetGameList(@Path("idUser") int idUser);
 
@@ -130,6 +134,10 @@ public interface INodeJS {
     @GET("VerifyFavlist/{idUser}/{idGame}")
     Call <String> VerifyFavlist (@Path("idUser") int idUser,
                                  @Path("idGame") int idGame);
+
+    @GET("VerifyTopicCreator/{idUser}/{idChat}")
+    Call <String> VerifyTopicCreator (@Path("idUser") int idUser,
+                                 @Path("idChat") int idChat);
 
 
     @POST("search")
@@ -170,6 +178,9 @@ public interface INodeJS {
 
     @GET("GetCommentNbr/{idGame}")
     Call <String> GetCommentNbr (@Path("idGame") int idGame);
+
+    @GET("GetMembersNbr/{idChat}")
+    Call <String> GetMembersNbr (@Path("idChat") int idChat);
 
     @GET("GetFavoriteNbr/{idGame}")
     Call <String> GetFavoriteNbr (@Path("idGame") int idGame);
